@@ -2,7 +2,7 @@
 
 > Một truyện tranh khoa học viễn tưởng nguyên bản về một thế giới không phải hình cầu, mà là chín mặt phẳng xếp chồng lên nhau.
 
-![Bìa Chương 1](assets/cover.png)
+![Bìa Chương 1](assets/cover.jpg)
 
 ## Đọc truyện
 
