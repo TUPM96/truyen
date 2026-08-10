@@ -29,23 +29,21 @@
 - An Vy: “Nó chỉ là máy cứu hộ.”
 - Kha-Ruun: “Không. Nó là thứ thiên thạch đang gọi.”
 
-## Kịch bản tiếp theo — chưa xuất bản
-
 ### Trang 5 — Nham Cung báo động
 
-Chuông đá phát ba nhịp khắp thành phố. Dân tộc Nham nhìn lên khe trời tím. Hội Đồng Nham bắt Kha-Ruun áp giải An Vy.
-
-- Hội Đồng: “Kẻ Trên Mặt mang khóa của Mắt Rơi.”
+- Dẫn: “Ba nhịp. Báo động.”
+- Hội Đồng Nham: “Kẻ Trên Mặt mang khóa của Mắt Rơi.”
 - An Vy: “Tôi tới để cứu người, không phải mở thứ đó.”
 - Kha-Ruun: “Nếu cô nói dối, chính tay ta sẽ đóng cánh cửa.”
 
 ### Trang 6 — Lệnh xuyên vỏ
 
-Trên mặt đất, Chỉ huy Bách mất tín hiệu của An và cho rằng cô bị bắt. Ông kích hoạt đầu đạn địa tầng.
-
+- Dẫn: “Trên mặt đất. Mất tín hiệu: 04 phút 12 giây.”
 - Bách: “Mười phút nữa khóa trục. Không để thứ dưới đó bò lên.”
 - Kỹ thuật viên: “Còn An Vy?”
 - Bách: “Cô ấy biết quy tắc cứu hộ: một người không đổi lấy một thành phố.”
+
+## Kịch bản tiếp theo — chưa xuất bản
 
 ### Trang 7 — Ký ức trong đá
 
