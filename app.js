@@ -18,6 +18,7 @@ const pageByGlobal = new Map(publishedPages.map(page => [page.global, page]));
 
 const mode = 'paged';
 let currentGlobal = Math.min(Math.max(Number(localStorage.getItem('ctp-progress') || 1), 1), publishedThrough || 1);
+let controlsTimer = 0;
 let touchStartX = 0;
 let touchStartY = 0;
 let lastSwipeAt = 0;
@@ -141,6 +142,7 @@ async function openReader() {
   renderReader();
   await requestReaderFullscreen();
   requestAnimationFrame(() => showCurrentPage(false));
+  showControls();
   viewport.focus({preventScroll: true});
 }
 
@@ -153,6 +155,23 @@ async function closeReader({fromFullscreen = false} = {}) {
   }
   overlay.hidden = true;
   document.body.classList.remove('reader-open');
+  clearTimeout(controlsTimer);
+}
+
+function hideControls() {
+  if (!drawer.classList.contains('open')) overlay.classList.add('controls-hidden');
+}
+
+function showControls() {
+  overlay.classList.remove('controls-hidden');
+  clearTimeout(controlsTimer);
+  controlsTimer = window.setTimeout(hideControls, 2800);
+}
+
+function toggleControls(event) {
+  if (event.target.closest('button, a')) return;
+  if (overlay.classList.contains('controls-hidden')) showControls();
+  else hideControls();
 }
 
 function handlePageTap(event) {
@@ -163,19 +182,24 @@ function handlePageTap(event) {
     stepPage(-1);
   } else if (position >= .66) {
     stepPage(1);
+  } else {
+    toggleControls(event);
   }
 }
 
 function openDrawer() {
+  clearTimeout(controlsTimer);
   drawer.classList.add('open');
   drawer.setAttribute('aria-hidden', 'false');
   scrim.hidden = false;
+  overlay.classList.remove('controls-hidden');
 }
 
 function closeDrawer() {
   drawer.classList.remove('open');
   drawer.setAttribute('aria-hidden', 'true');
   scrim.hidden = true;
+  if (readerIsOpen) showControls();
 }
 
 document.querySelector('#readButton').addEventListener('click', openReader);
