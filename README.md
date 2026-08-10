@@ -29,7 +29,7 @@ cuu-tang-phang/
     └── reference/         # Bảng mẫu giữ nhất quán nhân vật
 ```
 
-Hình minh họa không chứa lời thoại để tránh lỗi chữ trong ảnh. Phần thoại chính thức được đặt ngay dưới từng trang trong Markdown, giúp đọc rõ trên điện thoại và hỗ trợ công cụ đọc màn hình.
+Mỗi trang hoàn thiện chứa sẵn hộp dẫn chuyện và bong bóng thoại tiếng Việt trong ảnh, được kiểm tra chính tả và bố cục trước khi đăng. Kịch bản nguồn vẫn được giữ riêng để sửa chữ và hỗ trợ công cụ đọc màn hình, nhưng website không chồng thêm lớp thoại HTML lên tranh.
 
 ## Bản quyền
 

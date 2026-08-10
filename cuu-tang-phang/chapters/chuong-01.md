@@ -102,7 +102,7 @@
 
 ## Trang 6 — Bầu trời thứ hai
 
-![Trang 6](../assets/pages/page-06.jpg)
+![Trang 6](../assets/pages/page-06-lettered.webp)
 
 **Khung 1.** Đêm xuống. Linh An cắm trại cạnh vết nứt; sao trên trời phản chiếu trong khe sáng.
 

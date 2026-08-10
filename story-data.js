@@ -1,4 +1,7 @@
-const pageImage = number => `cuu-tang-phang/assets/pages/page-${String(number).padStart(2, '0')}.jpg`;
+// Final comic pages include their own professionally composed Vietnamese
+// lettering. Keeping the script below separate makes later corrections and
+// accessibility checks possible without drawing a second HTML layer on top.
+const pageImage = number => `cuu-tang-phang/assets/pages/page-${String(number).padStart(2, '0')}-lettered.webp`;
 
 const STORY = {
   title: 'Cửu Tầng Phẳng',

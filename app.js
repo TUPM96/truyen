@@ -27,25 +27,9 @@ function imageFor(page) {
   return `<img class="page-art" loading="lazy" src="${escapeHTML(page.image)}" alt="${escapeHTML(page.alt || page.title)}" onerror="this.closest('.comic-stage').classList.add('no-art'); this.remove()">`;
 }
 
-function speakerSlug(speaker) {
-  return String(speaker).normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().replace(/đ/g, 'd').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
-}
-
-function bubbleClass(speaker, index) {
-  const robot = /mốc/i.test(speaker);
-  return `speech-bubble bubble-${index + 1} speaker-${speakerSlug(speaker)}${robot ? ' robot-bubble' : ''}`;
-}
-
-function letteringFor(page) {
-  return `
-    <div class="lettering" aria-label="Lời thoại trang ${page.global}">
-      <p class="story-caption">${escapeHTML(page.narration)}</p>
-      ${page.lines.map((line, index) => `
-        <div class="${bubbleClass(line[0], index)}">
-          <span class="speaker">${escapeHTML(line[0])}</span>
-          <p>${escapeHTML(line[1])}</p>
-        </div>`).join('')}
-    </div>`;
+function pageAccessibleText(page) {
+  const dialogue = page.lines.map(([speaker, line]) => `${speaker}: ${line}`).join(' ');
+  return `${page.title}. ${page.narration} ${dialogue}`;
 }
 
 function renderChapter() {
@@ -63,11 +47,10 @@ function renderChapter() {
       <p>${escapeHTML(chapter.opening)}</p>
     </header>
     ${chapter.pages.map((page, index) => `
-      <section class="comic-page page-${page.global}" data-page="${index + 1}" data-global="${page.global}">
+      <section class="comic-page page-${page.global}" data-page="${index + 1}" data-global="${page.global}" aria-label="${escapeHTML(pageAccessibleText(page))}">
         <div class="comic-stage layout-${((page.global - 1) % 4) + 1}">
           ${imageFor(page)}
           <div class="missing-art-panels" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
-          ${letteringFor(page)}
         </div>
         <div class="page-folio">
           <span>TRANG ${String(page.global).padStart(2, '0')}</span>

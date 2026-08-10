@@ -23,8 +23,8 @@ Khi một vết nứt phát sáng mở ra giữa đồng muối, Linh An biết 
 ## Định dạng dự án
 
 - Truyện chính được trình bày bằng Markdown.
-- Mỗi trang có tranh toàn trang và phần thoại tiếng Việt bên dưới để dễ đọc trên GitHub và hỗ trợ truy cập.
-- Hình không chứa chữ nhằm tránh lỗi chính tả do công cụ tạo ảnh; lời thoại chuẩn nằm trong Markdown.
+- Mỗi trang hoàn thiện là một trang truyện màu có hộp dẫn và bong bóng thoại tiếng Việt nằm trực tiếp trong ảnh.
+- Kịch bản chữ được giữ riêng để kiểm tra chính tả, sửa lettering và hỗ trợ truy cập; website không chồng lớp thoại HTML lên tranh.
 
 ## Tình trạng
 
