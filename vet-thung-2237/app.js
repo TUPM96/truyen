@@ -1,8 +1,10 @@
 const reader = document.querySelector('#reader');
 const stage = document.querySelector('#readerStage');
 const comic = document.querySelector('#comic');
+const nextButton = document.querySelector('#nextPage');
 const total = STORY.pages.length;
-let current = Math.min(Math.max(Number(localStorage.getItem('vt2237-progress') || 1), 1), total);
+let finished = localStorage.getItem('vt2237-complete') === 'true';
+let current = finished ? 1 : Math.min(Math.max(Number(localStorage.getItem('vt2237-progress') || 1), 1), total);
 let open = false;
 let fullscreenRequested = false;
 let touchX = 0;
@@ -28,10 +30,18 @@ function update() {
   stage.setAttribute('aria-label', `Trang ${current} trên ${total}: ${currentPage.title}`);
   document.querySelector('#progressBar').style.width = `${current / total * 100}%`;
   document.querySelector('#prevPage').disabled = current === 1;
-  document.querySelector('#nextPage').disabled = current === total;
-  document.querySelector('#readLabel').textContent = current > 1 ? `Đọc tiếp · Trang ${current}` : 'Đọc ngay';
+  const atEnd = current === total;
+  nextButton.classList.toggle('chapter-finish', atEnd);
+  nextButton.textContent = atEnd ? '✓' : '›';
+  nextButton.setAttribute('aria-label', atEnd ? 'Hoàn tất chương và thoát' : 'Trang sau');
+  nextButton.title = atEnd ? 'Hoàn tất chương' : 'Trang sau';
+  updateReadLabel();
   preload(current - 1);
   preload(current + 1);
+}
+
+function updateReadLabel() {
+  document.querySelector('#readLabel').textContent = finished ? 'Đọc lại chương' : current > 1 ? `Đọc tiếp · Trang ${current}` : 'Đọc ngay';
 }
 
 function preload(number) {
@@ -83,14 +93,23 @@ async function closeReader(fromFullscreen = false) {
   document.body.classList.remove('reader-open');
 }
 
+function finishChapter() {
+  finished = true;
+  current = 1;
+  localStorage.setItem('vt2237-complete', 'true');
+  localStorage.setItem('vt2237-progress', '1');
+  updateReadLabel();
+  closeReader();
+}
+
 document.querySelector('#releaseStatus').textContent = `${STORY.chapterComplete ? '1 chương hoàn tất' : '1 chương'} · ${total} trang`;
 document.querySelector('#chapterPages').textContent = `${total} trang →`;
-document.querySelector('#readLabel').textContent = current > 1 ? `Đọc tiếp · Trang ${current}` : 'Đọc ngay';
+updateReadLabel();
 document.querySelector('#readButton').addEventListener('click', openReader);
 document.querySelector('#openChapter').addEventListener('click', () => { current = 1; openReader(); });
 document.querySelector('#closeReader').addEventListener('click', () => closeReader());
 document.querySelector('#prevPage').addEventListener('click', () => step(-1));
-document.querySelector('#nextPage').addEventListener('click', () => step(1));
+nextButton.addEventListener('click', () => current === total ? finishChapter() : step(1));
 document.querySelector('#tapLeft').addEventListener('click', () => step(-1));
 document.querySelector('#tapRight').addEventListener('click', () => step(1));
 stage.addEventListener('click', event => { if (event.target === stage || event.target.closest('.comic-page')) { reader.classList.toggle('controls-hidden'); if (!reader.classList.contains('controls-hidden')) showControls(); } });

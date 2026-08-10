@@ -17,7 +17,15 @@
 - Đã preload cả trang trước và trang sau để lật hai chiều mượt hơn.
 - Đã bổ sung nhãn trang cho trình đọc màn hình và phím `Home`/`End` để về đầu/cuối chương.
 
+## Audit phát hành và kết chương — 11/08/2026
+
+- Đã đối chiếu lại ảnh bìa với thiết kế khóa của An Vy, Kha-Ruun và bảng màu của truyện.
+- Đã tạo ảnh chia sẻ riêng tỷ lệ 1200 × 630 từ bìa gốc; không vẽ lại hoặc thay đổi thiết kế nhân vật.
+- Đã bổ sung canonical URL, Open Graph, Twitter Card, kích thước và mô tả thay thế cho ảnh chia sẻ.
+- Ảnh Open Graph dùng URL tuyệt đối để trình thu thập mạng xã hội tải đúng trên GitHub Pages.
+- Ở trang 12, nút tiến đổi thành nút hoàn tất chương; khi xác nhận, reader đóng, tiến độ về trang 1 và nút chính đổi thành “Đọc lại chương”.
+
 ## Trạng thái
 
 - Chương 1 hoàn tất: 12/12 trang.
-- Lượt audit tiếp theo nên kiểm tra metadata chia sẻ, ảnh bìa và hành vi khi đọc tới trang cuối.
+- Lượt audit tiếp theo nên kiểm tra hiệu năng ảnh, cache font và độ ổn định khi mở/đóng toàn màn hình trên iOS.
