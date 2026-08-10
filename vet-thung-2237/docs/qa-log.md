@@ -9,7 +9,15 @@
 - Trang 4 mới giữ Kha-Ruun ở tỷ lệ người cao, gầy khỏe, da bazan, mắt hổ phách, vân xanh lục và giáp vai lưỡi liềm bên phải.
 - Đã kiểm tra lại lettering trang 4, không còn chữ bị cắt hoặc tràn hộp thoại.
 
+## Audit reader di động — 11/08/2026
+
+- Đã bỏ thanh tiêu đề nổi phía trên vì che phần đầu trang truyện trên điện thoại, đặc biệt ở trang 1–3.
+- Đã đưa nút thoát vào dock dưới cùng với nút lật trang và số trang luôn hiển thị.
+- Đã ưu tiên tải trang đang đọc cùng hai trang kề, thay vì luôn tải gấp trang 1–2.
+- Đã preload cả trang trước và trang sau để lật hai chiều mượt hơn.
+- Đã bổ sung nhãn trang cho trình đọc màn hình và phím `Home`/`End` để về đầu/cuối chương.
+
 ## Trạng thái
 
 - Chương 1 hoàn tất: 12/12 trang.
-- Lượt audit tiếp theo nên ưu tiên khả năng đọc trên màn hình điện thoại và độ tương phản chữ ở trang 1–3.
+- Lượt audit tiếp theo nên kiểm tra metadata chia sẻ, ảnh bìa và hành vi khi đọc tới trang cuối.

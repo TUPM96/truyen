@@ -12,19 +12,25 @@ let controlsTimer = 0;
 const pageByNumber = new Map(STORY.pages.map(page => [page.number, page]));
 
 function render() {
-  comic.innerHTML = STORY.pages.map(page => `<section class="comic-page${page.number === current ? ' active' : ''}" data-page="${page.number}"><img src="${page.image}" alt="${page.alt}" loading="${page.number <= 2 ? 'eager' : 'lazy'}" decoding="async"></section>`).join('');
+  comic.innerHTML = STORY.pages.map(page => `<section class="comic-page${page.number === current ? ' active' : ''}" data-page="${page.number}" aria-hidden="${page.number !== current}"><img src="${page.image}" alt="${page.alt}" loading="${Math.abs(page.number - current) <= 1 ? 'eager' : 'lazy'}" decoding="async"></section>`).join('');
   update();
 }
 
 function update() {
-  comic.querySelectorAll('.comic-page').forEach(page => page.classList.toggle('active', Number(page.dataset.page) === current));
+  comic.querySelectorAll('.comic-page').forEach(page => {
+    const active = Number(page.dataset.page) === current;
+    page.classList.toggle('active', active);
+    page.setAttribute('aria-hidden', String(!active));
+  });
+  const currentPage = pageByNumber.get(current);
   localStorage.setItem('vt2237-progress', current);
   document.querySelector('#pageCounter').textContent = `Trang ${current} / ${total}`;
-  document.querySelector('#readerPosition').textContent = `Trang ${current} / ${total}`;
+  stage.setAttribute('aria-label', `Trang ${current} trên ${total}: ${currentPage.title}`);
   document.querySelector('#progressBar').style.width = `${current / total * 100}%`;
   document.querySelector('#prevPage').disabled = current === 1;
   document.querySelector('#nextPage').disabled = current === total;
   document.querySelector('#readLabel').textContent = current > 1 ? `Đọc tiếp · Trang ${current}` : 'Đọc ngay';
+  preload(current - 1);
   preload(current + 1);
 }
 
@@ -83,7 +89,6 @@ document.querySelector('#readLabel').textContent = current > 1 ? `Đọc tiếp 
 document.querySelector('#readButton').addEventListener('click', openReader);
 document.querySelector('#openChapter').addEventListener('click', () => { current = 1; openReader(); });
 document.querySelector('#closeReader').addEventListener('click', () => closeReader());
-document.querySelector('#readerHome').addEventListener('click', event => { event.preventDefault(); closeReader(); });
 document.querySelector('#prevPage').addEventListener('click', () => step(-1));
 document.querySelector('#nextPage').addEventListener('click', () => step(1));
 document.querySelector('#tapLeft').addEventListener('click', () => step(-1));
@@ -92,6 +97,6 @@ stage.addEventListener('click', event => { if (event.target === stage || event.t
 stage.addEventListener('pointermove', showControls, {passive: true});
 stage.addEventListener('touchstart', event => { touchX = event.changedTouches[0].clientX; touchY = event.changedTouches[0].clientY; }, {passive: true});
 stage.addEventListener('touchend', event => { const dx = event.changedTouches[0].clientX - touchX; const dy = event.changedTouches[0].clientY - touchY; if (Math.abs(dx) > 55 && Math.abs(dx) > Math.abs(dy) * 1.25) step(dx < 0 ? 1 : -1); }, {passive: true});
-document.addEventListener('keydown', event => { if (!open) return; if (event.key === 'Escape') closeReader(); if (event.key === 'ArrowRight' || event.key === 'PageDown') step(1); if (event.key === 'ArrowLeft' || event.key === 'PageUp') step(-1); });
+document.addEventListener('keydown', event => { if (!open) return; if (event.key === 'Escape') closeReader(); if (event.key === 'ArrowRight' || event.key === 'PageDown') step(1); if (event.key === 'ArrowLeft' || event.key === 'PageUp') step(-1); if (event.key === 'Home') { current = 1; update(); showControls(); } if (event.key === 'End') { current = total; update(); showControls(); } });
 document.addEventListener('fullscreenchange', () => { if (fullscreenRequested && !document.fullscreenElement && open) { fullscreenRequested = false; closeReader(true); } });
 document.addEventListener('webkitfullscreenchange', () => { if (fullscreenRequested && !document.webkitFullscreenElement && open) { fullscreenRequested = false; closeReader(true); } });

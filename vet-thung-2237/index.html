@@ -45,23 +45,20 @@
     </section>
   </main>
 
-  <footer><span>© Vết Thủng 2237 · Truyện nguyên bản</span><span>Cập nhật theo tiến độ sáng tác</span></footer>
+  <footer><span>© Vết Thủng 2237 · Truyện nguyên bản</span><span>Chương 1 đã hoàn tất</span></footer>
 
-  <section class="reader" id="reader" hidden aria-label="Trình đọc Vết Thủng 2237">
+  <section class="reader" id="reader" hidden aria-labelledby="readerTitle">
+    <h2 class="sr-only" id="readerTitle">Trình đọc Vết Thủng 2237</h2>
     <div class="progress"><span id="progressBar"></span></div>
-    <header class="reader-toolbar" id="readerToolbar">
-      <button id="closeReader" type="button" aria-label="Thoát trình đọc">←</button>
-      <div><strong>Chương 1 · Ba Nhịp Dưới Hố Sâu</strong><span id="readerPosition">Trang 1 / 4</span></div>
-      <a href="#" id="readerHome" aria-label="Về đầu truyện">⌂</a>
-    </header>
     <div class="reader-stage" id="readerStage" tabindex="0">
       <article id="comic"></article>
       <button class="tap-zone tap-left" id="tapLeft" type="button" aria-label="Trang trước"></button>
       <button class="tap-zone tap-right" id="tapRight" type="button" aria-label="Trang sau"></button>
     </div>
-    <nav class="reader-nav" id="readerNav">
+    <nav class="reader-nav" id="readerNav" aria-label="Điều khiển đọc truyện">
+      <button id="closeReader" type="button" aria-label="Thoát trình đọc">×</button>
       <button id="prevPage" type="button" aria-label="Trang trước">‹</button>
-      <span id="pageCounter" aria-live="polite">Trang 1 / 4</span>
+      <span id="pageCounter" aria-live="polite">Trang 1 / 12</span>
       <button id="nextPage" type="button" aria-label="Trang sau">›</button>
     </nav>
   </section>
