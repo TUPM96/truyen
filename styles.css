@@ -130,3 +130,21 @@ footer { display: flex; justify-content: space-between; gap: 20px; padding: 32px
 }
 
 @media (prefers-reduced-motion: reduce) { * { scroll-behavior: auto !important; transition: none !important; } }
+
+
+/* Bố cục chữ tinh chỉnh theo panel tranh chính thức */
+.page-5 .bubble-1 { top: 16%; right: 3%; left: auto; }
+.page-5 .bubble-2 { top: 61%; left: 3%; right: auto; }
+.page-5 .bubble-3 { top: 79%; right: 3%; left: auto; }
+
+@media (max-width: 520px) {
+  .reader-shell { padding-inline: 0; }
+  .reader-head, .reader-note, .chapter-nav { margin-inline: 14px; }
+  .comic { gap: 28px; }
+  .comic-page { border-inline: 0; }
+  .story-caption { width: 72%; font-size: clamp(12px, 3.25vw, 15px); line-height: 1.32; }
+  .speech-bubble { width: 48%; padding: 9px 10px; }
+  .speech-bubble p { font-size: clamp(11px, 3.05vw, 14px); line-height: 1.25; }
+  .speech-bubble .speaker { font-size: clamp(7px, 2vw, 9px); }
+  .page-folio { padding-inline: 14px; }
+}
