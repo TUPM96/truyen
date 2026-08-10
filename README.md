@@ -24,7 +24,7 @@ cuu-tang-phang/
 ├── chapters/              # Các chương ở dạng Markdown
 ├── docs/                  # Luật thế giới và hồ sơ nhân vật
 └── assets/
-    ├── cover.png          # Bìa truyện
+    ├── cover.jpg          # Bìa truyện
     ├── pages/             # Tranh từng trang
     └── reference/         # Bảng mẫu giữ nhất quán nhân vật
 ```
