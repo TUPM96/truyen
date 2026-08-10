@@ -6,7 +6,7 @@
 
 ## Trang 1 — Đường thẳng
 
-![Trang 1](../assets/pages/page-01.png)
+![Trang 1](../assets/pages/page-01.jpg)
 
 **Khung 1 — Toàn cảnh Khe Gió.** Thành phố nằm trên đồng muối phẳng đến vô tận. Những tháp gió kéo bóng dài dưới Nhật Tuyến.
 
@@ -26,7 +26,7 @@
 
 ## Trang 2 — Cái bóng dựng đứng
 
-![Trang 2](../assets/pages/page-02.png)
+![Trang 2](../assets/pages/page-02.jpg)
 
 **Khung 1.** Giữa chợ Khe Gió, Nhật Tuyến ở đúng thiên đỉnh. Mọi bóng người co lại dưới chân.
 
@@ -46,7 +46,7 @@
 
 ## Trang 3 — Bản đồ có chín đường
 
-![Trang 3](../assets/pages/page-03.png)
+![Trang 3](../assets/pages/page-03.jpg)
 
 **Khung 1.** Trong kho bản đồ, thầy Vân khóa bảy lớp cửa rồi đặt một tấm đồng lên bàn.
 
@@ -66,7 +66,7 @@
 
 ## Trang 4 — Chuyến tàu cuối
 
-![Trang 4](../assets/pages/page-04.png)
+![Trang 4](../assets/pages/page-04.jpg)
 
 **Khung 1.** Linh An nhảy lên toa cáp chở muối khi nó rời Khe Gió. Mốc cắt dây khóa phía sau.
 
@@ -84,7 +84,7 @@
 
 ## Trang 5 — Kim chỉ xuống
 
-![Trang 5](../assets/pages/page-05.png)
+![Trang 5](../assets/pages/page-05.jpg)
 
 **Khung 1.** Tàu dừng giữa đồng muối vì đường ray bị một vết nứt xanh cắt ngang.
 
@@ -102,7 +102,7 @@
 
 ## Trang 6 — Bầu trời thứ hai
 
-![Trang 6](../assets/pages/page-06.png)
+![Trang 6](../assets/pages/page-06.jpg)
 
 **Khung 1.** Đêm xuống. Linh An cắm trại cạnh vết nứt; sao trên trời phản chiếu trong khe sáng.
 
@@ -120,7 +120,7 @@
 
 ## Trang 7 — Người giữ chân trời
 
-![Trang 7](../assets/pages/page-07.png)
+![Trang 7](../assets/pages/page-07.jpg)
 
 **Khung 1.** Những xe trượt buồm lướt trên muối. Chấp tuyến Bạch Kinh đứng ở mũi xe, mặt nạ trắng cắt bởi một vạch đen.
 
@@ -138,7 +138,7 @@
 
 ## Trang 8 — Đền gió không có đáy
 
-![Trang 8](../assets/pages/page-08.png)
+![Trang 8](../assets/pages/page-08.jpg)
 
 **Khung 1.** Linh An trú trong một đền gió bỏ hoang giữa tường mây.
 
@@ -158,7 +158,7 @@
 
 ## Trang 9 — Khi “dưới” đổi hướng
 
-![Trang 9](../assets/pages/page-09.png)
+![Trang 9](../assets/pages/page-09.jpg)
 
 **Khung 1.** Buồng thang lao qua bóng tối. Những dải sáng đánh dấu khoảng cách giữa hai tầng.
 
@@ -176,7 +176,7 @@
 
 ## Trang 10 — Hải Trần
 
-![Trang 10](../assets/pages/page-10.png)
+![Trang 10](../assets/pages/page-10.jpg)
 
 **Khung 1.** Cửa thang mở. Linh An bước ra Tầng Hai.
 
@@ -192,7 +192,7 @@
 
 ## Trang 11 — Tin nhắn của người mất tích
 
-![Trang 11](../assets/pages/page-11.png)
+![Trang 11](../assets/pages/page-11.jpg)
 
 **Khung 1.** Trong trạm bảo trì, la bàn chiếu hình Hạ Miên lớn tuổi hơn, khuôn mặt nhiễu sáng.
 
@@ -212,7 +212,7 @@
 
 ## Trang 12 — Chìa khóa sống
 
-![Trang 12](../assets/pages/page-12.png)
+![Trang 12](../assets/pages/page-12.jpg)
 
 **Khung 1.** Bên dưới trạm là Cọc Neo: một cột đen khổng lồ xuyên qua biển trần và biến mất vào bóng tối.
 

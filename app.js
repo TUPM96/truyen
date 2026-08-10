@@ -9,9 +9,14 @@ const progressText = document.querySelector('#progressText');
 const pageControls = document.querySelector('#pageControls');
 const pageCounter = document.querySelector('#pageCounter');
 
-let chapterIndex = Math.max(0, Number(localStorage.getItem('ctp-chapter') || 0));
+const savedChapter = Number(localStorage.getItem('ctp-chapter') || 0);
+let chapterIndex = Number.isInteger(savedChapter)
+  ? Math.min(Math.max(savedChapter, 0), STORY.chapters.length - 1)
+  : 0;
 let pageIndex = 0;
-let mode = localStorage.getItem('ctp-mode') || 'vertical';
+let mode = ['vertical', 'paged'].includes(localStorage.getItem('ctp-mode'))
+  ? localStorage.getItem('ctp-mode')
+  : 'vertical';
 
 function escapeHTML(value) {
   return String(value).replace(/[&<>'"]/g, char => ({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[char]));
