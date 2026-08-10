@@ -74,11 +74,11 @@ a { text-decoration: none; }
 .reader-overlay[hidden] { display: none; }
 .reader-progress-track { position: fixed; inset: 0 0 auto; z-index: 105; height: 3px; background: rgba(255,255,255,.08); }
 .reader-progress-track span { display: block; width: 0; height: 100%; background: var(--cyan); transition: width .2s ease; }
-.reader-viewport { display: grid; place-items: center; width: 100%; height: 100dvh; padding: 4px 64px calc(82px + env(safe-area-inset-bottom)); overflow: hidden; outline: none; overscroll-behavior: none; touch-action: pan-y; user-select: none; }
-.comic { display: grid; place-items: center; width: 100%; height: 100%; margin: 0 auto; background: #020305; }
-.comic-page { position: relative; display: none; place-items: center; width: 100%; height: 100%; margin: 0; background: #05070b; }
+.reader-viewport { display: grid; grid-template-rows: minmax(0,1fr); place-items: center; width: 100%; height: 100dvh; min-height: 0; padding: 4px 64px calc(82px + env(safe-area-inset-bottom)); overflow: hidden; outline: none; overscroll-behavior: none; touch-action: pan-y; user-select: none; }
+.comic { display: grid; grid-template-rows: minmax(0,1fr); place-items: center; width: 100%; height: 100%; min-height: 0; margin: 0 auto; overflow: hidden; background: #020305; }
+.comic-page { position: relative; display: none; place-items: center; width: 100%; height: 100%; min-height: 0; margin: 0; overflow: hidden; background: #05070b; }
 .reader-overlay[data-mode="paged"] .comic-page.active-page { display: grid; place-items: center; }
-.page-art { display: block; width: auto; max-width: 100%; height: auto; max-height: 100%; min-height: 0; object-fit: contain; background: #05070b; box-shadow: 0 18px 70px rgba(0,0,0,.45); }
+.page-art { display: block; width: auto; max-width: 100%; height: auto; max-height: calc(100dvh - 90px - env(safe-area-inset-bottom)); min-height: 0; object-fit: contain; background: #05070b; box-shadow: 0 18px 70px rgba(0,0,0,.45); }
 .reader-bottom { position: fixed; left: 50%; bottom: max(10px,env(safe-area-inset-bottom)); z-index: 104; display: grid; grid-template-columns: 44px 44px minmax(116px,1fr) 44px 44px; align-items: center; gap: 5px; width: min(440px,calc(100vw - 24px)); padding: 6px; background: rgba(11,15,22,.82); border: 1px solid rgba(255,255,255,.13); border-radius: 20px; box-shadow: 0 14px 50px rgba(0,0,0,.42); transform: translateX(-50%); backdrop-filter: blur(18px) saturate(1.2); }
 .reader-bottom[hidden] { display: none; }
 .reader-control { display: grid; place-items: center; width: 44px; height: 44px; padding: 0; color: #f1f5fb; background: rgba(255,255,255,.055); border: 1px solid rgba(255,255,255,.09); border-radius: 14px; font-size: 24px; line-height: 1; transition: background .16s ease,border-color .16s ease,opacity .16s ease; }
@@ -126,6 +126,7 @@ a { text-decoration: none; }
   .episode-copy strong { font-size: 21px; }
   .site-footer { flex-direction: column; }
   .reader-viewport { padding: 3px 3px calc(76px + env(safe-area-inset-bottom)); }
+  .page-art { max-height: calc(100dvh - 82px - env(safe-area-inset-bottom)); }
   .reader-bottom { bottom: max(8px,env(safe-area-inset-bottom)); grid-template-columns: 42px 42px minmax(94px,1fr) 42px 42px; gap: 3px; width: calc(100vw - 16px); padding: 5px; border-radius: 18px; }
   .reader-control { width: 42px; height: 42px; border-radius: 13px; }
 }
