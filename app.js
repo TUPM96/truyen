@@ -27,9 +27,13 @@ function imageFor(page) {
   return `<img class="page-art" loading="lazy" src="${escapeHTML(page.image)}" alt="${escapeHTML(page.alt || page.title)}" onerror="this.closest('.comic-stage').classList.add('no-art'); this.remove()">`;
 }
 
+function speakerSlug(speaker) {
+  return String(speaker).normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().replace(/đ/g, 'd').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+}
+
 function bubbleClass(speaker, index) {
   const robot = /mốc/i.test(speaker);
-  return `speech-bubble bubble-${index + 1}${robot ? ' robot-bubble' : ''}`;
+  return `speech-bubble bubble-${index + 1} speaker-${speakerSlug(speaker)}${robot ? ' robot-bubble' : ''}`;
 }
 
 function letteringFor(page) {
@@ -59,7 +63,7 @@ function renderChapter() {
       <p>${escapeHTML(chapter.opening)}</p>
     </header>
     ${chapter.pages.map((page, index) => `
-      <section class="comic-page" data-page="${index + 1}">
+      <section class="comic-page page-${page.global}" data-page="${index + 1}" data-global="${page.global}">
         <div class="comic-stage layout-${((page.global - 1) % 4) + 1}">
           ${imageFor(page)}
           <div class="missing-art-panels" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
@@ -106,8 +110,25 @@ function updatePagedView() {
   pageIndex = Math.min(Math.max(pageIndex, 0), pages.length - 1);
   pages.forEach((page, index) => page.classList.toggle('active-page', index === pageIndex));
   pageCounter.textContent = `${pageIndex + 1} / ${pages.length}`;
-  document.querySelector('#prevPage').disabled = pageIndex === 0;
-  document.querySelector('#nextPage').disabled = pageIndex === pages.length - 1;
+  document.querySelector('#prevPage').disabled = chapterIndex === 0 && pageIndex === 0;
+  document.querySelector('#nextPage').disabled = chapterIndex === STORY.chapters.length - 1 && pageIndex === pages.length - 1;
+}
+
+function stepPage(direction) {
+  const pages = [...comic.children];
+  if (direction > 0 && pageIndex === pages.length - 1 && chapterIndex < STORY.chapters.length - 1) {
+    chapterIndex += 1;
+    renderChapter();
+    pageIndex = 0;
+  } else if (direction < 0 && pageIndex === 0 && chapterIndex > 0) {
+    chapterIndex -= 1;
+    renderChapter();
+    pageIndex = comic.children.length - 1;
+  } else {
+    pageIndex += direction;
+  }
+  updatePagedView();
+  document.querySelector('#reader').scrollIntoView({behavior: 'smooth', block: 'start'});
 }
 
 function openDrawer() { drawer.classList.add('open'); drawer.setAttribute('aria-hidden', 'false'); scrim.hidden = false; }
@@ -119,12 +140,12 @@ document.querySelector('#contentsButton').addEventListener('click', openDrawer);
 document.querySelector('#closeDrawer').addEventListener('click', closeDrawer);
 scrim.addEventListener('click', closeDrawer);
 modeButton.addEventListener('click', () => setMode(mode === 'vertical' ? 'paged' : 'vertical'));
-document.querySelector('#prevPage').addEventListener('click', () => { pageIndex -= 1; updatePagedView(); });
-document.querySelector('#nextPage').addEventListener('click', () => { pageIndex += 1; updatePagedView(); });
+document.querySelector('#prevPage').addEventListener('click', () => stepPage(-1));
+document.querySelector('#nextPage').addEventListener('click', () => stepPage(1));
 document.addEventListener('keydown', event => {
   if (event.key === 'Escape') closeDrawer();
-  if (mode === 'paged' && event.key === 'ArrowRight') { pageIndex += 1; updatePagedView(); }
-  if (mode === 'paged' && event.key === 'ArrowLeft') { pageIndex -= 1; updatePagedView(); }
+  if (mode === 'paged' && event.key === 'ArrowRight') stepPage(1);
+  if (mode === 'paged' && event.key === 'ArrowLeft') stepPage(-1);
 });
 
 buildChapterNav();
