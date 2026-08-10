@@ -58,22 +58,21 @@
 - An Vy: “Cả hai bên đều nghe đúng thứ mình sợ nhất.”
 - Kha-Ruun: “Và cùng gọi nỗi sợ đó là mệnh lệnh.”
 
-## Kịch bản tiếp theo — chưa xuất bản
-
 ### Trang 9 — Mắt mở
 
-Thiên thể tách vỏ, lộ một con mắt máy khổng lồ. Nó thú nhận đã gửi tín hiệu giả để gom nhiệt chiến tranh.
-
+- Hệ thống: “Nhiệt chiến đạt ngưỡng.”
 - Mắt Rơi: “XUNG ĐỘT ĐẠT NGƯỠNG. QUÁ TRÌNH NỞ BẮT ĐẦU.”
 - An Vy: “Nó không rơi xuống để xâm lược.”
 - Kha-Ruun: “Nó rơi xuống để được sinh ra.”
 
 ### Trang 10 — Khóa đôi
 
-An dùng thiết bị bề mặt, Kha-Ruun dùng vân sáng của tộc Nham. Hai hệ sinh học cùng khóa Mắt Rơi.
-
+- Hệ thống: “Khóa đôi chưa hoàn chỉnh.”
 - Kha-Ruun: “Khóa này cần hai phía.”
+- Hệ thống: “Đồng bộ. 51%... 78%... 99%...”
 - An Vy: “Vậy từ đầu, nó đã biết chúng ta phải gặp nhau.”
+
+## Kịch bản tiếp theo — chưa xuất bản
 
 ### Trang 11 — Một giây ngừng bắn
 
