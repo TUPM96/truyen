@@ -6,6 +6,9 @@ const pageImage = number => `cuu-tang-phang/assets/pages/page-${String(number).p
 const STORY = {
   title: 'Cửu Tầng Phẳng',
   volume: 'Tập 1 — Người giữ khóa',
+  // Production data stays here so later illustration runs can continue the
+  // complete volume. The public reader only exposes finished page images.
+  publishedThrough: 7,
   chapters: [
     {
       short: 'Mép trời',

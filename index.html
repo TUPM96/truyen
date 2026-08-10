@@ -4,9 +4,9 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <meta name="theme-color" content="#070a13">
-  <meta name="description" content="Đọc online Cửu Tầng Phẳng — truyện tranh khoa học viễn tưởng màu về một thế giới gồm chín mặt phẳng chồng lên nhau.">
+  <meta name="description" content="Đọc Cửu Tầng Phẳng — truyện tranh khoa học viễn tưởng màu về một thế giới gồm chín mặt phẳng chồng lên nhau.">
   <meta property="og:title" content="Cửu Tầng Phẳng — Tập 1">
-  <meta property="og:description" content="Mép trời không cong. Chiếc la bàn lại chỉ xuống dưới chân Linh An.">
+  <meta property="og:description" content="Mép trời không cong. Chiếc la bàn lại chỉ xuống.">
   <meta property="og:image" content="cuu-tang-phang/assets/cover-webtoon.jpg">
   <title>Cửu Tầng Phẳng — Đọc truyện online</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -14,84 +14,88 @@
   <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&family=Spectral:ital,wght@0,600;1,600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
 </head>
-<body data-mode="vertical">
-  <header class="topbar">
-    <a class="brand" href="#top" aria-label="Về đầu trang">
+<body>
+  <header class="site-header">
+    <a class="brand" href="#top" aria-label="Cửu Tầng Phẳng">
       <span class="brand-mark">Ⅸ</span>
       <span>CỬU TẦNG PHẲNG</span>
     </a>
-    <nav class="top-actions" aria-label="Điều khiển đọc truyện">
-      <button class="icon-button" id="contentsButton" type="button" aria-label="Mở mục lục">Mục lục</button>
-      <button class="icon-button" id="modeButton" type="button" aria-label="Đổi chế độ đọc">Lật trang</button>
-    </nav>
+    <span class="release-pill">TRUYỆN MÀU NGUYÊN BẢN</span>
   </header>
 
   <main id="top">
-    <section class="hero" aria-labelledby="story-title">
-      <div class="hero-glow"></div>
-      <div class="cover-wrap">
-        <img class="cover" src="cuu-tang-phang/assets/cover-webtoon.jpg" onerror="this.src='cuu-tang-phang/assets/cover.jpg'" alt="Linh An đứng trước chín mặt phẳng của thế giới">
+    <section class="series-hero" aria-labelledby="storyTitle">
+      <div class="hero-atmosphere"></div>
+      <div class="cover-frame">
+        <img class="cover" src="cuu-tang-phang/assets/cover-webtoon.jpg" onerror="this.src='cuu-tang-phang/assets/cover.jpg'" alt="Bìa truyện Cửu Tầng Phẳng">
+        <span class="cover-volume">TẬP 1</span>
       </div>
-      <div class="hero-copy">
-        <p class="eyebrow">TRUYỆN MÀU · KHOA HỌC VIỄN TƯỞNG</p>
-        <h1 id="story-title">Cửu Tầng<br><em>Phẳng</em></h1>
+      <div class="series-copy">
+        <p class="eyebrow">SCI-FI · BÍ ẨN · PHIÊU LƯU</p>
+        <h1 id="storyTitle">Cửu Tầng <em>Phẳng</em></h1>
         <p class="tagline">Mép trời không cong.<br>Chiếc la bàn lại chỉ xuống.</p>
-        <p class="hero-summary">Linh An sống trong một thế giới được dạy là vô tận. Khi chiếc la bàn của người mẹ mất tích thức tỉnh, cô phát hiện dưới chân mình còn tám bầu trời khác — và cỗ máy giữ chúng cách xa nhau đang sụp đổ.</p>
-        <div class="hero-buttons">
-          <button class="primary-button" id="readButton" type="button">Đọc Tập 1</button>
-          <button class="secondary-button" id="aboutButton" type="button">Luật thế giới</button>
+        <p class="synopsis">Linh An sống trong một thế giới được dạy là vô tận. Khi chiếc la bàn của người mẹ mất tích thức tỉnh, cô phát hiện dưới chân mình còn tám bầu trời khác — và cỗ máy giữ chúng cách xa nhau đang sụp đổ.</p>
+        <div class="series-meta" aria-label="Thông tin truyện">
+          <span>Truyện màu</span><span>Đọc dọc</span><span>15+</span>
         </div>
-        <div class="volume-meta">
-          <span>Tập 1</span><span>6 chương</span><span>52 trang</span><span>15+</span>
+        <div class="hero-actions">
+          <button class="read-cta" id="readButton" type="button">
+            <span id="readButtonLabel">Đọc ngay</span><b aria-hidden="true">→</b>
+          </button>
+          <button class="quiet-button" id="chaptersButton" type="button">Mục lục</button>
         </div>
       </div>
     </section>
 
-    <section class="world-strip" id="about" aria-labelledby="world-title">
-      <p class="section-kicker">THẾ GIỚI CỬU DIỆP</p>
-      <h2 id="world-title">Không phải một hành tinh.<br>Là chín trang của một cỗ máy.</h2>
-      <div class="layer-diagram" aria-label="Chín tầng của Cửu Diệp">
-        <span>Đồng Trời</span><span>Hải Trần</span><span>Lâm Kính</span><span>Xưởng Mưa</span><span>Tịch Thành</span><span>Vườn Tro</span><span>Lõi Ca</span><span>Kho Đêm</span><span>Mặt Gốc</span>
+    <section class="episode-section" id="episodes" aria-labelledby="episodesTitle">
+      <div class="section-heading">
+        <div><p class="eyebrow">TẬP 1 · NGƯỜI GIỮ KHÓA</p><h2 id="episodesTitle">Danh sách chương</h2></div>
+        <p id="releaseStatus">Đang phát hành</p>
       </div>
-    </section>
-
-    <section class="reader-shell" id="reader" aria-labelledby="readerTitle">
-      <div class="reader-head">
-        <div>
-          <p class="section-kicker">TẬP 1</p>
-          <h2 id="readerTitle">Người giữ khóa</h2>
-        </div>
-        <div class="reader-progress" aria-label="Tiến độ đọc">
-          <span id="progressText">Chương 1 / 6</span>
-          <div class="progress-track"><span id="progressBar"></span></div>
-        </div>
-      </div>
-
-      <p class="reader-note">Lời kể và bong bóng thoại được in trực tiếp vào từng trang tranh. Cuộn xuống để đọc như webtoon, hoặc chọn <strong>Lật trang</strong>.</p>
-
-      <div id="chapterNav" class="chapter-nav" aria-label="Danh sách chương"></div>
-      <article id="comic" class="comic" aria-live="polite"></article>
-
-      <div class="page-controls" id="pageControls">
-        <button id="prevPage" type="button">← Trang trước</button>
-        <span id="pageCounter">1 / 1</span>
-        <button id="nextPage" type="button">Trang sau →</button>
-      </div>
+      <div class="episode-list" id="episodeList"></div>
     </section>
   </main>
 
-  <aside class="drawer" id="drawer" aria-hidden="true" aria-label="Mục lục">
-    <button class="drawer-close" id="closeDrawer" type="button" aria-label="Đóng mục lục">×</button>
-    <p class="section-kicker">MỤC LỤC TẬP 1</p>
-    <h2>Người giữ khóa</h2>
-    <div id="drawerChapters" class="drawer-chapters"></div>
-  </aside>
-  <div class="scrim" id="scrim" hidden></div>
-
-  <footer>
-    <span>Cửu Tầng Phẳng · Truyện nguyên bản</span>
-    <a href="https://github.com/TUPM96/truyen">Nguồn dự án</a>
+  <footer class="site-footer">
+    <span>© Cửu Tầng Phẳng · Truyện nguyên bản</span>
+    <span>Tinh túy trong từng khung truyện</span>
   </footer>
+
+  <section class="reader-overlay" id="readerOverlay" hidden aria-label="Trình đọc Cửu Tầng Phẳng">
+    <div class="reader-progress-track" aria-hidden="true"><span id="readerProgressBar"></span></div>
+    <header class="reader-toolbar" id="readerToolbar">
+      <button class="reader-icon" id="exitReader" type="button" aria-label="Thoát trình đọc">←</button>
+      <div class="reader-title">
+        <strong id="readerChapterTitle">Chương 1</strong>
+        <span id="readerPosition">Trang 1</span>
+      </div>
+      <div class="reader-actions">
+        <button class="reader-tool" id="readerMode" type="button" aria-label="Đổi chế độ đọc">Lật trang</button>
+        <button class="reader-icon" id="readerContents" type="button" aria-label="Mở mục lục">☰</button>
+      </div>
+    </header>
+
+    <div class="reader-viewport" id="readerViewport" tabindex="0">
+      <article class="comic" id="comic" aria-live="polite"></article>
+      <div class="chapter-end" id="chapterEnd" hidden>
+        <span>ĐÃ ĐỌC ĐẾN TRANG MỚI NHẤT</span>
+        <strong>Hẹn gặp lại ở trang tiếp theo.</strong>
+        <button id="backToSeries" type="button">Về trang truyện</button>
+      </div>
+    </div>
+
+    <nav class="reader-bottom" id="readerBottom" aria-label="Điều hướng trang">
+      <button id="prevPage" type="button" aria-label="Trang trước">‹</button>
+      <span id="pageCounter">1 / 1</span>
+      <button id="nextPage" type="button" aria-label="Trang sau">›</button>
+    </nav>
+
+    <aside class="reader-drawer" id="readerDrawer" aria-hidden="true" aria-label="Mục lục">
+      <div class="drawer-heading"><div><span>TẬP 1</span><strong>Người giữ khóa</strong></div><button id="closeDrawer" type="button" aria-label="Đóng mục lục">×</button></div>
+      <div id="drawerChapters" class="drawer-chapters"></div>
+    </aside>
+    <button class="reader-scrim" id="readerScrim" type="button" hidden aria-label="Đóng mục lục"></button>
+  </section>
 
   <script src="story-data.js"></script>
   <script src="app.js"></script>

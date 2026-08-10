@@ -1,136 +1,249 @@
+const overlay = document.querySelector('#readerOverlay');
+const viewport = document.querySelector('#readerViewport');
 const comic = document.querySelector('#comic');
-const chapterNav = document.querySelector('#chapterNav');
-const drawerChapters = document.querySelector('#drawerChapters');
-const drawer = document.querySelector('#drawer');
-const scrim = document.querySelector('#scrim');
-const modeButton = document.querySelector('#modeButton');
-const progressBar = document.querySelector('#progressBar');
-const progressText = document.querySelector('#progressText');
-const pageControls = document.querySelector('#pageControls');
+const bottomBar = document.querySelector('#readerBottom');
+const drawer = document.querySelector('#readerDrawer');
+const scrim = document.querySelector('#readerScrim');
 const pageCounter = document.querySelector('#pageCounter');
+const positionLabel = document.querySelector('#readerPosition');
+const chapterTitle = document.querySelector('#readerChapterTitle');
+const progressBar = document.querySelector('#readerProgressBar');
+const chapterEnd = document.querySelector('#chapterEnd');
 
-const savedChapter = Number(localStorage.getItem('ctp-chapter') || 0);
-let chapterIndex = Number.isInteger(savedChapter)
-  ? Math.min(Math.max(savedChapter, 0), STORY.chapters.length - 1)
-  : 0;
-let pageIndex = 0;
-let mode = ['vertical', 'paged'].includes(localStorage.getItem('ctp-mode'))
-  ? localStorage.getItem('ctp-mode')
-  : 'vertical';
+const publishedThrough = Math.min(Number(STORY.publishedThrough || 0), 52);
+const allPages = STORY.chapters.flatMap((chapter, chapterIndex) =>
+  chapter.pages.map(page => ({...page, chapterIndex, chapterTitle: chapter.title, chapterShort: chapter.short}))
+);
+const publishedPages = allPages.filter(page => page.global <= publishedThrough);
+const pageByGlobal = new Map(publishedPages.map(page => [page.global, page]));
 
-function escapeHTML(value) {
-  return String(value).replace(/[&<>'"]/g, char => ({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[char]));
+let mode = localStorage.getItem('ctp-reader-mode') === 'paged' ? 'paged' : 'vertical';
+let currentGlobal = Math.min(Math.max(Number(localStorage.getItem('ctp-progress') || 1), 1), publishedThrough || 1);
+let controlsTimer = 0;
+let observer;
+let touchStartX = 0;
+let touchStartY = 0;
+let readerIsOpen = false;
+let requestedFullscreen = false;
+
+const escapeHTML = value => String(value).replace(/[&<>'"]/g, char => ({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[char]));
+
+function chapterGroups() {
+  return STORY.chapters.map((chapter, index) => ({
+    chapter,
+    index,
+    pages: chapter.pages.filter(page => page.global <= publishedThrough)
+  })).filter(group => group.pages.length);
 }
 
-function imageFor(page) {
-  if (!page.image) return '';
-  return `<img class="page-art" loading="lazy" src="${escapeHTML(page.image)}" alt="${escapeHTML(page.alt || page.title)}" onerror="this.closest('.comic-stage').classList.add('no-art'); this.remove()">`;
-}
-
-function pageAccessibleText(page) {
-  const dialogue = page.lines.map(([speaker, line]) => `${speaker}: ${line}`).join(' ');
-  return `${page.title}. ${page.narration} ${dialogue}`;
-}
-
-function renderChapter() {
-  const chapter = STORY.chapters[chapterIndex];
-  pageIndex = 0;
-  localStorage.setItem('ctp-chapter', chapterIndex);
-  document.title = `${chapter.title} — Cửu Tầng Phẳng`;
-  progressText.textContent = `Chương ${chapterIndex + 1} / ${STORY.chapters.length}`;
-  progressBar.style.width = `${((chapterIndex + 1) / STORY.chapters.length) * 100}%`;
-
-  comic.innerHTML = `
-    <header class="chapter-opening active-page">
-      <p class="section-kicker">CHƯƠNG ${chapterIndex + 1}</p>
-      <h3>${escapeHTML(chapter.title)}</h3>
-      <p>${escapeHTML(chapter.opening)}</p>
-    </header>
-    ${chapter.pages.map((page, index) => `
-      <section class="comic-page page-${page.global}" data-page="${index + 1}" data-global="${page.global}" aria-label="${escapeHTML(pageAccessibleText(page))}">
-        <div class="comic-stage layout-${((page.global - 1) % 4) + 1}">
-          ${imageFor(page)}
-          <div class="missing-art-panels" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
-        </div>
-        <div class="page-folio">
-          <span>TRANG ${String(page.global).padStart(2, '0')}</span>
-          <h4>${escapeHTML(page.title)}</h4>
-        </div>
-      </section>`).join('')}`;
-  updatePagedView();
-  updateChapterButtons();
-}
-
-function updateChapterButtons() {
-  [...document.querySelectorAll('[data-chapter]')].forEach(button => button.classList.toggle('active', Number(button.dataset.chapter) === chapterIndex));
-}
-
-function buildChapterNav() {
-  const buttons = STORY.chapters.map((chapter, index) => `<button type="button" data-chapter="${index}">${index + 1}. ${escapeHTML(chapter.short)}</button>`).join('');
-  chapterNav.innerHTML = buttons;
-  drawerChapters.innerHTML = STORY.chapters.map((chapter, index) => `<button type="button" data-chapter="${index}"><strong>Chương ${index + 1}</strong><br>${escapeHTML(chapter.title)}</button>`).join('');
-  document.querySelectorAll('[data-chapter]').forEach(button => button.addEventListener('click', () => {
-    chapterIndex = Number(button.dataset.chapter);
-    renderChapter();
+function buildPublicChapterList() {
+  const groups = chapterGroups();
+  document.querySelector('#episodeList').innerHTML = groups.map(({chapter, index, pages}) => `
+    <button class="episode-row" type="button" data-open-chapter="${index}" data-page="${pages[0].global}">
+      <span class="episode-number">${String(index + 1).padStart(2, '0')}</span>
+      <span class="episode-copy"><strong>${escapeHTML(chapter.title)}</strong><small>${escapeHTML(chapter.opening)}</small></span>
+      <span class="episode-pages">${pages.length} trang <b>→</b></span>
+    </button>`).join('');
+  document.querySelector('#drawerChapters').innerHTML = groups.map(({chapter, index, pages}) => `
+    <button type="button" data-open-chapter="${index}" data-page="${pages[0].global}">
+      <span>CHƯƠNG ${index + 1}</span><strong>${escapeHTML(chapter.title)}</strong><small>${pages.length} trang</small>
+    </button>`).join('');
+  document.querySelector('#releaseStatus').textContent = `${groups.length} chương · ${publishedPages.length} trang`;
+  document.querySelectorAll('[data-open-chapter]').forEach(button => button.addEventListener('click', () => {
+    currentGlobal = Number(button.dataset.page);
     closeDrawer();
-    document.querySelector('#reader').scrollIntoView({behavior: 'smooth'});
+    openReader();
   }));
+}
+
+function pageMarkup(page) {
+  return `<section class="comic-page" id="page-${page.global}" data-global="${page.global}" data-chapter="${page.chapterIndex}" aria-label="Trang ${page.global}: ${escapeHTML(page.title)}">
+    <img class="page-art" src="${escapeHTML(page.image)}" alt="${escapeHTML(page.alt || page.title)}" loading="${page.global <= 2 ? 'eager' : 'lazy'}" decoding="async">
+  </section>`;
+}
+
+function renderReader() {
+  comic.innerHTML = publishedPages.map(pageMarkup).join('');
+  overlay.dataset.mode = mode;
+  document.querySelector('#readerMode').textContent = mode === 'vertical' ? 'Lật trang' : 'Đọc dọc';
+  bottomBar.hidden = mode === 'vertical';
+  chapterEnd.hidden = mode === 'paged';
+  observePages();
+  showCurrentPage(false);
+}
+
+function saveProgress(global) {
+  const page = pageByGlobal.get(global);
+  if (!page) return;
+  currentGlobal = global;
+  localStorage.setItem('ctp-progress', global);
+  localStorage.setItem('ctp-chapter', page.chapterIndex);
+  positionLabel.textContent = `Trang ${global} / ${publishedThrough}`;
+  chapterTitle.textContent = `Chương ${page.chapterIndex + 1} · ${page.chapterShort}`;
+  pageCounter.textContent = `${global} / ${publishedThrough}`;
+  progressBar.style.width = `${(global / publishedThrough) * 100}%`;
+  document.querySelector('#readButtonLabel').textContent = global > 1 ? `Đọc tiếp · Trang ${global}` : 'Đọc ngay';
+  preloadAround(global);
+}
+
+function observePages() {
+  observer?.disconnect();
+  if (mode !== 'vertical') return;
+  observer = new IntersectionObserver(entries => {
+    const visible = entries.filter(entry => entry.isIntersecting).sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+    if (visible) saveProgress(Number(visible.target.dataset.global));
+  }, {root: viewport, threshold: [.35, .6, .85]});
+  comic.querySelectorAll('.comic-page').forEach(page => observer.observe(page));
+}
+
+function showCurrentPage(smooth = true) {
+  const page = pageByGlobal.get(currentGlobal) || publishedPages[0];
+  if (!page) return;
+  currentGlobal = page.global;
+  comic.querySelectorAll('.comic-page').forEach(element => element.classList.toggle('active-page', Number(element.dataset.global) === currentGlobal));
+  saveProgress(currentGlobal);
+  if (mode === 'vertical') {
+    document.querySelector(`#page-${currentGlobal}`)?.scrollIntoView({behavior: smooth ? 'smooth' : 'auto', block: 'start'});
+  } else {
+    viewport.scrollTop = 0;
+  }
+}
+
+function stepPage(direction) {
+  const next = currentGlobal + direction;
+  if (!pageByGlobal.has(next)) {
+    if (direction > 0) chapterEnd.hidden = false;
+    return;
+  }
+  currentGlobal = next;
+  showCurrentPage(false);
+  showControls();
+}
+
+function preloadAround(global) {
+  [global + 1, global + 2, global - 1].forEach(number => {
+    const page = pageByGlobal.get(number);
+    if (page && !document.head.querySelector(`link[data-preload-page="${number}"]`)) {
+      const link = document.createElement('link');
+      link.rel = 'preload';
+      link.as = 'image';
+      link.href = page.image;
+      link.dataset.preloadPage = number;
+      document.head.appendChild(link);
+    }
+  });
+}
+
+async function requestReaderFullscreen() {
+  const request = overlay.requestFullscreen || overlay.webkitRequestFullscreen;
+  if (!request) return;
+  try {
+    requestedFullscreen = true;
+    await request.call(overlay, {navigationUI: 'hide'});
+  } catch (_) {
+    requestedFullscreen = false;
+  }
+}
+
+async function openReader() {
+  if (!publishedPages.length) return;
+  readerIsOpen = true;
+  overlay.hidden = false;
+  document.body.classList.add('reader-open');
+  renderReader();
+  await requestReaderFullscreen();
+  requestAnimationFrame(() => showCurrentPage(false));
+  showControls();
+  viewport.focus({preventScroll: true});
+}
+
+async function closeReader({fromFullscreen = false} = {}) {
+  if (!readerIsOpen) return;
+  readerIsOpen = false;
+  closeDrawer();
+  if (!fromFullscreen && (document.fullscreenElement || document.webkitFullscreenElement)) {
+    try { await (document.exitFullscreen?.() || document.webkitExitFullscreen?.()); } catch (_) {}
+  }
+  overlay.hidden = true;
+  document.body.classList.remove('reader-open');
+  clearTimeout(controlsTimer);
 }
 
 function setMode(nextMode) {
   mode = nextMode;
-  document.body.dataset.mode = mode;
-  localStorage.setItem('ctp-mode', mode);
-  modeButton.textContent = mode === 'vertical' ? 'Lật trang' : 'Đọc dọc';
-  pageControls.hidden = mode === 'vertical';
-  pageIndex = 0;
-  updatePagedView();
+  localStorage.setItem('ctp-reader-mode', mode);
+  renderReader();
+  showControls();
 }
 
-function updatePagedView() {
-  const pages = [...comic.children];
-  if (!pages.length) return;
-  pageIndex = Math.min(Math.max(pageIndex, 0), pages.length - 1);
-  pages.forEach((page, index) => page.classList.toggle('active-page', index === pageIndex));
-  pageCounter.textContent = `${pageIndex + 1} / ${pages.length}`;
-  document.querySelector('#prevPage').disabled = chapterIndex === 0 && pageIndex === 0;
-  document.querySelector('#nextPage').disabled = chapterIndex === STORY.chapters.length - 1 && pageIndex === pages.length - 1;
+function showControls() {
+  overlay.classList.remove('controls-hidden');
+  clearTimeout(controlsTimer);
+  controlsTimer = window.setTimeout(() => {
+    if (!drawer.classList.contains('open')) overlay.classList.add('controls-hidden');
+  }, 2800);
 }
 
-function stepPage(direction) {
-  const pages = [...comic.children];
-  if (direction > 0 && pageIndex === pages.length - 1 && chapterIndex < STORY.chapters.length - 1) {
-    chapterIndex += 1;
-    renderChapter();
-    pageIndex = 0;
-  } else if (direction < 0 && pageIndex === 0 && chapterIndex > 0) {
-    chapterIndex -= 1;
-    renderChapter();
-    pageIndex = comic.children.length - 1;
-  } else {
-    pageIndex += direction;
-  }
-  updatePagedView();
-  document.querySelector('#reader').scrollIntoView({behavior: 'smooth', block: 'start'});
+function toggleControls(event) {
+  if (event.target.closest('button, a')) return;
+  overlay.classList.toggle('controls-hidden');
+  if (!overlay.classList.contains('controls-hidden')) showControls();
 }
 
-function openDrawer() { drawer.classList.add('open'); drawer.setAttribute('aria-hidden', 'false'); scrim.hidden = false; }
-function closeDrawer() { drawer.classList.remove('open'); drawer.setAttribute('aria-hidden', 'true'); scrim.hidden = true; }
+function openDrawer() {
+  drawer.classList.add('open');
+  drawer.setAttribute('aria-hidden', 'false');
+  scrim.hidden = false;
+  overlay.classList.remove('controls-hidden');
+}
 
-document.querySelector('#readButton').addEventListener('click', () => document.querySelector('#reader').scrollIntoView({behavior: 'smooth'}));
-document.querySelector('#aboutButton').addEventListener('click', () => document.querySelector('#about').scrollIntoView({behavior: 'smooth'}));
-document.querySelector('#contentsButton').addEventListener('click', openDrawer);
+function closeDrawer() {
+  drawer.classList.remove('open');
+  drawer.setAttribute('aria-hidden', 'true');
+  scrim.hidden = true;
+}
+
+document.querySelector('#readButton').addEventListener('click', openReader);
+document.querySelector('#chaptersButton').addEventListener('click', () => document.querySelector('#episodes').scrollIntoView({behavior: 'smooth'}));
+document.querySelector('#exitReader').addEventListener('click', () => closeReader());
+document.querySelector('#backToSeries').addEventListener('click', () => closeReader());
+document.querySelector('#readerMode').addEventListener('click', () => setMode(mode === 'vertical' ? 'paged' : 'vertical'));
+document.querySelector('#readerContents').addEventListener('click', openDrawer);
 document.querySelector('#closeDrawer').addEventListener('click', closeDrawer);
 scrim.addEventListener('click', closeDrawer);
-modeButton.addEventListener('click', () => setMode(mode === 'vertical' ? 'paged' : 'vertical'));
 document.querySelector('#prevPage').addEventListener('click', () => stepPage(-1));
 document.querySelector('#nextPage').addEventListener('click', () => stepPage(1));
+viewport.addEventListener('click', toggleControls);
+viewport.addEventListener('pointermove', showControls, {passive: true});
+viewport.addEventListener('touchstart', event => {
+  touchStartX = event.changedTouches[0].clientX;
+  touchStartY = event.changedTouches[0].clientY;
+}, {passive: true});
+viewport.addEventListener('touchend', event => {
+  if (mode !== 'paged') return;
+  const dx = event.changedTouches[0].clientX - touchStartX;
+  const dy = event.changedTouches[0].clientY - touchStartY;
+  if (Math.abs(dx) > 55 && Math.abs(dx) > Math.abs(dy) * 1.25) stepPage(dx < 0 ? 1 : -1);
+}, {passive: true});
 document.addEventListener('keydown', event => {
-  if (event.key === 'Escape') closeDrawer();
-  if (mode === 'paged' && event.key === 'ArrowRight') stepPage(1);
-  if (mode === 'paged' && event.key === 'ArrowLeft') stepPage(-1);
+  if (!readerIsOpen) return;
+  if (event.key === 'Escape') closeReader();
+  if (event.key === 'ArrowRight' || event.key === 'PageDown') stepPage(1);
+  if (event.key === 'ArrowLeft' || event.key === 'PageUp') stepPage(-1);
+  if (event.key.toLowerCase() === 'm') setMode(mode === 'vertical' ? 'paged' : 'vertical');
+});
+document.addEventListener('fullscreenchange', () => {
+  if (requestedFullscreen && !document.fullscreenElement && readerIsOpen) {
+    requestedFullscreen = false;
+    closeReader({fromFullscreen: true});
+  }
+});
+document.addEventListener('webkitfullscreenchange', () => {
+  if (requestedFullscreen && !document.webkitFullscreenElement && readerIsOpen) {
+    requestedFullscreen = false;
+    closeReader({fromFullscreen: true});
+  }
 });
 
-buildChapterNav();
-renderChapter();
-setMode(mode);
+buildPublicChapterList();
+saveProgress(currentGlobal);
