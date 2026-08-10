@@ -6,7 +6,7 @@ Repository lưu các bộ truyện tranh và truyện minh họa nguyên bản, 
 
 | Bộ truyện | Thể loại | Trạng thái | Đọc |
 |---|---|---|---|
-| **Cửu Tầng Phẳng** | Khoa học viễn tưởng · Bí ẩn · Phiêu lưu | Đang hoàn thiện Chương 1 | [Mở bộ truyện](cuu-tang-phang/README.md) |
+| **Cửu Tầng Phẳng** | Khoa học viễn tưởng · Bí ẩn · Phiêu lưu | Tập 1: 6 chương · 52 trang | [Đọc online](https://tupm96.github.io/truyen/) |
 
 ## Cửu Tầng Phẳng
 
@@ -14,7 +14,7 @@ Thế giới không phải một hành tinh hình cầu. Nó là một cấu tr�
 
 Tại Tầng Một, Linh An — một học việc đo đạc 19 tuổi — phát hiện chiếc la bàn của người mẹ mất tích không chỉ sai hướng. Kim la bàn đang chỉ xuyên xuống dưới mặt đất, về phía tám thế giới mà mọi bản đồ đều cố tình che giấu.
 
-Chương mở đầu, **“Mép Trời Không Cong”**, theo chân Linh An từ thành Khe Gió qua tường mây nhân tạo, xuống Đường Khâu đầu tiên và tới Hải Trần: một tầng có đại dương nằm trên trần trời. Càng đi sâu, cô càng nhận ra chín tầng không phải chín thế giới tách biệt, mà là chín bộ phận của một cỗ máy đang dần trượt khỏi vị trí.
+Tập đầu, **“Người giữ khóa”**, theo chân Linh An từ thành Khe Gió qua tường mây nhân tạo, xuống Đường Khâu đầu tiên và tới Hải Trần: một tầng có đại dương nằm trên trần trời. Trong sáu chương, cô phải ngăn hai mặt phẳng va vào nhau, đối mặt bí mật về người mẹ và tự quyết định mình là một con người hay chỉ là chìa khóa của cỗ máy.
 
 ## Cấu trúc
 
