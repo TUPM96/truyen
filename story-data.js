@@ -8,7 +8,7 @@ const STORY = {
   volume: 'Tập 1 — Người giữ khóa',
   // Production data stays here so later illustration runs can continue the
   // complete volume. The public reader only exposes finished page images.
-  publishedThrough: 12,
+  publishedThrough: 14,
   chapters: [
     {
       short: 'Mép trời',
