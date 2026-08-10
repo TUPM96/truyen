@@ -77,7 +77,7 @@ async function closeReader(fromFullscreen = false) {
   document.body.classList.remove('reader-open');
 }
 
-document.querySelector('#releaseStatus').textContent = `1 chương · ${total} trang`;
+document.querySelector('#releaseStatus').textContent = `${STORY.chapterComplete ? '1 chương hoàn tất' : '1 chương'} · ${total} trang`;
 document.querySelector('#chapterPages').textContent = `${total} trang →`;
 document.querySelector('#readLabel').textContent = current > 1 ? `Đọc tiếp · Trang ${current}` : 'Đọc ngay';
 document.querySelector('#readButton').addEventListener('click', openReader);

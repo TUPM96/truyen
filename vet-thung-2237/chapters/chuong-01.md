@@ -72,19 +72,18 @@
 - Hệ thống: “Đồng bộ. 51%... 78%... 99%...”
 - An Vy: “Vậy từ đầu, nó đã biết chúng ta phải gặp nhau.”
 
-## Kịch bản tiếp theo — chưa xuất bản
-
 ### Trang 11 — Một giây ngừng bắn
 
-An phát toàn bộ bằng chứng cho hai quân đội. Bách hủy đầu đạn trong khoảnh khắc cuối; Hội Đồng Nham tắt pháo.
-
+- Hệ cứu hộ: “Phát toàn kênh. Bằng chứng gốc.”
 - Bách: “Ta cho cô một giây.”
+- Hệ thống: “Đầu đạn: hủy. Pháo Nham: tắt.”
 - An Vy: “Một giây là đủ để ngừng một cuộc chiến. Chưa đủ để tha thứ.”
 
 ### Trang 12 — Những vết thủng khác
 
-Mắt Rơi bị khóa. Loài người và tộc Nham lần đầu nhìn thấy bầu trời của nhau. Trên bản đồ toàn cầu, tám điểm đen khác cùng sáng lên.
-
+- Hệ thống: “Khóa đôi hoàn tất.”
 - Kha-Ruun: “Chiến tranh kết thúc chưa?”
 - An Vy: “Chưa. Nhưng lời nói dối đầu tiên đã chết.”
 - Dẫn kết: “Đêm đó, Trái Đất trả lời bằng chín nhịp.”
+
+## Chương 1 hoàn tất

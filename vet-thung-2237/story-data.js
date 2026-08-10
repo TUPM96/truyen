@@ -1,6 +1,7 @@
 const STORY = {
   title: 'Vết Thủng 2237',
-  publishedThrough: 10,
+  publishedThrough: 12,
+  chapterComplete: true,
   pages: [
     {number: 1, image: 'assets/pages/page-01.webp', title: 'Thứ rơi ngoài bản đồ sao', alt: 'Thiên thể đen xuyên qua thành phố năm 2237'},
     {number: 2, image: 'assets/pages/page-02.webp', title: 'Ba nhịp', alt: 'An Vy nhận tín hiệu sống dưới hố sâu'},
@@ -11,6 +12,8 @@ const STORY = {
     {number: 7, image: 'assets/pages/page-07.webp', title: 'Ký ức trong đá', alt: 'An Vy và Kha-Ruun nhìn thấy ký ức Mắt Rơi được phóng khỏi Nham Cung'},
     {number: 8, image: 'assets/pages/page-08.webp', title: 'Hai phía khai hỏa', alt: 'Đầu đạn bề mặt và pháo địa nhiệt cùng nhắm vào trục xuyên vỏ'},
     {number: 9, image: 'assets/pages/page-09.webp', title: 'Mắt mở', alt: 'Mắt Rơi tách vỏ thành một mống mắt cơ khí khổng lồ'},
-    {number: 10, image: 'assets/pages/page-10.webp', title: 'Khóa đôi', alt: 'An Vy và Kha-Ruun cùng kích hoạt hai nửa khóa của Mắt Rơi'}
+    {number: 10, image: 'assets/pages/page-10.webp', title: 'Khóa đôi', alt: 'An Vy và Kha-Ruun cùng kích hoạt hai nửa khóa của Mắt Rơi'},
+    {number: 11, image: 'assets/pages/page-11.webp', title: 'Một giây ngừng bắn', alt: 'Chỉ huy Bách hủy đầu đạn khi An Vy phát bằng chứng giả mạo'},
+    {number: 12, image: 'assets/pages/page-12.webp', title: 'Những vết thủng khác', alt: 'Bản đồ Trái Đất hiện chín điểm Vết Thủng sau khi Mắt Rơi bị khóa'}
   ]
 };
