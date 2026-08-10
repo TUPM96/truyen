@@ -179,6 +179,10 @@ function closeDrawer() {
 }
 
 document.querySelector('#readButton').addEventListener('click', openReader);
+document.querySelectorAll('[data-read-story]').forEach(button => button.addEventListener('click', () => {
+  currentGlobal = Number(button.dataset.page || 1);
+  openReader();
+}));
 document.querySelector('#chaptersButton').addEventListener('click', () => document.querySelector('#episodes').scrollIntoView({behavior: 'smooth'}));
 document.querySelector('#exitReader').addEventListener('click', () => closeReader());
 document.querySelector('#backToSeries').addEventListener('click', () => closeReader());
