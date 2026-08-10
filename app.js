@@ -17,12 +17,12 @@ const allPages = STORY.chapters.flatMap((chapter, chapterIndex) =>
 const publishedPages = allPages.filter(page => page.global <= publishedThrough);
 const pageByGlobal = new Map(publishedPages.map(page => [page.global, page]));
 
-let mode = localStorage.getItem('ctp-reader-mode') === 'paged' ? 'paged' : 'vertical';
+const mode = 'paged';
 let currentGlobal = Math.min(Math.max(Number(localStorage.getItem('ctp-progress') || 1), 1), publishedThrough || 1);
 let controlsTimer = 0;
-let observer;
 let touchStartX = 0;
 let touchStartY = 0;
+let lastSwipeAt = 0;
 let readerIsOpen = false;
 let requestedFullscreen = false;
 
@@ -65,10 +65,8 @@ function pageMarkup(page) {
 function renderReader() {
   comic.innerHTML = publishedPages.map(pageMarkup).join('');
   overlay.dataset.mode = mode;
-  document.querySelector('#readerMode').textContent = mode === 'vertical' ? 'Lật trang' : 'Đọc dọc';
-  bottomBar.hidden = mode === 'vertical';
-  chapterEnd.hidden = mode === 'paged';
-  observePages();
+  bottomBar.hidden = false;
+  chapterEnd.hidden = true;
   showCurrentPage(false);
 }
 
@@ -80,20 +78,12 @@ function saveProgress(global) {
   localStorage.setItem('ctp-chapter', page.chapterIndex);
   positionLabel.textContent = `Trang ${global} / ${publishedThrough}`;
   chapterTitle.textContent = `Chương ${page.chapterIndex + 1} · ${page.chapterShort}`;
-  pageCounter.textContent = `${global} / ${publishedThrough}`;
-  progressBar.style.width = `${(global / publishedThrough) * 100}%`;
+  pageCounter.textContent = `Trang ${global} / ${publishedPages.length}`;
+  progressBar.style.width = `${(global / publishedPages.length) * 100}%`;
   document.querySelector('#readButtonLabel').textContent = global > 1 ? `Đọc tiếp · Trang ${global}` : 'Đọc ngay';
+  document.querySelector('#prevPage').disabled = global <= publishedPages[0].global;
+  document.querySelector('#nextPage').disabled = global >= publishedPages[publishedPages.length - 1].global;
   preloadAround(global);
-}
-
-function observePages() {
-  observer?.disconnect();
-  if (mode !== 'vertical') return;
-  observer = new IntersectionObserver(entries => {
-    const visible = entries.filter(entry => entry.isIntersecting).sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
-    if (visible) saveProgress(Number(visible.target.dataset.global));
-  }, {root: viewport, threshold: [.35, .6, .85]});
-  comic.querySelectorAll('.comic-page').forEach(page => observer.observe(page));
 }
 
 function showCurrentPage(smooth = true) {
@@ -102,17 +92,13 @@ function showCurrentPage(smooth = true) {
   currentGlobal = page.global;
   comic.querySelectorAll('.comic-page').forEach(element => element.classList.toggle('active-page', Number(element.dataset.global) === currentGlobal));
   saveProgress(currentGlobal);
-  if (mode === 'vertical') {
-    document.querySelector(`#page-${currentGlobal}`)?.scrollIntoView({behavior: smooth ? 'smooth' : 'auto', block: 'start'});
-  } else {
-    viewport.scrollTop = 0;
-  }
+  viewport.scrollTop = 0;
 }
 
 function stepPage(direction) {
   const next = currentGlobal + direction;
   if (!pageByGlobal.has(next)) {
-    if (direction > 0) chapterEnd.hidden = false;
+    showControls();
     return;
   }
   currentGlobal = next;
@@ -169,13 +155,6 @@ async function closeReader({fromFullscreen = false} = {}) {
   clearTimeout(controlsTimer);
 }
 
-function setMode(nextMode) {
-  mode = nextMode;
-  localStorage.setItem('ctp-reader-mode', mode);
-  renderReader();
-  showControls();
-}
-
 function showControls() {
   overlay.classList.remove('controls-hidden');
   clearTimeout(controlsTimer);
@@ -188,6 +167,19 @@ function toggleControls(event) {
   if (event.target.closest('button, a')) return;
   overlay.classList.toggle('controls-hidden');
   if (!overlay.classList.contains('controls-hidden')) showControls();
+}
+
+function handlePageTap(event) {
+  if (event.target.closest('button, a') || Date.now() - lastSwipeAt < 350) return;
+  const rect = viewport.getBoundingClientRect();
+  const position = (event.clientX - rect.left) / rect.width;
+  if (position <= .34) {
+    stepPage(-1);
+  } else if (position >= .66) {
+    stepPage(1);
+  } else {
+    toggleControls(event);
+  }
 }
 
 function openDrawer() {
@@ -207,30 +199,30 @@ document.querySelector('#readButton').addEventListener('click', openReader);
 document.querySelector('#chaptersButton').addEventListener('click', () => document.querySelector('#episodes').scrollIntoView({behavior: 'smooth'}));
 document.querySelector('#exitReader').addEventListener('click', () => closeReader());
 document.querySelector('#backToSeries').addEventListener('click', () => closeReader());
-document.querySelector('#readerMode').addEventListener('click', () => setMode(mode === 'vertical' ? 'paged' : 'vertical'));
 document.querySelector('#readerContents').addEventListener('click', openDrawer);
 document.querySelector('#closeDrawer').addEventListener('click', closeDrawer);
 scrim.addEventListener('click', closeDrawer);
 document.querySelector('#prevPage').addEventListener('click', () => stepPage(-1));
 document.querySelector('#nextPage').addEventListener('click', () => stepPage(1));
-viewport.addEventListener('click', toggleControls);
+viewport.addEventListener('click', handlePageTap);
 viewport.addEventListener('pointermove', showControls, {passive: true});
 viewport.addEventListener('touchstart', event => {
   touchStartX = event.changedTouches[0].clientX;
   touchStartY = event.changedTouches[0].clientY;
 }, {passive: true});
 viewport.addEventListener('touchend', event => {
-  if (mode !== 'paged') return;
   const dx = event.changedTouches[0].clientX - touchStartX;
   const dy = event.changedTouches[0].clientY - touchStartY;
-  if (Math.abs(dx) > 55 && Math.abs(dx) > Math.abs(dy) * 1.25) stepPage(dx < 0 ? 1 : -1);
+  if (Math.abs(dx) > 55 && Math.abs(dx) > Math.abs(dy) * 1.25) {
+    lastSwipeAt = Date.now();
+    stepPage(dx < 0 ? 1 : -1);
+  }
 }, {passive: true});
 document.addEventListener('keydown', event => {
   if (!readerIsOpen) return;
   if (event.key === 'Escape') closeReader();
   if (event.key === 'ArrowRight' || event.key === 'PageDown') stepPage(1);
   if (event.key === 'ArrowLeft' || event.key === 'PageUp') stepPage(-1);
-  if (event.key.toLowerCase() === 'm') setMode(mode === 'vertical' ? 'paged' : 'vertical');
 });
 document.addEventListener('fullscreenchange', () => {
   if (requestedFullscreen && !document.fullscreenElement && readerIsOpen) {
