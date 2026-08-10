@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#050807">
+  <meta name="description" content="Đọc Vết Thủng 2237 — truyện tranh khoa học viễn tưởng màu về cuộc chiến giữa loài người và tộc Nham trong lòng đất.">
+  <meta property="og:title" content="Vết Thủng 2237">
+  <meta property="og:description" content="Thiên thạch không nổ. Nó gõ cửa từ phía bên kia.">
+  <meta property="og:image" content="assets/cover.png">
+  <title>Vết Thủng 2237 — Đọc truyện online</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&family=Spectral:ital,wght@0,600;1,600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="site-header">
+    <a class="back-link" href="../">← Thư viện truyện</a>
+    <span>TRUYỆN MÀU NGUYÊN BẢN</span>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="cover-wrap">
+        <img src="assets/cover.png" onerror="this.src='assets/pages/page-01.webp'" alt="Bìa Vết Thủng 2237">
+        <span>CHƯƠNG MỞ ĐẦU</span>
+      </div>
+      <div class="hero-copy">
+        <p class="eyebrow">SCI-FI · SINH TỒN · ĐỊA TÂM</p>
+        <h1>Vết Thủng <em>2237</em></h1>
+        <p class="tagline">Thiên thạch không nổ.<br>Nó gõ cửa từ phía bên kia.</p>
+        <p class="synopsis">Một thiên thể đen xuyên qua thành phố và tiếp tục khoan vào Trái Đất. Nữ phi công cứu hộ An Vy lần theo ba nhịp tín hiệu ở độ sâu 91 ki-lô-mét, nơi tộc Nham đang chuẩn bị cho cuộc chiến mà họ tin loài người đã khơi mào.</p>
+        <div class="meta"><span>Truyện màu</span><span>Lật từng trang</span><span>15+</span></div>
+        <div class="actions">
+          <button id="readButton" type="button"><span id="readLabel">Đọc ngay</span><b>→</b></button>
+          <a href="#chapters">Mục lục</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="chapters" id="chapters">
+      <div class="chapter-heading"><div><p class="eyebrow">TẬP 1 · MẮT RƠI</p><h2>Danh sách chương</h2></div><span id="releaseStatus"></span></div>
+      <button class="chapter-row" id="openChapter" type="button"><b>01</b><span><strong>Ba Nhịp Dưới Hố Sâu</strong><small>Ngày Trái Đất bị xuyên thủng, thứ đầu tiên vọng lên không phải tiếng nổ.</small></span><i id="chapterPages">4 trang →</i></button>
+    </section>
+  </main>
+
+  <footer><span>© Vết Thủng 2237 · Truyện nguyên bản</span><span>Cập nhật theo tiến độ sáng tác</span></footer>
+
+  <section class="reader" id="reader" hidden aria-label="Trình đọc Vết Thủng 2237">
+    <div class="progress"><span id="progressBar"></span></div>
+    <header class="reader-toolbar" id="readerToolbar">
+      <button id="closeReader" type="button" aria-label="Thoát trình đọc">←</button>
+      <div><strong>Chương 1 · Ba Nhịp Dưới Hố Sâu</strong><span id="readerPosition">Trang 1 / 4</span></div>
+      <a href="#" id="readerHome" aria-label="Về đầu truyện">⌂</a>
+    </header>
+    <div class="reader-stage" id="readerStage" tabindex="0">
+      <article id="comic"></article>
+      <button class="tap-zone tap-left" id="tapLeft" type="button" aria-label="Trang trước"></button>
+      <button class="tap-zone tap-right" id="tapRight" type="button" aria-label="Trang sau"></button>
+    </div>
+    <nav class="reader-nav" id="readerNav">
+      <button id="prevPage" type="button" aria-label="Trang trước">‹</button>
+      <span id="pageCounter" aria-live="polite">Trang 1 / 4</span>
+      <button id="nextPage" type="button" aria-label="Trang sau">›</button>
+    </nav>
+  </section>
+
+  <script src="story-data.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

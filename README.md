@@ -7,6 +7,11 @@ Repository lưu các bộ truyện tranh và truyện minh họa nguyên bản, 
 | Bộ truyện | Thể loại | Trạng thái | Đọc |
 |---|---|---|---|
 | **Cửu Tầng Phẳng** | Khoa học viễn tưởng · Bí ẩn · Phiêu lưu | Tập 1: 6 chương · 52 trang | [Đọc online](https://tupm96.github.io/truyen/) |
+| **Vết Thủng 2237** | Khoa học viễn tưởng · Sinh tồn · Địa tâm | Tập 1 đang sáng tác · 4 trang đã xuất bản | [Đọc online](https://tupm96.github.io/truyen/vet-thung-2237/) |
+
+## Vết Thủng 2237
+
+Năm 2237, một thiên thể đen xuyên qua thành phố và tiếp tục khoan vào Trái Đất. Nữ phi công cứu hộ An Vy lần theo tín hiệu sống ở độ sâu 91 ki-lô-mét, nơi tộc Nham đã xây dựng một nền văn minh quanh địa tâm từ trước lịch sử loài người. Cả hai phía tin bên kia vừa khai chiến — nhưng Mắt Rơi mới là kẻ đang phát mệnh lệnh giả.
 
 ## Cửu Tầng Phẳng
 
