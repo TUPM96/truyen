@@ -4,7 +4,11 @@
 
 ![Bìa Chương 1](assets/cover.jpg)
 
-## Đọc truyện
+## Đọc truyện online
+
+- [Mở trình đọc GitHub Pages](https://tupm96.github.io/truyen/)
+
+## Tài liệu truyện
 
 - [Chương 1 — Mép Trời Không Cong](chapters/chuong-01.md)
 - [Luật thế giới](docs/world-bible.md)
@@ -24,7 +28,8 @@ Khi một vết nứt phát sáng mở ra giữa đồng muối, Linh An biết 
 
 ## Tình trạng
 
-- Chương 1: hoàn chỉnh, 12 trang.
+- Tập 1 “Người giữ khóa”: kịch bản hoàn chỉnh 6 chương, 52 trang.
+- Tranh màu: đang được hoàn thiện và đưa vào trình đọc theo từng lô.
 - Thể loại: khoa học viễn tưởng, bí ẩn, phiêu lưu.
 - Độ tuổi gợi ý: 15+.
 
