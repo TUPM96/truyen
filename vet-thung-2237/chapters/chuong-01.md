@@ -43,22 +43,22 @@
 - Kỹ thuật viên: “Còn An Vy?”
 - Bách: “Cô ấy biết quy tắc cứu hộ: một người không đổi lấy một thành phố.”
 
-## Kịch bản tiếp theo — chưa xuất bản
-
 ### Trang 7 — Ký ức trong đá
 
-Thiết bị trên tay An chiếu ký ức cổ: Mắt Rơi từng được phóng từ Nham Cung, mang theo một sinh thể ngủ đông.
-
+- Hệ cứu hộ: “Dữ liệu cổ đang phục hồi.”
+- Dẫn: “Ký ức. Nham Cung — thời tiền sử.”
 - An Vy: “Thiên thạch này sinh ra từ Trái Đất.”
 - Kha-Ruun: “Không. Nó là đứa con bị lưu đày.”
 - Hệ cứu hộ: “Phát hiện tín hiệu giả mạo từ cả hai quân đội.”
 
 ### Trang 8 — Hai phía khai hỏa
 
-Quân mặt đất thả đầu đạn. Quân Nham mở pháo địa nhiệt. An và Kha-Ruun đứng giữa hai đường bắn.
-
+- Hệ thống bề mặt: “Đầu đạn. 00:08.”
+- Hệ thống Nham: “Pháo địa nhiệt. Khai hỏa.”
 - An Vy: “Cả hai bên đều nghe đúng thứ mình sợ nhất.”
 - Kha-Ruun: “Và cùng gọi nỗi sợ đó là mệnh lệnh.”
+
+## Kịch bản tiếp theo — chưa xuất bản
 
 ### Trang 9 — Mắt mở
 
