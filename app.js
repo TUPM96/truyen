@@ -24,7 +24,24 @@ function escapeHTML(value) {
 
 function imageFor(page) {
   if (!page.image) return '';
-  return `<img class="page-art" loading="lazy" src="${escapeHTML(page.image)}" alt="${escapeHTML(page.alt || page.title)}" onerror="this.classList.add('is-missing')">`;
+  return `<img class="page-art" loading="lazy" src="${escapeHTML(page.image)}" alt="${escapeHTML(page.alt || page.title)}" onerror="this.closest('.comic-stage').classList.add('no-art'); this.remove()">`;
+}
+
+function bubbleClass(speaker, index) {
+  const robot = /mốc/i.test(speaker);
+  return `speech-bubble bubble-${index + 1}${robot ? ' robot-bubble' : ''}`;
+}
+
+function letteringFor(page) {
+  return `
+    <div class="lettering" aria-label="Lời thoại trang ${page.global}">
+      <p class="story-caption">${escapeHTML(page.narration)}</p>
+      ${page.lines.map((line, index) => `
+        <div class="${bubbleClass(line[0], index)}">
+          <span class="speaker">${escapeHTML(line[0])}</span>
+          <p>${escapeHTML(line[1])}</p>
+        </div>`).join('')}
+    </div>`;
 }
 
 function renderChapter() {
@@ -43,14 +60,14 @@ function renderChapter() {
     </header>
     ${chapter.pages.map((page, index) => `
       <section class="comic-page" data-page="${index + 1}">
-        ${imageFor(page)}
-        <div class="page-copy">
-          <span class="page-number">TRANG ${String(page.global).padStart(2, '0')}</span>
-          <h4 class="page-title">${escapeHTML(page.title)}</h4>
-          <p class="narration">${escapeHTML(page.narration)}</p>
-          <div class="dialogue">
-            ${page.lines.map(line => `<p class="line"><strong>${escapeHTML(line[0])}:</strong> ${escapeHTML(line[1])}</p>`).join('')}
-          </div>
+        <div class="comic-stage layout-${((page.global - 1) % 4) + 1}">
+          ${imageFor(page)}
+          <div class="missing-art-panels" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+          ${letteringFor(page)}
+        </div>
+        <div class="page-folio">
+          <span>TRANG ${String(page.global).padStart(2, '0')}</span>
+          <h4>${escapeHTML(page.title)}</h4>
         </div>
       </section>`).join('')}`;
   updatePagedView();
