@@ -5,7 +5,6 @@ const bottomBar = document.querySelector('#readerBottom');
 const drawer = document.querySelector('#readerDrawer');
 const scrim = document.querySelector('#readerScrim');
 const pageCounter = document.querySelector('#pageCounter');
-const positionLabel = document.querySelector('#readerPosition');
 const chapterTitle = document.querySelector('#readerChapterTitle');
 const progressBar = document.querySelector('#readerProgressBar');
 const chapterEnd = document.querySelector('#chapterEnd');
@@ -19,7 +18,6 @@ const pageByGlobal = new Map(publishedPages.map(page => [page.global, page]));
 
 const mode = 'paged';
 let currentGlobal = Math.min(Math.max(Number(localStorage.getItem('ctp-progress') || 1), 1), publishedThrough || 1);
-let controlsTimer = 0;
 let touchStartX = 0;
 let touchStartY = 0;
 let lastSwipeAt = 0;
@@ -76,7 +74,6 @@ function saveProgress(global) {
   currentGlobal = global;
   localStorage.setItem('ctp-progress', global);
   localStorage.setItem('ctp-chapter', page.chapterIndex);
-  positionLabel.textContent = `Trang ${global} / ${publishedThrough}`;
   chapterTitle.textContent = `Chương ${page.chapterIndex + 1} · ${page.chapterShort}`;
   pageCounter.textContent = `Trang ${global} / ${publishedPages.length}`;
   progressBar.style.width = `${(global / publishedPages.length) * 100}%`;
@@ -90,20 +87,25 @@ function showCurrentPage(smooth = true) {
   const page = pageByGlobal.get(currentGlobal) || publishedPages[0];
   if (!page) return;
   currentGlobal = page.global;
-  comic.querySelectorAll('.comic-page').forEach(element => element.classList.toggle('active-page', Number(element.dataset.global) === currentGlobal));
+  comic.querySelectorAll('.comic-page').forEach(element => {
+    const active = Number(element.dataset.global) === currentGlobal;
+    element.classList.toggle('active-page', active);
+    element.setAttribute('aria-hidden', String(!active));
+    if (active) {
+      const art = element.querySelector('.page-art');
+      art.loading = 'eager';
+      art.fetchPriority = 'high';
+    }
+  });
   saveProgress(currentGlobal);
   viewport.scrollTop = 0;
 }
 
 function stepPage(direction) {
   const next = currentGlobal + direction;
-  if (!pageByGlobal.has(next)) {
-    showControls();
-    return;
-  }
+  if (!pageByGlobal.has(next)) return;
   currentGlobal = next;
   showCurrentPage(false);
-  showControls();
 }
 
 function preloadAround(global) {
@@ -139,7 +141,6 @@ async function openReader() {
   renderReader();
   await requestReaderFullscreen();
   requestAnimationFrame(() => showCurrentPage(false));
-  showControls();
   viewport.focus({preventScroll: true});
 }
 
@@ -152,21 +153,6 @@ async function closeReader({fromFullscreen = false} = {}) {
   }
   overlay.hidden = true;
   document.body.classList.remove('reader-open');
-  clearTimeout(controlsTimer);
-}
-
-function showControls() {
-  overlay.classList.remove('controls-hidden');
-  clearTimeout(controlsTimer);
-  controlsTimer = window.setTimeout(() => {
-    if (!drawer.classList.contains('open')) overlay.classList.add('controls-hidden');
-  }, 2800);
-}
-
-function toggleControls(event) {
-  if (event.target.closest('button, a')) return;
-  overlay.classList.toggle('controls-hidden');
-  if (!overlay.classList.contains('controls-hidden')) showControls();
 }
 
 function handlePageTap(event) {
@@ -177,8 +163,6 @@ function handlePageTap(event) {
     stepPage(-1);
   } else if (position >= .66) {
     stepPage(1);
-  } else {
-    toggleControls(event);
   }
 }
 
@@ -186,7 +170,6 @@ function openDrawer() {
   drawer.classList.add('open');
   drawer.setAttribute('aria-hidden', 'false');
   scrim.hidden = false;
-  overlay.classList.remove('controls-hidden');
 }
 
 function closeDrawer() {
@@ -205,7 +188,6 @@ scrim.addEventListener('click', closeDrawer);
 document.querySelector('#prevPage').addEventListener('click', () => stepPage(-1));
 document.querySelector('#nextPage').addEventListener('click', () => stepPage(1));
 viewport.addEventListener('click', handlePageTap);
-viewport.addEventListener('pointermove', showControls, {passive: true});
 viewport.addEventListener('touchstart', event => {
   touchStartX = event.changedTouches[0].clientX;
   touchStartY = event.changedTouches[0].clientY;

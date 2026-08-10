@@ -63,16 +63,6 @@
 
   <section class="reader-overlay" id="readerOverlay" hidden aria-label="Trình đọc Cửu Tầng Phẳng">
     <div class="reader-progress-track" aria-hidden="true"><span id="readerProgressBar"></span></div>
-    <header class="reader-toolbar" id="readerToolbar">
-      <button class="reader-icon" id="exitReader" type="button" aria-label="Thoát trình đọc">←</button>
-      <div class="reader-title">
-        <strong id="readerChapterTitle">Chương 1</strong>
-        <span id="readerPosition">Trang 1</span>
-      </div>
-      <div class="reader-actions">
-        <button class="reader-icon" id="readerContents" type="button" aria-label="Mở mục lục">☰</button>
-      </div>
-    </header>
 
     <div class="reader-viewport" id="readerViewport" tabindex="0">
       <article class="comic" id="comic" aria-live="polite"></article>
@@ -83,10 +73,15 @@
       </div>
     </div>
 
-    <nav class="reader-bottom" id="readerBottom" aria-label="Điều hướng trang">
-      <button id="prevPage" type="button" aria-label="Trang trước">‹</button>
-      <span id="pageCounter" aria-live="polite">Trang 1 / 1</span>
-      <button id="nextPage" type="button" aria-label="Trang sau">›</button>
+    <nav class="reader-bottom" id="readerBottom" aria-label="Điều khiển trình đọc">
+      <button class="reader-control reader-exit" id="exitReader" type="button" aria-label="Thoát trình đọc" title="Thoát">←</button>
+      <button class="reader-control" id="prevPage" type="button" aria-label="Trang trước" title="Trang trước">‹</button>
+      <span class="reader-status">
+        <strong id="pageCounter" aria-live="polite">Trang 1 / 1</strong>
+        <small id="readerChapterTitle">Chương 1</small>
+      </span>
+      <button class="reader-control" id="nextPage" type="button" aria-label="Trang sau" title="Trang sau">›</button>
+      <button class="reader-control reader-menu" id="readerContents" type="button" aria-label="Mở mục lục" title="Mục lục">☰</button>
     </nav>
 
     <aside class="reader-drawer" id="readerDrawer" aria-hidden="true" aria-label="Mục lục">
