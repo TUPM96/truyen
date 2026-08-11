@@ -42,7 +42,16 @@
 - Đã giữ thiết bị cyan trên cổ tay phải An Vy và chuyển cảnh liên tục từ lần tiếp xúc đầu tiên sang toàn cảnh Nham Cung.
 - Đã đối chiếu sáu câu thoại/lời dẫn trang 4 và năm mục chữ trang 3; không phát hiện sai dấu hoặc chữ bị cắt.
 
+## Audit thoại tự nhiên trang 5–6 — 11/08/2026
+
+- Đã thay mới trang 5 “Nham Cung báo động” và trang 6 “Lệnh xuyên vỏ” bằng ảnh gen hoàn chỉnh cùng bong bóng thoại tiếng Việt.
+- Hội Đồng Nham chuyển từ lời tuyên án một chiều sang đối thoại chất vấn; Kha-Ruun công khai nhận trách nhiệm cho An Vy.
+- Chỉ huy Bách vẫn ra lệnh chuẩn bị đầu đạn nhưng lộ rõ nỗi sợ mất thêm một thành phố, giữ đúng lịch sử nhân vật.
+- Đã sửa nữ kỹ thuật viên thành nhân vật riêng với tóc búi, tai nghe và đồng phục xanh hải quân để không bị nhầm với An Vy đang ở dưới lòng đất.
+- Đã giữ thiết bị cyan trên cổ tay phải An Vy, tạo hình người của Kha-Ruun, sẹo qua lông mày trái của Bách và một đầu đạn chưa phóng.
+- Đã đối chiếu toàn bộ chữ trong ảnh với kịch bản; không phát hiện sai dấu, chữ bị cắt hoặc nhãn tên người nói.
+
 ## Trạng thái
 
 - Chương 1 hoàn tất: 12/12 trang.
-- Lượt audit tiếp theo tiếp tục làm mềm thoại và thay trang 5–6 theo chuẩn bong bóng thoại mới.
+- Lượt audit tiếp theo tiếp tục làm mềm thoại và thay trang 7–8 theo chuẩn bong bóng thoại mới.

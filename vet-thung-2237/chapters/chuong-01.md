@@ -34,17 +34,20 @@
 
 ### Trang 5 — Nham Cung báo động
 
-- Dẫn: “Ba nhịp. Báo động.”
-- Hội Đồng Nham: “Kẻ Trên Mặt mang khóa của Mắt Rơi.”
-- An Vy: “Tôi tới để cứu người, không phải mở thứ đó.”
-- Kha-Ruun: “Nếu cô nói dối, chính tay ta sẽ đóng cánh cửa.”
+- Hiệu ứng: “Cộc. Cộc. Cộc.”
+- Hội Đồng Nham: “Chiếc khóa đã trở về... trên tay một Kẻ Trên Mặt.”
+- An Vy: “Tôi không biết nó là khóa. Tôi chỉ nghe có người gọi.”
+- Kha-Ruun: “Cô ấy chưa mở cánh cửa nào cả.”
+- Hội Đồng Nham: “Nếu ngươi lầm thì sao?”
+- Kha-Ruun: “Ta sẽ tự đóng cánh cửa.”
 
 ### Trang 6 — Lệnh xuyên vỏ
 
 - Dẫn: “Trên mặt đất. Mất tín hiệu: 04 phút 12 giây.”
-- Bách: “Mười phút nữa khóa trục. Không để thứ dưới đó bò lên.”
-- Kỹ thuật viên: “Còn An Vy?”
-- Bách: “Cô ấy biết quy tắc cứu hộ: một người không đổi lấy một thành phố.”
+- Bách: “Khóa trục sau mười phút. Chuẩn bị đầu đạn xuyên vỏ.”
+- Kỹ thuật viên: “Còn An Vy thì sao, chỉ huy?”
+- Bách: “Nếu còn sống, cô ấy sẽ tìm đường về.”
+- Bách: “...Chúng ta không được mất thêm một thành phố.”
 
 ### Trang 7 — Ký ức trong đá
 
