@@ -68,17 +68,20 @@
 
 ### Trang 9 — Mắt mở
 
-- Hệ thống: “Nhiệt chiến đạt ngưỡng.”
-- Mắt Rơi: “XUNG ĐỘT ĐẠT NGƯỠNG. QUÁ TRÌNH NỞ BẮT ĐẦU.”
-- An Vy: “Nó không rơi xuống để xâm lược.”
-- Kha-Ruun: “Nó rơi xuống để được sinh ra.”
+- Hệ thống: “Nhiệt xung đột: đủ.”
+- Mắt Rơi: “Vỏ ươm: mở.”
+- An Vy: “Khoan... nó đang hút nhiệt từ hai luồng bắn!”
+- Kha-Ruun: “Chúng ta không đánh thức nó.”
+- An Vy: “Chúng ta đang ấp nó.”
 
 ### Trang 10 — Khóa đôi
 
-- Hệ thống: “Khóa đôi chưa hoàn chỉnh.”
-- Kha-Ruun: “Khóa này cần hai phía.”
-- Hệ thống: “Đồng bộ. 51%... 78%... 99%...”
-- An Vy: “Vậy từ đầu, nó đã biết chúng ta phải gặp nhau.”
+- Hệ thống: “Khóa đôi: thiếu một nửa.”
+- An Vy: “Thiết bị của tôi khớp với nửa này.”
+- Kha-Ruun: “Nửa kia nhận vân Nham.”
+- An Vy: “Vậy đặt tay xuống. Cùng lúc.”
+- Hệ thống: “Đồng bộ: 51%... 78%... 99%.”
+- Hệ thống: “Kênh gốc đã mở.”
 
 ### Trang 11 — Một giây ngừng bắn
 

@@ -11,8 +11,8 @@ const STORY = {
     {number: 6, image: 'assets/pages/page-06.webp?v=dialogue-20260811-p56', title: 'Lệnh xuyên vỏ', alt: 'Chỉ huy Bách chuẩn bị đầu đạn xuyên vỏ sau khi mất tín hiệu An Vy'},
     {number: 7, image: 'assets/pages/page-07.webp?v=dialogue-20260811-p78', title: 'Ký ức trong đá', alt: 'An Vy và Kha-Ruun thấy ký ức tổ tiên tộc Nham phóng Mắt Rơi khỏi Trái Đất'},
     {number: 8, image: 'assets/pages/page-08.webp?v=dialogue-20260811-p78', title: 'Hai phía khai hỏa', alt: 'An Vy và Kha-Ruun phát hiện đầu đạn bề mặt cùng pháo địa nhiệt bị mệnh lệnh giả điều khiển'},
-    {number: 9, image: 'assets/pages/page-09.webp', title: 'Mắt mở', alt: 'Mắt Rơi tách vỏ thành một mống mắt cơ khí khổng lồ'},
-    {number: 10, image: 'assets/pages/page-10.webp', title: 'Khóa đôi', alt: 'An Vy và Kha-Ruun cùng kích hoạt hai nửa khóa của Mắt Rơi'},
+    {number: 9, image: 'assets/pages/page-09.webp?v=dialogue-20260811-p910', title: 'Mắt mở', alt: 'An Vy và Kha-Ruun thấy Mắt Rơi hút hai luồng nhiệt rồi mở thành một mống mắt cơ khí'},
+    {number: 10, image: 'assets/pages/page-10.webp?v=dialogue-20260811-p910', title: 'Khóa đôi', alt: 'Thiết bị cổ tay An Vy và vân Nham của Kha-Ruun cùng kích hoạt hai nửa khóa'},
     {number: 11, image: 'assets/pages/page-11.webp', title: 'Một giây ngừng bắn', alt: 'Chỉ huy Bách hủy đầu đạn khi An Vy phát bằng chứng giả mạo'},
     {number: 12, image: 'assets/pages/page-12.webp', title: 'Những vết thủng khác', alt: 'Bản đồ Trái Đất hiện chín điểm Vết Thủng sau khi Mắt Rơi bị khóa'}
   ]

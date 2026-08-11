@@ -60,7 +60,15 @@
 - Lần dựng đầu trang 7 thiếu câu hỏi thứ hai của An Vy; đã loại bản đó, dựng lại và đối chiếu đủ sáu mục chữ trước khi xuất bản.
 - Đã kiểm tra toàn bộ dấu tiếng Việt, chữ không bị cắt, không có nhãn tên người nói và không có hộp thoại kiểu giao diện.
 
+## Audit thoại tự nhiên trang 9–10 — 11/08/2026
+
+- Đã thay mới trang 9 “Mắt mở” và trang 10 “Khóa đôi” bằng ảnh gen hoàn chỉnh cùng bong bóng thoại tiếng Việt.
+- Trang 9 biến lời giải thích về Mắt Rơi thành phát hiện tức thời: An Vy nhìn thấy nó hút nhiệt từ hai luồng bắn, Kha-Ruun nhận ra họ không đánh thức mà đang ấp nó.
+- Trang 10 để hai nhân vật tự thử hai nửa khóa bằng thiết bị cổ tay và vân Nham; thao tác đồng thời mở kênh bằng chứng gốc, nối trực tiếp sang trang 11.
+- Đã giữ đúng một Mắt Rơi mở thành mống mắt hổ phách, thiết bị cyan trên cổ tay phải An Vy, hình người cao gầy cùng giáp vai phải của Kha-Ruun.
+- Đã đối chiếu đủ năm mục chữ trang 9 và sáu mục chữ trang 10; không có nhãn tên, chữ thừa, chữ bị cắt hoặc hộp thoại kiểu giao diện.
+
 ## Trạng thái
 
 - Chương 1 hoàn tất: 12/12 trang.
-- Lượt audit tiếp theo tiếp tục làm mềm thoại và thay trang 9–10 theo chuẩn bong bóng thoại mới.
+- Lượt audit tiếp theo tiếp tục làm mềm thoại và thay trang 11–12 theo chuẩn bong bóng thoại mới.
