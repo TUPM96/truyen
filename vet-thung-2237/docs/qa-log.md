@@ -115,7 +115,7 @@
 - Khi reader mở, nội dung trang chủ phía sau chuyển sang trạng thái `inert`; phím `Tab` và `Shift+Tab` chỉ đi qua vùng đọc, nút tải lại đang hiện và các nút điều khiển khả dụng.
 - Hai vùng chạm vô hình trái/phải được bỏ khỏi thứ tự bàn phím vì đã có nút trang trước/trang sau rõ nhãn trong dock, tránh người dùng phải tab qua điều khiển trùng lặp không nhìn thấy.
 - Dock luôn hiện lại khi người dùng nhấn `Tab` và không tự ẩn khi tiêu điểm đang nằm trên một nút điều khiển hoặc nút tải lại.
-- Khi thoát bằng nút đóng, phím `Escape` hoặc rời toàn màn hình, tiêu điểm trở về đúng nút đã dùng để mở reader.
+- Khi reader thực sự đóng bằng nút đóng hoặc phím `Escape`, tiêu điểm trở về đúng nút đã dùng để mở reader.
 - Đã bổ sung viền tiêu điểm tương phản tím lạnh/xanh lục cho vùng đọc, nút điều khiển và nút tải lại mà không thay đổi bảng màu khóa.
 
 ## Audit metadata và đường dẫn xuất bản — 11/08/2026
@@ -126,8 +126,16 @@
 - Liên kết “Thư viện truyện” cùng thẻ `rel=home` tiếp tục dùng đường dẫn tương đối `../`, hoạt động từ URL thư mục chuẩn và URL `index.html` mà không khóa cứng tên repository.
 - Đã đối chiếu ảnh chia sẻ đúng JPEG 1200 × 630 và thẻ Vết Thủng 2237 trên trang thư viện trỏ đúng vào thư mục truyện.
 
+## Audit vòng đời toàn màn hình và thiết bị — 11/08/2026
+
+- Nếu trình duyệt không hỗ trợ hoặc từ chối yêu cầu native fullscreen, reader vẫn mở bằng lớp cố định phủ toàn màn hình và giữ nguyên các điều khiển.
+- Khi native fullscreen tự kết thúc do đổi tab hoặc chính sách trình duyệt, reader không còn bị đóng; trang hiện tại, tiến độ và tiêu đề tab được giữ nguyên trong chế độ dự phòng.
+- Reader và ảnh trang có cặp kích thước `100vh`/`100dvh`, hỗ trợ cả trình duyệt cũ lẫn thanh địa chỉ động trên điện thoại hiện đại.
+- Sự kiện đổi hướng, đổi kích thước cửa sổ và thay đổi visual viewport được gộp nhịp; reader bỏ hiệu ứng chuyển trang dở, preload lại hai trang kề và hiện dock sau khi bố cục ổn định.
+- Khi quay lại từ tab nền, dock hiện lại mà không dựng lại ảnh, không đổi số trang và không cướp tiêu điểm khỏi nút đang sử dụng.
+
 ## Trạng thái
 
 - Chương 1 hoàn tất: 12/12 trang.
 - Toàn bộ 12 trang đã được thay hoặc duyệt theo chuẩn thoại tự nhiên nằm trực tiếp trong ảnh.
-- Lượt audit tiếp theo rà soát hành vi khi trình duyệt từ chối toàn màn hình, đổi hướng điện thoại và quay lại từ tab nền.
+- Lượt audit tiếp theo rà soát thao tác vuốt/chạm liên tiếp nhanh, chống lật quá trang và trạng thái nút khi chuyển trang dồn dập.
