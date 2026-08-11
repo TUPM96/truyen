@@ -159,8 +159,17 @@
 - Hai trang kề vẫn được preload để lật tiến/lùi mượt nhưng ở ưu tiên thấp; khi đổi trang, ảnh mới đang hiện được nâng lên ưu tiên cao.
 - Đã kiểm tra thuộc tính tải ở trang 1, trang giữa và trang 12; mỗi trạng thái luôn có đúng một ảnh ưu tiên cao, đúng trang đang đọc, đồng thời giữ nguyên số trang và tiến độ.
 
+## Audit cache ngoại tuyến và cập nhật phiên bản — 12/08/2026
+
+- Đã bổ sung service worker chỉ trong phạm vi thư mục `vet-thung-2237`, không can thiệp trang thư viện hoặc các truyện khác trong repository.
+- Lần tải trực tuyến đầu tiên lưu HTML, CSS, dữ liệu truyện, JavaScript và bìa; sau đó trang chủ cùng reader có thể khởi động lại khi mất mạng.
+- Ảnh truyện được cache dần khi người đọc thực sự mở tới, không tải trước toàn bộ 12 trang và không làm mất lợi ích tối ưu băng thông của lượt trước.
+- Điều hướng dùng chiến lược ưu tiên mạng để nhận HTML mới; JavaScript, CSS và ảnh dùng URL có phiên bản cùng cache-first để đọc ngoại tuyến mà không trộn tài nguyên cũ/mới.
+- Service worker luôn kiểm tra bản mới không qua HTTP cache, kích hoạt ngay, nhận quyền điều khiển và xóa các cache `vt2237-reader-*` cũ sau khi nâng phiên bản.
+- Đã kiểm tra cài đặt, cập nhật, xóa cache cũ, tải lại ngoại tuyến và cache ảnh theo nhu cầu; tiến độ 1–12 vẫn nằm trong `localStorage` và không bị service worker thay đổi.
+
 ## Trạng thái
 
 - Chương 1 hoàn tất: 12/12 trang.
 - Toàn bộ 12 trang đã được thay hoặc duyệt theo chuẩn thoại tự nhiên nằm trực tiếp trong ảnh.
-- Lượt audit tiếp theo rà soát cache ngoại tuyến, hành vi tải lại phiên bản mới và khả năng phục hồi khi tài nguyên cũ còn trong bộ nhớ trình duyệt.
+- Lượt audit tiếp theo rà soát liên kết sâu, nút Back/Forward và việc khôi phục trạng thái reader từ lịch sử trình duyệt.

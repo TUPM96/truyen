@@ -260,3 +260,11 @@ window.addEventListener('orientationchange', queueViewportRefresh, {passive: tru
 window.visualViewport?.addEventListener('resize', queueViewportRefresh, {passive: true});
 window.addEventListener('online', () => { if (open && comic.querySelector(`.comic-page[data-page="${current}"].load-failed`)) retryPage(current); });
 window.addEventListener('offline', () => { comic.querySelectorAll('.comic-page.load-failed').forEach(page => setPageLoadState(Number(page.dataset.page), true)); });
+
+if ('serviceWorker' in navigator && window.isSecureContext) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('sw.js', {scope: './', updateViaCache: 'none'})
+      .then(registration => registration.update())
+      .catch(() => {});
+  });
+}
