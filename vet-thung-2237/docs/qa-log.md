@@ -186,8 +186,17 @@
 - Phản hồi “đã chia sẻ/đã sao chép” được phát qua vùng `aria-live`, hiện dấu xác nhận trong 1,8 giây rồi trả nút về trạng thái ban đầu.
 - Đã kiểm tra chia sẻ native ở trang 6, Clipboard API ở trang 12, phương án trình duyệt cũ, thao tác hủy và đóng reader khi phản hồi còn đang hiển thị.
 
+## Audit in và lưu trang hiện tại — 12/08/2026
+
+- Đã thêm nút in/lưu vào dock reader; nút có nhãn bàn phím và trình đọc màn hình, đồng thời dock mobile được thu gọn để vẫn nằm trong khung rộng 320 px.
+- Khi kích hoạt, reader thoát native fullscreen nếu cần rồi gọi hộp thoại in hệ thống; người đọc có thể chọn máy in hoặc “Lưu thành PDF”.
+- CSS in chỉ hiển thị trang truyện đang hoạt động; trang chủ, nền đen, thanh tiến độ, dock, vùng chạm và thông báo lỗi đều bị loại khỏi bản in.
+- Ảnh dùng kích thước tự nhiên, `object-fit: contain`, giới hạn theo cả chiều rộng giấy và chiều cao trang; tỷ lệ gốc 862–864 × 1820–1825 không bị kéo dãn hoặc cắt.
+- Màu ảnh được giữ bằng `print-color-adjust: exact`; nền giấy là trắng và khối trang có quy tắc tránh ngắt giữa ảnh.
+- Đã kiểm tra trang 1, 6 và 12, thoát fullscreen trước khi in, hủy hộp thoại, dọn trạng thái sau `afterprint` và đóng reader khi chế độ in còn được đánh dấu.
+
 ## Trạng thái
 
 - Chương 1 hoàn tất: 12/12 trang.
 - Toàn bộ 12 trang đã được thay hoặc duyệt theo chuẩn thoại tự nhiên nằm trực tiếp trong ảnh.
-- Lượt audit tiếp theo rà soát khả năng in/lưu trang, tránh in giao diện reader đen và giữ đúng tỷ lệ ảnh truyện.
+- Lượt audit tiếp theo rà soát sơ đồ nút điều khiển trên màn hình 320 px, vùng an toàn iPhone và trường hợp chữ hệ thống phóng lớn 200%.

@@ -3,6 +3,7 @@ const stage = document.querySelector('#readerStage');
 const comic = document.querySelector('#comic');
 const nextButton = document.querySelector('#nextPage');
 const shareButton = document.querySelector('#sharePage');
+const printButton = document.querySelector('#printPage');
 const shareStatus = document.querySelector('#shareStatus');
 const total = STORY.pages.length;
 const baseDocumentTitle = document.title;
@@ -118,6 +119,24 @@ async function shareCurrentPage() {
     showShareStatus(`Đã sao chép liên kết trang ${current}.`);
   } catch (_) {
     showShareStatus('Không thể sao chép. Liên kết vẫn có trên thanh địa chỉ.', false);
+  }
+}
+
+function clearPrintMode() {
+  document.body.classList.remove('print-page');
+}
+
+async function printCurrentPage() {
+  if (!open) return;
+  document.body.classList.add('print-page');
+  fullscreenRequested = false;
+  if (document.fullscreenElement || document.webkitFullscreenElement) {
+    try { await (document.exitFullscreen?.() || document.webkitExitFullscreen?.()); } catch (_) {}
+  }
+  try {
+    window.print();
+  } catch (_) {
+    clearPrintMode();
   }
 }
 
@@ -286,6 +305,7 @@ function cleanupReader() {
   shareButton.textContent = '↗';
   shareButton.classList.remove('share-success');
   shareButton.setAttribute('aria-label', 'Chia sẻ trang hiện tại');
+  clearPrintMode();
   comic.replaceChildren();
   document.head.querySelectorAll('[data-preload]').forEach(link => link.remove());
 }
@@ -358,6 +378,7 @@ document.querySelector('#readButton').addEventListener('click', openReader);
 document.querySelector('#openChapter').addEventListener('click', () => { current = 1; openReader(); });
 document.querySelector('#closeReader').addEventListener('click', () => closeReader());
 shareButton.addEventListener('click', shareCurrentPage);
+printButton.addEventListener('click', printCurrentPage);
 document.querySelector('#prevPage').addEventListener('click', () => step(-1));
 nextButton.addEventListener('click', () => { if (!open) return; current === total ? finishChapter() : step(1); });
 document.querySelector('#tapLeft').addEventListener('click', event => { if (performance.now() < suppressTapUntil) return event.stopPropagation(); step(-1); });
@@ -375,6 +396,7 @@ window.addEventListener('orientationchange', queueViewportRefresh, {passive: tru
 window.visualViewport?.addEventListener('resize', queueViewportRefresh, {passive: true});
 window.addEventListener('online', () => { if (open && comic.querySelector(`.comic-page[data-page="${current}"].load-failed`)) retryPage(current); });
 window.addEventListener('offline', () => { comic.querySelectorAll('.comic-page.load-failed').forEach(page => setPageLoadState(Number(page.dataset.page), true)); });
+window.addEventListener('afterprint', clearPrintMode);
 window.addEventListener('popstate', () => {
   const linkedPage = pageFromLocation();
   if (linkedPage) {
