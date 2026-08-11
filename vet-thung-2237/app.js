@@ -3,6 +3,7 @@ const stage = document.querySelector('#readerStage');
 const comic = document.querySelector('#comic');
 const nextButton = document.querySelector('#nextPage');
 const total = STORY.pages.length;
+const baseDocumentTitle = document.title;
 let finished = localStorage.getItem('vt2237-complete') === 'true';
 const savedProgress = Number(localStorage.getItem('vt2237-progress') || 1);
 let current = Number.isInteger(savedProgress) && savedProgress >= 1 && savedProgress <= total ? savedProgress : 1;
@@ -66,6 +67,7 @@ function update(direction = 0) {
   });
   const currentPage = pageByNumber.get(current);
   localStorage.setItem('vt2237-progress', current);
+  document.title = `${currentPage.title} · Trang ${current}/${total} — ${STORY.title}`;
   document.querySelector('#pageCounter').textContent = `Trang ${current} / ${total}`;
   stage.setAttribute('aria-label', `Trang ${current} trên ${total}: ${currentPage.title}`);
   document.querySelector('#progressBar').style.width = `${current / total * 100}%`;
@@ -164,6 +166,7 @@ async function closeReader(fromFullscreen = false) {
   reader.hidden = true;
   setBackgroundInert(false);
   document.body.classList.remove('reader-open');
+  document.title = baseDocumentTitle;
   if (lastFocused?.isConnected) lastFocused.focus({preventScroll: true});
 }
 
