@@ -33,7 +33,16 @@
 - Đã bỏ nhãn tên người nói khỏi bong bóng; đuôi thoại và ngữ cảnh khung tranh xác định người đang nói.
 - Đã đối chiếu chính tả, dấu tiếng Việt, thứ tự sự kiện, màu trang phục và thiết bị cứu hộ cyan của An Vy.
 
+## Audit thoại tự nhiên trang 3–4 — 11/08/2026
+
+- Đã thay mới trang 3 “Kẻ Trên Mặt” và trang 4 “Bầu trời thứ hai” bằng ảnh gen hoàn chỉnh cùng bong bóng thoại tiếng Việt.
+- Kha-Ruun nói ngắn theo tâm thế người đang bảo vệ quê hương; An Vy phản ứng trực tiếp sau khi bị chặn và được cứu.
+- Đã bỏ nhãn tên, hộp thoại kiểu giao diện và các câu giải thích mang giọng báo cáo.
+- Đã giữ Kha-Ruun ở tỷ lệ người cao, gầy khỏe, khuôn mặt thanh, mắt hổ phách, vân xanh lục và giáp vai lưỡi liềm.
+- Đã giữ thiết bị cyan trên cổ tay phải An Vy và chuyển cảnh liên tục từ lần tiếp xúc đầu tiên sang toàn cảnh Nham Cung.
+- Đã đối chiếu sáu câu thoại/lời dẫn trang 4 và năm mục chữ trang 3; không phát hiện sai dấu hoặc chữ bị cắt.
+
 ## Trạng thái
 
 - Chương 1 hoàn tất: 12/12 trang.
-- Lượt audit tiếp theo tiếp tục làm mềm thoại và thay trang 3–4 theo chuẩn bong bóng thoại mới.
+- Lượt audit tiếp theo tiếp tục làm mềm thoại và thay trang 5–6 theo chuẩn bong bóng thoại mới.

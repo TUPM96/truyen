@@ -17,18 +17,20 @@
 
 ### Trang 3 — Kẻ Trên Mặt
 
-- Kha-Ruun: “Kẻ Trên Mặt! Các ngươi đã mở Mắt Rơi!”
-- An Vy: “Tôi không hiểu ngôn ngữ của anh!”
-- Hệ cứu hộ: “Đang dịch ngữ âm địa tâm.”
-- Kha-Ruun: “Vậy hãy hiểu điều này: rời khỏi lòng đất của chúng ta.”
+- Dẫn: “Sâu 91 ki-lô-mét.”
+- Kha-Ruun: “Đứng lại, Kẻ Trên Mặt! Cô đã đánh thức Mắt Rơi!”
+- An Vy: “Khoan đã! Tôi không hiểu anh nói gì!”
+- Hệ cứu hộ: “Đang bắt nhịp ngôn ngữ...”
+- Kha-Ruun: “Hiểu rồi thì quay lên. Đây là nhà của chúng ta.”
 
 ### Trang 4 — Bầu trời thứ hai
 
-- An Vy: “Nếu muốn giết tôi, anh đã không kéo tôi khỏi vết nứt.”
-- Kha-Ruun: “Ta cứu cái khóa trên cổ tay cô.”
-- Dẫn: “Sâu 91 ki-lô-mét, An Vy nhìn thấy bầu trời thứ hai của Trái Đất.”
-- An Vy: “Nó chỉ là máy cứu hộ.”
-- Kha-Ruun: “Không. Nó là thứ thiên thạch đang gọi.”
+- Hiệu ứng: “Rắc—ầm!”
+- An Vy: “Anh vừa cứu tôi. Vậy hạ mũi thương xuống được chứ?”
+- Kha-Ruun: “Ta cứu thứ đang sáng trên tay cô.”
+- Dẫn: “Ở độ sâu 91 ki-lô-mét, Trái Đất có một bầu trời khác.”
+- An Vy: “Cái này à? Chỉ là máy cứu hộ.”
+- Kha-Ruun: “Không. Mắt Rơi đang gọi nó.”
 
 ### Trang 5 — Nham Cung báo động
 
