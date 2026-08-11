@@ -8,7 +8,7 @@ const STORY = {
   volume: 'Tập 1 — Người giữ khóa',
   // Production data stays here so later illustration runs can continue the
   // complete volume. The public reader only exposes finished page images.
-  publishedThrough: 44,
+  publishedThrough: 46,
   chapters: [
     {
       short: 'Mép trời',
@@ -87,6 +87,15 @@ const STORY = {
         {global:42, image:pageImage(42), title:'Mốc bay vào lõi', alt:'Mốc hy sinh vỏ máy để nối tín hiệu', narration:'Mốc gập ba cánh, lao vào đường cắt và dùng thân đồng làm cầu dẫn. Mắt cyan của nó tắt.', lines:[['Linh An','Mốc! Quay lại!'],['Mốc','Nhiệm vụ đầu tiên: đo thế giới.'],['Mốc','Kết quả cuối: thế giới lớn hơn bản đồ.']]},
         {global:43, image:pageImage(43), title:'Tên mình giữa chín tầng', alt:'Linh giữ bản thân trong dòng tín hiệu', narration:'Không còn giọng Mốc nhắc tên, Linh gần như tan vào chín tầng. Rồi hàng nghìn giọng nói thay nhau gọi cô.', lines:[['Nghi','Linh An!'],['Thầy Vân','Linh An!'],['Bạch Miên','An, trở về!'],['Linh An','Tôi ở đây. Và chúng ta cùng giữ.']]},
         {global:44, image:pageImage(44), title:'Khoảng cách mở lại', alt:'Hai tầng tách ra an toàn', narration:'Cọc Neo bắt được nhịp chung. Hai bầu trời dừng lại khi chỉ còn cách nhau một dải sáng, rồi chậm rãi rời xa.', lines:[['Mốc, rất nhỏ','Đồng bộ… đạt.'],['Linh An','Mốc?'],['Nghi','Tôi nghe thấy. Con tam giác phiền phức vẫn còn.']]}
+      ]
+    },
+    {
+      short: 'Người giữ khóa',
+      title: 'Người Giữ Khóa',
+      opening: 'Thế giới được cứu không trở lại như cũ. Điều đó, Linh nghĩ, mới là dấu hiệu họ thật sự đã cứu nó.',
+      pages: [
+        {global:45, image:pageImage(45), title:'Sau cơn sụp', alt:'Sao Chìm sửa chữa dưới biển trần', narration:'Biển trần trở lại vị trí, nhưng một khoảng trong suốt vẫn mở giữa hai tầng. Người Tầng Một và Hải Trần nhìn thấy ánh đèn của nhau mỗi đêm.', lines:[['Nghi','Họ gọi nó là Cửa Sổ An.'],['Linh An','Nghe như tên một quán trà.'],['Nghi','Cô ghét trà ngọt. Mốc kể rồi.']]},
+        {global:46, image:pageImage(46), title:'Con mắt cyan', alt:'Mốc được sửa chữa với thân mới', narration:'Nghi đặt mắt cyan của Mốc vào một thân máy mới. Nó méo hơn, nhỏ hơn và kêu to hơn trước.', lines:[['Mốc','Đánh giá thân mới: thiếu cân xứng.'],['Nghi','Đánh giá chủ cũ: thiếu biết ơn.'],['Linh An','Hai người hợp nhau đáng sợ.']]}
       ]
     }
   ]
