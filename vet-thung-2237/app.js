@@ -2,6 +2,8 @@ const reader = document.querySelector('#reader');
 const stage = document.querySelector('#readerStage');
 const comic = document.querySelector('#comic');
 const nextButton = document.querySelector('#nextPage');
+const shareButton = document.querySelector('#sharePage');
+const shareStatus = document.querySelector('#shareStatus');
 const total = STORY.pages.length;
 const baseDocumentTitle = document.title;
 let finished = localStorage.getItem('vt2237-complete') === 'true';
@@ -14,6 +16,7 @@ let touchY = 0;
 let controlsTimer = 0;
 let turnTimer = 0;
 let viewportTimer = 0;
+let shareTimer = 0;
 let suppressTapUntil = 0;
 let finishReadyAt = 0;
 let lastFocused = null;
@@ -53,6 +56,69 @@ function clearReaderHistory() {
   delete state.vt2237Origin;
   delete state.page;
   history.replaceState(state, '', locationWithoutPage());
+}
+
+function shareUrl() {
+  return new URL(locationForPage(current), location.origin).href;
+}
+
+async function copyLink(url) {
+  if (navigator.clipboard?.writeText && window.isSecureContext) {
+    try {
+      await navigator.clipboard.writeText(url);
+      return;
+    } catch (_) {}
+  }
+  const textarea = document.createElement('textarea');
+  textarea.value = url;
+  textarea.setAttribute('readonly', '');
+  textarea.style.position = 'fixed';
+  textarea.style.opacity = '0';
+  document.body.appendChild(textarea);
+  textarea.select();
+  const copied = document.execCommand?.('copy');
+  textarea.remove();
+  shareButton.focus({preventScroll: true});
+  if (!copied) throw new Error('copy unavailable');
+}
+
+function showShareStatus(message, success = true) {
+  clearTimeout(shareTimer);
+  shareStatus.textContent = message;
+  shareButton.textContent = success ? '✓' : '!';
+  shareButton.classList.toggle('share-success', success);
+  shareButton.setAttribute('aria-label', message);
+  shareTimer = setTimeout(() => {
+    shareStatus.textContent = '';
+    shareButton.textContent = '↗';
+    shareButton.classList.remove('share-success');
+    shareButton.setAttribute('aria-label', 'Chia sẻ trang hiện tại');
+  }, 1800);
+}
+
+async function shareCurrentPage() {
+  const page = pageByNumber.get(current);
+  const url = shareUrl();
+  const data = {
+    title: `${STORY.title} — Trang ${current}: ${page.title}`,
+    text: `Đọc ${STORY.title}, trang ${current}: ${page.title}`,
+    url
+  };
+  if (navigator.share) {
+    try {
+      await navigator.share(data);
+      showShareStatus(`Đã chia sẻ trang ${current}.`);
+      return;
+    } catch (error) {
+      if (error?.name === 'AbortError') return;
+    }
+  }
+  try {
+    await copyLink(url);
+    showShareStatus(`Đã sao chép liên kết trang ${current}.`);
+  } catch (_) {
+    showShareStatus('Không thể sao chép. Liên kết vẫn có trên thanh địa chỉ.', false);
+  }
 }
 
 function render() {
@@ -192,6 +258,7 @@ function refreshReaderViewport() {
 
 function queueViewportRefresh() {
   clearTimeout(viewportTimer);
+  clearTimeout(shareTimer);
   viewportTimer = setTimeout(refreshReaderViewport, 80);
 }
 
@@ -208,12 +275,17 @@ function cleanupReader() {
   controlsTimer = 0;
   turnTimer = 0;
   viewportTimer = 0;
+  shareTimer = 0;
   touchX = 0;
   touchY = 0;
   suppressTapUntil = 0;
   finishReadyAt = 0;
   stage.classList.remove('turn-next', 'turn-prev');
   reader.classList.remove('controls-hidden');
+  shareStatus.textContent = '';
+  shareButton.textContent = '↗';
+  shareButton.classList.remove('share-success');
+  shareButton.setAttribute('aria-label', 'Chia sẻ trang hiện tại');
   comic.replaceChildren();
   document.head.querySelectorAll('[data-preload]').forEach(link => link.remove());
 }
@@ -285,6 +357,7 @@ updateReadLabel();
 document.querySelector('#readButton').addEventListener('click', openReader);
 document.querySelector('#openChapter').addEventListener('click', () => { current = 1; openReader(); });
 document.querySelector('#closeReader').addEventListener('click', () => closeReader());
+shareButton.addEventListener('click', shareCurrentPage);
 document.querySelector('#prevPage').addEventListener('click', () => step(-1));
 nextButton.addEventListener('click', () => { if (!open) return; current === total ? finishChapter() : step(1); });
 document.querySelector('#tapLeft').addEventListener('click', event => { if (performance.now() < suppressTapUntil) return event.stopPropagation(); step(-1); });

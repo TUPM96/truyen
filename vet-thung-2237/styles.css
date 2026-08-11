@@ -66,6 +66,7 @@ footer { display:flex; justify-content:space-between; gap:20px; max-width:var(--
 .reader-nav span { min-width:108px; color:#eef8f5; font-size:11px; font-weight:700; text-align:center; }
 .reader-nav button:disabled { opacity:.28; cursor:default; }
 .reader-nav button.chapter-finish { color:#04110d; background:var(--green); border-color:var(--green); font-size:17px; font-weight:800; }
+.reader-nav button.share-success { color:#04110d; background:var(--green); border-color:var(--green); }
 .reader-nav button:focus-visible,.page-error button:focus-visible { outline:3px solid var(--violet); outline-offset:2px; }
 .controls-hidden .reader-nav { background:rgba(9,14,13,.58); border-color:transparent; }
 .controls-hidden .reader-nav button { width:0; overflow:hidden; opacity:0; pointer-events:none; border:0; }

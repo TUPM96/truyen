@@ -177,8 +177,17 @@
 - Tham số trang rỗng, thập phân, âm hoặc ngoài 1–12 tự bị loại bỏ; không thể tạo trạng thái reader không tồn tại hoặc làm sai tiến độ đã lưu.
 - Đã kiểm tra mở/đóng, lật đến trang 6, Back, Forward, tải lại liên kết sâu trang 12 và bốn dạng tham số không hợp lệ.
 
+## Audit chia sẻ trang đang đọc — 12/08/2026
+
+- Đã thêm nút chia sẻ vào dock dưới cùng; nút nằm trong vòng tiêu điểm bàn phím, có nhãn rõ cho trình đọc màn hình và không tạo thanh tiêu đề phủ lên tranh.
+- Trên thiết bị hỗ trợ Web Share API, reader gửi tiêu đề truyện, số trang, tên trang và URL sâu `?page=N` cho bảng chia sẻ hệ thống.
+- Khi Web Share API không tồn tại hoặc báo lỗi, ứng dụng tự sao chép liên kết bằng Clipboard API; trình duyệt cũ tiếp tục có phương án sao chép qua vùng văn bản tạm.
+- Nếu người dùng hủy bảng chia sẻ, reader không hiện thông báo sai và không tự sao chép; nếu mọi cách sao chép đều thất bại, trạng thái hướng dẫn dùng liên kết sẵn trên thanh địa chỉ.
+- Phản hồi “đã chia sẻ/đã sao chép” được phát qua vùng `aria-live`, hiện dấu xác nhận trong 1,8 giây rồi trả nút về trạng thái ban đầu.
+- Đã kiểm tra chia sẻ native ở trang 6, Clipboard API ở trang 12, phương án trình duyệt cũ, thao tác hủy và đóng reader khi phản hồi còn đang hiển thị.
+
 ## Trạng thái
 
 - Chương 1 hoàn tất: 12/12 trang.
 - Toàn bộ 12 trang đã được thay hoặc duyệt theo chuẩn thoại tự nhiên nằm trực tiếp trong ảnh.
-- Lượt audit tiếp theo rà soát thao tác chia sẻ trang hiện tại, sao chép liên kết và phản hồi khi Web Share API không được hỗ trợ.
+- Lượt audit tiếp theo rà soát khả năng in/lưu trang, tránh in giao diện reader đen và giữ đúng tỷ lệ ảnh truyện.
