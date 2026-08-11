@@ -8,7 +8,7 @@ const STORY = {
   volume: 'Tập 1 — Người giữ khóa',
   // Production data stays here so later illustration runs can continue the
   // complete volume. The public reader only exposes finished page images.
-  publishedThrough: 42,
+  publishedThrough: 44,
   chapters: [
     {
       short: 'Mép trời',
@@ -84,7 +84,9 @@ const STORY = {
         {global:39, image:pageImage(39), title:'Những sợi xích cuối', alt:'Người dân giữ thành phố khỏi biển sụp', narration:'Dân Sao Chìm kéo những sợi xích cuối. Phía Tầng Một, công nhân tàu cáp neo tháp gió vào cùng một nhịp rung.', lines:[['Nghi','Họ đang nghe chúng ta!'],['Thầy Vân','Không. Chúng ta đang nghe nhau.'],['Mốc','Tín hiệu đồng bộ tăng: ba mươi hai phần trăm.']]},
         {global:40, image:pageImage(40), title:'Bạch Miên bỏ mặt nạ', alt:'Bạch Miên phát lời thú nhận', narration:'Bạch Miên mở mọi kênh truyền của Hội Bạch Kinh. Ông tháo mặt nạ trước hàng triệu người.', lines:[['Bạch Miên','Chúng tôi gọi bí mật là trật tự. Gọi im lặng là an toàn.'],['Bạch Miên','Hôm nay, mọi lời nói dối của chúng tôi sẽ được mở.'],['Hàm','Ông vừa kết thúc Hội Bạch Kinh.'],['Bạch Miên','Không. Ta kết thúc quyền nói thay thế giới.']]},
         {global:41, image:pageImage(41), title:'Nhát cắt', alt:'Hàm kích hoạt thiết bị cắt tầng', narration:'Hàm kích hoạt thiết bị. Một đường tối chạy dọc Hải Trần, cắt mọi tín hiệu vừa kết nối.', lines:[['Hàm','Lịch sử sẽ gọi tôi là quái vật. Nhưng nó vẫn còn lịch sử để gọi.'],['Linh An','Ông không cứu lịch sử. Ông chỉ cứu quyền quyết định của mình.'],['Nghi','Linh, cọc đang vỡ!']]},
-        {global:42, image:pageImage(42), title:'Mốc bay vào lõi', alt:'Mốc hy sinh vỏ máy để nối tín hiệu', narration:'Mốc gập ba cánh, lao vào đường cắt và dùng thân đồng làm cầu dẫn. Mắt cyan của nó tắt.', lines:[['Linh An','Mốc! Quay lại!'],['Mốc','Nhiệm vụ đầu tiên: đo thế giới.'],['Mốc','Kết quả cuối: thế giới lớn hơn bản đồ.']]}
+        {global:42, image:pageImage(42), title:'Mốc bay vào lõi', alt:'Mốc hy sinh vỏ máy để nối tín hiệu', narration:'Mốc gập ba cánh, lao vào đường cắt và dùng thân đồng làm cầu dẫn. Mắt cyan của nó tắt.', lines:[['Linh An','Mốc! Quay lại!'],['Mốc','Nhiệm vụ đầu tiên: đo thế giới.'],['Mốc','Kết quả cuối: thế giới lớn hơn bản đồ.']]},
+        {global:43, image:pageImage(43), title:'Tên mình giữa chín tầng', alt:'Linh giữ bản thân trong dòng tín hiệu', narration:'Không còn giọng Mốc nhắc tên, Linh gần như tan vào chín tầng. Rồi hàng nghìn giọng nói thay nhau gọi cô.', lines:[['Nghi','Linh An!'],['Thầy Vân','Linh An!'],['Bạch Miên','An, trở về!'],['Linh An','Tôi ở đây. Và chúng ta cùng giữ.']]},
+        {global:44, image:pageImage(44), title:'Khoảng cách mở lại', alt:'Hai tầng tách ra an toàn', narration:'Cọc Neo bắt được nhịp chung. Hai bầu trời dừng lại khi chỉ còn cách nhau một dải sáng, rồi chậm rãi rời xa.', lines:[['Mốc, rất nhỏ','Đồng bộ… đạt.'],['Linh An','Mốc?'],['Nghi','Tôi nghe thấy. Con tam giác phiền phức vẫn còn.']]}
       ]
     }
   ]
