@@ -101,8 +101,16 @@
 - Khi bấm hoàn tất ở trang 12, reader vẫn đóng, đặt tiến độ về trang 1 và lưu trạng thái hoàn thành như trước.
 - Đã kiểm tra đủ các trường hợp: người đọc mới, thoát giữa lần đầu, hoàn tất, bắt đầu đọc lại, thoát giữa lần đọc lại và dữ liệu lưu không hợp lệ.
 
+## Audit tải ảnh và phục hồi kết nối — 11/08/2026
+
+- Khi một ảnh trang truyện tải lỗi, reader nay giữ nguyên số trang và vị trí đọc, đồng thời hiện thông báo ngay giữa trang thay cho màn hình trống.
+- Thông báo phân biệt thiết bị đang ngoại tuyến với kết nối chập chờn và có nút “Tải lại trang” đủ lớn để thao tác trên điện thoại.
+- Nút tải lại thêm dấu thời gian vào riêng yêu cầu ảnh bị lỗi để bỏ qua phản hồi hỏng trong bộ nhớ đệm; URL gốc trong dữ liệu truyện không bị thay đổi.
+- Khi trình duyệt báo có mạng trở lại, reader chỉ tự thử lại trang lỗi đang mở, không tải lại toàn bộ 12 trang và không làm mất tiến độ.
+- Đã giữ lớp thông báo cao hơn hai vùng chạm lật trang; thao tác “Tải lại trang” không vô tình lật trang hoặc ẩn dock điều khiển.
+
 ## Trạng thái
 
 - Chương 1 hoàn tất: 12/12 trang.
 - Toàn bộ 12 trang đã được thay hoặc duyệt theo chuẩn thoại tự nhiên nằm trực tiếp trong ảnh.
-- Lượt audit tiếp theo rà soát tải ảnh, mất mạng tạm thời và khả năng phục hồi khi một trang lỗi.
+- Lượt audit tiếp theo rà soát bàn phím, trình đọc màn hình và thứ tự tiêu điểm trong chế độ toàn màn hình.
