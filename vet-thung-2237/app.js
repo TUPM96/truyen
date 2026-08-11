@@ -17,6 +17,7 @@ let viewportTimer = 0;
 let suppressTapUntil = 0;
 let finishReadyAt = 0;
 let lastFocused = null;
+let readerSession = 0;
 
 const pageByNumber = new Map(STORY.pages.map(page => [page.number, page]));
 const backgroundContent = [...document.querySelectorAll('.site-header, main, footer')];
@@ -163,6 +164,23 @@ function handleFullscreenExit(fullscreenElement) {
   refreshReaderViewport();
 }
 
+function cleanupReader() {
+  clearTimeout(controlsTimer);
+  clearTimeout(turnTimer);
+  clearTimeout(viewportTimer);
+  controlsTimer = 0;
+  turnTimer = 0;
+  viewportTimer = 0;
+  touchX = 0;
+  touchY = 0;
+  suppressTapUntil = 0;
+  finishReadyAt = 0;
+  stage.classList.remove('turn-next', 'turn-prev');
+  reader.classList.remove('controls-hidden');
+  comic.replaceChildren();
+  document.head.querySelectorAll('[data-preload]').forEach(link => link.remove());
+}
+
 async function enterFullscreen() {
   const request = reader.requestFullscreen || reader.webkitRequestFullscreen;
   if (!request) return;
@@ -171,6 +189,7 @@ async function enterFullscreen() {
 }
 
 async function openReader() {
+  const session = ++readerSession;
   lastFocused = document.activeElement;
   open = true;
   reader.hidden = false;
@@ -178,21 +197,30 @@ async function openReader() {
   document.body.classList.add('reader-open');
   render();
   await enterFullscreen();
+  if (!open || session !== readerSession) {
+    if (!open && (document.fullscreenElement === reader || document.webkitFullscreenElement === reader)) {
+      try { await (document.exitFullscreen?.() || document.webkitExitFullscreen?.()); } catch (_) {}
+    }
+    return;
+  }
   showControls();
   stage.focus({preventScroll: true});
 }
 
 async function closeReader() {
   if (!open) return;
+  const session = ++readerSession;
   open = false;
   fullscreenRequested = false;
   if (document.fullscreenElement || document.webkitFullscreenElement) {
     try { await (document.exitFullscreen?.() || document.webkitExitFullscreen?.()); } catch (_) {}
   }
+  if (session !== readerSession) return;
   reader.hidden = true;
   setBackgroundInert(false);
   document.body.classList.remove('reader-open');
   document.title = baseDocumentTitle;
+  cleanupReader();
   if (lastFocused?.isConnected) lastFocused.focus({preventScroll: true});
 }
 
