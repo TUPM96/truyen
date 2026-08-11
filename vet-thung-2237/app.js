@@ -10,6 +10,7 @@ let fullscreenRequested = false;
 let touchX = 0;
 let touchY = 0;
 let controlsTimer = 0;
+let turnTimer = 0;
 
 const pageByNumber = new Map(STORY.pages.map(page => [page.number, page]));
 
@@ -18,7 +19,7 @@ function render() {
   update();
 }
 
-function update() {
+function update(direction = 0) {
   comic.querySelectorAll('.comic-page').forEach(page => {
     const active = Number(page.dataset.page) === current;
     page.classList.toggle('active', active);
@@ -38,6 +39,15 @@ function update() {
   updateReadLabel();
   preload(current - 1);
   preload(current + 1);
+  if (direction) animateTurn(direction);
+}
+
+function animateTurn(direction) {
+  clearTimeout(turnTimer);
+  stage.classList.remove('turn-next', 'turn-prev');
+  void stage.offsetWidth;
+  stage.classList.add(direction > 0 ? 'turn-next' : 'turn-prev');
+  turnTimer = setTimeout(() => stage.classList.remove('turn-next', 'turn-prev'), 280);
 }
 
 function updateReadLabel() {
@@ -56,7 +66,7 @@ function step(direction) {
   const next = current + direction;
   if (!pageByNumber.has(next)) return showControls();
   current = next;
-  update();
+  update(direction);
   showControls();
 }
 
@@ -116,6 +126,6 @@ stage.addEventListener('click', event => { if (event.target === stage || event.t
 stage.addEventListener('pointermove', showControls, {passive: true});
 stage.addEventListener('touchstart', event => { touchX = event.changedTouches[0].clientX; touchY = event.changedTouches[0].clientY; }, {passive: true});
 stage.addEventListener('touchend', event => { const dx = event.changedTouches[0].clientX - touchX; const dy = event.changedTouches[0].clientY - touchY; if (Math.abs(dx) > 55 && Math.abs(dx) > Math.abs(dy) * 1.25) step(dx < 0 ? 1 : -1); }, {passive: true});
-document.addEventListener('keydown', event => { if (!open) return; if (event.key === 'Escape') closeReader(); if (event.key === 'ArrowRight' || event.key === 'PageDown') step(1); if (event.key === 'ArrowLeft' || event.key === 'PageUp') step(-1); if (event.key === 'Home') { current = 1; update(); showControls(); } if (event.key === 'End') { current = total; update(); showControls(); } });
+document.addEventListener('keydown', event => { if (!open) return; if (event.key === 'Escape') closeReader(); if (event.key === 'ArrowRight' || event.key === 'PageDown') step(1); if (event.key === 'ArrowLeft' || event.key === 'PageUp') step(-1); if (event.key === 'Home' && current !== 1) { current = 1; update(-1); showControls(); } if (event.key === 'End' && current !== total) { current = total; update(1); showControls(); } });
 document.addEventListener('fullscreenchange', () => { if (fullscreenRequested && !document.fullscreenElement && open) { fullscreenRequested = false; closeReader(true); } });
 document.addEventListener('webkitfullscreenchange', () => { if (fullscreenRequested && !document.webkitFullscreenElement && open) { fullscreenRequested = false; closeReader(true); } });
