@@ -51,18 +51,20 @@
 
 ### Trang 7 — Ký ức trong đá
 
-- Hệ cứu hộ: “Dữ liệu cổ đang phục hồi.”
-- Dẫn: “Ký ức. Nham Cung — thời tiền sử.”
-- An Vy: “Thiên thạch này sinh ra từ Trái Đất.”
-- Kha-Ruun: “Không. Nó là đứa con bị lưu đày.”
-- Hệ cứu hộ: “Phát hiện tín hiệu giả mạo từ cả hai quân đội.”
+- Hệ cứu hộ: “Đang khôi phục ký ức...”
+- Dẫn: “Nham Cung — trước lịch sử.”
+- An Vy: “Khoan... nó đang bay lên từ Nham Cung?”
+- Kha-Ruun: “Tổ tiên ta đã đuổi nó khỏi Trái Đất.”
+- An Vy: “Vậy tại sao nó quay về?”
+- Hệ cứu hộ: “Cảnh báo: hai mệnh lệnh giả đang được phát.”
 
 ### Trang 8 — Hai phía khai hỏa
 
-- Hệ thống bề mặt: “Đầu đạn. 00:08.”
-- Hệ thống Nham: “Pháo địa nhiệt. Khai hỏa.”
-- An Vy: “Cả hai bên đều nghe đúng thứ mình sợ nhất.”
-- Kha-Ruun: “Và cùng gọi nỗi sợ đó là mệnh lệnh.”
+- Hệ thống bề mặt: “Đầu đạn: 00:08.”
+- Hệ thống Nham: “Pháo địa nhiệt: khai hỏa.”
+- An Vy: “Không... cả hai bên đều bị lừa!”
+- An Vy: “Và họ đang bắn thẳng vào Mắt Rơi.”
+- Kha-Ruun: “Họ chỉ nghe thấy điều mình sợ nhất.”
 
 ### Trang 9 — Mắt mở
 

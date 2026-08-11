@@ -51,7 +51,16 @@
 - Đã giữ thiết bị cyan trên cổ tay phải An Vy, tạo hình người của Kha-Ruun, sẹo qua lông mày trái của Bách và một đầu đạn chưa phóng.
 - Đã đối chiếu toàn bộ chữ trong ảnh với kịch bản; không phát hiện sai dấu, chữ bị cắt hoặc nhãn tên người nói.
 
+## Audit thoại tự nhiên trang 7–8 — 11/08/2026
+
+- Đã thay mới trang 7 “Ký ức trong đá” và trang 8 “Hai phía khai hỏa” bằng ảnh gen hoàn chỉnh cùng bong bóng thoại tiếng Việt.
+- Trang 7 cho An Vy phản ứng và đặt câu hỏi ngay trong ký ức; Kha-Ruun trả lời bằng lịch sử của chính tộc Nham thay cho đoạn thuyết minh cứng.
+- Trang 8 chuyển phát hiện mệnh lệnh giả thành đối thoại khẩn giữa An Vy và Kha-Ruun khi một đầu đạn cùng pháo địa nhiệt khai hỏa.
+- Đã giữ Mắt Rơi là một thiên thể duy nhất, tạo hình người cao gầy của Kha-Ruun, thiết bị cyan trên cổ tay phải An Vy và bảng màu xanh lục sinh học–hổ phách–tím lạnh–đen núi lửa.
+- Lần dựng đầu trang 7 thiếu câu hỏi thứ hai của An Vy; đã loại bản đó, dựng lại và đối chiếu đủ sáu mục chữ trước khi xuất bản.
+- Đã kiểm tra toàn bộ dấu tiếng Việt, chữ không bị cắt, không có nhãn tên người nói và không có hộp thoại kiểu giao diện.
+
 ## Trạng thái
 
 - Chương 1 hoàn tất: 12/12 trang.
-- Lượt audit tiếp theo tiếp tục làm mềm thoại và thay trang 7–8 theo chuẩn bong bóng thoại mới.
+- Lượt audit tiếp theo tiếp tục làm mềm thoại và thay trang 9–10 theo chuẩn bong bóng thoại mới.
