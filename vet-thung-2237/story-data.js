@@ -13,7 +13,7 @@ const STORY = {
     {number: 8, image: 'assets/pages/page-08.webp?v=dialogue-20260811-p78', title: 'Hai phía khai hỏa', alt: 'An Vy và Kha-Ruun phát hiện đầu đạn bề mặt cùng pháo địa nhiệt bị mệnh lệnh giả điều khiển'},
     {number: 9, image: 'assets/pages/page-09.webp?v=dialogue-20260811-p910', title: 'Mắt mở', alt: 'An Vy và Kha-Ruun thấy Mắt Rơi hút hai luồng nhiệt rồi mở thành một mống mắt cơ khí'},
     {number: 10, image: 'assets/pages/page-10.webp?v=dialogue-20260811-p910', title: 'Khóa đôi', alt: 'Thiết bị cổ tay An Vy và vân Nham của Kha-Ruun cùng kích hoạt hai nửa khóa'},
-    {number: 11, image: 'assets/pages/page-11.webp', title: 'Một giây ngừng bắn', alt: 'Chỉ huy Bách hủy đầu đạn khi An Vy phát bằng chứng giả mạo'},
-    {number: 12, image: 'assets/pages/page-12.webp', title: 'Những vết thủng khác', alt: 'Bản đồ Trái Đất hiện chín điểm Vết Thủng sau khi Mắt Rơi bị khóa'}
+    {number: 11, image: 'assets/pages/page-11.webp?v=dialogue-20260811-p1112', title: 'Một giây ngừng bắn', alt: 'An Vy phát bằng chứng gốc để Bách và Hội Đồng Nham cùng ra lệnh ngừng bắn'},
+    {number: 12, image: 'assets/pages/page-12.webp?v=dialogue-20260811-p1112', title: 'Những vết thủng khác', alt: 'An Vy và Kha-Ruun nhìn bản đồ Trái Đất hiện đúng chín tín hiệu Vết Thủng'}
   ]
 };

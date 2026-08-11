@@ -68,7 +68,17 @@
 - Đã giữ đúng một Mắt Rơi mở thành mống mắt hổ phách, thiết bị cyan trên cổ tay phải An Vy, hình người cao gầy cùng giáp vai phải của Kha-Ruun.
 - Đã đối chiếu đủ năm mục chữ trang 9 và sáu mục chữ trang 10; không có nhãn tên, chữ thừa, chữ bị cắt hoặc hộp thoại kiểu giao diện.
 
+## Audit thoại tự nhiên trang 11–12 — 11/08/2026
+
+- Đã thay mới trang 11 “Một giây ngừng bắn” và trang 12 “Những vết thủng khác” bằng ảnh gen hoàn chỉnh cùng bong bóng thoại tiếng Việt.
+- Trang 11 chuyển đoạn giải thích dài thành cuộc đối đáp trực tiếp: An Vy đưa bằng chứng, Bách chỉ cho một giây, rồi cả Bách và Hội Đồng Nham tự ra lệnh dừng vũ khí.
+- Trang 12 để Kha-Ruun hỏi về kết thúc chiến tranh và An Vy trả lời ngắn, dè dặt; câu dẫn cuối giữ vai trò móc nối sang bí ẩn tiếp theo.
+- Đã giữ sẹo qua lông mày trái của Bách, thiết bị cyan trên cổ tay phải An Vy, hình người cao gầy cùng giáp vai phải của Kha-Ruun và một Mắt Rơi duy nhất.
+- Đã đếm trực tiếp đúng chín tín hiệu Vết Thủng trên địa cầu ở khung cuối; không có điểm thứ mười hoặc điểm trang trí dễ gây nhầm.
+- Đã đối chiếu đủ sáu mục chữ trang 11 và bốn mục chữ trang 12; không có nhãn tên, chữ bị cắt hoặc hộp thoại kiểu giao diện.
+
 ## Trạng thái
 
 - Chương 1 hoàn tất: 12/12 trang.
-- Lượt audit tiếp theo tiếp tục làm mềm thoại và thay trang 11–12 theo chuẩn bong bóng thoại mới.
+- Toàn bộ 12 trang đã được thay hoặc duyệt theo chuẩn thoại tự nhiên nằm trực tiếp trong ảnh.
+- Lượt audit tiếp theo rà soát đồng bộ toàn chương về tỷ lệ nhân vật, hướng phụ kiện, cỡ chữ và nhịp chuyển cảnh.

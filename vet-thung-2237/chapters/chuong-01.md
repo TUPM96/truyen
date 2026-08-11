@@ -85,16 +85,18 @@
 
 ### Trang 11 — Một giây ngừng bắn
 
-- Hệ cứu hộ: “Phát toàn kênh. Bằng chứng gốc.”
-- Bách: “Ta cho cô một giây.”
-- Hệ thống: “Đầu đạn: hủy. Pháo Nham: tắt.”
-- An Vy: “Một giây là đủ để ngừng một cuộc chiến. Chưa đủ để tha thứ.”
+- Hệ cứu hộ: “Kênh gốc: phát toàn kênh.”
+- An Vy: “Bách, nghe tôi! Mệnh lệnh tấn công là giả!”
+- Bách: “Cô có một giây.”
+- An Vy: “Vậy nhìn cho kỹ.”
+- Bách: “Hủy đầu đạn.”
+- Hội Đồng Nham: “Tắt pháo.”
 
 ### Trang 12 — Những vết thủng khác
 
-- Hệ thống: “Khóa đôi hoàn tất.”
-- Kha-Ruun: “Chiến tranh kết thúc chưa?”
-- An Vy: “Chưa. Nhưng lời nói dối đầu tiên đã chết.”
+- Hệ thống: “Khóa đôi: hoàn tất.”
+- Kha-Ruun: “Vậy là hết chiến tranh rồi sao?”
+- An Vy: “Chưa. Nhưng ít nhất họ đã ngừng bắn.”
 - Dẫn kết: “Đêm đó, Trái Đất trả lời bằng chín nhịp.”
 
 ## Chương 1 hoàn tất
