@@ -134,8 +134,16 @@
 - Sự kiện đổi hướng, đổi kích thước cửa sổ và thay đổi visual viewport được gộp nhịp; reader bỏ hiệu ứng chuyển trang dở, preload lại hai trang kề và hiện dock sau khi bố cục ổn định.
 - Khi quay lại từ tab nền, dock hiện lại mà không dựng lại ảnh, không đổi số trang và không cướp tiêu điểm khỏi nút đang sử dụng.
 
+## Audit thao tác lật trang dồn dập — 11/08/2026
+
+- Sau một cú vuốt hợp lệ, reader chặn sự kiện `click` tổng hợp trong 500 ms, tránh vùng chạm tiến/lùi làm trang nhảy thêm lần thứ hai.
+- Chuyển động ngang được reader xử lý, trong khi thao tác dọc và chụm hai ngón vẫn dành cho trình duyệt; các nút trong dock dùng `touch-action: manipulation` để giảm độ trễ và tránh phóng to do chạm đúp.
+- Hàm lật trang chỉ chạy khi reader đang mở và luôn kiểm tra trang kế tiếp tồn tại, nên chuỗi chạm nhanh không thể vượt trang 1 hoặc trang 12.
+- Khi vừa chuyển từ trang 11 sang trang 12, nút hoàn tất có khoảng bảo vệ 320 ms; cú nhấn thứ hai trong cùng chuỗi không thể vô tình đóng chương.
+- Sau khi hoàn tất chương, các sự kiện nút còn nằm trong hàng đợi không thể đổi tiến độ từ trang 1; trạng thái nút lùi và nút hoàn tất luôn khớp số trang hiện tại.
+
 ## Trạng thái
 
 - Chương 1 hoàn tất: 12/12 trang.
 - Toàn bộ 12 trang đã được thay hoặc duyệt theo chuẩn thoại tự nhiên nằm trực tiếp trong ảnh.
-- Lượt audit tiếp theo rà soát thao tác vuốt/chạm liên tiếp nhanh, chống lật quá trang và trạng thái nút khi chuyển trang dồn dập.
+- Lượt audit tiếp theo rà soát bộ nhớ khi mở/đóng reader nhiều lần, số listener và việc giải phóng ảnh không còn cần thiết.
