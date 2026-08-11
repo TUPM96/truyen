@@ -151,8 +151,16 @@
 - Mỗi lần mở/đóng có mã phiên riêng, nên phản hồi fullscreen đến muộn từ phiên cũ không thể giấu, dọn hoặc cướp tiêu điểm của phiên reader mới.
 - Đã kiểm tra 25 chu kỳ mở/đóng liên tiếp: mỗi lần mở có đúng 12 trang, mỗi lần đóng trở về 0 nút trang và 0 thẻ preload, không làm mất vị trí đọc.
 
+## Audit tải lần đầu và ưu tiên mạng — 11/08/2026
+
+- Ảnh bìa 1024 × 1536 được chuyển nguyên hình từ PNG 3.146.989 byte sang WebP 217.416 byte, giảm 93,1% mà không vẽ lại hoặc thay đổi thiết kế An Vy, Kha-Ruun và Nham Cung; PNG gốc vẫn là phương án dự phòng.
+- Bìa được khai báo sẵn kích thước để tránh dịch chuyển bố cục và được ưu tiên tải cao ngay trong `head`, phù hợp vì đây là ảnh lớn nhất ở màn hình đầu.
+- Khi mở reader, chỉ trang đang đọc dùng `loading=eager` cùng ưu tiên cao; 11 trang còn lại tải lười với ưu tiên thấp, tránh tranh băng thông với trang đang nhìn.
+- Hai trang kề vẫn được preload để lật tiến/lùi mượt nhưng ở ưu tiên thấp; khi đổi trang, ảnh mới đang hiện được nâng lên ưu tiên cao.
+- Đã kiểm tra thuộc tính tải ở trang 1, trang giữa và trang 12; mỗi trạng thái luôn có đúng một ảnh ưu tiên cao, đúng trang đang đọc, đồng thời giữ nguyên số trang và tiến độ.
+
 ## Trạng thái
 
 - Chương 1 hoàn tất: 12/12 trang.
 - Toàn bộ 12 trang đã được thay hoặc duyệt theo chuẩn thoại tự nhiên nằm trực tiếp trong ảnh.
-- Lượt audit tiếp theo rà soát hiệu năng tải lần đầu, kích thước tài nguyên và thứ tự ưu tiên mạng.
+- Lượt audit tiếp theo rà soát cache ngoại tuyến, hành vi tải lại phiên bản mới và khả năng phục hồi khi tài nguyên cũ còn trong bộ nhớ trình duyệt.

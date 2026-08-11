@@ -23,7 +23,7 @@ const pageByNumber = new Map(STORY.pages.map(page => [page.number, page]));
 const backgroundContent = [...document.querySelectorAll('.site-header, main, footer')];
 
 function render() {
-  comic.innerHTML = STORY.pages.map(page => `<section class="comic-page${page.number === current ? ' active' : ''}" data-page="${page.number}" aria-hidden="${page.number !== current}" aria-busy="true"><img src="${page.image}" alt="${page.alt}" loading="${Math.abs(page.number - current) <= 1 ? 'eager' : 'lazy'}" decoding="async" data-page-image="${page.number}"><div class="page-error" data-page-error="${page.number}" role="alert" hidden><strong>Không tải được trang ${page.number}</strong><span data-page-error-message>Kiểm tra kết nối rồi thử lại.</span><button type="button" data-retry-page="${page.number}">Tải lại trang</button></div></section>`).join('');
+  comic.innerHTML = STORY.pages.map(page => `<section class="comic-page${page.number === current ? ' active' : ''}" data-page="${page.number}" aria-hidden="${page.number !== current}" aria-busy="true"><img src="${page.image}" alt="${page.alt}" loading="${page.number === current ? 'eager' : 'lazy'}" fetchpriority="${page.number === current ? 'high' : 'low'}" decoding="async" data-page-image="${page.number}"><div class="page-error" data-page-error="${page.number}" role="alert" hidden><strong>Không tải được trang ${page.number}</strong><span data-page-error-message>Kiểm tra kết nối rồi thử lại.</span><button type="button" data-retry-page="${page.number}">Tải lại trang</button></div></section>`).join('');
   bindPageImages();
   update();
 }
@@ -68,6 +68,9 @@ function update(direction = 0) {
     const active = Number(page.dataset.page) === current;
     page.classList.toggle('active', active);
     page.setAttribute('aria-hidden', String(!active));
+    const image = page.querySelector('[data-page-image]');
+    image.setAttribute('loading', active ? 'eager' : 'lazy');
+    image.setAttribute('fetchpriority', active ? 'high' : 'low');
   });
   const currentPage = pageByNumber.get(current);
   localStorage.setItem('vt2237-progress', current);
@@ -105,7 +108,7 @@ function preload(number) {
   const page = pageByNumber.get(number);
   if (!page || document.head.querySelector(`[data-preload="${number}"]`)) return;
   const link = document.createElement('link');
-  link.rel = 'preload'; link.as = 'image'; link.href = page.image; link.dataset.preload = number;
+  link.rel = 'preload'; link.as = 'image'; link.href = page.image; link.setAttribute('fetchpriority', 'low'); link.dataset.preload = number;
   document.head.appendChild(link);
 }
 
