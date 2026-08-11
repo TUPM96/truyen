@@ -109,8 +109,17 @@
 - Khi trình duyệt báo có mạng trở lại, reader chỉ tự thử lại trang lỗi đang mở, không tải lại toàn bộ 12 trang và không làm mất tiến độ.
 - Đã giữ lớp thông báo cao hơn hai vùng chạm lật trang; thao tác “Tải lại trang” không vô tình lật trang hoặc ẩn dock điều khiển.
 
+## Audit bàn phím và trình đọc màn hình — 11/08/2026
+
+- Reader được khai báo là hộp thoại modal có tiêu đề và hướng dẫn ẩn về các phím mũi tên, `Home`, `End` và `Escape`.
+- Khi reader mở, nội dung trang chủ phía sau chuyển sang trạng thái `inert`; phím `Tab` và `Shift+Tab` chỉ đi qua vùng đọc, nút tải lại đang hiện và các nút điều khiển khả dụng.
+- Hai vùng chạm vô hình trái/phải được bỏ khỏi thứ tự bàn phím vì đã có nút trang trước/trang sau rõ nhãn trong dock, tránh người dùng phải tab qua điều khiển trùng lặp không nhìn thấy.
+- Dock luôn hiện lại khi người dùng nhấn `Tab` và không tự ẩn khi tiêu điểm đang nằm trên một nút điều khiển hoặc nút tải lại.
+- Khi thoát bằng nút đóng, phím `Escape` hoặc rời toàn màn hình, tiêu điểm trở về đúng nút đã dùng để mở reader.
+- Đã bổ sung viền tiêu điểm tương phản tím lạnh/xanh lục cho vùng đọc, nút điều khiển và nút tải lại mà không thay đổi bảng màu khóa.
+
 ## Trạng thái
 
 - Chương 1 hoàn tất: 12/12 trang.
 - Toàn bộ 12 trang đã được thay hoặc duyệt theo chuẩn thoại tự nhiên nằm trực tiếp trong ảnh.
-- Lượt audit tiếp theo rà soát bàn phím, trình đọc màn hình và thứ tự tiêu điểm trong chế độ toàn màn hình.
+- Lượt audit tiếp theo rà soát metadata chia sẻ, tiêu đề tài liệu và liên kết quay về thư viện khi truy cập từ nhiều đường dẫn.
