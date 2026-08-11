@@ -213,8 +213,17 @@
 - Viền focus được đổi sang màu hệ thống `Highlight`, thanh tiến độ dùng `Highlight`, còn ảnh trang truyện là nội dung gốc nên được loại khỏi phép đổi màu cưỡng bức để không phá thiết kế An Vy, Kha-Ruun và bảng màu khóa.
 - Đã kiểm tra trạng thái trang 1, 6 và 12, nút khóa/hoàn tất, focus bàn phím, CSS tương phản cao và toàn bộ regression reader, in, chia sẻ, lịch sử, mạng cùng cache ngoại tuyến.
 
+## Audit blur, độ trong suốt và nền tranh sáng — 12/08/2026
+
+- Đã đo trực tiếp 12 ảnh tại vùng dưới–giữa nơi dock xuất hiện: trang 10 sáng nhất theo trung bình, kế tiếp là trang 12 và 3; nhiều trang có điểm sáng đạt trắng tuyệt đối.
+- Dock mở trên nền trắng cực đại vẫn đạt 14,13:1; dock thu gọn cũ chỉ đạt 4,42:1 nên lớp nền được tăng từ alpha 0,58 lên 0,68, nâng trường hợp xấu nhất lên 6,34:1.
+- Nền đặc `#090e0d` nay là phương án mặc định, vì vậy trình duyệt không hỗ trợ `backdrop-filter` vẫn hiển thị dock rõ ràng thay vì phụ thuộc vào khả năng làm mờ phía sau.
+- Blur 12 px chỉ được bật bên trong `@supports`, có cả thuộc tính chuẩn và tiền tố WebKit; trình duyệt hỗ trợ dùng nền alpha 0,94, còn trình duyệt cũ tự giữ nền đặc.
+- Khi `prefers-reduced-transparency: reduce` hoạt động, dock mở, dock thu gọn và hộp lỗi đều dùng nền đặc, tắt blur/bóng và tăng viền để trạng thái không phụ thuộc độ trong suốt.
+- Đã kiểm tra trang sáng 3/10/12, trường hợp nền trắng tuyệt đối, có/không có blur, giảm độ trong suốt, CSS parser và toàn bộ regression reader trước đó.
+
 ## Trạng thái
 
 - Chương 1 hoàn tất: 12/12 trang.
 - Toàn bộ 12 trang đã được thay hoặc duyệt theo chuẩn thoại tự nhiên nằm trực tiếp trong ảnh.
-- Lượt audit tiếp theo rà soát trường hợp trình duyệt không hỗ trợ `backdrop-filter`, chế độ giảm độ trong suốt và khả năng đọc dock trên các trang tranh sáng nhất.
+- Lượt audit tiếp theo rà soát khi font web bị chặn hoặc tải chậm, thứ tự font dự phòng và độ ổn định bố cục trang chủ trước/sau khi font hoàn tất.
