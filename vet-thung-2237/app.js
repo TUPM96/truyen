@@ -4,6 +4,7 @@ const comic = document.querySelector('#comic');
 const nextButton = document.querySelector('#nextPage');
 const shareButton = document.querySelector('#sharePage');
 const printButton = document.querySelector('#printPage');
+const pageCounter = document.querySelector('#pageCounter');
 const shareStatus = document.querySelector('#shareStatus');
 const total = STORY.pages.length;
 const baseDocumentTitle = document.title;
@@ -193,7 +194,8 @@ function update(direction = 0) {
   const currentPage = pageByNumber.get(current);
   localStorage.setItem('vt2237-progress', current);
   document.title = `${currentPage.title} · Trang ${current}/${total} — ${STORY.title}`;
-  document.querySelector('#pageCounter').textContent = `Trang ${current} / ${total}`;
+  pageCounter.textContent = `${current} / ${total}`;
+  pageCounter.setAttribute('aria-label', `Trang ${current} trên ${total}`);
   stage.setAttribute('aria-label', `Trang ${current} trên ${total}: ${currentPage.title}`);
   document.querySelector('#progressBar').style.width = `${current / total * 100}%`;
   document.querySelector('#prevPage').disabled = current === 1;

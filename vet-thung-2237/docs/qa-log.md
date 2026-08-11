@@ -195,8 +195,17 @@
 - Màu ảnh được giữ bằng `print-color-adjust: exact`; nền giấy là trắng và khối trang có quy tắc tránh ngắt giữa ảnh.
 - Đã kiểm tra trang 1, 6 và 12, thoát fullscreen trước khi in, hủy hộp thoại, dọn trạng thái sau `afterprint` và đóng reader khi chế độ in còn được đánh dấu.
 
+## Audit màn hình hẹp, vùng an toàn và chữ 200% — 12/08/2026
+
+- Dock ở viewport 320 px chừa tối thiểu 12 px mỗi cạnh nhưng vẫn giữ cả năm nút ở kích thước chạm 44 × 44 px; không còn phải thu nút xuống 36 px để vừa màn hình.
+- Bộ đếm hiển thị gọn dạng `N / 12`, còn nhãn trợ năng đọc đầy đủ “Trang N trên 12”; số trang hiện tại vẫn luôn rõ mà không làm dock tràn khi chữ hệ thống tăng đến 200%.
+- Khi viewport hiệu dụng giảm còn 240 px do phóng lớn, sáu thành phần điều khiển tự chuyển thành lưới hai hàng, ba cột; thứ tự đóng, chia sẻ, in rồi lùi, bộ đếm, tiến vẫn giữ nguyên.
+- Reader, thanh tiến độ, vùng chạm và dock đã dùng đủ bốn `safe-area-inset-*`; tranh và điều khiển không nằm dưới tai thỏ, Dynamic Island hoặc thanh Home trong cả chiều dọc lẫn chiều ngang.
+- Biểu tượng nút không bị font inflation làm tràn vòng tròn; hộp báo lỗi có chiều cao tối đa theo vùng nhìn an toàn và tự cuộn khi nội dung được phóng lớn.
+- Đã kiểm tra công thức bố cục ở 320 px, viewport hiệu dụng 240/160 px, nhãn bộ đếm trang 1/6/12, trạng thái nút đầu/cuối chương và toàn bộ regression reader trước đó.
+
 ## Trạng thái
 
 - Chương 1 hoàn tất: 12/12 trang.
 - Toàn bộ 12 trang đã được thay hoặc duyệt theo chuẩn thoại tự nhiên nằm trực tiếp trong ảnh.
-- Lượt audit tiếp theo rà soát sơ đồ nút điều khiển trên màn hình 320 px, vùng an toàn iPhone và trường hợp chữ hệ thống phóng lớn 200%.
+- Lượt audit tiếp theo rà soát độ tương phản trong reader, chế độ tương phản cao cưỡng bức và khả năng nhận biết nút bị vô hiệu hóa mà không chỉ dựa vào độ mờ.
