@@ -13,6 +13,7 @@ let touchX = 0;
 let touchY = 0;
 let controlsTimer = 0;
 let turnTimer = 0;
+let viewportTimer = 0;
 let lastFocused = null;
 
 const pageByNumber = new Map(STORY.pages.map(page => [page.number, page]));
@@ -138,6 +139,25 @@ function setBackgroundInert(value) {
   backgroundContent.forEach(element => { element.inert = value; });
 }
 
+function refreshReaderViewport() {
+  if (!open) return;
+  stage.classList.remove('turn-next', 'turn-prev');
+  preload(current - 1);
+  preload(current + 1);
+  showControls();
+}
+
+function queueViewportRefresh() {
+  clearTimeout(viewportTimer);
+  viewportTimer = setTimeout(refreshReaderViewport, 80);
+}
+
+function handleFullscreenExit(fullscreenElement) {
+  if (!fullscreenRequested || fullscreenElement) return;
+  fullscreenRequested = false;
+  refreshReaderViewport();
+}
+
 async function enterFullscreen() {
   const request = reader.requestFullscreen || reader.webkitRequestFullscreen;
   if (!request) return;
@@ -157,10 +177,11 @@ async function openReader() {
   stage.focus({preventScroll: true});
 }
 
-async function closeReader(fromFullscreen = false) {
+async function closeReader() {
   if (!open) return;
   open = false;
-  if (!fromFullscreen && (document.fullscreenElement || document.webkitFullscreenElement)) {
+  fullscreenRequested = false;
+  if (document.fullscreenElement || document.webkitFullscreenElement) {
     try { await (document.exitFullscreen?.() || document.webkitExitFullscreen?.()); } catch (_) {}
   }
   reader.hidden = true;
@@ -194,7 +215,11 @@ stage.addEventListener('pointermove', showControls, {passive: true});
 stage.addEventListener('touchstart', event => { touchX = event.changedTouches[0].clientX; touchY = event.changedTouches[0].clientY; }, {passive: true});
 stage.addEventListener('touchend', event => { const dx = event.changedTouches[0].clientX - touchX; const dy = event.changedTouches[0].clientY - touchY; if (Math.abs(dx) > 55 && Math.abs(dx) > Math.abs(dy) * 1.25) step(dx < 0 ? 1 : -1); }, {passive: true});
 document.addEventListener('keydown', event => { if (!open) return; if (event.key === 'Tab') return trapReaderFocus(event); if (event.key === 'Escape') { event.preventDefault(); closeReader(); return; } if (event.key === 'ArrowRight' || event.key === 'PageDown') step(1); if (event.key === 'ArrowLeft' || event.key === 'PageUp') step(-1); if (event.key === 'Home' && current !== 1) { current = 1; update(-1); showControls(); } if (event.key === 'End' && current !== total) { current = total; update(1); showControls(); } });
-document.addEventListener('fullscreenchange', () => { if (fullscreenRequested && !document.fullscreenElement && open) { fullscreenRequested = false; closeReader(true); } });
-document.addEventListener('webkitfullscreenchange', () => { if (fullscreenRequested && !document.webkitFullscreenElement && open) { fullscreenRequested = false; closeReader(true); } });
+document.addEventListener('fullscreenchange', () => handleFullscreenExit(document.fullscreenElement));
+document.addEventListener('webkitfullscreenchange', () => handleFullscreenExit(document.webkitFullscreenElement));
+document.addEventListener('visibilitychange', () => { if (!document.hidden) refreshReaderViewport(); });
+window.addEventListener('resize', queueViewportRefresh, {passive: true});
+window.addEventListener('orientationchange', queueViewportRefresh, {passive: true});
+window.visualViewport?.addEventListener('resize', queueViewportRefresh, {passive: true});
 window.addEventListener('online', () => { if (open && comic.querySelector(`.comic-page[data-page="${current}"].load-failed`)) retryPage(current); });
 window.addEventListener('offline', () => { comic.querySelectorAll('.comic-page.load-failed').forEach(page => setPageLoadState(Number(page.dataset.page), true)); });
