@@ -77,8 +77,16 @@
 - Đã đếm trực tiếp đúng chín tín hiệu Vết Thủng trên địa cầu ở khung cuối; không có điểm thứ mười hoặc điểm trang trí dễ gây nhầm.
 - Đã đối chiếu đủ sáu mục chữ trang 11 và bốn mục chữ trang 12; không có nhãn tên, chữ bị cắt hoặc hộp thoại kiểu giao diện.
 
+## Audit đồng bộ toàn chương và lật trang — 11/08/2026
+
+- Đã xem lại 12 trang theo hai bảng liên hoàn 1–6 và 7–12, sau đó kiểm tra riêng các lần xuất hiện của An Vy, Kha-Ruun và Chỉ huy Bách.
+- Đã đối chiếu thiết bị cyan trên cổ tay phải An Vy, giáp vai lưỡi liềm bên phải Kha-Ruun, sẹo qua lông mày trái của Bách và chuỗi một Mắt Rơi duy nhất; không phát hiện lỗi cần thay ảnh.
+- Tất cả ảnh trang nằm trong dải 862–864 px × 1820–1825 px, không có trang lệch tỷ lệ gây giật khung reader.
+- Đã bổ sung chuyển động vào trang mới theo đúng hướng tiến/lùi cho nút, vùng chạm, vuốt và bàn phím; phím Home/End cũng phản ánh đúng hướng.
+- Hiệu ứng chỉ kéo dài 260 ms và tự tắt theo `prefers-reduced-motion`, tránh gây khó chịu cho người nhạy chuyển động.
+
 ## Trạng thái
 
 - Chương 1 hoàn tất: 12/12 trang.
 - Toàn bộ 12 trang đã được thay hoặc duyệt theo chuẩn thoại tự nhiên nằm trực tiếp trong ảnh.
-- Lượt audit tiếp theo rà soát đồng bộ toàn chương về tỷ lệ nhân vật, hướng phụ kiện, cỡ chữ và nhịp chuyển cảnh.
+- Lượt audit tiếp theo rà soát độ tương phản và khả năng đọc chữ trên màn hình nhỏ.
