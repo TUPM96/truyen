@@ -46,6 +46,10 @@ footer { display:flex; justify-content:space-between; gap:20px; max-width:var(--
 .comic-page { display:none; width:100%; height:100%; place-items:center; }
 .comic-page.active { display:grid; }
 .comic-page img { display:block; width:auto; max-width:100%; height:100%; object-fit:contain; }
+.reader-stage.turn-next .comic-page.active img { animation:page-in-next .26s cubic-bezier(.22,.75,.28,1); }
+.reader-stage.turn-prev .comic-page.active img { animation:page-in-prev .26s cubic-bezier(.22,.75,.28,1); }
+@keyframes page-in-next { from { opacity:.25; transform:translateX(24px) scale(.992); } to { opacity:1; transform:none; } }
+@keyframes page-in-prev { from { opacity:.25; transform:translateX(-24px) scale(.992); } to { opacity:1; transform:none; } }
 .tap-zone { position:fixed; inset:3px auto 62px; z-index:102; width:30vw; background:transparent; border:0; opacity:0; }
 .tap-left { left:0; }
 .tap-right { right:0; }
@@ -56,4 +60,4 @@ footer { display:flex; justify-content:space-between; gap:20px; max-width:var(--
 .controls-hidden .reader-nav { background:rgba(9,14,13,.58); border-color:transparent; }
 .controls-hidden .reader-nav button { width:0; overflow:hidden; opacity:0; pointer-events:none; border:0; }
 @media(max-width:760px){ .site-header>span{display:none}.hero{grid-template-columns:1fr;padding-top:82px;text-align:center}.cover-wrap{width:min(74vw,340px)}.hero h1{font-size:clamp(65px,21vw,100px)}.synopsis{margin-inline:auto}.meta,.actions{justify-content:center}.chapter-heading{align-items:start;flex-direction:column}.chapter-row{grid-template-columns:40px 1fr}.chapter-row i{display:none}footer{flex-direction:column}.reader-stage{padding:0 0 64px}.comic-page img{width:100%;height:auto;max-height:calc(100dvh - 66px)}.tap-zone{width:34vw}.reader-nav{gap:7px}.reader-nav button{width:38px;height:38px}.reader-nav span{min-width:96px}}
-@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}}
+@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}.reader-stage.turn-next .comic-page.active img,.reader-stage.turn-prev .comic-page.active img{animation:none!important}}
