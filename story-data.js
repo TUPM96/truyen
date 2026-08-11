@@ -8,7 +8,7 @@ const STORY = {
   volume: 'Tập 1 — Người giữ khóa',
   // Production data stays here so later illustration runs can continue the
   // complete volume. The public reader only exposes finished page images.
-  publishedThrough: 46,
+  publishedThrough: 48,
   chapters: [
     {
       short: 'Mép trời',
@@ -95,7 +95,9 @@ const STORY = {
       opening: 'Thế giới được cứu không trở lại như cũ. Điều đó, Linh nghĩ, mới là dấu hiệu họ thật sự đã cứu nó.',
       pages: [
         {global:45, image:pageImage(45), title:'Sau cơn sụp', alt:'Sao Chìm sửa chữa dưới biển trần', narration:'Biển trần trở lại vị trí, nhưng một khoảng trong suốt vẫn mở giữa hai tầng. Người Tầng Một và Hải Trần nhìn thấy ánh đèn của nhau mỗi đêm.', lines:[['Nghi','Họ gọi nó là Cửa Sổ An.'],['Linh An','Nghe như tên một quán trà.'],['Nghi','Cô ghét trà ngọt. Mốc kể rồi.']]},
-        {global:46, image:pageImage(46), title:'Con mắt cyan', alt:'Mốc được sửa chữa với thân mới', narration:'Nghi đặt mắt cyan của Mốc vào một thân máy mới. Nó méo hơn, nhỏ hơn và kêu to hơn trước.', lines:[['Mốc','Đánh giá thân mới: thiếu cân xứng.'],['Nghi','Đánh giá chủ cũ: thiếu biết ơn.'],['Linh An','Hai người hợp nhau đáng sợ.']]}
+        {global:46, image:pageImage(46), title:'Con mắt cyan', alt:'Mốc được sửa chữa với thân mới', narration:'Nghi đặt mắt cyan của Mốc vào một thân máy mới. Nó méo hơn, nhỏ hơn và kêu to hơn trước.', lines:[['Mốc','Đánh giá thân mới: thiếu cân xứng.'],['Nghi','Đánh giá chủ cũ: thiếu biết ơn.'],['Linh An','Hai người hợp nhau đáng sợ.']]},
+        {global:47, image:pageImage(47), title:'Phiên tòa không mặt nạ', alt:'Bạch Miên nhận trách nhiệm trước hai tầng', narration:'Bạch Miên tự bước vào phiên tòa chung đầu tiên của hai tầng. Không mặt nạ. Không danh hiệu.', lines:[['Bạch Miên','Tôi không xin được tha. Tôi xin được kể hết.'],['Linh An','Tôi sẽ nghe. Nhưng tôi không hứa sẽ hiểu.'],['Bạch Miên','Thế đã nhiều hơn ta xứng đáng.']]},
+        {global:48, image:pageImage(48), title:'Bản đồ đầu tiên không có mép giả', alt:'Thầy Vân mở bản đồ Cửu Diệp', narration:'Thầy Vân đốt con dấu kiểm duyệt và mở kho bản đồ cho mọi người. Trên tờ giấy mới, đường chân trời không còn bị cắt bởi một khoảng trắng.', lines:[['Thầy Vân','Thầy đã dạy con đo những gì được phép tồn tại.'],['Linh An','Giờ mình đo những gì thật sự ở đó.'],['Thầy Vân','Và nếu cái thước không đủ dài?'],['Linh An','Thì nối thêm.']]}
       ]
     }
   ]
