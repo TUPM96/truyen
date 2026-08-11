@@ -8,7 +8,7 @@ const STORY = {
   volume: 'Tập 1 — Người giữ khóa',
   // Production data stays here so later illustration runs can continue the
   // complete volume. The public reader only exposes finished page images.
-  publishedThrough: 36,
+  publishedThrough: 38,
   chapters: [
     {
       short: 'Mép trời',
@@ -80,28 +80,7 @@ const STORY = {
       opening: 'Khoảng cách giữa Tầng Một và Hải Trần còn lại chưa đầy một thành phố. Lần đầu tiên, dân hai tầng có thể nhìn thấy nhau bằng mắt thường.',
       pages: [
         {global:37, image:pageImage(37), title:'Mặt đất trên đầu', alt:'Tầng Một hiện trên bầu trời Hải Trần', narration:'Đồng muối của Tầng Một hiện rõ phía trên biển trần. Những tháp gió treo như răng của một cỗ máy đang khép miệng.', lines:[['Nghi','Nếu hai tầng chạm nhau?'],['Mốc','Không còn đủ từ để mô tả hậu quả.'],['Linh An','Vậy đừng để nó xảy ra.']]},
-        {global:38, image:pageImage(38), title:'Khe Gió nhìn xuống', alt:'Người Tầng Một nhìn thấy Hải Trần', narration:'Ở Khe Gió, tường mây tan lần đầu sau ba trăm năm. Người dân nhìn thấy đại dương nằm dưới thế giới mình.', lines:[['Thầy Vân qua máy truyền','An, cả thành phố đang hỏi ta đã giấu họ điều gì.'],['Linh An','Thầy nói thật đi.'],['Thầy Vân','Thầy sợ họ sẽ không tha thứ.'],['Linh An','Họ không cần tha thứ ngay. Họ cần biết mình đang cứu ai.']]},
-        {global:39, image:pageImage(39), title:'Những sợi xích cuối', alt:'Người dân giữ thành phố khỏi biển sụp', narration:'Dân Sao Chìm kéo những sợi xích cuối. Phía Tầng Một, công nhân tàu cáp neo tháp gió vào cùng một nhịp rung.', lines:[['Nghi','Họ đang nghe chúng ta!'],['Thầy Vân','Không. Chúng ta đang nghe nhau.'],['Mốc','Tín hiệu đồng bộ tăng: ba mươi hai phần trăm.']]},
-        {global:40, image:pageImage(40), title:'Bạch Miên bỏ mặt nạ', alt:'Bạch Miên phát lời thú nhận', narration:'Bạch Miên mở mọi kênh truyền của Hội Bạch Kinh. Ông tháo mặt nạ trước hàng triệu người.', lines:[['Bạch Miên','Chúng tôi gọi bí mật là trật tự. Gọi im lặng là an toàn.'],['Bạch Miên','Hôm nay, mọi lời nói dối của chúng tôi sẽ được mở.'],['Hàm','Ông vừa kết thúc Hội Bạch Kinh.'],['Bạch Miên','Không. Ta kết thúc quyền nói thay thế giới.']]},
-        {global:41, image:pageImage(41), title:'Nhát cắt', alt:'Hàm kích hoạt thiết bị cắt tầng', narration:'Hàm kích hoạt thiết bị. Một đường tối chạy dọc Hải Trần, cắt mọi tín hiệu vừa kết nối.', lines:[['Hàm','Lịch sử sẽ gọi tôi là quái vật. Nhưng nó vẫn còn lịch sử để gọi.'],['Linh An','Ông không cứu lịch sử. Ông chỉ cứu quyền quyết định của mình.'],['Nghi','Linh, cọc đang vỡ!']]},
-        {global:42, image:pageImage(42), title:'Mốc bay vào lõi', alt:'Mốc hy sinh vỏ máy để nối tín hiệu', narration:'Mốc gập ba cánh, lao vào đường cắt và dùng thân đồng làm cầu dẫn. Mắt cyan của nó tắt.', lines:[['Linh An','Mốc! Quay lại!'],['Mốc','Nhiệm vụ đầu tiên: đo thế giới.'],['Mốc','Kết quả cuối: thế giới lớn hơn bản đồ.']]},
-        {global:43, image:pageImage(43), title:'Tên mình giữa chín tầng', alt:'Linh giữ bản thân trong dòng tín hiệu', narration:'Không còn giọng Mốc nhắc tên, Linh gần như tan vào chín tầng. Rồi hàng nghìn giọng nói thay nhau gọi cô.', lines:[['Nghi','Linh An!'],['Thầy Vân','Linh An!'],['Bạch Miên','An, trở về!'],['Linh An','Tôi ở đây. Và chúng ta cùng giữ.']]},
-        {global:44, image:pageImage(44), title:'Khoảng cách mở lại', alt:'Hai tầng tách ra an toàn', narration:'Cọc Neo bắt được nhịp chung. Hai bầu trời dừng lại khi chỉ còn cách nhau một dải sáng, rồi chậm rãi rời xa.', lines:[['Mốc, rất nhỏ','Đồng bộ… đạt.'],['Linh An','Mốc?'],['Nghi','Tôi nghe thấy. Con tam giác phiền phức vẫn còn.']]}
-      ]
-    },
-    {
-      short: 'Người giữ khóa',
-      title: 'Người Giữ Khóa',
-      opening: 'Thế giới được cứu không trở lại như cũ. Điều đó, Linh nghĩ, mới là dấu hiệu họ thật sự đã cứu nó.',
-      pages: [
-        {global:45, image:pageImage(45), title:'Sau cơn sụp', alt:'Sao Chìm sửa chữa dưới biển trần', narration:'Biển trần trở lại vị trí, nhưng một khoảng trong suốt vẫn mở giữa hai tầng. Người Tầng Một và Hải Trần nhìn thấy ánh đèn của nhau mỗi đêm.', lines:[['Nghi','Họ gọi nó là Cửa Sổ An.'],['Linh An','Nghe như tên một quán trà.'],['Nghi','Cô ghét trà ngọt. Mốc kể rồi.']]},
-        {global:46, image:pageImage(46), title:'Con mắt cyan', alt:'Mốc được sửa chữa với thân mới', narration:'Nghi đặt mắt cyan của Mốc vào một thân máy mới. Nó méo hơn, nhỏ hơn và kêu to hơn trước.', lines:[['Mốc','Đánh giá thân mới: thiếu cân xứng.'],['Nghi','Đánh giá chủ cũ: thiếu biết ơn.'],['Linh An','Hai người hợp nhau đáng sợ.']]},
-        {global:47, image:pageImage(47), title:'Phiên tòa không mặt nạ', alt:'Bạch Miên nhận trách nhiệm trước hai tầng', narration:'Bạch Miên tự bước vào phiên tòa chung đầu tiên của hai tầng. Không mặt nạ. Không danh hiệu.', lines:[['Bạch Miên','Tôi không xin được tha. Tôi xin được kể hết.'],['Linh An','Tôi sẽ nghe. Nhưng tôi không hứa sẽ hiểu.'],['Bạch Miên','Thế đã nhiều hơn ta xứng đáng.']]},
-        {global:48, image:pageImage(48), title:'Bản đồ đầu tiên không có mép giả', alt:'Thầy Vân mở bản đồ Cửu Diệp', narration:'Thầy Vân đốt con dấu kiểm duyệt và mở kho bản đồ cho mọi người. Trên tờ giấy mới, đường chân trời không còn bị cắt bởi một khoảng trắng.', lines:[['Thầy Vân','Thầy đã dạy con đo những gì được phép tồn tại.'],['Linh An','Giờ mình đo những gì thật sự ở đó.'],['Thầy Vân','Và nếu cái thước không đủ dài?'],['Linh An','Thì nối thêm.']]},
-        {global:49, image:pageImage(49), title:'Tín hiệu từ Lâm Kính', alt:'Rừng Tầng Ba phát tín hiệu', narration:'Đúng đêm đầu tiên Cọc Neo ổn định, la bàn nhận một âm thanh từ Tầng Ba: tiếng rừng lặp lại giọng Hạ Miên.', lines:[['Hạ Miên','An, mẹ vẫn còn sống.'],['Linh An','Mẹ ở Tầng Chín.'],['Hạ Miên','Không còn lâu nữa. Họ đã thức dậy.']]},
-        {global:50, image:pageImage(50), title:'Khóa thứ hai', alt:'Một ký hiệu lá sáng trên la bàn', narration:'Trên vòng thứ hai của la bàn, một ký hiệu hình chiếc lá mở sáng. Mốc chiếu tuyến đường qua Lâm Kính.', lines:[['Mốc','Khoảng cách: một Đường Khâu, ba khu rừng biết nói dối.'],['Nghi','Tôi chưa từng thấy cây nói dối.'],['Linh An','Tôi từng thấy người. Chắc cũng gần giống.']]},
-        {global:51, image:pageImage(51), title:'Rời hai bầu trời', alt:'Linh Nghi Mốc lên đường tới Tầng Ba', narration:'Linh không trở về Khe Gió. Cô đứng trước Đường Khâu thứ hai cùng Nghi và Mốc, mang theo bản đồ vẫn còn tám phần trắng.', lines:[['Nghi','Cô chắc muốn tôi đi cùng?'],['Linh An','Không. Nhưng tôi chắc mình không muốn đi một mình.'],['Mốc','Ghi nhận một lời mời thiếu lịch sự.']]},
-        {global:52, image:pageImage(52), title:'Trang tiếp theo', alt:'Cánh cửa mở ra khu rừng gương', narration:'Cánh cửa mở. Phía bên kia, một khu rừng mọc cả từ mặt đất lẫn trần trời, và mọi chiếc lá đều thì thầm tên người bước vào.', lines:[['Khu rừng','Linh An. Người giữ khóa.'],['Linh An','Tôi không phải chìa khóa của các người.'],['Linh An','Tôi là người quyết định cánh cửa nào được mở.']]}
+        {global:38, image:pageImage(38), title:'Khe Gió nhìn xuống', alt:'Người Tầng Một nhìn thấy Hải Trần', narration:'Ở Khe Gió, tường mây tan lần đầu sau ba trăm năm. Người dân nhìn thấy đại dương nằm dưới thế giới mình.', lines:[['Thầy Vân qua máy truyền','An, cả thành phố đang hỏi ta đã giấu họ điều gì.'],['Linh An','Thầy nói thật đi.'],['Thầy Vân','Thầy sợ họ sẽ không tha thứ.'],['Linh An','Họ không cần tha thứ ngay. Họ cần biết mình đang cứu ai.']]}
       ]
     }
   ]
