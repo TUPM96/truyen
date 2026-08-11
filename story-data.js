@@ -8,7 +8,7 @@ const STORY = {
   volume: 'Tập 1 — Người giữ khóa',
   // Production data stays here so later illustration runs can continue the
   // complete volume. The public reader only exposes finished page images.
-  publishedThrough: 38,
+  publishedThrough: 40,
   chapters: [
     {
       short: 'Mép trời',
@@ -80,7 +80,9 @@ const STORY = {
       opening: 'Khoảng cách giữa Tầng Một và Hải Trần còn lại chưa đầy một thành phố. Lần đầu tiên, dân hai tầng có thể nhìn thấy nhau bằng mắt thường.',
       pages: [
         {global:37, image:pageImage(37), title:'Mặt đất trên đầu', alt:'Tầng Một hiện trên bầu trời Hải Trần', narration:'Đồng muối của Tầng Một hiện rõ phía trên biển trần. Những tháp gió treo như răng của một cỗ máy đang khép miệng.', lines:[['Nghi','Nếu hai tầng chạm nhau?'],['Mốc','Không còn đủ từ để mô tả hậu quả.'],['Linh An','Vậy đừng để nó xảy ra.']]},
-        {global:38, image:pageImage(38), title:'Khe Gió nhìn xuống', alt:'Người Tầng Một nhìn thấy Hải Trần', narration:'Ở Khe Gió, tường mây tan lần đầu sau ba trăm năm. Người dân nhìn thấy đại dương nằm dưới thế giới mình.', lines:[['Thầy Vân qua máy truyền','An, cả thành phố đang hỏi ta đã giấu họ điều gì.'],['Linh An','Thầy nói thật đi.'],['Thầy Vân','Thầy sợ họ sẽ không tha thứ.'],['Linh An','Họ không cần tha thứ ngay. Họ cần biết mình đang cứu ai.']]}
+        {global:38, image:pageImage(38), title:'Khe Gió nhìn xuống', alt:'Người Tầng Một nhìn thấy Hải Trần', narration:'Ở Khe Gió, tường mây tan lần đầu sau ba trăm năm. Người dân nhìn thấy đại dương nằm dưới thế giới mình.', lines:[['Thầy Vân qua máy truyền','An, cả thành phố đang hỏi ta đã giấu họ điều gì.'],['Linh An','Thầy nói thật đi.'],['Thầy Vân','Thầy sợ họ sẽ không tha thứ.'],['Linh An','Họ không cần tha thứ ngay. Họ cần biết mình đang cứu ai.']]},
+        {global:39, image:pageImage(39), title:'Những sợi xích cuối', alt:'Người dân giữ thành phố khỏi biển sụp', narration:'Dân Sao Chìm kéo những sợi xích cuối. Phía Tầng Một, công nhân tàu cáp neo tháp gió vào cùng một nhịp rung.', lines:[['Nghi','Họ đang nghe chúng ta!'],['Thầy Vân','Không. Chúng ta đang nghe nhau.'],['Mốc','Tín hiệu đồng bộ tăng: ba mươi hai phần trăm.']]},
+        {global:40, image:pageImage(40), title:'Bạch Miên bỏ mặt nạ', alt:'Bạch Miên phát lời thú nhận', narration:'Bạch Miên mở mọi kênh truyền của Hội Bạch Kinh. Ông tháo mặt nạ trước hàng triệu người.', lines:[['Bạch Miên','Chúng tôi gọi bí mật là trật tự. Gọi im lặng là an toàn.'],['Bạch Miên','Hôm nay, mọi lời nói dối của chúng tôi sẽ được mở.'],['Hàm','Ông vừa kết thúc Hội Bạch Kinh.'],['Bạch Miên','Không. Ta kết thúc quyền nói thay thế giới.']]}
       ]
     }
   ]
