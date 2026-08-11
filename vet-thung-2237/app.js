@@ -12,8 +12,10 @@ let touchX = 0;
 let touchY = 0;
 let controlsTimer = 0;
 let turnTimer = 0;
+let lastFocused = null;
 
 const pageByNumber = new Map(STORY.pages.map(page => [page.number, page]));
+const backgroundContent = [...document.querySelectorAll('.site-header, main, footer')];
 
 function render() {
   comic.innerHTML = STORY.pages.map(page => `<section class="comic-page${page.number === current ? ' active' : ''}" data-page="${page.number}" aria-hidden="${page.number !== current}" aria-busy="true"><img src="${page.image}" alt="${page.alt}" loading="${Math.abs(page.number - current) <= 1 ? 'eager' : 'lazy'}" decoding="async" data-page-image="${page.number}"><div class="page-error" data-page-error="${page.number}" role="alert" hidden><strong>Không tải được trang ${page.number}</strong><span data-page-error-message>Kiểm tra kết nối rồi thử lại.</span><button type="button" data-retry-page="${page.number}">Tải lại trang</button></div></section>`).join('');
@@ -110,7 +112,28 @@ function step(direction) {
 function showControls() {
   reader.classList.remove('controls-hidden');
   clearTimeout(controlsTimer);
-  controlsTimer = setTimeout(() => reader.classList.add('controls-hidden'), 2600);
+  controlsTimer = setTimeout(() => { if (!document.activeElement?.closest('.reader-nav, .page-error')) reader.classList.add('controls-hidden'); }, 2600);
+}
+
+function readerFocusOrder() {
+  const order = [stage];
+  const retry = comic.querySelector('.comic-page.active.load-failed [data-retry-page]');
+  if (retry) order.push(retry);
+  order.push(...reader.querySelectorAll('.reader-nav button:not(:disabled)'));
+  return order;
+}
+
+function trapReaderFocus(event) {
+  const order = readerFocusOrder();
+  const index = order.indexOf(document.activeElement);
+  const nextIndex = event.shiftKey ? (index <= 0 ? order.length - 1 : index - 1) : (index < 0 || index === order.length - 1 ? 0 : index + 1);
+  event.preventDefault();
+  showControls();
+  order[nextIndex].focus({preventScroll: true});
+}
+
+function setBackgroundInert(value) {
+  backgroundContent.forEach(element => { element.inert = value; });
 }
 
 async function enterFullscreen() {
@@ -121,8 +144,10 @@ async function enterFullscreen() {
 }
 
 async function openReader() {
+  lastFocused = document.activeElement;
   open = true;
   reader.hidden = false;
+  setBackgroundInert(true);
   document.body.classList.add('reader-open');
   render();
   await enterFullscreen();
@@ -137,7 +162,9 @@ async function closeReader(fromFullscreen = false) {
     try { await (document.exitFullscreen?.() || document.webkitExitFullscreen?.()); } catch (_) {}
   }
   reader.hidden = true;
+  setBackgroundInert(false);
   document.body.classList.remove('reader-open');
+  if (lastFocused?.isConnected) lastFocused.focus({preventScroll: true});
 }
 
 function finishChapter() {
@@ -163,7 +190,7 @@ stage.addEventListener('click', event => { if (!event.target.closest('[data-retr
 stage.addEventListener('pointermove', showControls, {passive: true});
 stage.addEventListener('touchstart', event => { touchX = event.changedTouches[0].clientX; touchY = event.changedTouches[0].clientY; }, {passive: true});
 stage.addEventListener('touchend', event => { const dx = event.changedTouches[0].clientX - touchX; const dy = event.changedTouches[0].clientY - touchY; if (Math.abs(dx) > 55 && Math.abs(dx) > Math.abs(dy) * 1.25) step(dx < 0 ? 1 : -1); }, {passive: true});
-document.addEventListener('keydown', event => { if (!open) return; if (event.key === 'Escape') closeReader(); if (event.key === 'ArrowRight' || event.key === 'PageDown') step(1); if (event.key === 'ArrowLeft' || event.key === 'PageUp') step(-1); if (event.key === 'Home' && current !== 1) { current = 1; update(-1); showControls(); } if (event.key === 'End' && current !== total) { current = total; update(1); showControls(); } });
+document.addEventListener('keydown', event => { if (!open) return; if (event.key === 'Tab') return trapReaderFocus(event); if (event.key === 'Escape') { event.preventDefault(); closeReader(); return; } if (event.key === 'ArrowRight' || event.key === 'PageDown') step(1); if (event.key === 'ArrowLeft' || event.key === 'PageUp') step(-1); if (event.key === 'Home' && current !== 1) { current = 1; update(-1); showControls(); } if (event.key === 'End' && current !== total) { current = total; update(1); showControls(); } });
 document.addEventListener('fullscreenchange', () => { if (fullscreenRequested && !document.fullscreenElement && open) { fullscreenRequested = false; closeReader(true); } });
 document.addEventListener('webkitfullscreenchange', () => { if (fullscreenRequested && !document.webkitFullscreenElement && open) { fullscreenRequested = false; closeReader(true); } });
 window.addEventListener('online', () => { if (open && comic.querySelector(`.comic-page[data-page="${current}"].load-failed`)) retryPage(current); });
