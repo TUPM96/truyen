@@ -204,8 +204,17 @@
 - Biểu tượng nút không bị font inflation làm tràn vòng tròn; hộp báo lỗi có chiều cao tối đa theo vùng nhìn an toàn và tự cuộn khi nội dung được phóng lớn.
 - Đã kiểm tra công thức bố cục ở 320 px, viewport hiệu dụng 240/160 px, nhãn bộ đếm trang 1/6/12, trạng thái nút đầu/cuối chương và toàn bộ regression reader trước đó.
 
+## Audit tương phản và chế độ màu cưỡng bức — 12/08/2026
+
+- Màu chữ/nền trong dock đạt tỷ lệ 18,16:1, bộ đếm đạt 17,94:1, focus tím lạnh đạt 7,30:1 và nút hành động xanh lục đạt 12,57:1; đều vượt ngưỡng 4,5:1 cho chữ thường.
+- Nút “Trang trước” bị khóa ở trang 1 không còn chỉ giảm opacity: trạng thái nay có chữ xám sáng trên nền đen xanh đạt 8,92:1, viền nét đứt, con trỏ không cho phép và một gạch chéo trực quan.
+- Đã thêm chế độ `prefers-contrast: more`: dock và hộp lỗi chuyển sang nền đen đặc, viền trắng, bỏ blur/bóng, trong khi nút hoàn tất và tải lại vẫn dùng xanh lục khóa của truyện với độ tương phản cao.
+- Trong `forced-colors: active`, reader dùng các màu hệ thống `Canvas`, `CanvasText`, `ButtonFace`, `ButtonText`, `GrayText`, `Highlight` và `HighlightText`; trạng thái khóa vẫn có cả viền nét đứt lẫn gạch chéo.
+- Viền focus được đổi sang màu hệ thống `Highlight`, thanh tiến độ dùng `Highlight`, còn ảnh trang truyện là nội dung gốc nên được loại khỏi phép đổi màu cưỡng bức để không phá thiết kế An Vy, Kha-Ruun và bảng màu khóa.
+- Đã kiểm tra trạng thái trang 1, 6 và 12, nút khóa/hoàn tất, focus bàn phím, CSS tương phản cao và toàn bộ regression reader, in, chia sẻ, lịch sử, mạng cùng cache ngoại tuyến.
+
 ## Trạng thái
 
 - Chương 1 hoàn tất: 12/12 trang.
 - Toàn bộ 12 trang đã được thay hoặc duyệt theo chuẩn thoại tự nhiên nằm trực tiếp trong ảnh.
-- Lượt audit tiếp theo rà soát độ tương phản trong reader, chế độ tương phản cao cưỡng bức và khả năng nhận biết nút bị vô hiệu hóa mà không chỉ dựa vào độ mờ.
+- Lượt audit tiếp theo rà soát trường hợp trình duyệt không hỗ trợ `backdrop-filter`, chế độ giảm độ trong suốt và khả năng đọc dock trên các trang tranh sáng nhất.
