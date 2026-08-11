@@ -85,8 +85,16 @@
 - Đã bổ sung chuyển động vào trang mới theo đúng hướng tiến/lùi cho nút, vùng chạm, vuốt và bàn phím; phím Home/End cũng phản ánh đúng hướng.
 - Hiệu ứng chỉ kéo dài 260 ms và tự tắt theo `prefers-reduced-motion`, tránh gây khó chịu cho người nhạy chuyển động.
 
+## Audit khả năng đọc trên màn hình nhỏ — 11/08/2026
+
+- Đã mô phỏng các trang nhiều chữ 3, 5, 7, 10 và 11 trong khung 320 × 568; bong bóng có tương phản tốt nhưng chiều rộng trang chỉ còn khoảng 238 px do reader luôn chừa chỗ cho dock.
+- Trên điện thoại, trang truyện nay dùng trọn chiều cao màn hình, nâng chiều rộng hiển thị ở khung thử lên khoảng 269 px mà vẫn giữ nguyên chế độ lật từng trang, không cuộn dọc.
+- Dock điều khiển chuyển sang lớp nổi và tự ẩn hoàn toàn sau khi thao tác; người đọc có thể chạm giữa trang để gọi lại bất kỳ lúc nào.
+- Vùng chạm trái/phải được kéo xuống hết đáy khi dock ẩn, giữ góc trái lùi trang và góc phải tiến trang.
+- Đã giữ `100dvh` và vùng an toàn của dock để giao diện ổn định khi thanh trình duyệt di động đóng/mở.
+
 ## Trạng thái
 
 - Chương 1 hoàn tất: 12/12 trang.
 - Toàn bộ 12 trang đã được thay hoặc duyệt theo chuẩn thoại tự nhiên nằm trực tiếp trong ảnh.
-- Lượt audit tiếp theo rà soát độ tương phản và khả năng đọc chữ trên màn hình nhỏ.
+- Lượt audit tiếp theo rà soát trạng thái hoàn tất chương, lưu tiến độ và hành vi quay lại đọc.
