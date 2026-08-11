@@ -93,8 +93,16 @@
 - Vùng chạm trái/phải được kéo xuống hết đáy khi dock ẩn, giữ góc trái lùi trang và góc phải tiến trang.
 - Đã giữ `100dvh` và vùng an toàn của dock để giao diện ổn định khi thanh trình duyệt di động đóng/mở.
 
+## Audit hoàn tất chương và đọc lại — 11/08/2026
+
+- Đã sửa việc cờ “đã hoàn tất” luôn ép reader về trang 1, làm mất vị trí khi người đọc dừng giữa lần đọc lại rồi tải lại trang.
+- Tiến độ hợp lệ 1–12 nay luôn được khôi phục; dữ liệu rỗng, sai kiểu, số thập phân hoặc ngoài phạm vi tự trở về trang 1 thay vì làm reader lỗi.
+- Nhãn nút ưu tiên “Đọc tiếp · Trang X” khi đang dở một lượt đọc, kể cả chương đã từng hoàn thành; chỉ hiện “Đọc lại chương” khi tiến độ đang ở trang 1.
+- Khi bấm hoàn tất ở trang 12, reader vẫn đóng, đặt tiến độ về trang 1 và lưu trạng thái hoàn thành như trước.
+- Đã kiểm tra đủ các trường hợp: người đọc mới, thoát giữa lần đầu, hoàn tất, bắt đầu đọc lại, thoát giữa lần đọc lại và dữ liệu lưu không hợp lệ.
+
 ## Trạng thái
 
 - Chương 1 hoàn tất: 12/12 trang.
 - Toàn bộ 12 trang đã được thay hoặc duyệt theo chuẩn thoại tự nhiên nằm trực tiếp trong ảnh.
-- Lượt audit tiếp theo rà soát trạng thái hoàn tất chương, lưu tiến độ và hành vi quay lại đọc.
+- Lượt audit tiếp theo rà soát tải ảnh, mất mạng tạm thời và khả năng phục hồi khi một trang lỗi.
