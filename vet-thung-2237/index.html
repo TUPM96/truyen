@@ -24,7 +24,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&family=Spectral:ital,wght@0,600;1,600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=image-recovery-20260811">
+  <link rel="stylesheet" href="styles.css?v=reader-a11y-20260811">
 </head>
 <body>
   <header class="site-header">
@@ -59,13 +59,14 @@
 
   <footer><span>© Vết Thủng 2237 · Truyện nguyên bản</span><span>Chương 1 đã hoàn tất</span></footer>
 
-  <section class="reader" id="reader" hidden aria-labelledby="readerTitle">
+  <section class="reader" id="reader" hidden role="dialog" aria-modal="true" aria-labelledby="readerTitle" aria-describedby="readerInstructions">
     <h2 class="sr-only" id="readerTitle">Trình đọc Vết Thủng 2237</h2>
+    <p class="sr-only" id="readerInstructions">Dùng phím mũi tên trái và phải để lật trang, phím Home và End để về đầu hoặc cuối chương, phím Escape để thoát.</p>
     <div class="progress"><span id="progressBar"></span></div>
     <div class="reader-stage" id="readerStage" tabindex="0">
       <article id="comic"></article>
-      <button class="tap-zone tap-left" id="tapLeft" type="button" aria-label="Trang trước"></button>
-      <button class="tap-zone tap-right" id="tapRight" type="button" aria-label="Trang sau"></button>
+      <button class="tap-zone tap-left" id="tapLeft" type="button" tabindex="-1" aria-hidden="true" aria-label="Trang trước"></button>
+      <button class="tap-zone tap-right" id="tapRight" type="button" tabindex="-1" aria-hidden="true" aria-label="Trang sau"></button>
     </div>
     <nav class="reader-nav" id="readerNav" aria-label="Điều khiển đọc truyện">
       <button id="closeReader" type="button" aria-label="Thoát trình đọc">×</button>
@@ -76,6 +77,6 @@
   </section>
 
   <script src="story-data.js?v=dialogue-20260811-p1112"></script>
-  <script src="app.js?v=image-recovery-20260811"></script>
+  <script src="app.js?v=reader-a11y-20260811"></script>
 </body>
 </html>
