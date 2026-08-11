@@ -22,6 +22,39 @@ let readerSession = 0;
 const pageByNumber = new Map(STORY.pages.map(page => [page.number, page]));
 const backgroundContent = [...document.querySelectorAll('.site-header, main, footer')];
 
+function pageFromLocation() {
+  const value = Number(new URL(location.href).searchParams.get('page'));
+  return Number.isInteger(value) && pageByNumber.has(value) ? value : null;
+}
+
+function locationForPage(number) {
+  const url = new URL(location.href);
+  url.searchParams.set('page', number);
+  return `${url.pathname}${url.search}${url.hash}`;
+}
+
+function locationWithoutPage() {
+  const url = new URL(location.href);
+  url.searchParams.delete('page');
+  return `${url.pathname}${url.search}${url.hash}`;
+}
+
+function readerHistoryState(origin = history.state?.vt2237Origin || 'deep-link') {
+  return {...(history.state || {}), vt2237Reader: true, vt2237Origin: origin, page: current};
+}
+
+function syncReaderHistory(mode, origin) {
+  history[`${mode}State`](readerHistoryState(origin), '', locationForPage(current));
+}
+
+function clearReaderHistory() {
+  const state = {...(history.state || {})};
+  delete state.vt2237Reader;
+  delete state.vt2237Origin;
+  delete state.page;
+  history.replaceState(state, '', locationWithoutPage());
+}
+
 function render() {
   comic.innerHTML = STORY.pages.map(page => `<section class="comic-page${page.number === current ? ' active' : ''}" data-page="${page.number}" aria-hidden="${page.number !== current}" aria-busy="true"><img src="${page.image}" alt="${page.alt}" loading="${page.number === current ? 'eager' : 'lazy'}" fetchpriority="${page.number === current ? 'high' : 'low'}" decoding="async" data-page-image="${page.number}"><div class="page-error" data-page-error="${page.number}" role="alert" hidden><strong>Không tải được trang ${page.number}</strong><span data-page-error-message>Kiểm tra kết nối rồi thử lại.</span><button type="button" data-retry-page="${page.number}">Tải lại trang</button></div></section>`).join('');
   bindPageImages();
@@ -89,6 +122,7 @@ function update(direction = 0) {
   updateReadLabel();
   preload(current - 1);
   preload(current + 1);
+  if (open && history.state?.vt2237Reader) syncReaderHistory('replace');
   if (direction) animateTurn(direction);
 }
 
@@ -191,15 +225,16 @@ async function enterFullscreen() {
   catch (_) { fullscreenRequested = false; }
 }
 
-async function openReader() {
+async function openReader({requestNativeFullscreen = true, historyMode = 'push'} = {}) {
   const session = ++readerSession;
   lastFocused = document.activeElement;
   open = true;
+  if (historyMode === 'push') syncReaderHistory('push', 'pushed');
   reader.hidden = false;
   setBackgroundInert(true);
   document.body.classList.add('reader-open');
   render();
-  await enterFullscreen();
+  if (requestNativeFullscreen) await enterFullscreen();
   if (!open || session !== readerSession) {
     if (!open && (document.fullscreenElement === reader || document.webkitFullscreenElement === reader)) {
       try { await (document.exitFullscreen?.() || document.webkitExitFullscreen?.()); } catch (_) {}
@@ -210,8 +245,15 @@ async function openReader() {
   stage.focus({preventScroll: true});
 }
 
-async function closeReader() {
+async function closeReader({historyMode = 'auto'} = {}) {
   if (!open) return;
+  if (historyMode === 'auto' && history.state?.vt2237Reader) {
+    if (history.state.vt2237Origin === 'pushed') {
+      history.back();
+      return;
+    }
+    clearReaderHistory();
+  }
   const session = ++readerSession;
   open = false;
   fullscreenRequested = false;
@@ -260,6 +302,21 @@ window.addEventListener('orientationchange', queueViewportRefresh, {passive: tru
 window.visualViewport?.addEventListener('resize', queueViewportRefresh, {passive: true});
 window.addEventListener('online', () => { if (open && comic.querySelector(`.comic-page[data-page="${current}"].load-failed`)) retryPage(current); });
 window.addEventListener('offline', () => { comic.querySelectorAll('.comic-page.load-failed').forEach(page => setPageLoadState(Number(page.dataset.page), true)); });
+window.addEventListener('popstate', () => {
+  const linkedPage = pageFromLocation();
+  if (linkedPage) {
+    const direction = linkedPage === current ? 0 : linkedPage > current ? 1 : -1;
+    current = linkedPage;
+    if (open) {
+      update(direction);
+      showControls();
+    } else {
+      openReader({requestNativeFullscreen: false, historyMode: 'none'});
+    }
+  } else if (open) {
+    closeReader({historyMode: 'none'});
+  }
+});
 
 if ('serviceWorker' in navigator && window.isSecureContext) {
   window.addEventListener('load', () => {
@@ -267,4 +324,13 @@ if ('serviceWorker' in navigator && window.isSecureContext) {
       .then(registration => registration.update())
       .catch(() => {});
   });
+}
+
+const linkedPage = pageFromLocation();
+if (linkedPage) {
+  current = linkedPage;
+  syncReaderHistory('replace', 'deep-link');
+  openReader({requestNativeFullscreen: false, historyMode: 'none'});
+} else if (new URL(location.href).searchParams.has('page')) {
+  clearReaderHistory();
 }

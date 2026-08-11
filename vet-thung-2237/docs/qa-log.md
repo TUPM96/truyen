@@ -168,8 +168,17 @@
 - Service worker luôn kiểm tra bản mới không qua HTTP cache, kích hoạt ngay, nhận quyền điều khiển và xóa các cache `vt2237-reader-*` cũ sau khi nâng phiên bản.
 - Đã kiểm tra cài đặt, cập nhật, xóa cache cũ, tải lại ngoại tuyến và cache ảnh theo nhu cầu; tiến độ 1–12 vẫn nằm trong `localStorage` và không bị service worker thay đổi.
 
+## Audit liên kết sâu và lịch sử trình duyệt — 12/08/2026
+
+- URL reader nay mang số trang dạng `?page=N`; mở trực tiếp liên kết hợp lệ 1–12 sẽ dựng đúng trang đã chỉ định mà không yêu cầu native fullscreen ngoài thao tác người dùng.
+- Khi mở reader từ trang chủ, ứng dụng chỉ thêm một mục lịch sử; lật trang cập nhật mục đó bằng `replaceState`, vì vậy nút Back đóng reader thay vì phải lùi qua từng trang.
+- Sau khi Back đóng reader, nút Forward mở lại đúng trang cuối cùng; việc khôi phục không tự gọi fullscreen và vẫn giữ tiến độ, tiêu đề tab, preload cùng trạng thái nút.
+- Đóng một liên kết sâu được mở trực tiếp sẽ bỏ tham số `page` và trở về trang truyện, tránh đẩy người đọc rời website khi không có mục lịch sử nội bộ phía trước.
+- Tham số trang rỗng, thập phân, âm hoặc ngoài 1–12 tự bị loại bỏ; không thể tạo trạng thái reader không tồn tại hoặc làm sai tiến độ đã lưu.
+- Đã kiểm tra mở/đóng, lật đến trang 6, Back, Forward, tải lại liên kết sâu trang 12 và bốn dạng tham số không hợp lệ.
+
 ## Trạng thái
 
 - Chương 1 hoàn tất: 12/12 trang.
 - Toàn bộ 12 trang đã được thay hoặc duyệt theo chuẩn thoại tự nhiên nằm trực tiếp trong ảnh.
-- Lượt audit tiếp theo rà soát liên kết sâu, nút Back/Forward và việc khôi phục trạng thái reader từ lịch sử trình duyệt.
+- Lượt audit tiếp theo rà soát thao tác chia sẻ trang hiện tại, sao chép liên kết và phản hồi khi Web Share API không được hỗ trợ.
