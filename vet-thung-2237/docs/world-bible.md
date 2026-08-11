@@ -26,3 +26,5 @@ Mắt Rơi là một “chìa khóa quay về” được phóng khỏi Trái Đ
 - Không đổi mặt, tóc, giáp, màu mắt, vị trí vệt sáng hoặc phụ kiện giữa các trang.
 - Không gore. Chiến đấu căng thẳng nhưng không sa vào bạo lực đồ họa.
 - Lời thoại tiếng Việt phải nằm trực tiếp trong ảnh hoàn thiện và được kiểm tra dấu/chính tả trước khi xuất bản.
+- Thoại phải giống lời người thật đang nói trong tình huống khẩn cấp: câu ngắn, có phản ứng và cảm xúc; tránh văn báo cáo, khẩu hiệu hoặc hai nhân vật thay nhau giải thích cốt truyện.
+- Bong bóng thoại phải được dựng cùng trang truyện, có đuôi thoại tự nhiên; không dùng hộp chữ vuông giống giao diện ứng dụng và không ghi nhãn tên người nói trong bong bóng.

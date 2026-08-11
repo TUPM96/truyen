@@ -4,15 +4,16 @@
 
 ### Trang 1 — Thứ rơi ngoài bản đồ sao
 
-- Dẫn: “Năm 2237. Loài người đã chặn được bão Mặt Trời, nhưng không ai ngăn được thứ rơi từ bên ngoài bản đồ sao.”
-- An Vy: “Trung tâm, thiên thể không phát nổ. Nó đang... khoan xuống!”
-- Trung tâm: “Độ sâu sáu mươi ki-lô-mét. Vẫn tăng.”
+- Dẫn: “Năm 2237. Người ta tưởng đã chế ngự được bầu trời. Rồi Mắt Rơi xuất hiện.”
+- An Vy: “Trung tâm, nghe rõ không? Nó không nổ... nó đang khoan thẳng xuống!”
+- Trung tâm: “Rõ. Sáu mươi ki-lô-mét rồi. An Vy, rời mép hố ngay!”
 
 ### Trang 2 — Ba nhịp
 
-- Chỉ huy Bách: “Dừng ở tầng vỏ. Bên dưới đó chưa từng có người.”
-- An Vy: “Có tín hiệu sống dưới đó.”
-- Tín hiệu: “Ba nhịp. Ngừng. Ba nhịp...”
+- Dẫn: “Mười bảy phút sau.”
+- Chỉ huy Bách: “An Vy, dừng lại. Chưa ai biết dưới lớp vỏ đó có gì.”
+- An Vy: “Có người sống dưới ấy. Tôi nghe thấy họ.”
+- Tín hiệu: “Cộc. Cộc. Cộc. ... Cộc. Cộc. Cộc.”
 
 ### Trang 3 — Kẻ Trên Mặt
 

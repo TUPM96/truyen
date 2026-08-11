@@ -25,7 +25,15 @@
 - Ảnh Open Graph dùng URL tuyệt đối để trình thu thập mạng xã hội tải đúng trên GitHub Pages.
 - Ở trang 12, nút tiến đổi thành nút hoàn tất chương; khi xác nhận, reader đóng, tiến độ về trang 1 và nút chính đổi thành “Đọc lại chương”.
 
+## Audit thoại tự nhiên — 11/08/2026
+
+- Đã thay mới trang 1 và trang 2 bằng ảnh truyện được tạo hoàn chỉnh cùng bong bóng thoại tiếng Việt; không ghép hộp thoại dạng giao diện lên tranh.
+- Đã viết lại lời An Vy, Chỉ huy Bách và Trung tâm theo câu nói ngắn, có phản ứng trực tiếp trong tình huống khẩn cấp.
+- Đã chuyển tín hiệu ba nhịp thành âm thanh “Cộc. Cộc. Cộc.” để người đọc cảm nhận thay vì nghe nhân vật giải thích.
+- Đã bỏ nhãn tên người nói khỏi bong bóng; đuôi thoại và ngữ cảnh khung tranh xác định người đang nói.
+- Đã đối chiếu chính tả, dấu tiếng Việt, thứ tự sự kiện, màu trang phục và thiết bị cứu hộ cyan của An Vy.
+
 ## Trạng thái
 
 - Chương 1 hoàn tất: 12/12 trang.
-- Lượt audit tiếp theo nên kiểm tra hiệu năng ảnh, cache font và độ ổn định khi mở/đóng toàn màn hình trên iOS.
+- Lượt audit tiếp theo tiếp tục làm mềm thoại và thay trang 3–4 theo chuẩn bong bóng thoại mới.
