@@ -8,7 +8,7 @@ const STORY = {
   volume: 'Tập 1 — Người giữ khóa',
   // Production data stays here so later illustration runs can continue the
   // complete volume. The public reader only exposes finished page images.
-  publishedThrough: 50,
+  publishedThrough: 52,
   chapters: [
     {
       short: 'Mép trời',
@@ -99,7 +99,9 @@ const STORY = {
         {global:47, image:pageImage(47), title:'Phiên tòa không mặt nạ', alt:'Bạch Miên nhận trách nhiệm trước hai tầng', narration:'Bạch Miên tự bước vào phiên tòa chung đầu tiên của hai tầng. Không mặt nạ. Không danh hiệu.', lines:[['Bạch Miên','Tôi không xin được tha. Tôi xin được kể hết.'],['Linh An','Tôi sẽ nghe. Nhưng tôi không hứa sẽ hiểu.'],['Bạch Miên','Thế đã nhiều hơn ta xứng đáng.']]},
         {global:48, image:pageImage(48), title:'Bản đồ đầu tiên không có mép giả', alt:'Thầy Vân mở bản đồ Cửu Diệp', narration:'Thầy Vân đốt con dấu kiểm duyệt và mở kho bản đồ cho mọi người. Trên tờ giấy mới, đường chân trời không còn bị cắt bởi một khoảng trắng.', lines:[['Thầy Vân','Thầy đã dạy con đo những gì được phép tồn tại.'],['Linh An','Giờ mình đo những gì thật sự ở đó.'],['Thầy Vân','Và nếu cái thước không đủ dài?'],['Linh An','Thì nối thêm.']]},
         {global:49, image:pageImage(49), title:'Tín hiệu từ Lâm Kính', alt:'Rừng Tầng Ba phát tín hiệu', narration:'Đúng đêm đầu tiên Cọc Neo ổn định, la bàn nhận một âm thanh từ Tầng Ba: tiếng rừng lặp lại giọng Hạ Miên.', lines:[['Hạ Miên','An, mẹ vẫn còn sống.'],['Linh An','Mẹ ở Tầng Chín.'],['Hạ Miên','Không còn lâu nữa. Họ đã thức dậy.']]},
-        {global:50, image:pageImage(50), title:'Khóa thứ hai', alt:'Một ký hiệu lá sáng trên la bàn', narration:'Trên vòng thứ hai của la bàn, một ký hiệu hình chiếc lá mở sáng. Mốc chiếu tuyến đường qua Lâm Kính.', lines:[['Mốc','Khoảng cách: một Đường Khâu, ba khu rừng biết nói dối.'],['Nghi','Tôi chưa từng thấy cây nói dối.'],['Linh An','Tôi từng thấy người. Chắc cũng gần giống.']]}
+        {global:50, image:pageImage(50), title:'Khóa thứ hai', alt:'Một ký hiệu lá sáng trên la bàn', narration:'Trên vòng thứ hai của la bàn, một ký hiệu hình chiếc lá mở sáng. Mốc chiếu tuyến đường qua Lâm Kính.', lines:[['Mốc','Khoảng cách: một Đường Khâu, ba khu rừng biết nói dối.'],['Nghi','Tôi chưa từng thấy cây nói dối.'],['Linh An','Tôi từng thấy người. Chắc cũng gần giống.']]},
+        {global:51, image:pageImage(51), title:'Rời hai bầu trời', alt:'Linh Nghi Mốc lên đường tới Tầng Ba', narration:'Linh không trở về Khe Gió. Cô đứng trước Đường Khâu thứ hai cùng Nghi và Mốc, mang theo bản đồ vẫn còn tám phần trắng.', lines:[['Nghi','Cô chắc muốn tôi đi cùng?'],['Linh An','Không. Nhưng tôi chắc mình không muốn đi một mình.'],['Mốc','Ghi nhận một lời mời thiếu lịch sự.']]},
+        {global:52, image:pageImage(52), title:'Trang tiếp theo', alt:'Cánh cửa mở ra khu rừng gương', narration:'Cánh cửa mở. Phía bên kia, một khu rừng mọc cả từ mặt đất lẫn trần trời, và mọi chiếc lá đều thì thầm tên người bước vào.', lines:[['Khu rừng','Linh An. Người giữ khóa.'],['Linh An','Tôi không phải chìa khóa của các người.'],['Linh An','Tôi là người quyết định cánh cửa nào được mở.']]}
       ]
     }
   ]
