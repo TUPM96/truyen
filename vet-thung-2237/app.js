@@ -16,8 +16,44 @@ let turnTimer = 0;
 const pageByNumber = new Map(STORY.pages.map(page => [page.number, page]));
 
 function render() {
-  comic.innerHTML = STORY.pages.map(page => `<section class="comic-page${page.number === current ? ' active' : ''}" data-page="${page.number}" aria-hidden="${page.number !== current}"><img src="${page.image}" alt="${page.alt}" loading="${Math.abs(page.number - current) <= 1 ? 'eager' : 'lazy'}" decoding="async"></section>`).join('');
+  comic.innerHTML = STORY.pages.map(page => `<section class="comic-page${page.number === current ? ' active' : ''}" data-page="${page.number}" aria-hidden="${page.number !== current}" aria-busy="true"><img src="${page.image}" alt="${page.alt}" loading="${Math.abs(page.number - current) <= 1 ? 'eager' : 'lazy'}" decoding="async" data-page-image="${page.number}"><div class="page-error" data-page-error="${page.number}" role="alert" hidden><strong>Không tải được trang ${page.number}</strong><span data-page-error-message>Kiểm tra kết nối rồi thử lại.</span><button type="button" data-retry-page="${page.number}">Tải lại trang</button></div></section>`).join('');
+  bindPageImages();
   update();
+}
+
+function bindPageImages() {
+  comic.querySelectorAll('[data-page-image]').forEach(image => {
+    const number = Number(image.dataset.pageImage);
+    image.addEventListener('load', () => setPageLoadState(number, false));
+    image.addEventListener('error', () => setPageLoadState(number, true));
+    if (image.complete) setPageLoadState(number, image.naturalWidth === 0);
+  });
+  comic.querySelectorAll('[data-retry-page]').forEach(button => {
+    button.addEventListener('click', () => retryPage(Number(button.dataset.retryPage)));
+  });
+}
+
+function setPageLoadState(number, failed) {
+  const page = comic.querySelector(`.comic-page[data-page="${number}"]`);
+  if (!page) return;
+  const error = page.querySelector('[data-page-error]');
+  page.classList.toggle('load-failed', failed);
+  page.setAttribute('aria-busy', 'false');
+  error.hidden = !failed;
+  if (failed) error.querySelector('[data-page-error-message]').textContent = navigator.onLine ? 'Kết nối chập chờn. Hãy thử tải lại trang.' : 'Thiết bị đang ngoại tuyến. Trang sẽ thử lại khi có mạng.';
+}
+
+function retryPage(number) {
+  const pageData = pageByNumber.get(number);
+  const page = comic.querySelector(`.comic-page[data-page="${number}"]`);
+  const image = page?.querySelector('[data-page-image]');
+  if (!pageData || !page || !image) return;
+  page.classList.remove('load-failed');
+  page.querySelector('[data-page-error]').hidden = true;
+  page.setAttribute('aria-busy', 'true');
+  const retryUrl = new URL(pageData.image, document.baseURI);
+  retryUrl.searchParams.set('retry', Date.now());
+  image.src = retryUrl.href;
 }
 
 function update(direction = 0) {
@@ -123,10 +159,12 @@ document.querySelector('#prevPage').addEventListener('click', () => step(-1));
 nextButton.addEventListener('click', () => current === total ? finishChapter() : step(1));
 document.querySelector('#tapLeft').addEventListener('click', () => step(-1));
 document.querySelector('#tapRight').addEventListener('click', () => step(1));
-stage.addEventListener('click', event => { if (event.target === stage || event.target.closest('.comic-page')) { reader.classList.toggle('controls-hidden'); if (!reader.classList.contains('controls-hidden')) showControls(); } });
+stage.addEventListener('click', event => { if (!event.target.closest('[data-retry-page]') && (event.target === stage || event.target.closest('.comic-page'))) { reader.classList.toggle('controls-hidden'); if (!reader.classList.contains('controls-hidden')) showControls(); } });
 stage.addEventListener('pointermove', showControls, {passive: true});
 stage.addEventListener('touchstart', event => { touchX = event.changedTouches[0].clientX; touchY = event.changedTouches[0].clientY; }, {passive: true});
 stage.addEventListener('touchend', event => { const dx = event.changedTouches[0].clientX - touchX; const dy = event.changedTouches[0].clientY - touchY; if (Math.abs(dx) > 55 && Math.abs(dx) > Math.abs(dy) * 1.25) step(dx < 0 ? 1 : -1); }, {passive: true});
 document.addEventListener('keydown', event => { if (!open) return; if (event.key === 'Escape') closeReader(); if (event.key === 'ArrowRight' || event.key === 'PageDown') step(1); if (event.key === 'ArrowLeft' || event.key === 'PageUp') step(-1); if (event.key === 'Home' && current !== 1) { current = 1; update(-1); showControls(); } if (event.key === 'End' && current !== total) { current = total; update(1); showControls(); } });
 document.addEventListener('fullscreenchange', () => { if (fullscreenRequested && !document.fullscreenElement && open) { fullscreenRequested = false; closeReader(true); } });
 document.addEventListener('webkitfullscreenchange', () => { if (fullscreenRequested && !document.webkitFullscreenElement && open) { fullscreenRequested = false; closeReader(true); } });
+window.addEventListener('online', () => { if (open && comic.querySelector(`.comic-page[data-page="${current}"].load-failed`)) retryPage(current); });
+window.addEventListener('offline', () => { comic.querySelectorAll('.comic-page.load-failed').forEach(page => setPageLoadState(Number(page.dataset.page), true)); });
