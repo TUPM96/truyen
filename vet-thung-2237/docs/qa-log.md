@@ -118,8 +118,16 @@
 - Khi thoát bằng nút đóng, phím `Escape` hoặc rời toàn màn hình, tiêu điểm trở về đúng nút đã dùng để mở reader.
 - Đã bổ sung viền tiêu điểm tương phản tím lạnh/xanh lục cho vùng đọc, nút điều khiển và nút tải lại mà không thay đổi bảng màu khóa.
 
+## Audit metadata và đường dẫn xuất bản — 11/08/2026
+
+- Tiêu đề tài liệu nay ghi rõ truyện, số chương và tên chương; khi reader mở, tiêu đề tab đổi theo tên cùng số trang đang đọc rồi phục hồi khi thoát.
+- Đã bổ sung `robots` cho phép ảnh xem trước lớn, MIME/URL HTTPS của ảnh Open Graph và mô tả thay thế cho ảnh Twitter Card.
+- Đã thêm dữ liệu có cấu trúc Schema.org `ComicStory` với ngôn ngữ tiếng Việt, thể loại, phân loại 15+, trạng thái phát hành, tập truyện và hai nhân vật chính.
+- Liên kết “Thư viện truyện” cùng thẻ `rel=home` tiếp tục dùng đường dẫn tương đối `../`, hoạt động từ URL thư mục chuẩn và URL `index.html` mà không khóa cứng tên repository.
+- Đã đối chiếu ảnh chia sẻ đúng JPEG 1200 × 630 và thẻ Vết Thủng 2237 trên trang thư viện trỏ đúng vào thư mục truyện.
+
 ## Trạng thái
 
 - Chương 1 hoàn tất: 12/12 trang.
 - Toàn bộ 12 trang đã được thay hoặc duyệt theo chuẩn thoại tự nhiên nằm trực tiếp trong ảnh.
-- Lượt audit tiếp theo rà soát metadata chia sẻ, tiêu đề tài liệu và liên kết quay về thư viện khi truy cập từ nhiều đường dẫn.
+- Lượt audit tiếp theo rà soát hành vi khi trình duyệt từ chối toàn màn hình, đổi hướng điện thoại và quay lại từ tab nền.
