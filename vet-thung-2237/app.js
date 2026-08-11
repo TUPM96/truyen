@@ -14,6 +14,8 @@ let touchY = 0;
 let controlsTimer = 0;
 let turnTimer = 0;
 let viewportTimer = 0;
+let suppressTapUntil = 0;
+let finishReadyAt = 0;
 let lastFocused = null;
 
 const pageByNumber = new Map(STORY.pages.map(page => [page.number, page]));
@@ -74,7 +76,9 @@ function update(direction = 0) {
   document.querySelector('#progressBar').style.width = `${current / total * 100}%`;
   document.querySelector('#prevPage').disabled = current === 1;
   const atEnd = current === total;
+  const wasAtEnd = nextButton.classList.contains('chapter-finish');
   nextButton.classList.toggle('chapter-finish', atEnd);
+  finishReadyAt = atEnd ? (wasAtEnd ? finishReadyAt : performance.now() + 320) : 0;
   nextButton.textContent = atEnd ? '✓' : '›';
   nextButton.setAttribute('aria-label', atEnd ? 'Hoàn tất chương và thoát' : 'Trang sau');
   nextButton.title = atEnd ? 'Hoàn tất chương' : 'Trang sau';
@@ -105,6 +109,7 @@ function preload(number) {
 }
 
 function step(direction) {
+  if (!open) return;
   const next = current + direction;
   if (!pageByNumber.has(next)) return showControls();
   current = next;
@@ -192,6 +197,7 @@ async function closeReader() {
 }
 
 function finishChapter() {
+  if (!open || current !== total || performance.now() < finishReadyAt) return showControls();
   finished = true;
   current = 1;
   localStorage.setItem('vt2237-complete', 'true');
@@ -207,13 +213,13 @@ document.querySelector('#readButton').addEventListener('click', openReader);
 document.querySelector('#openChapter').addEventListener('click', () => { current = 1; openReader(); });
 document.querySelector('#closeReader').addEventListener('click', () => closeReader());
 document.querySelector('#prevPage').addEventListener('click', () => step(-1));
-nextButton.addEventListener('click', () => current === total ? finishChapter() : step(1));
-document.querySelector('#tapLeft').addEventListener('click', () => step(-1));
-document.querySelector('#tapRight').addEventListener('click', () => step(1));
-stage.addEventListener('click', event => { if (!event.target.closest('[data-retry-page]') && (event.target === stage || event.target.closest('.comic-page'))) { reader.classList.toggle('controls-hidden'); if (!reader.classList.contains('controls-hidden')) showControls(); } });
+nextButton.addEventListener('click', () => { if (!open) return; current === total ? finishChapter() : step(1); });
+document.querySelector('#tapLeft').addEventListener('click', event => { if (performance.now() < suppressTapUntil) return event.stopPropagation(); step(-1); });
+document.querySelector('#tapRight').addEventListener('click', event => { if (performance.now() < suppressTapUntil) return event.stopPropagation(); step(1); });
+stage.addEventListener('click', event => { if (performance.now() < suppressTapUntil) return event.preventDefault(); if (!event.target.closest('[data-retry-page]') && (event.target === stage || event.target.closest('.comic-page'))) { reader.classList.toggle('controls-hidden'); if (!reader.classList.contains('controls-hidden')) showControls(); } });
 stage.addEventListener('pointermove', showControls, {passive: true});
 stage.addEventListener('touchstart', event => { touchX = event.changedTouches[0].clientX; touchY = event.changedTouches[0].clientY; }, {passive: true});
-stage.addEventListener('touchend', event => { const dx = event.changedTouches[0].clientX - touchX; const dy = event.changedTouches[0].clientY - touchY; if (Math.abs(dx) > 55 && Math.abs(dx) > Math.abs(dy) * 1.25) step(dx < 0 ? 1 : -1); }, {passive: true});
+stage.addEventListener('touchend', event => { const dx = event.changedTouches[0].clientX - touchX; const dy = event.changedTouches[0].clientY - touchY; if (Math.abs(dx) > 55 && Math.abs(dx) > Math.abs(dy) * 1.25) { event.preventDefault(); suppressTapUntil = performance.now() + 500; step(dx < 0 ? 1 : -1); } }, {passive: false});
 document.addEventListener('keydown', event => { if (!open) return; if (event.key === 'Tab') return trapReaderFocus(event); if (event.key === 'Escape') { event.preventDefault(); closeReader(); return; } if (event.key === 'ArrowRight' || event.key === 'PageDown') step(1); if (event.key === 'ArrowLeft' || event.key === 'PageUp') step(-1); if (event.key === 'Home' && current !== 1) { current = 1; update(-1); showControls(); } if (event.key === 'End' && current !== total) { current = total; update(1); showControls(); } });
 document.addEventListener('fullscreenchange', () => handleFullscreenExit(document.fullscreenElement));
 document.addEventListener('webkitfullscreenchange', () => handleFullscreenExit(document.webkitFullscreenElement));
