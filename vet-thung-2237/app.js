@@ -4,7 +4,8 @@ const comic = document.querySelector('#comic');
 const nextButton = document.querySelector('#nextPage');
 const total = STORY.pages.length;
 let finished = localStorage.getItem('vt2237-complete') === 'true';
-let current = finished ? 1 : Math.min(Math.max(Number(localStorage.getItem('vt2237-progress') || 1), 1), total);
+const savedProgress = Number(localStorage.getItem('vt2237-progress') || 1);
+let current = Number.isInteger(savedProgress) && savedProgress >= 1 && savedProgress <= total ? savedProgress : 1;
 let open = false;
 let fullscreenRequested = false;
 let touchX = 0;
@@ -51,7 +52,7 @@ function animateTurn(direction) {
 }
 
 function updateReadLabel() {
-  document.querySelector('#readLabel').textContent = finished ? 'Đọc lại chương' : current > 1 ? `Đọc tiếp · Trang ${current}` : 'Đọc ngay';
+  document.querySelector('#readLabel').textContent = current > 1 ? `Đọc tiếp · Trang ${current}` : finished ? 'Đọc lại chương' : 'Đọc ngay';
 }
 
 function preload(number) {
