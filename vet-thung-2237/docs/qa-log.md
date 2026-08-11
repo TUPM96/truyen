@@ -142,8 +142,17 @@
 - Khi vừa chuyển từ trang 11 sang trang 12, nút hoàn tất có khoảng bảo vệ 320 ms; cú nhấn thứ hai trong cùng chuỗi không thể vô tình đóng chương.
 - Sau khi hoàn tất chương, các sự kiện nút còn nằm trong hàng đợi không thể đổi tiến độ từ trang 1; trạng thái nút lùi và nút hoàn tất luôn khớp số trang hiện tại.
 
+## Audit bộ nhớ và vòng đời reader — 11/08/2026
+
+- Sau khi đóng reader, toàn bộ 12 phần tử trang, ảnh, thông báo lỗi và nút tải lại được gỡ khỏi DOM; listener riêng của từng ảnh/nút đi cùng các nút này thay vì tích lũy qua nhiều lần mở.
+- Các thẻ preload của hai trang kề cũng được xóa khi đóng, cho phép trình duyệt giải phóng tài nguyên ảnh đã giải mã khi cần; tiến độ đọc trong `localStorage` vẫn được giữ nguyên.
+- Ba bộ hẹn giờ điều khiển, chuyển trang và cập nhật viewport được hủy; trạng thái vuốt, hiệu ứng chuyển trang và khoảng bảo vệ nút hoàn tất được đặt lại cho phiên kế tiếp.
+- Listener điều khiển toàn cục chỉ được đăng ký một lần khi tải ứng dụng; mở reader trở lại chỉ dựng lại nội dung trang, không đăng ký thêm listener toàn cục.
+- Mỗi lần mở/đóng có mã phiên riêng, nên phản hồi fullscreen đến muộn từ phiên cũ không thể giấu, dọn hoặc cướp tiêu điểm của phiên reader mới.
+- Đã kiểm tra 25 chu kỳ mở/đóng liên tiếp: mỗi lần mở có đúng 12 trang, mỗi lần đóng trở về 0 nút trang và 0 thẻ preload, không làm mất vị trí đọc.
+
 ## Trạng thái
 
 - Chương 1 hoàn tất: 12/12 trang.
 - Toàn bộ 12 trang đã được thay hoặc duyệt theo chuẩn thoại tự nhiên nằm trực tiếp trong ảnh.
-- Lượt audit tiếp theo rà soát bộ nhớ khi mở/đóng reader nhiều lần, số listener và việc giải phóng ảnh không còn cần thiết.
+- Lượt audit tiếp theo rà soát hiệu năng tải lần đầu, kích thước tài nguyên và thứ tự ưu tiên mạng.
