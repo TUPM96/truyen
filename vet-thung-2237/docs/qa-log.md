@@ -249,8 +249,17 @@
 - Manifest, hai SVG và hai PNG được cache cùng shell ở service worker phiên bản 10, nên ứng dụng đã cài vẫn có đủ tên/biểu tượng khi khởi động ngoại tuyến sau lần tải đầu.
 - Đã kiểm tra JSON manifest, phạm vi/start URL, metadata HTML, kích thước/định dạng ảnh, vùng maskable, shortcut, cache ngoại tuyến, CSP và toàn bộ regression reader.
 
+## Audit ứng dụng đã cài và cập nhật an toàn — 12/08/2026
+
+- Khi service worker mới nhận quyền điều khiển một phiên đã có worker cũ, ứng dụng chỉ tải lại đúng một lần để HTML, CSS, JavaScript và cache cùng phiên bản; lượt cài đầu không tự tải lại nên không tạo vòng lặp hoặc làm gián đoạn người đọc mới.
+- URL sâu `?page=N` cùng tiến độ trong `localStorage` vẫn tồn tại qua lần tải lại, vì vậy người đang đọc tiếp tục đúng trang thay vì trở về đầu chương.
+- Cache cài đặt được tách thành tài nguyên reader cốt lõi và tài nguyên PWA phụ; lỗi tạm thời ở manifest hoặc một biểu tượng được cô lập bằng `Promise.allSettled`, không còn làm toàn bộ service worker cài đặt thất bại.
+- Manifest được thêm vào chiến lược cache-first khi trình duyệt yêu cầu lại, nên tài nguyên PWA từng lỗi có thể tự phục hồi ở lần truy cập trực tuyến kế tiếp.
+- Trong chế độ `display-mode: standalone`, header, hero và footer chừa đủ safe area phía trên, hai cạnh và thanh Home; reader toàn màn hình tiếp tục dùng bộ quy tắc safe area riêng đã kiểm thử.
+- Đã mô phỏng một biểu tượng 512 SVG lỗi khi cài, chuyển worker cũ sang mới, tải lại có kiểm soát, khởi động ngoại tuyến, standalone safe area và toàn bộ regression reader.
+
 ## Trạng thái
 
 - Chương 1 hoàn tất: 12/12 trang.
 - Toàn bộ 12 trang đã được thay hoặc duyệt theo chuẩn thoại tự nhiên nằm trực tiếp trong ảnh.
-- Lượt audit tiếp theo rà soát hành vi cập nhật của ứng dụng đã cài, hiển thị standalone và khả năng phục hồi nếu manifest hoặc biểu tượng tạm lỗi.
+- Lượt audit tiếp theo rà soát cử chỉ điều hướng của ứng dụng standalone, nút Back vật lý Android và việc mở liên kết ngoài phạm vi ứng dụng.

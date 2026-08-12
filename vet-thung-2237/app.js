@@ -416,6 +416,13 @@ window.addEventListener('popstate', () => {
 });
 
 if ('serviceWorker' in navigator && window.isSecureContext) {
+  const hadController = Boolean(navigator.serviceWorker.controller);
+  let refreshingForWorker = false;
+  navigator.serviceWorker.addEventListener?.('controllerchange', () => {
+    if (!hadController || refreshingForWorker) return;
+    refreshingForWorker = true;
+    location.reload();
+  });
   window.addEventListener('load', () => {
     navigator.serviceWorker.register('sw.js', {scope: './', updateViaCache: 'none'})
       .then(registration => registration.update())
