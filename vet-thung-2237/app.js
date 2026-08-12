@@ -26,6 +26,19 @@ let readerSession = 0;
 
 const pageByNumber = new Map(STORY.pages.map(page => [page.number, page]));
 const backgroundContent = [...document.querySelectorAll('.site-header, main, footer')];
+const standaloneMode = window.matchMedia?.('(display-mode: standalone)')?.matches || navigator.standalone === true;
+
+if (standaloneMode) {
+  const appScopePath = new URL('./', location.href).pathname;
+  document.querySelectorAll('a[href]').forEach(link => {
+    const target = new URL(link.getAttribute('href'), location.href);
+    const insideScope = target.origin === location.origin && target.pathname.startsWith(appScopePath);
+    if (insideScope) return;
+    link.target = '_blank';
+    link.rel = [...new Set(`${link.rel} external noopener`.trim().split(/\s+/))].join(' ');
+    link.title ||= 'Mở trong trình duyệt';
+  });
+}
 
 function pageFromLocation() {
   const value = Number(new URL(location.href).searchParams.get('page'));

@@ -258,8 +258,17 @@
 - Trong chế độ `display-mode: standalone`, header, hero và footer chừa đủ safe area phía trên, hai cạnh và thanh Home; reader toàn màn hình tiếp tục dùng bộ quy tắc safe area riêng đã kiểm thử.
 - Đã mô phỏng một biểu tượng 512 SVG lỗi khi cài, chuyển worker cũ sang mới, tải lại có kiểm soát, khởi động ngoại tuyến, standalone safe area và toàn bộ regression reader.
 
+## Audit điều hướng standalone và Back vật lý — 12/08/2026
+
+- Trong ứng dụng đã cài, nút/cử chỉ Back khi reader mở tiếp tục đi qua `popstate`: reader đóng trước, URL bỏ `?page`, còn ứng dụng vẫn ở trang truyện; Forward mở lại đúng trang cuối cùng mà không yêu cầu native fullscreen.
+- Shortcut trang 1 và trang 12 đi vào cùng luồng liên kết sâu đã kiểm thử; manifest thêm `launch_handler: navigate-existing` để trình duyệt hỗ trợ tái sử dụng cửa sổ ứng dụng hiện có thay vì nhân nhiều phiên.
+- Liên kết “Thư viện truyện” trỏ ra ngoài scope `vet-thung-2237/`; chỉ trong chế độ standalone, liên kết này mở bằng trình duyệt riêng với `external noopener`, nhờ đó reader/PWA không bị điều hướng mất trạng thái.
+- Trên website thông thường, liên kết thư viện vẫn mở cùng tab như trước; thay đổi không ảnh hưởng cách duyệt repository trên máy tính hoặc trình duyệt điện thoại.
+- Mọi liên kết nằm trong scope vẫn được giữ trong ứng dụng; việc phân loại dựa trên origin và tiền tố pathname, không khóa cứng hostname khác hoặc can thiệp liên kết chia sẻ.
+- Đã kiểm tra Back/Forward ở trang 5, khởi chạy shortcut trang 12, liên kết ngoài scope trong standalone/trình duyệt thường, lịch sử sâu, cache v12 và toàn bộ regression reader.
+
 ## Trạng thái
 
 - Chương 1 hoàn tất: 12/12 trang.
 - Toàn bộ 12 trang đã được thay hoặc duyệt theo chuẩn thoại tự nhiên nằm trực tiếp trong ảnh.
-- Lượt audit tiếp theo rà soát cử chỉ điều hướng của ứng dụng standalone, nút Back vật lý Android và việc mở liên kết ngoài phạm vi ứng dụng.
+- Lượt audit tiếp theo rà soát khả năng phục hồi tiến độ khi `localStorage` bị chặn/hỏng và hành vi reader trong chế độ duyệt riêng tư.
