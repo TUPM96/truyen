@@ -222,8 +222,17 @@
 - Khi `prefers-reduced-transparency: reduce` hoạt động, dock mở, dock thu gọn và hộp lỗi đều dùng nền đặc, tắt blur/bóng và tăng viền để trạng thái không phụ thuộc độ trong suốt.
 - Đã kiểm tra trang sáng 3/10/12, trường hợp nền trắng tuyệt đối, có/không có blur, giảm độ trong suốt, CSS parser và toàn bộ regression reader trước đó.
 
+## Audit font bị chặn, tải chậm và ổn định bố cục — 12/08/2026
+
+- Stylesheet Google Fonts không còn chặn lần vẽ đầu: tài nguyên được preload rồi kích hoạt bất đồng bộ; khi JavaScript tắt, thẻ `noscript` vẫn tải font theo cách thông thường.
+- Tham số đổi từ `display=swap` sang `display=optional`; font chỉ được dùng nếu sẵn sàng đủ sớm, tránh trường hợp font tải muộn rồi làm tiêu đề, nút đọc và mục lục nhảy sau khi người đọc đã bắt đầu thao tác.
+- Stack sans-serif có Be Vietnam Pro, Noto Sans, Segoe UI, Arial và generic sans-serif; stack serif có Spectral, Georgia, Times New Roman và generic serif, nên tiếng Việt vẫn hiển thị ngay khi Google Fonts bị chặn.
+- `font-size-adjust` của sans-serif đặt 0,53 theo x-height thật của Be Vietnam Pro; các vùng Spectral dùng 0,454 theo x-height thật của Spectral, giúp chiều cao chữ dự phòng gần bản thiết kế hơn.
+- Ảnh bìa tiếp tục có kích thước 1024 × 1536 và tỷ lệ 2:3 khai báo trước; nút đọc có chiều cao tối thiểu 52 px, vì vậy tải font không làm mất chỗ dành cho hai thành phần chính của màn đầu.
+- Đã kiểm tra HTML với font thành công, font bị chặn, JavaScript tắt và CSS font tải chậm; CSS parser, reader, lịch sử, chia sẻ, in, mạng, cache cùng 12/12 ảnh vẫn đạt.
+
 ## Trạng thái
 
 - Chương 1 hoàn tất: 12/12 trang.
 - Toàn bộ 12 trang đã được thay hoặc duyệt theo chuẩn thoại tự nhiên nằm trực tiếp trong ảnh.
-- Lượt audit tiếp theo rà soát khi font web bị chặn hoặc tải chậm, thứ tự font dự phòng và độ ổn định bố cục trang chủ trước/sau khi font hoàn tất.
+- Lượt audit tiếp theo rà soát chính sách bảo mật nội dung, tài nguyên bên thứ ba và khả năng vận hành trang chủ/reader khi mọi kết nối ngoài GitHub Pages đều bị chặn.
