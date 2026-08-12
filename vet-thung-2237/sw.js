@@ -1,10 +1,10 @@
 const CACHE_PREFIX = 'vt2237-reader-';
-const CACHE_NAME = 'vt2237-reader-20260812-15';
+const CACHE_NAME = 'vt2237-reader-20260812-16';
 const CORE_URLS = [
   './index.html',
-  './styles.css?v=reader-installed-20260812',
+  './styles.css?v=reader-share-capability-20260812',
   './story-data.js?v=dialogue-20260811-p1112',
-  './app.js?v=reader-share-lifecycle-20260812',
+  './app.js?v=reader-share-capability-20260812',
   './assets/cover.webp?v=cover-20260812',
   './assets/fonts/be-vietnam-pro-400.woff2',
   './assets/fonts/be-vietnam-pro-500.woff2',

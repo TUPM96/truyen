@@ -73,6 +73,8 @@ footer { display:flex; justify-content:space-between; gap:20px; max-width:var(--
 .reader-nav span { min-width:108px; color:#eef8f5; font-size:11px; font-weight:700; text-align:center; }
 .reader-nav button:disabled { color:#aeb9b7; background:#121817; border-color:#7e8a88; border-style:dashed; opacity:1; cursor:not-allowed; }
 .reader-nav button:disabled::after { content:""; position:absolute; width:62%; height:2px; background:currentColor; border-radius:2px; transform:rotate(-45deg); }
+.reader-nav button.share-pending:disabled { color:#d9e4e1; border-style:solid; cursor:wait; }
+.reader-nav button.share-pending:disabled::after { display:none; }
 .reader-nav button.chapter-finish { color:#04110d; background:var(--green); border-color:var(--green); font-size:17px; font-weight:800; }
 .reader-nav button.share-success { color:#04110d; background:var(--green); border-color:var(--green); }
 .reader-nav button:focus-visible,.page-error button:focus-visible { outline:3px solid var(--violet); outline-offset:2px; }

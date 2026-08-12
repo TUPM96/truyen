@@ -41,6 +41,7 @@ let turnTimer = 0;
 let viewportTimer = 0;
 let shareTimer = 0;
 let shareOperation = 0;
+let sharePending = false;
 let suppressTapUntil = 0;
 let finishReadyAt = 0;
 let lastFocused = null;
@@ -138,9 +139,40 @@ function resetShareFeedback({cancelPending = true} = {}) {
   clearTimeout(shareTimer);
   shareTimer = 0;
   shareStatus.textContent = '';
-  shareButton.textContent = '↗';
   shareButton.classList.remove('share-success');
-  shareButton.setAttribute('aria-label', 'Chia sẻ trang hiện tại');
+  if (sharePending) {
+    shareButton.textContent = '…';
+    shareButton.setAttribute('aria-label', 'Đang mở bảng chia sẻ');
+  } else {
+    shareButton.textContent = '↗';
+    shareButton.setAttribute('aria-label', 'Chia sẻ trang hiện tại');
+  }
+}
+
+function setSharePending(value) {
+  sharePending = value;
+  shareButton.disabled = value;
+  shareButton.classList.toggle('share-pending', value);
+  shareButton.setAttribute('aria-busy', String(value));
+  if (value) {
+    shareButton.textContent = '…';
+    shareButton.setAttribute('aria-label', 'Đang mở bảng chia sẻ');
+  } else {
+    if (shareButton.textContent === '…') shareButton.textContent = '↗';
+    if (shareButton.getAttribute('aria-label') === 'Đang mở bảng chia sẻ') {
+      shareButton.setAttribute('aria-label', 'Chia sẻ trang hiện tại');
+    }
+  }
+}
+
+function nativeShareData(data) {
+  if (typeof navigator.share !== 'function') return null;
+  if (typeof navigator.canShare !== 'function') return data;
+  const candidates = [data, {title: data.title, url: data.url}, {url: data.url}];
+  for (const candidate of candidates) {
+    try { if (navigator.canShare(candidate)) return candidate; } catch (_) {}
+  }
+  return null;
 }
 
 function showShareStatus(message, success = true) {
@@ -159,7 +191,8 @@ function showShareStatus(message, success = true) {
 }
 
 async function shareCurrentPage() {
-  if (!open || document.hidden) return;
+  if (!open || document.hidden || sharePending) return;
+  setSharePending(true);
   const operation = ++shareOperation;
   const session = readerSession;
   const pageNumber = current;
@@ -171,21 +204,26 @@ async function shareCurrentPage() {
     url
   };
   const contextIsCurrent = () => open && operation === shareOperation && session === readerSession && pageNumber === current;
-  if (navigator.share) {
-    try {
-      await navigator.share(data);
-      if (contextIsCurrent()) showShareStatus(`Đã chia sẻ trang ${pageNumber}.`);
-      return;
-    } catch (error) {
-      if (error?.name === 'AbortError') return;
-      if (!contextIsCurrent() || document.hidden) return;
-    }
-  }
+  const nativeData = nativeShareData(data);
   try {
-    await copyLink(url);
-    if (contextIsCurrent()) showShareStatus(`Đã sao chép liên kết trang ${pageNumber}.`);
-  } catch (_) {
-    if (contextIsCurrent()) showShareStatus('Không thể sao chép. Liên kết vẫn có trên thanh địa chỉ.', false);
+    if (nativeData) {
+      try {
+        await navigator.share(nativeData);
+        if (contextIsCurrent()) showShareStatus(`Đã chia sẻ trang ${pageNumber}.`);
+        return;
+      } catch (error) {
+        if (error?.name === 'AbortError') return;
+        if (!contextIsCurrent() || document.hidden) return;
+      }
+    }
+    try {
+      await copyLink(url);
+      if (contextIsCurrent()) showShareStatus(`Đã sao chép liên kết trang ${pageNumber}.`);
+    } catch (_) {
+      if (contextIsCurrent()) showShareStatus('Không thể sao chép. Liên kết vẫn có trên thanh địa chỉ.', false);
+    }
+  } finally {
+    setSharePending(false);
   }
 }
 

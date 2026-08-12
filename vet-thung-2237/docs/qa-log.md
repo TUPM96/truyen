@@ -294,8 +294,17 @@
 - Khi bảng chia sẻ bị hủy, tài liệu mất focus hoặc ứng dụng chạy nền, reader không tự sao chép ngoài ý muốn; nếu sao chép thật sự thất bại trong tài liệu đang hoạt động, thông báo vẫn chỉ rõ liên kết có sẵn trên thanh địa chỉ.
 - Đã kiểm tra chia sẻ native, Clipboard thành công/bị từ chối, sao chép trình duyệt cũ, mất focus, chạy nền, đóng reader và lật trang trong lúc promise chia sẻ còn chờ; cache ngoại tuyến nâng lên v15.
 
+## Audit khả năng Web Share và thao tác liên tiếp — 12/08/2026
+
+- Nút chia sẻ nay khóa theo cơ chế một tác vụ tại một thời điểm; lần bấm thứ hai trong khi bảng chia sẻ hệ thống còn mở bị bỏ qua, không tạo `InvalidStateError` và không tự chuyển sang Clipboard ngoài ý muốn.
+- Trong lúc chờ, nút có trạng thái `aria-busy`, bị vô hiệu hóa và hiển thị dấu chờ; trạng thái được dọn trong `finally` cho cả thành công, hủy và lỗi nên không thể mắc kẹt sau khi promise kết thúc.
+- `navigator.share()` vẫn được gọi đồng bộ ngay trong nhịp xử lý click trước mọi `await`, giữ nguyên transient user activation mà Safari, Chrome và các WebView yêu cầu.
+- Nếu có `navigator.canShare`, reader thử lần lượt gói đầy đủ, gói tiêu đề + URL và URL đơn; thiết bị hỗ trợ Web Share một phần nhận đúng gói nhỏ nhất mà nó chấp nhận.
+- Khi `canShare` trả `false` hoặc ném lỗi cho mọi gói, reader không gọi `share()` mà chuyển thẳng sang Clipboard trong cùng thao tác người dùng; trình duyệt không có `canShare` vẫn giữ tương thích Web Share cũ.
+- Đã kiểm tra hai lần bấm khi promise còn chờ, trạng thái busy, Web Share URL-only, `canShare=false`, transient activation, hủy, Clipboard và các trường hợp vòng đời từ lượt trước; cache ngoại tuyến nâng lên v16.
+
 ## Trạng thái
 
 - Chương 1 hoàn tất: 12/12 trang.
 - Toàn bộ 12 trang đã được thay hoặc duyệt theo chuẩn thoại tự nhiên nằm trực tiếp trong ảnh.
-- Lượt audit tiếp theo rà soát hành vi khi mở nhiều thao tác chia sẻ liên tiếp, trình duyệt giới hạn transient activation và thiết bị hỗ trợ Web Share một phần.
+- Lượt audit tiếp theo rà soát lật trang liên tiếp bằng chạm/phím, chế độ giảm chuyển động và trạng thái điều khiển khi animation bị gián đoạn.
