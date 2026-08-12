@@ -1,11 +1,18 @@
 const CACHE_PREFIX = 'vt2237-reader-';
-const CACHE_NAME = 'vt2237-reader-20260812-8';
+const CACHE_NAME = 'vt2237-reader-20260812-9';
 const SHELL_URLS = [
   './index.html',
-  './styles.css?v=reader-fonts-20260812',
+  './styles.css?v=reader-self-contained-20260812',
   './story-data.js?v=dialogue-20260811-p1112',
   './app.js?v=reader-safe-area-20260812',
-  './assets/cover.webp?v=cover-20260812'
+  './assets/cover.webp?v=cover-20260812',
+  './assets/fonts/be-vietnam-pro-400.woff2',
+  './assets/fonts/be-vietnam-pro-500.woff2',
+  './assets/fonts/be-vietnam-pro-600.woff2',
+  './assets/fonts/be-vietnam-pro-700.woff2',
+  './assets/fonts/be-vietnam-pro-800.woff2',
+  './assets/fonts/spectral-600.woff2',
+  './assets/fonts/spectral-600-italic.woff2'
 ];
 
 self.addEventListener('install', event => {
@@ -58,7 +65,7 @@ self.addEventListener('fetch', event => {
     event.respondWith(networkFirst(request));
     return;
   }
-  if (['image', 'script', 'style'].includes(request.destination)) {
+  if (['font', 'image', 'script', 'style'].includes(request.destination)) {
     event.respondWith(cacheFirst(request));
   }
 });

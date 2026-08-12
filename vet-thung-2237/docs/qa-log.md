@@ -231,8 +231,17 @@
 - Ảnh bìa tiếp tục có kích thước 1024 × 1536 và tỷ lệ 2:3 khai báo trước; nút đọc có chiều cao tối thiểu 52 px, vì vậy tải font không làm mất chỗ dành cho hai thành phần chính của màn đầu.
 - Đã kiểm tra HTML với font thành công, font bị chặn, JavaScript tắt và CSS font tải chậm; CSS parser, reader, lịch sử, chia sẻ, in, mạng, cache cùng 12/12 ảnh vẫn đạt.
 
+## Audit CSP và tài nguyên bên thứ ba — 12/08/2026
+
+- Google Fonts đã được loại khỏi đường tải runtime; trang chủ và reader không còn `preconnect`, stylesheet, script, ảnh hoặc font nào từ máy chủ bên ngoài GitHub Pages.
+- Năm trọng lượng Be Vietnam Pro và hai kiểu Spectral được đóng gói thành WOFF2 tập trung vào tiếng Việt/Latin, tổng 125.392 byte; tên family CSS có tiền tố `VT` để nhận diện đây là các bản subset.
+- Tệp `OFL-LICENSES.txt` đi kèm hai thông báo bản quyền và toàn văn SIL Open Font License 1.1; các stack Noto Sans/Segoe UI/Arial và Georgia/Times New Roman vẫn được giữ làm phương án dự phòng.
+- Chính sách CSP giới hạn mặc định, font, kết nối, ảnh, style, script và worker về cùng origin; script JSON-LD nội bộ được cho phép bằng đúng mã băm SHA-256 thay vì mở toàn bộ JavaScript inline, đồng thời object/frame bị chặn, base/form bị khóa về origin và tài nguyên HTTP tự được nâng lên HTTPS.
+- Service worker phiên bản 9 lưu sẵn cả bảy font nội bộ cùng shell; font tải sau lần đầu cũng đi qua chiến lược cache-first giống CSS, JavaScript và ảnh.
+- Đã kiểm tra cấu trúc CSP, không còn URL runtime bên thứ ba, chữ tiếng Việt đại diện không thiếu glyph, chữ ký WOFF2, tổng dung lượng font, giấy phép, cache ngoại tuyến và toàn bộ regression của reader.
+
 ## Trạng thái
 
 - Chương 1 hoàn tất: 12/12 trang.
 - Toàn bộ 12 trang đã được thay hoặc duyệt theo chuẩn thoại tự nhiên nằm trực tiếp trong ảnh.
-- Lượt audit tiếp theo rà soát chính sách bảo mật nội dung, tài nguyên bên thứ ba và khả năng vận hành trang chủ/reader khi mọi kết nối ngoài GitHub Pages đều bị chặn.
+- Lượt audit tiếp theo rà soát khả năng cài lên màn hình chính, metadata ứng dụng và biểu tượng PWA mà không thay đổi thiết kế truyện đã khóa.
