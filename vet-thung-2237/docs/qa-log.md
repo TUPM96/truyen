@@ -303,8 +303,17 @@
 - Khi `canShare` trả `false` hoặc ném lỗi cho mọi gói, reader không gọi `share()` mà chuyển thẳng sang Clipboard trong cùng thao tác người dùng; trình duyệt không có `canShare` vẫn giữ tương thích Web Share cũ.
 - Đã kiểm tra hai lần bấm khi promise còn chờ, trạng thái busy, Web Share URL-only, `canShare=false`, transient activation, hủy, Clipboard và các trường hợp vòng đời từ lượt trước; cache ngoại tuyến nâng lên v16.
 
+## Audit vòng đời hiệu ứng lật trang — 12/08/2026
+
+- Hiệu ứng lật không còn phụ thuộc riêng vào mốc chờ cố định: reader dọn lớp chuyển động ngay khi nhận `animationend` hoặc `animationcancel`, đồng thời giữ timeout 400 ms làm lưới an toàn nếu trình duyệt không phát sự kiện.
+- Sự kiện kết thúc từ ảnh trang cũ bị bỏ qua; khi người đọc bấm phím hoặc vuốt liên tiếp, animation cũ không thể xóa nhầm hiệu ứng đang chạy trên trang mới.
+- Lật nhanh bằng Arrow/PageDown/PageUp vẫn cập nhật tuần tự đúng trang, tiêu đề, bộ đếm, thanh tiến độ, URL lịch sử và tiến độ lưu; thao tác ngoài biên không làm phát sinh trang 0 hoặc 13.
+- Khi `prefers-reduced-motion` đã bật, reader bỏ hoàn toàn thao tác reflow và không gắn lớp animation; nếu tùy chọn được bật giữa một lượt chuyển trang, hiệu ứng đang chạy được dừng và dọn ngay.
+- Thay đổi kích thước, xoay màn hình, rời/khôi phục tab và đóng reader đều dùng chung hàm dọn chuyển động, tránh để lại transform/opacity hoặc timeout cũ trên lần mở tiếp theo.
+- Đã kiểm tra tám lần nhấn tiến liên tiếp, đổi hướng ngay khi animation còn chạy, sự kiện cũ đến muộn, vuốt trái, Home/End, thay đổi giảm chuyển động động và cache ngoại tuyến v17.
+
 ## Trạng thái
 
 - Chương 1 hoàn tất: 12/12 trang.
 - Toàn bộ 12 trang đã được thay hoặc duyệt theo chuẩn thoại tự nhiên nằm trực tiếp trong ảnh.
-- Lượt audit tiếp theo rà soát lật trang liên tiếp bằng chạm/phím, chế độ giảm chuyển động và trạng thái điều khiển khi animation bị gián đoạn.
+- Lượt audit tiếp theo rà soát thiết bị cảm ứng đa điểm, thao tác vuốt bị hủy và chống kích hoạt nhầm vùng chạm sau pinch-zoom.

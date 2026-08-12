@@ -50,6 +50,7 @@ let readerSession = 0;
 const pageByNumber = new Map(STORY.pages.map(page => [page.number, page]));
 const backgroundContent = [...document.querySelectorAll('.site-header, main, footer')];
 const standaloneMode = window.matchMedia?.('(display-mode: standalone)')?.matches || navigator.standalone === true;
+const reducedMotionQuery = window.matchMedia?.('(prefers-reduced-motion: reduce)');
 
 if (standaloneMode) {
   const appScopePath = new URL('./', location.href).pathname;
@@ -317,12 +318,28 @@ function update(direction = 0) {
   if (direction) animateTurn(direction);
 }
 
-function animateTurn(direction) {
+function clearTurnAnimation() {
   clearTimeout(turnTimer);
+  turnTimer = 0;
   stage.classList.remove('turn-next', 'turn-prev');
+}
+
+function animateTurn(direction) {
+  clearTurnAnimation();
+  if (reducedMotionQuery?.matches) return;
   void stage.offsetWidth;
   stage.classList.add(direction > 0 ? 'turn-next' : 'turn-prev');
-  turnTimer = setTimeout(() => stage.classList.remove('turn-next', 'turn-prev'), 280);
+  turnTimer = setTimeout(clearTurnAnimation, 400);
+}
+
+function handleTurnAnimationEnd(event) {
+  const activeImage = comic.querySelector('.comic-page.active img');
+  if (event.target !== activeImage || !event.animationName?.startsWith('page-in-')) return;
+  clearTurnAnimation();
+}
+
+function handleReducedMotionChange(event) {
+  if (event.matches) clearTurnAnimation();
 }
 
 function updateReadLabel() {
@@ -375,7 +392,7 @@ function setBackgroundInert(value) {
 
 function refreshReaderViewport() {
   if (!open) return;
-  stage.classList.remove('turn-next', 'turn-prev');
+  clearTurnAnimation();
   preload(current - 1);
   preload(current + 1);
   showControls();
@@ -405,7 +422,7 @@ function cleanupReader() {
   touchY = 0;
   suppressTapUntil = 0;
   finishReadyAt = 0;
-  stage.classList.remove('turn-next', 'turn-prev');
+  clearTurnAnimation();
   reader.classList.remove('controls-hidden');
   clearPrintMode();
   comic.replaceChildren();
@@ -487,6 +504,8 @@ document.querySelector('#tapLeft').addEventListener('click', event => { if (perf
 document.querySelector('#tapRight').addEventListener('click', event => { if (performance.now() < suppressTapUntil) return event.stopPropagation(); step(1); });
 stage.addEventListener('click', event => { if (performance.now() < suppressTapUntil) return event.preventDefault(); if (!event.target.closest('[data-retry-page]') && (event.target === stage || event.target.closest('.comic-page'))) { reader.classList.toggle('controls-hidden'); if (!reader.classList.contains('controls-hidden')) showControls(); } });
 stage.addEventListener('pointermove', showControls, {passive: true});
+stage.addEventListener('animationend', handleTurnAnimationEnd);
+stage.addEventListener('animationcancel', handleTurnAnimationEnd);
 stage.addEventListener('touchstart', event => { touchX = event.changedTouches[0].clientX; touchY = event.changedTouches[0].clientY; }, {passive: true});
 stage.addEventListener('touchend', event => { const dx = event.changedTouches[0].clientX - touchX; const dy = event.changedTouches[0].clientY - touchY; if (Math.abs(dx) > 55 && Math.abs(dx) > Math.abs(dy) * 1.25) { event.preventDefault(); suppressTapUntil = performance.now() + 500; step(dx < 0 ? 1 : -1); } }, {passive: false});
 document.addEventListener('keydown', event => { if (!open) return; if (event.key === 'Tab') return trapReaderFocus(event); if (event.key === 'Escape') { event.preventDefault(); closeReader(); return; } if (event.key === 'ArrowRight' || event.key === 'PageDown') step(1); if (event.key === 'ArrowLeft' || event.key === 'PageUp') step(-1); if (event.key === 'Home' && current !== 1) { current = 1; update(-1); showControls(); } if (event.key === 'End' && current !== total) { current = total; update(1); showControls(); } });
@@ -499,6 +518,8 @@ document.addEventListener('visibilitychange', () => {
 window.addEventListener('resize', queueViewportRefresh, {passive: true});
 window.addEventListener('orientationchange', queueViewportRefresh, {passive: true});
 window.visualViewport?.addEventListener('resize', queueViewportRefresh, {passive: true});
+if (reducedMotionQuery?.addEventListener) reducedMotionQuery.addEventListener('change', handleReducedMotionChange);
+else reducedMotionQuery?.addListener?.(handleReducedMotionChange);
 window.addEventListener('online', () => { if (open && comic.querySelector(`.comic-page[data-page="${current}"].load-failed`)) retryPage(current); });
 window.addEventListener('offline', () => { comic.querySelectorAll('.comic-page.load-failed').forEach(page => setPageLoadState(Number(page.dataset.page), true)); });
 window.addEventListener('afterprint', clearPrintMode);
