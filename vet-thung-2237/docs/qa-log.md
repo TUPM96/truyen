@@ -276,8 +276,17 @@
 - Hoàn tất chương cũng dùng cùng lớp lưu trữ an toàn, vì vậy nút hoàn tất ở trang 12 vẫn đóng reader và cập nhật nhãn trong phiên ngay cả khi storage không khả dụng.
 - Đã mô phỏng storage bị chặn từ lúc truy cập, storage đọc được nhưng ghi báo đầy, khôi phục trang 4, lật tới trang 5/6, đóng–mở lại, lịch sử, cache v13 và toàn bộ regression reader.
 
+## Audit dữ liệu tiến độ và nhiều tab — 12/08/2026
+
+- Giá trị tiến độ rỗng, chữ, số thập phân, âm, vô hạn hoặc ngoài 1–12 đều bị hàm xác thực loại bỏ; reader khởi động ở trang 1 thay vì dựng trạng thái không tồn tại.
+- Trạng thái hoàn tất chỉ chấp nhận đúng chuỗi `true`; dữ liệu hỏng không thể làm giao diện hiện nhầm “Đọc lại chương”.
+- Khi tab khác cập nhật tiến độ, tab đang ở trang chủ nhận sự kiện `storage` và đổi ngay nhãn “Đọc tiếp · Trang N”; trạng thái hoàn tất hoặc thao tác xóa storage cũng đồng bộ tương ứng.
+- Nếu reader đang mở, tiến độ đến từ tab khác chỉ được ghi nhận làm dữ liệu dự phòng mà không đổi `current`, URL, tranh hoặc bộ đếm; người đang đọc không bị kéo nhảy từ trang hiện tại sang trang của thiết bị/tab khác.
+- Giá trị storage bất thường phát sinh từ tab khác bị bỏ qua; sự kiện không liên quan không can thiệp reader, còn thao tác lật tại tab hiện tại tiếp tục là trạng thái mới nhất.
+- Đã kiểm tra bảy dạng tiến độ hỏng, đồng bộ tab rảnh từ trang 2 sang 7, hoàn tất/xóa storage, tab đang đọc trang 3–4 nhận trang 10, cache v14 và toàn bộ regression reader.
+
 ## Trạng thái
 
 - Chương 1 hoàn tất: 12/12 trang.
 - Toàn bộ 12 trang đã được thay hoặc duyệt theo chuẩn thoại tự nhiên nằm trực tiếp trong ảnh.
-- Lượt audit tiếp theo rà soát lỗi dữ liệu tiến độ bất thường, nhiều tab cùng đọc và đồng bộ khi storage thay đổi từ tab khác.
+- Lượt audit tiếp theo rà soát thao tác copy/chia sẻ khi quyền Clipboard bị từ chối, tài liệu bị mất focus và ứng dụng chạy nền.

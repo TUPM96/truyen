@@ -25,9 +25,13 @@ function writeProgress(key, value) {
   try { window.localStorage?.setItem(key, text); } catch (_) {}
 }
 
+function validStoredPage(value, fallback = null) {
+  const number = Number(value);
+  return Number.isInteger(number) && number >= 1 && number <= total ? number : fallback;
+}
+
 let finished = readProgress('vt2237-complete') === 'true';
-const savedProgress = Number(readProgress('vt2237-progress', 1));
-let current = Number.isInteger(savedProgress) && savedProgress >= 1 && savedProgress <= total ? savedProgress : 1;
+let current = validStoredPage(readProgress('vt2237-progress', 1), 1);
 let open = false;
 let fullscreenRequested = false;
 let touchX = 0;
@@ -429,6 +433,30 @@ window.visualViewport?.addEventListener('resize', queueViewportRefresh, {passive
 window.addEventListener('online', () => { if (open && comic.querySelector(`.comic-page[data-page="${current}"].load-failed`)) retryPage(current); });
 window.addEventListener('offline', () => { comic.querySelectorAll('.comic-page.load-failed').forEach(page => setPageLoadState(Number(page.dataset.page), true)); });
 window.addEventListener('afterprint', clearPrintMode);
+window.addEventListener('storage', event => {
+  if (event.key === null) {
+    volatileProgress.clear();
+    finished = false;
+    if (!open) current = 1;
+    updateReadLabel();
+    return;
+  }
+  if (event.key === 'vt2237-complete') {
+    if (event.newValue !== null && event.newValue !== 'true' && event.newValue !== 'false') return;
+    finished = event.newValue === 'true';
+    volatileProgress.set(event.key, String(finished));
+    updateReadLabel();
+    return;
+  }
+  if (event.key !== 'vt2237-progress') return;
+  const incomingPage = event.newValue === null ? 1 : validStoredPage(event.newValue);
+  if (!incomingPage) return;
+  volatileProgress.set(event.key, String(incomingPage));
+  if (!open) {
+    current = incomingPage;
+    updateReadLabel();
+  }
+});
 window.addEventListener('popstate', () => {
   const linkedPage = pageFromLocation();
   if (linkedPage) {
