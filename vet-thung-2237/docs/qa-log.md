@@ -240,8 +240,17 @@
 - Service worker phiên bản 9 lưu sẵn cả bảy font nội bộ cùng shell; font tải sau lần đầu cũng đi qua chiến lược cache-first giống CSS, JavaScript và ảnh.
 - Đã kiểm tra cấu trúc CSP, không còn URL runtime bên thứ ba, chữ tiếng Việt đại diện không thiếu glyph, chữ ký WOFF2, tổng dung lượng font, giấy phép, cache ngoại tuyến và toàn bộ regression của reader.
 
+## Audit cài đặt màn hình chính và PWA — 12/08/2026
+
+- Đã thêm Web App Manifest tiếng Việt với tên đầy đủ/rút gọn, mô tả, phạm vi riêng trong thư mục truyện, chế độ `standalone` và màu nền/chủ đề đen núi lửa `#050807`.
+- Biểu tượng mới chỉ dùng mô-típ Mắt Rơi/vết thủng, không vẽ lại nhân vật: xanh lục sinh học bao quanh đồng tử hổ phách, tia tím lạnh trên nền đen núi lửa; bản PNG 192 × 192 và maskable 512 × 512 nằm trong vùng an toàn khi hệ điều hành cắt hình.
+- Favicon SVG và Apple touch icon được khai báo riêng; các metadata dành cho “Thêm vào màn hình chính” trên Android/iOS dùng tên `Vết Thủng 2237` và thanh trạng thái đen trong suốt.
+- Hai shortcut mở thẳng trang 1 hoặc trang 12, tái sử dụng cơ chế liên kết sâu đã kiểm thử và không tạo luồng reader khác.
+- Manifest, hai SVG và hai PNG được cache cùng shell ở service worker phiên bản 10, nên ứng dụng đã cài vẫn có đủ tên/biểu tượng khi khởi động ngoại tuyến sau lần tải đầu.
+- Đã kiểm tra JSON manifest, phạm vi/start URL, metadata HTML, kích thước/định dạng ảnh, vùng maskable, shortcut, cache ngoại tuyến, CSP và toàn bộ regression reader.
+
 ## Trạng thái
 
 - Chương 1 hoàn tất: 12/12 trang.
 - Toàn bộ 12 trang đã được thay hoặc duyệt theo chuẩn thoại tự nhiên nằm trực tiếp trong ảnh.
-- Lượt audit tiếp theo rà soát khả năng cài lên màn hình chính, metadata ứng dụng và biểu tượng PWA mà không thay đổi thiết kế truyện đã khóa.
+- Lượt audit tiếp theo rà soát hành vi cập nhật của ứng dụng đã cài, hiển thị standalone và khả năng phục hồi nếu manifest hoặc biểu tượng tạm lỗi.

@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512" role="img" aria-labelledby="title desc">
+  <title id="title">Vết Thủng 2237</title>
+  <desc id="desc">Dấu vết thủng sinh học xanh lục, hổ phách và tím lạnh trên nền đá núi lửa</desc>
+  <rect width="512" height="512" fill="#050807"/>
+  <path d="M256 74 282 151 347 101 329 178 420 164 347 218 432 266 337 267 369 364 288 306 256 438 224 306 143 364 175 267 80 266 165 218 92 164 183 178 165 101 230 151Z" fill="#15111f" stroke="#a983ff" stroke-width="12" stroke-linejoin="round"/>
+  <ellipse cx="256" cy="252" rx="133" ry="96" fill="#0b1512" stroke="#55e8c3" stroke-width="19"/>
+  <ellipse cx="256" cy="252" rx="48" ry="80" fill="#e4a84b"/>
+  <ellipse cx="256" cy="252" rx="19" ry="72" fill="#050807"/>
+  <circle cx="224" cy="210" r="11" fill="#f4f2e9" opacity=".9"/>
+</svg>
