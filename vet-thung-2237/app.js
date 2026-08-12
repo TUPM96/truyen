@@ -8,8 +8,25 @@ const pageCounter = document.querySelector('#pageCounter');
 const shareStatus = document.querySelector('#shareStatus');
 const total = STORY.pages.length;
 const baseDocumentTitle = document.title;
-let finished = localStorage.getItem('vt2237-complete') === 'true';
-const savedProgress = Number(localStorage.getItem('vt2237-progress') || 1);
+const volatileProgress = new Map();
+
+function readProgress(key, fallback = null) {
+  try {
+    const value = window.localStorage?.getItem(key);
+    return value === null || value === undefined ? (volatileProgress.get(key) ?? fallback) : value;
+  } catch (_) {
+    return volatileProgress.get(key) ?? fallback;
+  }
+}
+
+function writeProgress(key, value) {
+  const text = String(value);
+  volatileProgress.set(key, text);
+  try { window.localStorage?.setItem(key, text); } catch (_) {}
+}
+
+let finished = readProgress('vt2237-complete') === 'true';
+const savedProgress = Number(readProgress('vt2237-progress', 1));
 let current = Number.isInteger(savedProgress) && savedProgress >= 1 && savedProgress <= total ? savedProgress : 1;
 let open = false;
 let fullscreenRequested = false;
@@ -205,7 +222,7 @@ function update(direction = 0) {
     image.setAttribute('fetchpriority', active ? 'high' : 'low');
   });
   const currentPage = pageByNumber.get(current);
-  localStorage.setItem('vt2237-progress', current);
+  writeProgress('vt2237-progress', current);
   document.title = `${currentPage.title} · Trang ${current}/${total} — ${STORY.title}`;
   pageCounter.textContent = `${current} / ${total}`;
   pageCounter.setAttribute('aria-label', `Trang ${current} trên ${total}`);
@@ -380,8 +397,8 @@ function finishChapter() {
   if (!open || current !== total || performance.now() < finishReadyAt) return showControls();
   finished = true;
   current = 1;
-  localStorage.setItem('vt2237-complete', 'true');
-  localStorage.setItem('vt2237-progress', '1');
+  writeProgress('vt2237-complete', 'true');
+  writeProgress('vt2237-progress', 1);
   updateReadLabel();
   closeReader();
 }

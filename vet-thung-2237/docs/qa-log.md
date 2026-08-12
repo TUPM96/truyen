@@ -267,8 +267,17 @@
 - Mọi liên kết nằm trong scope vẫn được giữ trong ứng dụng; việc phân loại dựa trên origin và tiền tố pathname, không khóa cứng hostname khác hoặc can thiệp liên kết chia sẻ.
 - Đã kiểm tra Back/Forward ở trang 5, khởi chạy shortcut trang 12, liên kết ngoài scope trong standalone/trình duyệt thường, lịch sử sâu, cache v12 và toàn bộ regression reader.
 
+## Audit lưu tiến độ trong chế độ riêng tư — 12/08/2026
+
+- Mọi thao tác đọc/ghi tiến độ và trạng thái hoàn tất nay đi qua hai hàm bảo vệ; cả việc truy cập thuộc tính `localStorage` lẫn `getItem`/`setItem` đều nằm trong `try/catch`, nên `SecurityError` hoặc `QuotaExceededError` không thể chặn khởi động reader.
+- Khi lưu trữ bị chặn hoàn toàn, reader bắt đầu an toàn ở trang 1 và dùng một `Map` trong bộ nhớ; người đọc vẫn có thể lật, đóng rồi mở lại đúng trang trong suốt phiên hiện tại.
+- Nếu trình duyệt cho đọc nhưng không cho ghi vì hết quota/chính sách riêng tư, tiến độ cũ vẫn được khôi phục; các lần lật mới tiếp tục được nhớ trong phiên mà không hiện lỗi hoặc làm mất điều khiển.
+- Chế độ dự phòng không giả vờ lưu vĩnh viễn: sau khi đóng toàn bộ phiên riêng tư, người đọc sẽ bắt đầu lại theo hành vi bảo mật của trình duyệt; URL sâu `?page=N` vẫn là phương án chia sẻ/khôi phục độc lập.
+- Hoàn tất chương cũng dùng cùng lớp lưu trữ an toàn, vì vậy nút hoàn tất ở trang 12 vẫn đóng reader và cập nhật nhãn trong phiên ngay cả khi storage không khả dụng.
+- Đã mô phỏng storage bị chặn từ lúc truy cập, storage đọc được nhưng ghi báo đầy, khôi phục trang 4, lật tới trang 5/6, đóng–mở lại, lịch sử, cache v13 và toàn bộ regression reader.
+
 ## Trạng thái
 
 - Chương 1 hoàn tất: 12/12 trang.
 - Toàn bộ 12 trang đã được thay hoặc duyệt theo chuẩn thoại tự nhiên nằm trực tiếp trong ảnh.
-- Lượt audit tiếp theo rà soát khả năng phục hồi tiến độ khi `localStorage` bị chặn/hỏng và hành vi reader trong chế độ duyệt riêng tư.
+- Lượt audit tiếp theo rà soát lỗi dữ liệu tiến độ bất thường, nhiều tab cùng đọc và đồng bộ khi storage thay đổi từ tab khác.
