@@ -285,8 +285,17 @@
 - Giá trị storage bất thường phát sinh từ tab khác bị bỏ qua; sự kiện không liên quan không can thiệp reader, còn thao tác lật tại tab hiện tại tiếp tục là trạng thái mới nhất.
 - Đã kiểm tra bảy dạng tiến độ hỏng, đồng bộ tab rảnh từ trang 2 sang 7, hoàn tất/xóa storage, tab đang đọc trang 3–4 nhận trang 10, cache v14 và toàn bộ regression reader.
 
+## Audit vòng đời chia sẻ và quyền Clipboard — 12/08/2026
+
+- Mỗi thao tác chia sẻ nay mang mã tác vụ, phiên reader và số trang cố định; phản hồi bất đồng bộ chỉ được hiển thị nếu người đọc vẫn ở đúng phiên và đúng trang đã chia sẻ.
+- Đóng reader, đổi kích thước/chiều màn hình hoặc đưa tài liệu xuống nền sẽ hủy phản hồi đang chờ và trả nút chia sẻ về trạng thái ban đầu; kết quả đến muộn không còn xuất hiện trên trang khác.
+- Clipboard API vẫn là phương án sao chép ưu tiên khi Web Share không dùng được; nếu quyền Clipboard bị từ chối, reader chỉ thử phương án `execCommand` khi tài liệu còn hiển thị và đang có focus.
+- Vùng văn bản tạm của phương án trình duyệt cũ được đặt ngoài màn hình, ẩn với công nghệ hỗ trợ và luôn xóa trong `finally`; focus được trả về đúng phần tử trước thao tác thay vì cưỡng ép vào nút chia sẻ.
+- Khi bảng chia sẻ bị hủy, tài liệu mất focus hoặc ứng dụng chạy nền, reader không tự sao chép ngoài ý muốn; nếu sao chép thật sự thất bại trong tài liệu đang hoạt động, thông báo vẫn chỉ rõ liên kết có sẵn trên thanh địa chỉ.
+- Đã kiểm tra chia sẻ native, Clipboard thành công/bị từ chối, sao chép trình duyệt cũ, mất focus, chạy nền, đóng reader và lật trang trong lúc promise chia sẻ còn chờ; cache ngoại tuyến nâng lên v15.
+
 ## Trạng thái
 
 - Chương 1 hoàn tất: 12/12 trang.
 - Toàn bộ 12 trang đã được thay hoặc duyệt theo chuẩn thoại tự nhiên nằm trực tiếp trong ảnh.
-- Lượt audit tiếp theo rà soát thao tác copy/chia sẻ khi quyền Clipboard bị từ chối, tài liệu bị mất focus và ứng dụng chạy nền.
+- Lượt audit tiếp theo rà soát hành vi khi mở nhiều thao tác chia sẻ liên tiếp, trình duyệt giới hạn transient activation và thiết bị hỗ trợ Web Share một phần.

@@ -40,6 +40,7 @@ let controlsTimer = 0;
 let turnTimer = 0;
 let viewportTimer = 0;
 let shareTimer = 0;
+let shareOperation = 0;
 let suppressTapUntil = 0;
 let finishReadyAt = 0;
 let lastFocused = null;
@@ -99,26 +100,51 @@ function shareUrl() {
 }
 
 async function copyLink(url) {
+  if (document.hidden || (typeof document.hasFocus === 'function' && !document.hasFocus())) {
+    throw new Error('document inactive');
+  }
   if (navigator.clipboard?.writeText && window.isSecureContext) {
     try {
       await navigator.clipboard.writeText(url);
       return;
     } catch (_) {}
   }
+  if (document.hidden || (typeof document.hasFocus === 'function' && !document.hasFocus())) {
+    throw new Error('document inactive');
+  }
+  const previousFocus = document.activeElement;
   const textarea = document.createElement('textarea');
   textarea.value = url;
   textarea.setAttribute('readonly', '');
+  textarea.setAttribute('aria-hidden', 'true');
+  textarea.tabIndex = -1;
   textarea.style.position = 'fixed';
+  textarea.style.inset = '-9999px auto auto -9999px';
   textarea.style.opacity = '0';
-  document.body.appendChild(textarea);
-  textarea.select();
-  const copied = document.execCommand?.('copy');
-  textarea.remove();
-  shareButton.focus({preventScroll: true});
+  let copied = false;
+  try {
+    document.body.appendChild(textarea);
+    textarea.select();
+    copied = Boolean(document.execCommand?.('copy'));
+  } finally {
+    textarea.remove();
+    if (!document.hidden && previousFocus?.isConnected) previousFocus.focus({preventScroll: true});
+  }
   if (!copied) throw new Error('copy unavailable');
 }
 
+function resetShareFeedback({cancelPending = true} = {}) {
+  if (cancelPending) shareOperation += 1;
+  clearTimeout(shareTimer);
+  shareTimer = 0;
+  shareStatus.textContent = '';
+  shareButton.textContent = '↗';
+  shareButton.classList.remove('share-success');
+  shareButton.setAttribute('aria-label', 'Chia sẻ trang hiện tại');
+}
+
 function showShareStatus(message, success = true) {
+  if (!open || document.hidden) return;
   clearTimeout(shareTimer);
   shareStatus.textContent = message;
   shareButton.textContent = success ? '✓' : '!';
@@ -133,27 +159,33 @@ function showShareStatus(message, success = true) {
 }
 
 async function shareCurrentPage() {
+  if (!open || document.hidden) return;
+  const operation = ++shareOperation;
+  const session = readerSession;
+  const pageNumber = current;
   const page = pageByNumber.get(current);
   const url = shareUrl();
   const data = {
-    title: `${STORY.title} — Trang ${current}: ${page.title}`,
-    text: `Đọc ${STORY.title}, trang ${current}: ${page.title}`,
+    title: `${STORY.title} — Trang ${pageNumber}: ${page.title}`,
+    text: `Đọc ${STORY.title}, trang ${pageNumber}: ${page.title}`,
     url
   };
+  const contextIsCurrent = () => open && operation === shareOperation && session === readerSession && pageNumber === current;
   if (navigator.share) {
     try {
       await navigator.share(data);
-      showShareStatus(`Đã chia sẻ trang ${current}.`);
+      if (contextIsCurrent()) showShareStatus(`Đã chia sẻ trang ${pageNumber}.`);
       return;
     } catch (error) {
       if (error?.name === 'AbortError') return;
+      if (!contextIsCurrent() || document.hidden) return;
     }
   }
   try {
     await copyLink(url);
-    showShareStatus(`Đã sao chép liên kết trang ${current}.`);
+    if (contextIsCurrent()) showShareStatus(`Đã sao chép liên kết trang ${pageNumber}.`);
   } catch (_) {
-    showShareStatus('Không thể sao chép. Liên kết vẫn có trên thanh địa chỉ.', false);
+    if (contextIsCurrent()) showShareStatus('Không thể sao chép. Liên kết vẫn có trên thanh địa chỉ.', false);
   }
 }
 
@@ -313,7 +345,7 @@ function refreshReaderViewport() {
 
 function queueViewportRefresh() {
   clearTimeout(viewportTimer);
-  clearTimeout(shareTimer);
+  resetShareFeedback();
   viewportTimer = setTimeout(refreshReaderViewport, 80);
 }
 
@@ -330,17 +362,13 @@ function cleanupReader() {
   controlsTimer = 0;
   turnTimer = 0;
   viewportTimer = 0;
-  shareTimer = 0;
+  resetShareFeedback();
   touchX = 0;
   touchY = 0;
   suppressTapUntil = 0;
   finishReadyAt = 0;
   stage.classList.remove('turn-next', 'turn-prev');
   reader.classList.remove('controls-hidden');
-  shareStatus.textContent = '';
-  shareButton.textContent = '↗';
-  shareButton.classList.remove('share-success');
-  shareButton.setAttribute('aria-label', 'Chia sẻ trang hiện tại');
   clearPrintMode();
   comic.replaceChildren();
   document.head.querySelectorAll('[data-preload]').forEach(link => link.remove());
@@ -426,7 +454,10 @@ stage.addEventListener('touchend', event => { const dx = event.changedTouches[0]
 document.addEventListener('keydown', event => { if (!open) return; if (event.key === 'Tab') return trapReaderFocus(event); if (event.key === 'Escape') { event.preventDefault(); closeReader(); return; } if (event.key === 'ArrowRight' || event.key === 'PageDown') step(1); if (event.key === 'ArrowLeft' || event.key === 'PageUp') step(-1); if (event.key === 'Home' && current !== 1) { current = 1; update(-1); showControls(); } if (event.key === 'End' && current !== total) { current = total; update(1); showControls(); } });
 document.addEventListener('fullscreenchange', () => handleFullscreenExit(document.fullscreenElement));
 document.addEventListener('webkitfullscreenchange', () => handleFullscreenExit(document.webkitFullscreenElement));
-document.addEventListener('visibilitychange', () => { if (!document.hidden) refreshReaderViewport(); });
+document.addEventListener('visibilitychange', () => {
+  if (document.hidden) return resetShareFeedback();
+  refreshReaderViewport();
+});
 window.addEventListener('resize', queueViewportRefresh, {passive: true});
 window.addEventListener('orientationchange', queueViewportRefresh, {passive: true});
 window.visualViewport?.addEventListener('resize', queueViewportRefresh, {passive: true});
