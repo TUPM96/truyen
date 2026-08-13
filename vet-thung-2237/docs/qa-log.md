@@ -534,3 +534,11 @@
 - Kết quả muộn của thao tác cũ không thể hiện thông báo sai hoặc mở khóa nhầm một yêu cầu chia sẻ mới; yêu cầu mới trên đúng trang vẫn hoạt động độc lập.
 - Đồng bộ phiên bản `app.js` trong HTML và gói shell; cache ngoại tuyến nâng lên v38.
 - Đã kiểm tra chia sẻ thành công, lời hứa treo, chuyển nền, đổi trang, đóng–mở reader, callback cũ hoàn tất muộn, yêu cầu mới, cú pháp, 24 URL trang và HTTP.
+
+## Dọn phản hồi chia sẻ khi lật trang — 14/08/2026
+
+- Không thêm trang hoặc chương mới; Tập 1 giữ nguyên 2 chương, 24 trang hoàn chỉnh.
+- Mỗi lần đổi trang nay luôn dọn dấu thành công/thất bại và thông báo của lần chia sẻ trước, kể cả thao tác đã kết thúc; trang mới không còn hiển thị nhầm “đã chia sẻ” cho trang cũ trong 1,8 giây.
+- Bộ hẹn giờ phản hồi cũ bị hủy cùng lúc, nên không thể đặt lại biểu tượng hoặc nhãn trợ năng sau khi người đọc đã chuyển trang.
+- Đồng bộ phiên bản `app.js` trong HTML và gói shell; cache ngoại tuyến nâng lên v39.
+- Đã kiểm tra phản hồi chia sẻ thành công/thất bại rồi lật trang, bộ hẹn giờ cũ, chia sẻ đang chờ, chia sẻ mới trên trang mới, cú pháp, 24 URL trang và HTTP.
