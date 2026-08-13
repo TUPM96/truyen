@@ -478,3 +478,11 @@
 - Người mở trang chủ và không đọc truyện vẫn nhận bản mới ngay khi worker đổi quyền điều khiển.
 - Đồng bộ phiên bản `app.js` trong HTML và gói shell; cache ngoại tuyến nâng lên v31.
 - Đã kiểm tra các nhánh cập nhật khi reader đóng, reader đang mở, tab ẩn rồi hiện lại, đóng reader qua lịch sử; kiểm tra cú pháp, 24 URL trang, HTTP và regression reader.
+
+## Dọn chế độ in trên mọi đường thoát — 13/08/2026
+
+- Không thêm trang hoặc chương mới; Tập 1 giữ nguyên 2 chương, 24 trang hoàn chỉnh.
+- Chế độ **In hoặc lưu trang hiện tại** nay luôn dọn lớp bố cục in khi hộp thoại kết thúc, kể cả trình duyệt không phát sự kiện `afterprint`.
+- Nhánh người đọc hủy in, in thành công và `window.print()` báo lỗi đều quay lại giao diện reader bình thường; listener `afterprint` vẫn được giữ làm lớp bảo vệ bổ sung.
+- Đồng bộ phiên bản `app.js` trong HTML và gói shell; cache ngoại tuyến nâng lên v32.
+- Đã mô phỏng in thành công, hủy/đóng hộp thoại, lỗi khi gọi in và sự kiện `afterprint`; kiểm tra cú pháp, 24 URL trang, HTTP và regression reader.

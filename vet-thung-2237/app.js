@@ -244,6 +244,7 @@ async function printCurrentPage() {
   try {
     window.print();
   } catch (_) {
+  } finally {
     clearPrintMode();
   }
 }
