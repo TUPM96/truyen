@@ -486,3 +486,11 @@
 - Nhánh người đọc hủy in, in thành công và `window.print()` báo lỗi đều quay lại giao diện reader bình thường; listener `afterprint` vẫn được giữ làm lớp bảo vệ bổ sung.
 - Đồng bộ phiên bản `app.js` trong HTML và gói shell; cache ngoại tuyến nâng lên v32.
 - Đã mô phỏng in thành công, hủy/đóng hộp thoại, lỗi khi gọi in và sự kiện `afterprint`; kiểm tra cú pháp, 24 URL trang, HTTP và regression reader.
+
+## Chặn cuộn ở biên chương — 14/08/2026
+
+- Không thêm trang hoặc chương mới; Tập 1 giữ nguyên 2 chương, 24 trang hoàn chỉnh.
+- Phím Home/End nay luôn chặn hành vi cuộn mặc định khi reader đang mở, kể cả người đọc đã đứng đúng trang đầu hoặc cuối chương.
+- Tại biên chương, reader không chạy hiệu ứng lật trang, không ghi lại tiến độ và không sửa lịch sử trình duyệt thừa; khi chưa ở biên, phím vẫn nhảy đúng trong Chương 1 (1–12) và Chương 2 (13–24).
+- Đồng bộ phiên bản `app.js` trong HTML và gói shell; cache ngoại tuyến nâng lên v33.
+- Đã kiểm tra cú pháp, tám trường hợp Home/End ở trong và tại biên hai chương, 24 URL trang, HTTP và regression reader.

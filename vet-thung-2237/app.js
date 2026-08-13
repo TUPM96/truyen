@@ -550,15 +550,16 @@ document.addEventListener('keydown', event => {
     step(-1);
     return;
   }
+  if (event.key !== 'Home' && event.key !== 'End') return;
+  event.preventDefault();
   const chapter = chapterForPage(current);
   if (event.key === 'Home' && current !== chapter.startPage) {
-    event.preventDefault();
     current = chapter.startPage;
     update(-1);
     showControls();
+    return;
   }
   if (event.key === 'End' && current !== chapter.endPage) {
-    event.preventDefault();
     current = chapter.endPage;
     update(1);
     showControls();
