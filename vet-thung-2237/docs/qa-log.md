@@ -494,3 +494,11 @@
 - Tại biên chương, reader không chạy hiệu ứng lật trang, không ghi lại tiến độ và không sửa lịch sử trình duyệt thừa; khi chưa ở biên, phím vẫn nhảy đúng trong Chương 1 (1–12) và Chương 2 (13–24).
 - Đồng bộ phiên bản `app.js` trong HTML và gói shell; cache ngoại tuyến nâng lên v33.
 - Đã kiểm tra cú pháp, tám trường hợp Home/End ở trong và tại biên hai chương, 24 URL trang, HTTP và regression reader.
+
+## Ổn định cử chỉ lật trang — 14/08/2026
+
+- Không thêm trang hoặc chương mới; Tập 1 giữ nguyên 2 chương, 24 trang hoàn chỉnh.
+- Swipe lật trang nay theo dõi đúng định danh của một ngón tay từ lúc chạm đến lúc nhấc, không lấy nhầm ngón khác trong chuỗi sự kiện.
+- Khi xuất hiện ngón thứ hai, thay đổi ngón đang theo dõi hoặc trình duyệt phát `touchcancel`, trạng thái swipe được hủy ngay; thao tác pinch/zoom không còn nguy cơ lật trang ngoài ý muốn.
+- Đồng bộ phiên bản `app.js` trong HTML và gói shell; cache ngoại tuyến nâng lên v34.
+- Đã kiểm tra swipe trái/phải hợp lệ, vuốt dọc, cử chỉ quá ngắn, đa chạm, đổi định danh, `touchcancel`, cú pháp, 24 URL trang và HTTP.

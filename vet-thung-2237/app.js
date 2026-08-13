@@ -34,6 +34,7 @@ let finished = STORY.publicationComplete && readProgress('vt2237-complete') === 
 let current = validStoredPage(readProgress('vt2237-progress', 1), 1);
 let open = false;
 let fullscreenRequested = false;
+let touchIdentifier = null;
 let touchX = 0;
 let touchY = 0;
 let controlsTimer = 0;
@@ -423,8 +424,7 @@ function cleanupReader() {
   turnTimer = 0;
   viewportTimer = 0;
   resetShareFeedback();
-  touchX = 0;
-  touchY = 0;
+  resetTouchGesture();
   suppressTapUntil = 0;
   finishReadyAt = 0;
   clearTurnAnimation();
@@ -432,6 +432,12 @@ function cleanupReader() {
   clearPrintMode();
   comic.replaceChildren();
   document.head.querySelectorAll('[data-preload]').forEach(link => link.remove());
+}
+
+function resetTouchGesture() {
+  touchIdentifier = null;
+  touchX = 0;
+  touchY = 0;
 }
 
 async function enterFullscreen() {
@@ -530,8 +536,32 @@ stage.addEventListener('click', event => { if (performance.now() < suppressTapUn
 stage.addEventListener('pointermove', showControls, {passive: true});
 stage.addEventListener('animationend', handleTurnAnimationEnd);
 stage.addEventListener('animationcancel', handleTurnAnimationEnd);
-stage.addEventListener('touchstart', event => { touchX = event.changedTouches[0].clientX; touchY = event.changedTouches[0].clientY; }, {passive: true});
-stage.addEventListener('touchend', event => { const dx = event.changedTouches[0].clientX - touchX; const dy = event.changedTouches[0].clientY - touchY; if (Math.abs(dx) > 55 && Math.abs(dx) > Math.abs(dy) * 1.25) { event.preventDefault(); suppressTapUntil = performance.now() + 500; step(dx < 0 ? 1 : -1); } }, {passive: false});
+stage.addEventListener('touchstart', event => {
+  if (event.touches.length !== 1) return resetTouchGesture();
+  const touch = event.touches[0];
+  touchIdentifier = touch.identifier;
+  touchX = touch.clientX;
+  touchY = touch.clientY;
+}, {passive: true});
+stage.addEventListener('touchmove', event => {
+  if (touchIdentifier === null || event.touches.length !== 1 || event.touches[0].identifier !== touchIdentifier) resetTouchGesture();
+}, {passive: true});
+stage.addEventListener('touchend', event => {
+  if (touchIdentifier === null) return;
+  const touch = Array.from(event.changedTouches).find(item => item.identifier === touchIdentifier);
+  const startX = touchX;
+  const startY = touchY;
+  resetTouchGesture();
+  if (!touch) return;
+  const dx = touch.clientX - startX;
+  const dy = touch.clientY - startY;
+  if (Math.abs(dx) > 55 && Math.abs(dx) > Math.abs(dy) * 1.25) {
+    event.preventDefault();
+    suppressTapUntil = performance.now() + 500;
+    step(dx < 0 ? 1 : -1);
+  }
+}, {passive: false});
+stage.addEventListener('touchcancel', resetTouchGesture, {passive: true});
 document.addEventListener('keydown', event => {
   if (!open) return;
   if (event.key === 'Tab') return trapReaderFocus(event);
