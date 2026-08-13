@@ -393,3 +393,18 @@
 - Chương 1 hoàn tất: 12 trang.
 - Chương 2 đang phát hành: 10 trang (trang toàn tập 13–22).
 - Tổng đã xuất bản: 22 trang.
+
+## Hoàn tất Chương 2 — trang 23–24 — 13/08/2026
+
+- Đã xuất bản trang 23 **Tám cánh cửa mở** và trang 24 **Tiếng gọi dưới biển**, hoàn tất Chương 2 **Tín Hiệu Thứ Chín** với 12 trang.
+- Trang 23 dùng đúng tám cửa khóa duy nhất trong bố cục 2 × 4, đánh số liên tục 01–08; không trộn tín hiệu 09 vào nhóm tám khóa.
+- Trang 24 cho khoang tin tự hủy có kiểm soát, tín hiệu 09 tắt và nguồn phát 10 xuất hiện rõ bên ngoài khí quyển, khép chương bằng tín hiệu Mắt Rơi không quay về một mình.
+- Đã đối chiếu toàn bộ chữ Việt, thiết kế An Vy/Kha-Ruun, thiết bị cổ tay phải, giáp vai phải, khoang tin và bảng màu đã khóa ở kích thước gốc.
+- Reader hiện có 24 trang; cả Chương 1 và Chương 2 đều hoàn tất, shortcut PWA trỏ trang 24 và cache ngoại tuyến nâng lên v23.
+- Đã kiểm tra JavaScript, hai chương/24 trang liên tục, manifest, CSP, cache, kích thước ảnh, HTTP và liên kết sâu trang 23–24.
+
+## Trạng thái
+
+- Chương 1 hoàn tất: 12 trang.
+- Chương 2 hoàn tất: 12 trang (trang toàn tập 13–24).
+- Tổng đã xuất bản: 24 trang.

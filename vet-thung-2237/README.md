@@ -6,7 +6,7 @@ Truyện tranh khoa học viễn tưởng màu nguyên bản. Năm 2237, một t
 
 - Tập 1: **Mắt Rơi**
 - Chương 1: **Ba Nhịp Dưới Hố Sâu** — hoàn tất, trang 1–12
-- Chương 2: **Tín Hiệu Thứ Chín** — đang phát hành, trang 13–22
+- Chương 2: **Tín Hiệu Thứ Chín** — hoàn tất, trang 13–24
 - Trình đọc: toàn màn hình, lật từng trang; bấm mép trái/phải, vuốt hoặc dùng phím mũi tên
 - Trang mới nhất có thao tác xác nhận đã đọc tới đây và giữ đúng tiến độ
 - Metadata chia sẻ dùng ảnh ngang 1200 × 630 tối ưu cho mạng xã hội

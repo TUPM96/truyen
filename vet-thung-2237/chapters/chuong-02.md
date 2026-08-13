@@ -88,12 +88,22 @@
 - An Vy: “Cho người sống tự nhìn.”
 - Hệ thống: “PHÁT TOÀN KÊNH: BỀ MẶT / NHAM CUNG.”
 
-## Kịch bản tiếp theo — chưa xuất bản
-
 ### Trang 23 — Tám cánh cửa mở
 
-Tám tín hiệu đứng yên đồng loạt đổi nhịp. Các khóa cổ bắt đầu mở theo trình tự mà khoang tin vừa cảnh báo.
+- Hệ thống: “TÍN HIỆU 01–08: ĐỔI NHỊP.”
+- Hiệu ứng: “CỘC. CỘC. CỘC.”
+- An Vy: “Khoang tin không cảnh báo chiến tranh.”
+- Kha-Ruun: “Nó cảnh báo một cuộc mở khóa.”
+- Hệ thống: “TÁM KHÓA: ĐANG MỞ.”
+- Dẫn: “Từ tám nơi trên Trái Đất, những cánh cửa cổ cùng thức giấc.”
 
 ### Trang 24 — Tiếng gọi dưới biển
 
-Tín hiệu 09 tự hủy sau khi giao tin. Từ ngoài vỏ Trái Đất, một nguồn phát thứ mười trả lời — chứng minh Mắt Rơi không quay về một mình.
+- An Vy: “Khoang tin đang tự hủy.”
+- Kha-Ruun: “Nó đã giao xong lời nhắn.”
+- Hệ thống: “TÍN HIỆU 09: ĐÃ TẮT.”
+- Hiệu ứng: “CỘC. CỘC. CỘC.”
+- An Vy: “Không phát ra từ dưới đất.”
+- Kha-Ruun: “Nó đến từ ngoài kia.”
+- Hệ thống: “NGUỒN PHÁT 10: NGOÀI KHÍ QUYỂN.”
+- Dẫn: “Mắt Rơi không quay về một mình.”
