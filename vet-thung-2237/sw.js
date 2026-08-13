@@ -1,5 +1,5 @@
 const CACHE_PREFIX = 'vt2237-reader-';
-const CACHE_NAME = 'vt2237-reader-20260813-29';
+const CACHE_NAME = 'vt2237-reader-20260813-30';
 const CORE_URLS = [
   './index.html',
   './styles.css?v=reader-share-capability-20260812',
@@ -73,11 +73,19 @@ async function cacheFirst(request) {
   const isRetry = requestUrl.searchParams.has('retry');
   requestUrl.searchParams.delete('retry');
   const canonicalRequest = isRetry ? requestUrl.href : request;
-  const cached = (await caches.match(request)) || (isRetry ? await caches.match(canonicalRequest) : null);
+  const cached = (await matchRuntimeResponse(request)) || (isRetry ? await matchRuntimeResponse(canonicalRequest) : null);
   if (cached) return cached;
   const response = await fetch(request);
   if (response.ok) await storeRuntimeResponse(canonicalRequest, response);
   return response;
+}
+
+async function matchRuntimeResponse(key) {
+  try {
+    return await caches.match(key);
+  } catch (_) {
+    return null;
+  }
 }
 
 async function storeRuntimeResponse(key, response) {
@@ -96,7 +104,7 @@ async function networkFirst(request) {
       return networkResponse;
     }
   } catch (_) {}
-  return (await caches.match(request)) || (await caches.match('./index.html')) || networkResponse || Response.error();
+  return (await matchRuntimeResponse(request)) || (await matchRuntimeResponse('./index.html')) || networkResponse || Response.error();
 }
 
 self.addEventListener('fetch', event => {

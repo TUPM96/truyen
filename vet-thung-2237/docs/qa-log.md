@@ -460,3 +460,12 @@
 - Quá trình cài bản ngoại tuyến trọn tập vẫn giữ tính nguyên vẹn: worker mới chỉ kích hoạt khi shell và đủ 24 trang đã được lưu.
 - Cache ngoại tuyến nâng lên v29.
 - Đã mô phỏng lỗi mở cache và lỗi `cache.put` cho cả ảnh lẫn điều hướng, cùng các nhánh cache-hit, mạng 200/503 và mất mạng; kiểm tra cú pháp, 24 URL trang và regression reader.
+
+## Dự phòng khi không đọc được cache — 13/08/2026
+
+- Không thêm trang hoặc chương mới; Tập 1 giữ nguyên 2 chương, 24 trang hoàn chỉnh.
+- Hoàn thiện cặp bảo vệ Cache Storage: nếu trình duyệt không đọc được cache, ảnh và tài nguyên tĩnh tự chuyển sang mạng thay vì làm hỏng yêu cầu.
+- Điều hướng cũng bỏ qua lỗi đọc cache; phản hồi mạng hợp lệ vẫn được dùng, còn phản hồi lỗi mạng vẫn được giữ khi không có bản dự phòng.
+- Không đưa bìa PNG 3,15 MB vào gói bắt buộc: 24 trang truyện đều là WEBP nên việc tăng dung lượng này không tạo khả năng đọc trọn tập cho trình duyệt thiếu WEBP.
+- Cache ngoại tuyến nâng lên v30.
+- Đã mô phỏng lỗi `caches.match` cho tài nguyên tĩnh và điều hướng, cache-hit, tải mạng 200/503, mất mạng, lỗi ghi cache và tải lại ảnh; kiểm tra cú pháp, 24 URL trang và regression reader.
