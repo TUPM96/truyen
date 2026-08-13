@@ -526,3 +526,11 @@
 - Nút in lập tức trở lại trạng thái sử dụng được trên trang mới; lời hứa cũ nếu hoàn tất muộn không thể mở hộp thoại in hoặc ghi đè trạng thái của yêu cầu mới.
 - Đồng bộ phiên bản `app.js` trong HTML và gói shell; cache ngoại tuyến nâng lên v37.
 - Đã kiểm tra đổi trang khi Fullscreen API còn treo, hoàn tất muộn, yêu cầu in mới sau khi hủy, in bình thường, cú pháp, 24 URL trang và HTTP.
+
+## Hủy chia sẻ an toàn khi đổi ngữ cảnh — 14/08/2026
+
+- Không thêm trang hoặc chương mới; Tập 1 giữ nguyên 2 chương, 24 trang hoàn chỉnh.
+- Khi ứng dụng chuyển nền, reader đóng, trang đang đọc thay đổi hoặc viewport đổi trong lúc bảng chia sẻ còn chờ, nút chia sẻ nay được mở khóa và dọn phản hồi ngay, không phụ thuộc Web Share API có kết thúc hay không.
+- Kết quả muộn của thao tác cũ không thể hiện thông báo sai hoặc mở khóa nhầm một yêu cầu chia sẻ mới; yêu cầu mới trên đúng trang vẫn hoạt động độc lập.
+- Đồng bộ phiên bản `app.js` trong HTML và gói shell; cache ngoại tuyến nâng lên v38.
+- Đã kiểm tra chia sẻ thành công, lời hứa treo, chuyển nền, đổi trang, đóng–mở reader, callback cũ hoàn tất muộn, yêu cầu mới, cú pháp, 24 URL trang và HTTP.

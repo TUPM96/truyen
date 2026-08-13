@@ -171,6 +171,12 @@ function setSharePending(value) {
   }
 }
 
+function cancelPendingShare() {
+  shareOperation += 1;
+  setSharePending(false);
+  resetShareFeedback({cancelPending: false});
+}
+
 function nativeShareData(data) {
   if (typeof navigator.share !== 'function') return null;
   if (typeof navigator.canShare !== 'function') return data;
@@ -229,7 +235,7 @@ async function shareCurrentPage() {
       if (contextIsCurrent()) showShareStatus('Không thể sao chép. Liên kết vẫn có trên thanh địa chỉ.', false);
     }
   } finally {
-    setSharePending(false);
+    if (operation === shareOperation) setSharePending(false);
   }
 }
 
@@ -315,6 +321,7 @@ function retryPage(number) {
 }
 
 function update(direction = 0) {
+  if (sharePending) cancelPendingShare();
   if (printPending) cancelPendingPrint();
   comic.querySelectorAll('.comic-page').forEach(page => {
     const active = Number(page.dataset.page) === current;
@@ -436,7 +443,7 @@ function refreshReaderViewport() {
 
 function queueViewportRefresh() {
   clearTimeout(viewportTimer);
-  resetShareFeedback();
+  cancelPendingShare();
   viewportTimer = setTimeout(refreshReaderViewport, 80);
 }
 
@@ -453,7 +460,7 @@ function cleanupReader() {
   controlsTimer = 0;
   turnTimer = 0;
   viewportTimer = 0;
-  resetShareFeedback();
+  cancelPendingShare();
   resetTouchGesture();
   suppressTapUntil = 0;
   finishReadyAt = 0;
@@ -629,7 +636,7 @@ document.addEventListener('keydown', event => {
 document.addEventListener('fullscreenchange', () => handleFullscreenExit(document.fullscreenElement));
 document.addEventListener('webkitfullscreenchange', () => handleFullscreenExit(document.webkitFullscreenElement));
 document.addEventListener('visibilitychange', () => {
-  if (document.hidden) return resetShareFeedback();
+  if (document.hidden) return cancelPendingShare();
   if (refreshForWorkerWhenSafe()) return;
   refreshReaderViewport();
 });
