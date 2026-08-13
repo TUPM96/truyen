@@ -416,3 +416,12 @@
 - Đồng bộ trạng thái Tập 1 trên thư viện, README, footer, mô tả tìm kiếm, Open Graph, Twitter Card và shortcut PWA.
 - Shortcut cuối đổi từ **Đọc trang mới nhất** sang **Đọc phần kết Tập 1**; cache ngoại tuyến nâng lên v24.
 - Đã kiểm tra JavaScript, hai chương/24 trang liên tục, trạng thái hoàn tất của mọi chương, manifest, CSP, cache, HTTP và liên kết sâu trang 24.
+
+## QA điều hướng theo chương — 13/08/2026
+
+- Không thêm trang hoặc chương mới; Tập 1 giữ nguyên 2 chương, 24 trang hoàn chỉnh.
+- Sửa phím Home/End để đi tới đầu/cuối **chương hiện tại** đúng như hướng dẫn trợ năng, thay vì luôn nhảy tới trang 1/24.
+- Arrow, Page Up/Down, Home và End chặn cuộn nền mặc định khi reader đang mở.
+- Sửa giá trị dự phòng của bộ đếm từ 1/12 thành 1/24; dữ liệu động tiếp tục cập nhật theo trang hiện tại.
+- Cache ngoại tuyến nâng lên v25 và dùng đúng phiên bản JavaScript điều hướng mới.
+- Đã kiểm tra cú pháp, biên Chương 1 (1–12), biên Chương 2 (13–24), liên kết sâu, manifest, CSP, cache và HTTP.

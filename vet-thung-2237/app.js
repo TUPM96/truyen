@@ -522,7 +522,38 @@ stage.addEventListener('animationend', handleTurnAnimationEnd);
 stage.addEventListener('animationcancel', handleTurnAnimationEnd);
 stage.addEventListener('touchstart', event => { touchX = event.changedTouches[0].clientX; touchY = event.changedTouches[0].clientY; }, {passive: true});
 stage.addEventListener('touchend', event => { const dx = event.changedTouches[0].clientX - touchX; const dy = event.changedTouches[0].clientY - touchY; if (Math.abs(dx) > 55 && Math.abs(dx) > Math.abs(dy) * 1.25) { event.preventDefault(); suppressTapUntil = performance.now() + 500; step(dx < 0 ? 1 : -1); } }, {passive: false});
-document.addEventListener('keydown', event => { if (!open) return; if (event.key === 'Tab') return trapReaderFocus(event); if (event.key === 'Escape') { event.preventDefault(); closeReader(); return; } if (event.key === 'ArrowRight' || event.key === 'PageDown') step(1); if (event.key === 'ArrowLeft' || event.key === 'PageUp') step(-1); if (event.key === 'Home' && current !== 1) { current = 1; update(-1); showControls(); } if (event.key === 'End' && current !== total) { current = total; update(1); showControls(); } });
+document.addEventListener('keydown', event => {
+  if (!open) return;
+  if (event.key === 'Tab') return trapReaderFocus(event);
+  if (event.key === 'Escape') {
+    event.preventDefault();
+    closeReader();
+    return;
+  }
+  if (event.key === 'ArrowRight' || event.key === 'PageDown') {
+    event.preventDefault();
+    step(1);
+    return;
+  }
+  if (event.key === 'ArrowLeft' || event.key === 'PageUp') {
+    event.preventDefault();
+    step(-1);
+    return;
+  }
+  const chapter = chapterForPage(current);
+  if (event.key === 'Home' && current !== chapter.startPage) {
+    event.preventDefault();
+    current = chapter.startPage;
+    update(-1);
+    showControls();
+  }
+  if (event.key === 'End' && current !== chapter.endPage) {
+    event.preventDefault();
+    current = chapter.endPage;
+    update(1);
+    showControls();
+  }
+});
 document.addEventListener('fullscreenchange', () => handleFullscreenExit(document.fullscreenElement));
 document.addEventListener('webkitfullscreenchange', () => handleFullscreenExit(document.webkitFullscreenElement));
 document.addEventListener('visibilitychange', () => {
