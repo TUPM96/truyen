@@ -425,3 +425,11 @@
 - Sửa giá trị dự phòng của bộ đếm từ 1/12 thành 1/24; dữ liệu động tiếp tục cập nhật theo trang hiện tại.
 - Cache ngoại tuyến nâng lên v25 và dùng đúng phiên bản JavaScript điều hướng mới.
 - Đã kiểm tra cú pháp, biên Chương 1 (1–12), biên Chương 2 (13–24), liên kết sâu, manifest, CSP, cache và HTTP.
+
+## Đảm bảo đọc ngoại tuyến trọn Tập 1 — 13/08/2026
+
+- Không thêm trang hoặc chương mới; Tập 1 giữ nguyên 2 chương, 24 trang hoàn chỉnh.
+- Service worker cài sẵn đúng 24 URL ảnh có phiên bản đang khai báo trong dữ liệu truyện, thay vì chỉ lưu từng trang sau khi người đọc đã mở.
+- Bản cache mới chỉ kích hoạt sau khi tải đủ cả 24 trang; manifest và biểu tượng PWA vẫn là tài nguyên phụ để một biểu tượng lỗi không chặn cập nhật nội dung.
+- Cache ngoại tuyến nâng lên v26.
+- Đã kiểm tra JavaScript, đối chiếu một-một URL trong dữ liệu truyện và service worker, đủ 24 tệp ảnh cục bộ, tổng dung lượng trang, HTTP và toàn bộ regression của reader.

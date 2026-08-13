@@ -1,5 +1,5 @@
 const CACHE_PREFIX = 'vt2237-reader-';
-const CACHE_NAME = 'vt2237-reader-20260813-25';
+const CACHE_NAME = 'vt2237-reader-20260813-26';
 const CORE_URLS = [
   './index.html',
   './styles.css?v=reader-share-capability-20260812',
@@ -21,11 +21,38 @@ const OPTIONAL_URLS = [
   './assets/icon-192.png?v=pwa-20260812',
   './assets/icon-512.png?v=pwa-20260812'
 ];
+const VOLUME_PAGE_URLS = [
+  './assets/pages/page-01.webp?v=dialogue-20260811',
+  './assets/pages/page-02.webp?v=dialogue-20260811',
+  './assets/pages/page-03.webp?v=dialogue-20260811-p34',
+  './assets/pages/page-04.webp?v=dialogue-20260811-p34',
+  './assets/pages/page-05.webp?v=dialogue-20260811-p56',
+  './assets/pages/page-06.webp?v=dialogue-20260811-p56',
+  './assets/pages/page-07.webp?v=dialogue-20260811-p78',
+  './assets/pages/page-08.webp?v=dialogue-20260811-p78',
+  './assets/pages/page-09.webp?v=dialogue-20260811-p910',
+  './assets/pages/page-10.webp?v=dialogue-20260811-p910',
+  './assets/pages/page-11.webp?v=dialogue-20260811-p1112',
+  './assets/pages/page-12.webp?v=dialogue-20260811-p1112',
+  './assets/pages/page-13.webp?v=chapter-02-20260813-p1',
+  './assets/pages/page-14.webp?v=chapter-02-20260813-p2',
+  './assets/pages/page-15.webp?v=chapter-02-20260813-p34',
+  './assets/pages/page-16.webp?v=chapter-02-20260813-p34',
+  './assets/pages/page-17.webp?v=chapter-02-20260813-p56',
+  './assets/pages/page-18.webp?v=chapter-02-20260813-p56',
+  './assets/pages/page-19.webp?v=chapter-02-20260813-p78',
+  './assets/pages/page-20.webp?v=chapter-02-20260813-p78',
+  './assets/pages/page-21.webp?v=chapter-02-20260813-p910',
+  './assets/pages/page-22.webp?v=chapter-02-20260813-p910',
+  './assets/pages/page-23.webp?v=chapter-02-20260813-p1112',
+  './assets/pages/page-24.webp?v=chapter-02-20260813-p1112'
+];
 
 self.addEventListener('install', event => {
   event.waitUntil(
     caches.open(CACHE_NAME)
       .then(cache => cache.addAll(CORE_URLS)
+        .then(() => cache.addAll(VOLUME_PAGE_URLS))
         .then(() => Promise.allSettled(OPTIONAL_URLS.map(url => cache.add(url)))))
       .then(() => self.skipWaiting())
   );
