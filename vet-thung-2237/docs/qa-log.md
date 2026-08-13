@@ -518,3 +518,11 @@
 - Nút in tạm khóa và báo trạng thái bận trong lúc chuẩn bị, ngăn nhiều yêu cầu in chồng nhau; mọi đường thoát đều hủy yêu cầu đang chờ và dọn bố cục in.
 - Đồng bộ phiên bản `app.js` trong HTML và gói shell; cache ngoại tuyến nâng lên v36.
 - Đã kiểm tra in đúng trang, đổi trang trong lúc chờ, thoát reader trong lúc chờ, nhấn in lặp, lỗi thoát toàn màn hình, cú pháp, 24 URL trang và HTTP.
+
+## Hủy in tức thời khi đổi trang — 14/08/2026
+
+- Không thêm trang hoặc chương mới; Tập 1 giữ nguyên 2 chương, 24 trang hoàn chỉnh.
+- Khi người đọc đổi trang trong lúc lệnh in còn chờ thoát toàn màn hình, yêu cầu in nay bị hủy và giao diện được dọn ngay, không phụ thuộc lời hứa của Fullscreen API có kết thúc hay không.
+- Nút in lập tức trở lại trạng thái sử dụng được trên trang mới; lời hứa cũ nếu hoàn tất muộn không thể mở hộp thoại in hoặc ghi đè trạng thái của yêu cầu mới.
+- Đồng bộ phiên bản `app.js` trong HTML và gói shell; cache ngoại tuyến nâng lên v37.
+- Đã kiểm tra đổi trang khi Fullscreen API còn treo, hoàn tất muộn, yêu cầu in mới sau khi hủy, in bình thường, cú pháp, 24 URL trang và HTTP.

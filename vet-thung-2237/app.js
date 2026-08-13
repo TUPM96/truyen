@@ -315,6 +315,7 @@ function retryPage(number) {
 }
 
 function update(direction = 0) {
+  if (printPending) cancelPendingPrint();
   comic.querySelectorAll('.comic-page').forEach(page => {
     const active = Number(page.dataset.page) === current;
     page.classList.toggle('active', active);
