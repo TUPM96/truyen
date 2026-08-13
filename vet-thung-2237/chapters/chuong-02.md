@@ -52,15 +52,25 @@
 - An Vy: “Nó đang chờ chúng ta mở cửa.”
 - Kha-Ruun: “Lại là khóa đôi.”
 
-## Kịch bản tiếp theo — chưa xuất bản
-
 ### Trang 19 — Kẻ mang tin
 
-Sau cửa không phải một Mắt Rơi khác mà là một khoang chuyển tin cổ, bị hư hại và mang theo lời cảnh báo về tám điểm còn lại.
+- Dẫn: “Sau cánh cửa khóa đôi.”
+- An Vy: “Không phải Mắt Rơi.”
+- Kha-Ruun: “Một khoang chuyển tin.”
+- Hệ thống: “CẢNH BÁO: TÁM ĐIỂM CÒN LẠI SẮP THỨC.”
+- An Vy: “Nó đi cả trăm ki-lô-mét chỉ để mang tin này.”
+- Kha-Ruun: “Và suýt chết dọc đường.”
 
 ### Trang 20 — Lịch sử bị cắt đôi
 
-Thông điệp cho thấy người bề mặt và tộc Nham từng cùng xây mạng khóa, sau đó mỗi bên xóa một nửa ký ức để che giấu một cuộc phản bội.
+- Hệ thống: “NHẬT KÝ KHÓA — PHẦN 1/2.”
+- Bản ghi: “Chúng ta đã cùng xây mạng khóa.”
+- Kha-Ruun: “Ký ức Nham không có đoạn này.”
+- Hệ thống: “PHẦN 2/2: ĐÃ BỊ XÓA.”
+- An Vy: “Không. Hai bên giữ mỗi bên một nửa.”
+- Kha-Ruun: “Để không ai kể trọn chuyện phản bội.”
+
+## Kịch bản tiếp theo — chưa xuất bản
 
 ### Trang 21 — Hội Đồng chia rẽ
 

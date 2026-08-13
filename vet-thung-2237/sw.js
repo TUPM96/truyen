@@ -1,9 +1,9 @@
 const CACHE_PREFIX = 'vt2237-reader-';
-const CACHE_NAME = 'vt2237-reader-20260813-20';
+const CACHE_NAME = 'vt2237-reader-20260813-21';
 const CORE_URLS = [
   './index.html',
   './styles.css?v=reader-share-capability-20260812',
-  './story-data.js?v=chapter-02-20260813-p56',
+  './story-data.js?v=chapter-02-20260813-p78',
   './app.js?v=reader-chapters-20260813',
   './assets/cover.webp?v=cover-20260812',
   './assets/fonts/be-vietnam-pro-400.woff2',
@@ -15,7 +15,7 @@ const CORE_URLS = [
   './assets/fonts/spectral-600-italic.woff2'
 ];
 const OPTIONAL_URLS = [
-  './manifest.webmanifest?v=chapter-02-20260813-p56',
+  './manifest.webmanifest?v=chapter-02-20260813-p78',
   './assets/icon-192.svg?v=pwa-20260812',
   './assets/icon-512.svg?v=pwa-20260812',
   './assets/icon-192.png?v=pwa-20260812',

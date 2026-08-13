@@ -363,3 +363,18 @@
 - Chương 1 hoàn tất: 12 trang.
 - Chương 2 đang phát hành: 6 trang (trang toàn tập 13–18).
 - Tổng đã xuất bản: 18 trang.
+
+## Mở rộng Chương 2 — trang 19–20 — 13/08/2026
+
+- Đã xuất bản trang 19 **Kẻ mang tin** và trang 20 **Lịch sử bị cắt đôi**.
+- Trang 19 nối trực tiếp cửa khóa đôi ở nhà ga dưới Thái Bình Dương: An Vy và Kha-Ruun tìm thấy khoang chuyển tin bị hư hại, cùng cảnh báo đúng tám điểm còn lại sắp thức.
+- Trang 20 phát bản ghi liên minh tiền sử: người bề mặt và tộc Nham cùng xây mạng khóa, rồi chia đôi ký ức để không phía nào giữ trọn câu chuyện phản bội.
+- Đã đối chiếu từng lời dẫn, thoại và chữ hệ thống trong ảnh; giữ đúng An Vy, Kha-Ruun, khoang tin, kiến trúc liên minh và bảng màu đã khóa.
+- Reader hiện có 20 trang; Chương 2 có 8 trang, shortcut PWA trỏ trang 20 và cache ngoại tuyến nâng lên v21.
+- Đã kiểm tra JavaScript, hai chương/20 trang liên tục, manifest, CSP, cache, kích thước ảnh, HTTP và liên kết sâu trang 19–20.
+
+## Trạng thái
+
+- Chương 1 hoàn tất: 12 trang.
+- Chương 2 đang phát hành: 8 trang (trang toàn tập 13–20).
+- Tổng đã xuất bản: 20 trang.
