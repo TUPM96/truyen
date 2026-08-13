@@ -43,6 +43,8 @@ let viewportTimer = 0;
 let shareTimer = 0;
 let shareOperation = 0;
 let sharePending = false;
+let printOperation = 0;
+let printPending = false;
 let suppressTapUntil = 0;
 let finishReadyAt = 0;
 let lastFocused = null;
@@ -235,18 +237,39 @@ function clearPrintMode() {
   document.body.classList.remove('print-page');
 }
 
+function setPrintPending(value) {
+  printPending = value;
+  printButton.disabled = value;
+  printButton.setAttribute('aria-busy', String(value));
+  printButton.textContent = value ? '…' : '⎙';
+  printButton.setAttribute('aria-label', value ? 'Đang chuẩn bị trang để in' : 'In hoặc lưu trang hiện tại');
+  printButton.title = value ? 'Đang chuẩn bị in' : 'In hoặc lưu trang';
+}
+
+function cancelPendingPrint() {
+  printOperation += 1;
+  setPrintPending(false);
+  clearPrintMode();
+}
+
 async function printCurrentPage() {
-  if (!open) return;
+  if (!open || printPending) return;
+  const operation = ++printOperation;
+  const session = readerSession;
+  const pageNumber = current;
+  const contextIsCurrent = () => open && operation === printOperation && session === readerSession && pageNumber === current;
+  setPrintPending(true);
   document.body.classList.add('print-page');
   fullscreenRequested = false;
   if (document.fullscreenElement || document.webkitFullscreenElement) {
     try { await (document.exitFullscreen?.() || document.webkitExitFullscreen?.()); } catch (_) {}
   }
   try {
-    window.print();
+    if (contextIsCurrent()) window.print();
   } catch (_) {
   } finally {
     clearPrintMode();
+    if (operation === printOperation) setPrintPending(false);
   }
 }
 
@@ -435,7 +458,7 @@ function cleanupReader() {
   finishReadyAt = 0;
   clearTurnAnimation();
   reader.classList.remove('controls-hidden');
-  clearPrintMode();
+  cancelPendingPrint();
   comic.replaceChildren();
   document.head.querySelectorAll('[data-preload]').forEach(link => link.remove());
 }
@@ -475,6 +498,7 @@ async function openReader({requestNativeFullscreen = true, historyMode = 'push'}
 
 async function closeReader({historyMode = 'auto'} = {}) {
   if (!open) return;
+  cancelPendingPrint();
   if (historyMode === 'auto' && history.state?.vt2237Reader) {
     if (history.state.vt2237Origin === 'pushed') {
       history.back();

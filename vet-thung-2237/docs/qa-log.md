@@ -510,3 +510,11 @@
 - Các thao tác tiến ở trang 1–23 vẫn chỉ lật đúng một trang; khoảng bảo vệ 320 mili giây tại trang cuối tiếp tục ngăn lần nhấn hoặc chạm kép vô tình đóng reader ngay sau khi vừa tới trang 24.
 - Đồng bộ phiên bản `app.js` trong HTML và gói shell; cache ngoại tuyến nâng lên v35.
 - Đã kiểm tra năm cách tiến ở trang thường và trang cuối, bảo vệ thao tác kép, trạng thái hoàn tất, cú pháp, 24 URL trang và HTTP.
+
+## Khóa đúng ngữ cảnh trang khi in — 14/08/2026
+
+- Không thêm trang hoặc chương mới; Tập 1 giữ nguyên 2 chương, 24 trang hoàn chỉnh.
+- Lệnh **In hoặc lưu trang hiện tại** nay ghi nhớ đúng phiên đọc và số trang tại thời điểm bấm; nếu người đọc đổi trang hoặc thoát trong lúc chờ rời toàn màn hình, hộp thoại in không còn mở cho nội dung đã đổi.
+- Nút in tạm khóa và báo trạng thái bận trong lúc chuẩn bị, ngăn nhiều yêu cầu in chồng nhau; mọi đường thoát đều hủy yêu cầu đang chờ và dọn bố cục in.
+- Đồng bộ phiên bản `app.js` trong HTML và gói shell; cache ngoại tuyến nâng lên v36.
+- Đã kiểm tra in đúng trang, đổi trang trong lúc chờ, thoát reader trong lúc chờ, nhấn in lặp, lỗi thoát toàn màn hình, cú pháp, 24 URL trang và HTTP.
