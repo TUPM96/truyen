@@ -408,3 +408,11 @@
 - Chương 1 hoàn tất: 12 trang.
 - Chương 2 hoàn tất: 12 trang (trang toàn tập 13–24).
 - Tổng đã xuất bản: 24 trang.
+
+## Đồng bộ trạng thái hoàn tất Tập 1 — 13/08/2026
+
+- Không thêm trang hoặc chương mới; Tập 1 **Mắt Rơi** giữ nguyên 2 chương, 24 trang hoàn chỉnh.
+- Sửa cờ xuất bản từ đang phát hành sang hoàn tất để nút xác nhận ở trang 24 kết thúc tập, lưu trạng thái đã đọc và chuyển nút chính thành **Đọc lại từ đầu**.
+- Đồng bộ trạng thái Tập 1 trên thư viện, README, footer, mô tả tìm kiếm, Open Graph, Twitter Card và shortcut PWA.
+- Shortcut cuối đổi từ **Đọc trang mới nhất** sang **Đọc phần kết Tập 1**; cache ngoại tuyến nâng lên v24.
+- Đã kiểm tra JavaScript, hai chương/24 trang liên tục, trạng thái hoàn tất của mọi chương, manifest, CSP, cache, HTTP và liên kết sâu trang 24.

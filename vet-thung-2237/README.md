@@ -4,11 +4,11 @@ Truyện tranh khoa học viễn tưởng màu nguyên bản. Năm 2237, một t
 
 ## Trạng thái xuất bản
 
-- Tập 1: **Mắt Rơi**
+- Tập 1: **Mắt Rơi** — hoàn tất, 2 chương · 24 trang
 - Chương 1: **Ba Nhịp Dưới Hố Sâu** — hoàn tất, trang 1–12
 - Chương 2: **Tín Hiệu Thứ Chín** — hoàn tất, trang 13–24
 - Trình đọc: toàn màn hình, lật từng trang; bấm mép trái/phải, vuốt hoặc dùng phím mũi tên
-- Trang mới nhất có thao tác xác nhận đã đọc tới đây và giữ đúng tiến độ
+- Trang cuối có thao tác hoàn tất tập; sau đó nút chính chuyển thành đọc lại từ đầu
 - Metadata chia sẻ dùng ảnh ngang 1200 × 630 tối ưu cho mạng xã hội
 
 Mỗi trang hoàn thiện chứa sẵn lời dẫn và thoại tiếng Việt trong ảnh. Dữ liệu chữ vẫn được giữ trong kịch bản nguồn để kiểm tra chính tả, tính liên tục và hỗ trợ các lượt sản xuất sau.

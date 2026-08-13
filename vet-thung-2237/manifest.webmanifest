@@ -35,7 +35,7 @@
       "icons": [{"src": "assets/icon-192.png?v=pwa-20260812", "sizes": "192x192", "type": "image/png"}]
     },
     {
-      "name": "Đọc trang mới nhất",
+      "name": "Đọc phần kết Tập 1",
       "short_name": "Trang 24",
       "url": "./?page=24",
       "icons": [{"src": "assets/icon-192.png?v=pwa-20260812", "sizes": "192x192", "type": "image/png"}]

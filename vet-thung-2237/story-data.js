@@ -1,7 +1,7 @@
 const STORY = {
   title: 'Vết Thủng 2237',
   publishedThrough: 24,
-  publicationComplete: false,
+  publicationComplete: true,
   chapters: [
     {number: 1, title: 'Ba Nhịp Dưới Hố Sâu', startPage: 1, endPage: 12, complete: true},
     {number: 2, title: 'Tín Hiệu Thứ Chín', startPage: 13, endPage: 24, complete: true}
