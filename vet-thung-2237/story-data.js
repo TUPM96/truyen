@@ -1,10 +1,10 @@
 const STORY = {
   title: 'Vết Thủng 2237',
-  publishedThrough: 14,
+  publishedThrough: 16,
   publicationComplete: false,
   chapters: [
     {number: 1, title: 'Ba Nhịp Dưới Hố Sâu', startPage: 1, endPage: 12, complete: true},
-    {number: 2, title: 'Tín Hiệu Thứ Chín', startPage: 13, endPage: 14, complete: false}
+    {number: 2, title: 'Tín Hiệu Thứ Chín', startPage: 13, endPage: 16, complete: false}
   ],
   pages: [
     {number: 1, image: 'assets/pages/page-01.webp?v=dialogue-20260811', title: 'Thứ rơi ngoài bản đồ sao', alt: 'Thiên thể Mắt Rơi xuyên qua thành phố năm 2237 và An Vy gọi Trung tâm'},
@@ -20,6 +20,8 @@ const STORY = {
     {number: 11, image: 'assets/pages/page-11.webp?v=dialogue-20260811-p1112', title: 'Một giây ngừng bắn', alt: 'An Vy phát bằng chứng gốc để Bách và Hội Đồng Nham cùng ra lệnh ngừng bắn'},
     {number: 12, image: 'assets/pages/page-12.webp?v=dialogue-20260811-p1112', title: 'Những vết thủng khác', alt: 'An Vy và Kha-Ruun nhìn bản đồ Trái Đất hiện đúng chín tín hiệu Vết Thủng'},
     {number: 13, image: 'assets/pages/page-13.webp?v=chapter-02-20260813-p1', title: 'Chín tín hiệu', alt: 'An Vy và Kha-Ruun phát hiện tín hiệu Vết Thủng thứ chín đang di chuyển dưới Thái Bình Dương'},
-    {number: 14, image: 'assets/pages/page-14.webp?v=chapter-02-20260813-p2', title: 'Ra đón nó', alt: 'An Vy và Kha-Ruun đi xuống con đường cổ dưới Nham Cung để chặn tín hiệu 09'}
+    {number: 14, image: 'assets/pages/page-14.webp?v=chapter-02-20260813-p2', title: 'Ra đón nó', alt: 'An Vy và Kha-Ruun đi xuống con đường cổ dưới Nham Cung để chặn tín hiệu 09'},
+    {number: 15, image: 'assets/pages/page-15.webp?v=chapter-02-20260813-p34', title: 'Đường khóa thức giấc', alt: 'An Vy và Kha-Ruun phát hiện cảnh báo cổ viết cho cả người bề mặt lẫn tộc Nham'},
+    {number: 16, image: 'assets/pages/page-16.webp?v=chapter-02-20260813-p34', title: 'Người không có trong ký ức', alt: 'Bản ghi cổ cho thấy người bề mặt từng cùng tổ tiên tộc Nham phóng Mắt Rơi'}
   ]
 };

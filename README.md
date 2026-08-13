@@ -7,7 +7,7 @@ Repository lưu các bộ truyện tranh và truyện minh họa nguyên bản, 
 | Bộ truyện | Thể loại | Trạng thái | Đọc |
 |---|---|---|---|
 | **Cửu Tầng Phẳng** | Khoa học viễn tưởng · Bí ẩn · Phiêu lưu | Tập 1: 6 chương · 52 trang | [Đọc online](https://tupm96.github.io/truyen/) |
-| **Vết Thủng 2237** | Khoa học viễn tưởng · Sinh tồn · Địa tâm | Chương 2 đang phát hành · 14 trang | [Đọc online](https://tupm96.github.io/truyen/vet-thung-2237/) |
+| **Vết Thủng 2237** | Khoa học viễn tưởng · Sinh tồn · Địa tâm | Chương 2 đang phát hành · 16 trang | [Đọc online](https://tupm96.github.io/truyen/vet-thung-2237/) |
 
 ## Vết Thủng 2237
 

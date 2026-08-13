@@ -17,15 +17,24 @@
 - Kha-Ruun: “Vậy chúng ta ra đón.”
 - Dẫn: “Bên dưới Nham Cung, một con đường đã ngủ suốt ba mươi nghìn năm.”
 
-## Kịch bản tiếp theo — chưa xuất bản
-
 ### Trang 15 — Đường khóa thức giấc
 
-Nền dẫn cổ tự chuyển động theo nhịp 09. Kha-Ruun nhận ra các ký tự trên vách không phải chữ Nham mà là cảnh báo dành cho cả hai giống người.
+- Hiệu ứng: “CỘC. CỘC. CỘC.”
+- An Vy: “Nó đang kéo chúng ta xuống.”
+- Kha-Ruun: “Những ký tự này không phải chữ Nham.”
+- An Vy: “Vậy chúng viết cho ai?”
+- Kha-Ruun: “Cho cả hai chúng ta.”
+- Cảnh báo: “CẢNH BÁO: KHÔNG MỞ ĐƯỜNG KHÓA.”
 
 ### Trang 16 — Người không có trong ký ức
 
-Một bản ghi cổ hiện hình một người bề mặt đứng cạnh tổ tiên tộc Nham trong ngày phóng Mắt Rơi, làm lung lay lịch sử chính thức của cả hai phía.
+- Hệ thống: “BẢN GHI: NGÀY PHÓNG MẮT RƠI.”
+- Dẫn: “Ba mươi nghìn năm trước, hai phía từng đứng cùng một bên.”
+- An Vy: “Người trên mặt... đã ở đây?”
+- Kha-Ruun: “Không có chuyện này trong ký ức Nham.”
+- An Vy: “Có. Chỉ là ai đó đã xóa nó.”
+
+## Kịch bản tiếp theo — chưa xuất bản
 
 ### Trang 17 — Nhịp giả thứ hai
 

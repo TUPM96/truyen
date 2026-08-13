@@ -333,3 +333,18 @@
 - Chương 1 hoàn tất: 12 trang.
 - Chương 2 đang phát hành: 2 trang (trang toàn tập 13–14).
 - Tổng đã xuất bản: 14 trang.
+
+## Mở rộng Chương 2 — 13/08/2026
+
+- Đã xuất bản trang 15 **Đường khóa thức giấc** và trang 16 **Người không có trong ký ức**.
+- Trang 15 nối trực tiếp nền dẫn ở trang 14: đường khóa chuyển động theo ba nhịp; cảnh báo cổ dùng hai nửa cyan–xanh lục và biểu tượng của cả người bề mặt lẫn tộc Nham.
+- Trang 16 mở đúng bản ghi mà cảnh báo kích hoạt: một phụ nữ bề mặt cổ đại và một tổ tiên tộc Nham cùng phóng Mắt Rơi. Nhân vật cổ được tách thiết kế rõ khỏi An Vy và Kha-Ruun hiện tại.
+- Toàn bộ thoại, lời dẫn, hiệu ứng và chữ hệ thống tiếng Việt đã nằm trong ảnh; đã đối chiếu từng câu với kịch bản nguồn và kiểm tra dấu/chính tả ở kích thước gốc.
+- Reader và mục lục hiện nhận 16 trang; Chương 2 mở từ trang 13 và có 4 trang đang phát hành. Shortcut PWA trỏ tới trang mới nhất 16; cache nâng lên v19.
+- Đã kiểm tra cú pháp, cấu trúc hai chương/16 trang, ảnh liên tục 1–16, liên kết sâu trang 15–16, manifest, CSP, cache và HTTP cục bộ.
+
+## Trạng thái
+
+- Chương 1 hoàn tất: 12 trang.
+- Chương 2 đang phát hành: 4 trang (trang toàn tập 13–16).
+- Tổng đã xuất bản: 16 trang.
