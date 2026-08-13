@@ -442,3 +442,12 @@
 - Vẫn giữ nguyên tham số phiên bản nội dung `v`, không dùng `ignoreSearch`, nên các bản ảnh cũ và mới không bị trộn.
 - Cache ngoại tuyến nâng lên v27.
 - Đã kiểm tra hai nhánh cache-hit ngoại tuyến và network-hit trực tuyến, khóa cache chuẩn, 24 URL trang, cú pháp JavaScript, HTTP và regression reader.
+
+## Ổn định điều hướng khi mạng chập chờn — 13/08/2026
+
+- Không thêm trang hoặc chương mới; Tập 1 giữ nguyên 2 chương, 24 trang hoàn chỉnh.
+- Điều hướng ưu tiên mạng nay dùng bản HTML đã lưu khi máy chủ tạm trả phản hồi lỗi, không chỉ khi trình duyệt mất kết nối hoàn toàn.
+- Mọi liên kết sâu `?page=1–24` cập nhật cùng một khóa `index.html`, tránh tạo 24 bản shell trùng nhau trong cache; tham số trang trên thanh địa chỉ vẫn được giữ để reader mở đúng trang.
+- Nếu chưa từng cài cache và mạng trả lỗi, service worker vẫn chuyển nguyên phản hồi lỗi thay vì giả lập thành công.
+- Cache ngoại tuyến nâng lên v28.
+- Đã mô phỏng phản hồi mạng 200, 503, mất mạng, cache liên kết sâu và trạng thái chưa có cache; kiểm tra cú pháp JavaScript, 24 URL trang và regression reader.
