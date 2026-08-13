@@ -369,6 +369,12 @@ function step(direction) {
   showControls();
 }
 
+function advance() {
+  if (!open) return;
+  if (current === total) return finishChapter();
+  step(1);
+}
+
 function showControls() {
   reader.classList.remove('controls-hidden');
   clearTimeout(controlsTimer);
@@ -529,9 +535,9 @@ document.querySelector('#closeReader').addEventListener('click', () => closeRead
 shareButton.addEventListener('click', shareCurrentPage);
 printButton.addEventListener('click', printCurrentPage);
 document.querySelector('#prevPage').addEventListener('click', () => step(-1));
-nextButton.addEventListener('click', () => { if (!open) return; current === total ? finishChapter() : step(1); });
+nextButton.addEventListener('click', advance);
 document.querySelector('#tapLeft').addEventListener('click', event => { if (performance.now() < suppressTapUntil) return event.stopPropagation(); step(-1); });
-document.querySelector('#tapRight').addEventListener('click', event => { if (performance.now() < suppressTapUntil) return event.stopPropagation(); step(1); });
+document.querySelector('#tapRight').addEventListener('click', event => { if (performance.now() < suppressTapUntil) return event.stopPropagation(); advance(); });
 stage.addEventListener('click', event => { if (performance.now() < suppressTapUntil) return event.preventDefault(); if (!event.target.closest('[data-retry-page]') && (event.target === stage || event.target.closest('.comic-page'))) { reader.classList.toggle('controls-hidden'); if (!reader.classList.contains('controls-hidden')) showControls(); } });
 stage.addEventListener('pointermove', showControls, {passive: true});
 stage.addEventListener('animationend', handleTurnAnimationEnd);
@@ -558,7 +564,7 @@ stage.addEventListener('touchend', event => {
   if (Math.abs(dx) > 55 && Math.abs(dx) > Math.abs(dy) * 1.25) {
     event.preventDefault();
     suppressTapUntil = performance.now() + 500;
-    step(dx < 0 ? 1 : -1);
+    dx < 0 ? advance() : step(-1);
   }
 }, {passive: false});
 stage.addEventListener('touchcancel', resetTouchGesture, {passive: true});
@@ -572,7 +578,7 @@ document.addEventListener('keydown', event => {
   }
   if (event.key === 'ArrowRight' || event.key === 'PageDown') {
     event.preventDefault();
-    step(1);
+    advance();
     return;
   }
   if (event.key === 'ArrowLeft' || event.key === 'PageUp') {

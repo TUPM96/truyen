@@ -502,3 +502,11 @@
 - Khi xuất hiện ngón thứ hai, thay đổi ngón đang theo dõi hoặc trình duyệt phát `touchcancel`, trạng thái swipe được hủy ngay; thao tác pinch/zoom không còn nguy cơ lật trang ngoài ý muốn.
 - Đồng bộ phiên bản `app.js` trong HTML và gói shell; cache ngoại tuyến nâng lên v34.
 - Đã kiểm tra swipe trái/phải hợp lệ, vuốt dọc, cử chỉ quá ngắn, đa chạm, đổi định danh, `touchcancel`, cú pháp, 24 URL trang và HTTP.
+
+## Đồng bộ thao tác hoàn tất tập — 14/08/2026
+
+- Không thêm trang hoặc chương mới; Tập 1 giữ nguyên 2 chương, 24 trang hoàn chỉnh.
+- Tại trang 24, mọi thao tác tiến gồm nút trang sau, vùng chạm bên phải, swipe sang trái, phím Mũi tên phải và Page Down đều cùng hoàn tất tập và thoát reader.
+- Các thao tác tiến ở trang 1–23 vẫn chỉ lật đúng một trang; khoảng bảo vệ 320 mili giây tại trang cuối tiếp tục ngăn lần nhấn hoặc chạm kép vô tình đóng reader ngay sau khi vừa tới trang 24.
+- Đồng bộ phiên bản `app.js` trong HTML và gói shell; cache ngoại tuyến nâng lên v35.
+- Đã kiểm tra năm cách tiến ở trang thường và trang cuối, bảo vệ thao tác kép, trạng thái hoàn tất, cú pháp, 24 URL trang và HTTP.
