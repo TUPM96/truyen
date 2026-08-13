@@ -1,10 +1,10 @@
 const STORY = {
   title: 'Vết Thủng 2237',
-  publishedThrough: 16,
+  publishedThrough: 18,
   publicationComplete: false,
   chapters: [
     {number: 1, title: 'Ba Nhịp Dưới Hố Sâu', startPage: 1, endPage: 12, complete: true},
-    {number: 2, title: 'Tín Hiệu Thứ Chín', startPage: 13, endPage: 16, complete: false}
+    {number: 2, title: 'Tín Hiệu Thứ Chín', startPage: 13, endPage: 18, complete: false}
   ],
   pages: [
     {number: 1, image: 'assets/pages/page-01.webp?v=dialogue-20260811', title: 'Thứ rơi ngoài bản đồ sao', alt: 'Thiên thể Mắt Rơi xuyên qua thành phố năm 2237 và An Vy gọi Trung tâm'},
@@ -22,6 +22,8 @@ const STORY = {
     {number: 13, image: 'assets/pages/page-13.webp?v=chapter-02-20260813-p1', title: 'Chín tín hiệu', alt: 'An Vy và Kha-Ruun phát hiện tín hiệu Vết Thủng thứ chín đang di chuyển dưới Thái Bình Dương'},
     {number: 14, image: 'assets/pages/page-14.webp?v=chapter-02-20260813-p2', title: 'Ra đón nó', alt: 'An Vy và Kha-Ruun đi xuống con đường cổ dưới Nham Cung để chặn tín hiệu 09'},
     {number: 15, image: 'assets/pages/page-15.webp?v=chapter-02-20260813-p34', title: 'Đường khóa thức giấc', alt: 'An Vy và Kha-Ruun phát hiện cảnh báo cổ viết cho cả người bề mặt lẫn tộc Nham'},
-    {number: 16, image: 'assets/pages/page-16.webp?v=chapter-02-20260813-p34', title: 'Người không có trong ký ức', alt: 'Bản ghi cổ cho thấy người bề mặt từng cùng tổ tiên tộc Nham phóng Mắt Rơi'}
+    {number: 16, image: 'assets/pages/page-16.webp?v=chapter-02-20260813-p34', title: 'Người không có trong ký ức', alt: 'Bản ghi cổ cho thấy người bề mặt từng cùng tổ tiên tộc Nham phóng Mắt Rơi'},
+    {number: 17, image: 'assets/pages/page-17.webp?v=chapter-02-20260813-p56', title: 'Nhịp giả thứ hai', alt: 'Chỉ huy Bách phát hiện tín hiệu giả mang sinh trắc hoàn hảo của An Vy và khóa lệnh khai hỏa'},
+    {number: 18, image: 'assets/pages/page-18.webp?v=chapter-02-20260813-p56', title: 'Trạm giữa biển', alt: 'An Vy và Kha-Ruun đến nhà ga cổ dưới Thái Bình Dương nơi tín hiệu 09 dừng sau cửa khóa đôi'}
   ]
 };

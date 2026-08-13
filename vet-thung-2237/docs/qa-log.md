@@ -348,3 +348,18 @@
 - Chương 1 hoàn tất: 12 trang.
 - Chương 2 đang phát hành: 4 trang (trang toàn tập 13–16).
 - Tổng đã xuất bản: 16 trang.
+
+## Mở rộng Chương 2 — trang 17–18 — 13/08/2026
+
+- Đã xuất bản trang 17 **Nhịp giả thứ hai** và trang 18 **Trạm giữa biển**.
+- Trang 17 đặt An Vy giả trên màn hình và An Vy thật tại Đường Khóa sâu 104 ki-lô-mét trong cùng trang; Bách nhận ra tính cách của cô không khớp dù sinh trắc báo 100%, rồi khóa lệnh khai hỏa.
+- Trang 18 mở rộng địa lý tới nhà ga liên minh sâu 108 ki-lô-mét dưới Thái Bình Dương; tín hiệu 09 dừng sau cửa kín có đúng hai khóa tay cyan–xanh lục.
+- Đã đối chiếu lời thoại, hệ thống, chính tả, thiết kế An Vy/Kha-Ruun/Bách, vị trí vệt sáng, phụ kiện và bảng màu khóa ở kích thước ảnh gốc.
+- Reader hiện có 18 trang; Chương 2 có 6 trang, shortcut PWA trỏ trang 18 và cache ngoại tuyến nâng lên v20.
+- Đã kiểm tra JavaScript, hai chương/18 trang liên tục, manifest, CSP, cache, kích thước ảnh, HTTP và liên kết sâu trang 17–18.
+
+## Trạng thái
+
+- Chương 1 hoàn tất: 12 trang.
+- Chương 2 đang phát hành: 6 trang (trang toàn tập 13–18).
+- Tổng đã xuất bản: 18 trang.

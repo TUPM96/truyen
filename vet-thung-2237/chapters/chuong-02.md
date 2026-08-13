@@ -34,15 +34,25 @@
 - Kha-Ruun: “Không có chuyện này trong ký ức Nham.”
 - An Vy: “Có. Chỉ là ai đó đã xóa nó.”
 
-## Kịch bản tiếp theo — chưa xuất bản
-
 ### Trang 17 — Nhịp giả thứ hai
 
-Bách nhận một thông điệp mang đúng sinh trắc của An Vy yêu cầu tấn công Nham Cung, trong khi An vẫn ở dưới đường khóa.
+- Hệ thống: “SINH TRẮC AN VY: KHỚP 100%.”
+- An Vy giả: “Chỉ huy, khai hỏa vào Nham Cung. Ngay bây giờ.”
+- Bách: “Không. An Vy không bao giờ ra lệnh bỏ dân thường.”
+- Hệ thống: “ĐƯỜNG KHÓA — SÂU 104 KI-LÔ-MÉT.”
+- An Vy: “Nó lại giả giọng tôi.”
+- Bách: “Khóa toàn bộ lệnh mang sinh trắc của cô ấy.”
 
 ### Trang 18 — Trạm giữa biển
 
-An Vy và Kha-Ruun tới một nhà ga địa tâm nằm dưới Thái Bình Dương. Tín hiệu 09 dừng ngay sau cánh cửa chỉ mở bằng khóa đôi.
+- Dẫn: “Dưới Thái Bình Dương — sâu 108 ki-lô-mét.”
+- An Vy: “Một nhà ga... ở dưới đáy biển?”
+- Kha-Ruun: “Không phải của riêng tộc Nham.”
+- Hệ thống: “TÍN HIỆU 09: ĐÃ DỪNG.”
+- An Vy: “Nó đang chờ chúng ta mở cửa.”
+- Kha-Ruun: “Lại là khóa đôi.”
+
+## Kịch bản tiếp theo — chưa xuất bản
 
 ### Trang 19 — Kẻ mang tin
 
