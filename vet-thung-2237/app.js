@@ -46,6 +46,7 @@ let suppressTapUntil = 0;
 let finishReadyAt = 0;
 let lastFocused = null;
 let readerSession = 0;
+let workerRefreshPending = false;
 
 const pageByNumber = new Map(STORY.pages.map(page => [page.number, page]));
 const chapterForPage = number => STORY.chapters.find(chapter => number >= chapter.startPage && number <= chapter.endPage);
@@ -481,6 +482,14 @@ async function closeReader({historyMode = 'auto'} = {}) {
   document.title = baseDocumentTitle;
   cleanupReader();
   if (lastFocused?.isConnected) lastFocused.focus({preventScroll: true});
+  refreshForWorkerWhenSafe();
+}
+
+function refreshForWorkerWhenSafe() {
+  if (!workerRefreshPending || open || document.hidden) return false;
+  workerRefreshPending = false;
+  location.reload();
+  return true;
 }
 
 function finishChapter() {
@@ -558,6 +567,7 @@ document.addEventListener('fullscreenchange', () => handleFullscreenExit(documen
 document.addEventListener('webkitfullscreenchange', () => handleFullscreenExit(document.webkitFullscreenElement));
 document.addEventListener('visibilitychange', () => {
   if (document.hidden) return resetShareFeedback();
+  if (refreshForWorkerWhenSafe()) return;
   refreshReaderViewport();
 });
 window.addEventListener('resize', queueViewportRefresh, {passive: true});
@@ -614,7 +624,8 @@ if ('serviceWorker' in navigator && window.isSecureContext) {
   navigator.serviceWorker.addEventListener?.('controllerchange', () => {
     if (!hadController || refreshingForWorker) return;
     refreshingForWorker = true;
-    location.reload();
+    workerRefreshPending = true;
+    refreshForWorkerWhenSafe();
   });
   window.addEventListener('load', () => {
     navigator.serviceWorker.register('sw.js', {scope: './', updateViaCache: 'none'})

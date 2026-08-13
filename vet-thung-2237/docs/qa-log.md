@@ -469,3 +469,12 @@
 - Không đưa bìa PNG 3,15 MB vào gói bắt buộc: 24 trang truyện đều là WEBP nên việc tăng dung lượng này không tạo khả năng đọc trọn tập cho trình duyệt thiếu WEBP.
 - Cache ngoại tuyến nâng lên v30.
 - Đã mô phỏng lỗi `caches.match` cho tài nguyên tĩnh và điều hướng, cache-hit, tải mạng 200/503, mất mạng, lỗi ghi cache và tải lại ảnh; kiểm tra cú pháp, 24 URL trang và regression reader.
+
+## Không ngắt phiên đọc khi ứng dụng cập nhật — 13/08/2026
+
+- Không thêm trang hoặc chương mới; Tập 1 giữ nguyên 2 chương, 24 trang hoàn chỉnh.
+- Service worker mới không còn buộc tải lại trang ngay khi người đọc đang mở reader hoặc tab đang chạy nền.
+- Lần làm mới được hoãn tới khi reader đã đóng và trang đang hiển thị; tiến độ vẫn được ghi trước khi cập nhật, tránh mất trang đang đọc hoặc thoát toàn màn hình giữa chừng.
+- Người mở trang chủ và không đọc truyện vẫn nhận bản mới ngay khi worker đổi quyền điều khiển.
+- Đồng bộ phiên bản `app.js` trong HTML và gói shell; cache ngoại tuyến nâng lên v31.
+- Đã kiểm tra các nhánh cập nhật khi reader đóng, reader đang mở, tab ẩn rồi hiện lại, đóng reader qua lịch sử; kiểm tra cú pháp, 24 URL trang, HTTP và regression reader.
