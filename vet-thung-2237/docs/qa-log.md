@@ -317,3 +317,19 @@
 - Chương 1 hoàn tất: 12/12 trang.
 - Toàn bộ 12 trang đã được thay hoặc duyệt theo chuẩn thoại tự nhiên nằm trực tiếp trong ảnh.
 - Lượt audit tiếp theo rà soát thiết bị cảm ứng đa điểm, thao tác vuốt bị hủy và chống kích hoạt nhầm vùng chạm sau pinch-zoom.
+
+## Phát hành Chương 2 — 13/08/2026
+
+- Đã mở Chương 2 **Tín Hiệu Thứ Chín** và xuất bản hai trang mới: trang 13 **Chín tín hiệu**, trang 14 **Ra đón nó**.
+- Trang 13 nối trực tiếp bản đồ chín điểm ở cuối Chương 1: tám tín hiệu đứng yên, tín hiệu 09 di chuyển dưới Thái Bình Dương. Ba bản đồ trong trang đều giữ đúng tổng chín điểm.
+- Trang 14 đưa An Vy và Kha-Ruun xuống con đường cổ dưới Nham Cung; thiết kế khóa của hai nhân vật, Bách và bảng màu xanh lục–hổ phách–tím lạnh–đen núi lửa được giữ nhất quán.
+- Toàn bộ lời dẫn, thoại và cảnh báo tiếng Việt đã nằm trực tiếp trong ảnh, được đối chiếu với kịch bản nguồn và kiểm tra dấu câu/chính tả bằng mắt ở kích thước gốc.
+- Mục lục hiện có hai chương; chọn Chương 2 mở đúng trang 13. Reader hỗ trợ liên kết sâu trang 13–14, hiển thị tổng 14 trang và giữ trang 14 làm tiến độ mới nhất thay vì đánh dấu cả tập đã hoàn tất.
+- Shortcut PWA thứ hai chuyển từ trang 12 sang trang mới nhất 14; service worker nâng lên v18 và đồng bộ đúng URL phiên bản của manifest, dữ liệu truyện và reader.
+- Đã kiểm tra cú pháp JavaScript, cấu trúc hai chương/14 trang, chuỗi trang liên tục, tồn tại ảnh, JSON manifest, hash CSP, liên kết cache, kích thước 864 × 1821, HTTP cục bộ và liên kết sâu trang 13–14.
+
+## Trạng thái
+
+- Chương 1 hoàn tất: 12 trang.
+- Chương 2 đang phát hành: 2 trang (trang toàn tập 13–14).
+- Tổng đã xuất bản: 14 trang.

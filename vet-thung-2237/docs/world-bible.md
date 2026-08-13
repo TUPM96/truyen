@@ -19,6 +19,12 @@ Mắt Rơi là một “chìa khóa quay về” được phóng khỏi Trái Đ
 - Mắt Rơi âm thầm phát các bản tin giả cho cả hai phía, kích hoạt chiến tranh để thu năng lượng nhiệt và nở ra.
 - An Vy và Kha-Ruun phải ngăn hai quân đội trước khi chứng minh được kẻ gây chiến thật sự.
 
+## Sau lần khóa đầu tiên
+
+- Khóa Mắt Rơi chỉ chặn được quá trình nở và vạch trần mệnh lệnh giả; nó không xóa mạng khóa cổ quanh địa tâm.
+- Bản đồ toàn cầu hiện chín tín hiệu Vết Thủng. Tám tín hiệu đứng yên, riêng tín hiệu 09 di chuyển trong một tuyến cổ dưới đáy Thái Bình Dương và hướng về Nham Cung.
+- Con đường cổ dưới Nham Cung đã ngủ khoảng ba mươi nghìn năm. Việc nó thức dậy là bí ẩn trung tâm của Chương 2, chưa được mặc định là hành động thù địch.
+
 ## Quy tắc hình ảnh cố định
 
 - Phong cách: webtoon Hàn màu cao cấp + nét manga Nhật sạch, bố cục điện ảnh.

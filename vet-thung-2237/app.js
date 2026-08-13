@@ -30,7 +30,7 @@ function validStoredPage(value, fallback = null) {
   return Number.isInteger(number) && number >= 1 && number <= total ? number : fallback;
 }
 
-let finished = readProgress('vt2237-complete') === 'true';
+let finished = STORY.publicationComplete && readProgress('vt2237-complete') === 'true';
 let current = validStoredPage(readProgress('vt2237-progress', 1), 1);
 let open = false;
 let fullscreenRequested = false;
@@ -48,6 +48,7 @@ let lastFocused = null;
 let readerSession = 0;
 
 const pageByNumber = new Map(STORY.pages.map(page => [page.number, page]));
+const chapterForPage = number => STORY.chapters.find(chapter => number >= chapter.startPage && number <= chapter.endPage);
 const backgroundContent = [...document.querySelectorAll('.site-header, main, footer')];
 const standaloneMode = window.matchMedia?.('(display-mode: standalone)')?.matches || navigator.standalone === true;
 const reducedMotionQuery = window.matchMedia?.('(prefers-reduced-motion: reduce)');
@@ -297,8 +298,9 @@ function update(direction = 0) {
     image.setAttribute('fetchpriority', active ? 'high' : 'low');
   });
   const currentPage = pageByNumber.get(current);
+  const currentChapter = chapterForPage(current);
   writeProgress('vt2237-progress', current);
-  document.title = `${currentPage.title} · Trang ${current}/${total} — ${STORY.title}`;
+  document.title = `${currentPage.title} · Chương ${currentChapter.number} · Trang ${current}/${total} — ${STORY.title}`;
   pageCounter.textContent = `${current} / ${total}`;
   pageCounter.setAttribute('aria-label', `Trang ${current} trên ${total}`);
   stage.setAttribute('aria-label', `Trang ${current} trên ${total}: ${currentPage.title}`);
@@ -309,8 +311,9 @@ function update(direction = 0) {
   nextButton.classList.toggle('chapter-finish', atEnd);
   finishReadyAt = atEnd ? (wasAtEnd ? finishReadyAt : performance.now() + 320) : 0;
   nextButton.textContent = atEnd ? '✓' : '›';
-  nextButton.setAttribute('aria-label', atEnd ? 'Hoàn tất chương và thoát' : 'Trang sau');
-  nextButton.title = atEnd ? 'Hoàn tất chương' : 'Trang sau';
+  const endLabel = STORY.publicationComplete ? 'Hoàn tất tập và thoát' : 'Đã đọc đến trang mới nhất và thoát';
+  nextButton.setAttribute('aria-label', atEnd ? endLabel : 'Trang sau');
+  nextButton.title = atEnd ? endLabel : 'Trang sau';
   updateReadLabel();
   preload(current - 1);
   preload(current + 1);
@@ -343,7 +346,7 @@ function handleReducedMotionChange(event) {
 }
 
 function updateReadLabel() {
-  document.querySelector('#readLabel').textContent = current > 1 ? `Đọc tiếp · Trang ${current}` : finished ? 'Đọc lại chương' : 'Đọc ngay';
+  document.querySelector('#readLabel').textContent = current > 1 ? `Đọc tiếp · Trang ${current}` : finished ? 'Đọc lại từ đầu' : 'Đọc ngay';
 }
 
 function preload(number) {
@@ -482,19 +485,30 @@ async function closeReader({historyMode = 'auto'} = {}) {
 
 function finishChapter() {
   if (!open || current !== total || performance.now() < finishReadyAt) return showControls();
-  finished = true;
-  current = 1;
-  writeProgress('vt2237-complete', 'true');
-  writeProgress('vt2237-progress', 1);
+  if (STORY.publicationComplete) {
+    finished = true;
+    current = 1;
+    writeProgress('vt2237-complete', 'true');
+    writeProgress('vt2237-progress', 1);
+  } else {
+    writeProgress('vt2237-complete', 'false');
+    writeProgress('vt2237-progress', current);
+  }
   updateReadLabel();
   closeReader();
 }
 
-document.querySelector('#releaseStatus').textContent = `${STORY.chapterComplete ? '1 chương hoàn tất' : '1 chương'} · ${total} trang`;
-document.querySelector('#chapterPages').textContent = `${total} trang →`;
+const completedChapters = STORY.chapters.filter(chapter => chapter.complete).length;
+document.querySelector('#releaseStatus').textContent = `${completedChapters} chương hoàn tất · ${total} trang`;
+document.querySelectorAll('[data-start-page]').forEach(button => {
+  const start = Number(button.dataset.startPage);
+  const chapter = STORY.chapters.find(item => item.startPage === start);
+  const count = chapter.endPage - chapter.startPage + 1;
+  button.querySelector('[data-chapter-pages]').textContent = `${count} trang${chapter.complete ? '' : ' · đang ra'} →`;
+  button.addEventListener('click', () => { current = start; openReader(); });
+});
 updateReadLabel();
 document.querySelector('#readButton').addEventListener('click', openReader);
-document.querySelector('#openChapter').addEventListener('click', () => { current = 1; openReader(); });
 document.querySelector('#closeReader').addEventListener('click', () => closeReader());
 shareButton.addEventListener('click', shareCurrentPage);
 printButton.addEventListener('click', printCurrentPage);
@@ -533,7 +547,7 @@ window.addEventListener('storage', event => {
   }
   if (event.key === 'vt2237-complete') {
     if (event.newValue !== null && event.newValue !== 'true' && event.newValue !== 'false') return;
-    finished = event.newValue === 'true';
+    finished = STORY.publicationComplete && event.newValue === 'true';
     volatileProgress.set(event.key, String(finished));
     updateReadLabel();
     return;
