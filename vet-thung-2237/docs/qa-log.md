@@ -433,3 +433,12 @@
 - Bản cache mới chỉ kích hoạt sau khi tải đủ cả 24 trang; manifest và biểu tượng PWA vẫn là tài nguyên phụ để một biểu tượng lỗi không chặn cập nhật nội dung.
 - Cache ngoại tuyến nâng lên v26.
 - Đã kiểm tra JavaScript, đối chiếu một-một URL trong dữ liệu truyện và service worker, đủ 24 tệp ảnh cục bộ, tổng dung lượng trang, HTTP và toàn bộ regression của reader.
+
+## Sửa tải lại trang khi ngoại tuyến — 13/08/2026
+
+- Không thêm trang hoặc chương mới; Tập 1 giữ nguyên 2 chương, 24 trang hoàn chỉnh.
+- Sửa đường dẫn **Tải lại trang**: service worker bỏ riêng tham số thử lại trước khi dò cache, nên vẫn tìm đúng ảnh gốc đã lưu khi thiết bị mất mạng.
+- Khi tải lại qua mạng thành công, ảnh được ghi về URL chuẩn thay vì tạo một mục cache tạm mang dấu thời gian.
+- Vẫn giữ nguyên tham số phiên bản nội dung `v`, không dùng `ignoreSearch`, nên các bản ảnh cũ và mới không bị trộn.
+- Cache ngoại tuyến nâng lên v27.
+- Đã kiểm tra hai nhánh cache-hit ngoại tuyến và network-hit trực tuyến, khóa cache chuẩn, 24 URL trang, cú pháp JavaScript, HTTP và regression reader.

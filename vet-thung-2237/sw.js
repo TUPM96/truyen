@@ -1,5 +1,5 @@
 const CACHE_PREFIX = 'vt2237-reader-';
-const CACHE_NAME = 'vt2237-reader-20260813-26';
+const CACHE_NAME = 'vt2237-reader-20260813-27';
 const CORE_URLS = [
   './index.html',
   './styles.css?v=reader-share-capability-20260812',
@@ -69,12 +69,16 @@ self.addEventListener('activate', event => {
 });
 
 async function cacheFirst(request) {
-  const cached = await caches.match(request);
+  const requestUrl = new URL(request.url);
+  const isRetry = requestUrl.searchParams.has('retry');
+  requestUrl.searchParams.delete('retry');
+  const canonicalRequest = isRetry ? requestUrl.href : request;
+  const cached = (await caches.match(request)) || (isRetry ? await caches.match(canonicalRequest) : null);
   if (cached) return cached;
   const response = await fetch(request);
   if (response.ok) {
     const cache = await caches.open(CACHE_NAME);
-    await cache.put(request, response.clone());
+    await cache.put(canonicalRequest, response.clone());
   }
   return response;
 }
