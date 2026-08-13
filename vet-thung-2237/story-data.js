@@ -1,10 +1,10 @@
 const STORY = {
   title: 'Vết Thủng 2237',
-  publishedThrough: 20,
+  publishedThrough: 22,
   publicationComplete: false,
   chapters: [
     {number: 1, title: 'Ba Nhịp Dưới Hố Sâu', startPage: 1, endPage: 12, complete: true},
-    {number: 2, title: 'Tín Hiệu Thứ Chín', startPage: 13, endPage: 20, complete: false}
+    {number: 2, title: 'Tín Hiệu Thứ Chín', startPage: 13, endPage: 22, complete: false}
   ],
   pages: [
     {number: 1, image: 'assets/pages/page-01.webp?v=dialogue-20260811', title: 'Thứ rơi ngoài bản đồ sao', alt: 'Thiên thể Mắt Rơi xuyên qua thành phố năm 2237 và An Vy gọi Trung tâm'},
@@ -26,6 +26,8 @@ const STORY = {
     {number: 17, image: 'assets/pages/page-17.webp?v=chapter-02-20260813-p56', title: 'Nhịp giả thứ hai', alt: 'Chỉ huy Bách phát hiện tín hiệu giả mang sinh trắc hoàn hảo của An Vy và khóa lệnh khai hỏa'},
     {number: 18, image: 'assets/pages/page-18.webp?v=chapter-02-20260813-p56', title: 'Trạm giữa biển', alt: 'An Vy và Kha-Ruun đến nhà ga cổ dưới Thái Bình Dương nơi tín hiệu 09 dừng sau cửa khóa đôi'},
     {number: 19, image: 'assets/pages/page-19.webp?v=chapter-02-20260813-p78', title: 'Kẻ mang tin', alt: 'An Vy và Kha-Ruun mở khóa đôi, tìm thấy khoang chuyển tin bị hư hại cảnh báo tám điểm còn lại sắp thức'},
-    {number: 20, image: 'assets/pages/page-20.webp?v=chapter-02-20260813-p78', title: 'Lịch sử bị cắt đôi', alt: 'Bản ghi cổ cho thấy người bề mặt và tộc Nham từng cùng xây mạng khóa rồi chia đôi ký ức về cuộc phản bội'}
+    {number: 20, image: 'assets/pages/page-20.webp?v=chapter-02-20260813-p78', title: 'Lịch sử bị cắt đôi', alt: 'Bản ghi cổ cho thấy người bề mặt và tộc Nham từng cùng xây mạng khóa rồi chia đôi ký ức về cuộc phản bội'},
+    {number: 21, image: 'assets/pages/page-21.webp?v=chapter-02-20260813-p910', title: 'Hội Đồng chia rẽ', alt: 'Hội Đồng Nham chia thành hai phe trước bản ghi cổ và ra lệnh niêm phong nhà ga dưới biển'},
+    {number: 22, image: 'assets/pages/page-22.webp?v=chapter-02-20260813-p910', title: 'Lệnh của người sống', alt: 'An Vy từ chối hai mệnh lệnh đối nghịch và phát bản ghi cổ cho dân thường bề mặt cùng Nham Cung'}
   ]
 };

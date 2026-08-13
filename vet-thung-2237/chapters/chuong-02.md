@@ -70,15 +70,25 @@
 - An Vy: “Không. Hai bên giữ mỗi bên một nửa.”
 - Kha-Ruun: “Để không ai kể trọn chuyện phản bội.”
 
-## Kịch bản tiếp theo — chưa xuất bản
-
 ### Trang 21 — Hội Đồng chia rẽ
 
-Một phe Hội Đồng Nham muốn phá hủy khoang tin trước khi sự thật lan ra; phe của Kha-Ruun yêu cầu đưa bằng chứng về Nham Cung.
+- Dẫn: “Bản ghi vừa chạm tới Nham Cung.”
+- Trưởng lão phe cứng rắn: “Phá hủy khoang tin. Sự thật này sẽ xé Nham Cung.”
+- Kha-Ruun: “Sự thật không chia rẽ chúng ta. Lời dối trá mới có.”
+- Trưởng lão phe đối thoại: “Đưa bằng chứng về Hội Đồng.”
+- Trưởng lão phe cứng rắn: “Không ai được rời trạm.”
+- Hệ thống: “LỆNH NIÊM PHONG: ĐÃ KÍCH HOẠT.”
 
 ### Trang 22 — Lệnh của người sống
 
-An Vy từ chối cả mệnh lệnh rút lui của Bách lẫn yêu cầu giao khóa của Hội Đồng, chọn phát bản ghi cho dân thường hai phía.
+- Bách: “An Vy, rút lui. Tôi không giữ được tuyến lâu hơn.”
+- Trưởng lão phe cứng rắn: “Giao khóa. Ngay lập tức.”
+- An Vy: “Hai bên đều muốn chôn nó.”
+- Kha-Ruun: “Cô định làm gì?”
+- An Vy: “Cho người sống tự nhìn.”
+- Hệ thống: “PHÁT TOÀN KÊNH: BỀ MẶT / NHAM CUNG.”
+
+## Kịch bản tiếp theo — chưa xuất bản
 
 ### Trang 23 — Tám cánh cửa mở
 

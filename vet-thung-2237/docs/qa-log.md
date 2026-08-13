@@ -378,3 +378,18 @@
 - Chương 1 hoàn tất: 12 trang.
 - Chương 2 đang phát hành: 8 trang (trang toàn tập 13–20).
 - Tổng đã xuất bản: 20 trang.
+
+## Mở rộng Chương 2 — trang 21–22 — 13/08/2026
+
+- Đã xuất bản trang 21 **Hội Đồng chia rẽ** và trang 22 **Lệnh của người sống**.
+- Trang 21 nối trực tiếp bản ghi bị cắt đôi: Hội Đồng Nham chia thành phe muốn phá hủy khoang tin và phe yêu cầu đưa bằng chứng về Nham Cung; lệnh niêm phong khóa nhà ga dưới biển.
+- Trang 22 đặt An Vy giữa lệnh rút lui của Bách và lệnh giao khóa của Hội Đồng; cô dùng thiết bị cổ tay phải phát bản ghi nguyên vẹn cho dân thường bề mặt và Nham Cung.
+- Đã đối chiếu lời thoại, đuôi bong bóng, thiết kế An Vy/Kha-Ruun/Bách, trưởng lão Nham, kiến trúc nhà ga và bảng màu đã khóa ở kích thước gốc.
+- Reader hiện có 22 trang; Chương 2 có 10 trang, shortcut PWA trỏ trang 22 và cache ngoại tuyến nâng lên v22.
+- Đã kiểm tra JavaScript, hai chương/22 trang liên tục, manifest, CSP, cache, kích thước ảnh, HTTP và liên kết sâu trang 21–22.
+
+## Trạng thái
+
+- Chương 1 hoàn tất: 12 trang.
+- Chương 2 đang phát hành: 10 trang (trang toàn tập 13–22).
+- Tổng đã xuất bản: 22 trang.
