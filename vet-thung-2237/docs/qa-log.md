@@ -451,3 +451,12 @@
 - Nếu chưa từng cài cache và mạng trả lỗi, service worker vẫn chuyển nguyên phản hồi lỗi thay vì giả lập thành công.
 - Cache ngoại tuyến nâng lên v28.
 - Đã mô phỏng phản hồi mạng 200, 503, mất mạng, cache liên kết sâu và trạng thái chưa có cache; kiểm tra cú pháp JavaScript, 24 URL trang và regression reader.
+
+## Không để lỗi ghi cache chặn nội dung — 13/08/2026
+
+- Không thêm trang hoặc chương mới; Tập 1 giữ nguyên 2 chương, 24 trang hoàn chỉnh.
+- Ảnh, font, mã giao diện và HTML vừa tải thành công nay vẫn được trả cho trình đọc nếu thiết bị hết dung lượng hoặc trình duyệt từ chối ghi cache.
+- Việc ghi cache lúc chạy được gom vào một hàm an toàn; lỗi lưu chỉ làm mất khả năng dùng lại tài nguyên ở lần sau, không biến phản hồi mạng hợp lệ thành trang lỗi.
+- Quá trình cài bản ngoại tuyến trọn tập vẫn giữ tính nguyên vẹn: worker mới chỉ kích hoạt khi shell và đủ 24 trang đã được lưu.
+- Cache ngoại tuyến nâng lên v29.
+- Đã mô phỏng lỗi mở cache và lỗi `cache.put` cho cả ảnh lẫn điều hướng, cùng các nhánh cache-hit, mạng 200/503 và mất mạng; kiểm tra cú pháp, 24 URL trang và regression reader.
