@@ -642,3 +642,12 @@
 - Gói cài đặt vẫn giữ tính toàn vẹn: chỉ kích hoạt worker mới sau khi shell và toàn bộ 24 trang bắt buộc đã có; lỗi tài nguyên phụ không chặn cập nhật.
 - Cache ngoại tuyến nâng lên v50.
 - Đã mô phỏng nâng cấp từ cache cũ, cài lần đầu, tài nguyên bắt buộc bị thiếu/lỗi và tài nguyên phụ lỗi; kiểm tra đủ khóa cache, cú pháp, 24 URL trang, liên kết sâu và HTTP.
+
+## Buộc làm mới shell khi nâng phiên bản — 14/08/2026
+
+- Không thêm trang hoặc chương mới; Tập 1 giữ nguyên 2 chương, 24 trang hoàn chỉnh.
+- `index.html` nay được lấy bằng yêu cầu `cache: reload`, tránh nhận lại shell HTTP cũ trong khoảng `max-age=600` của GitHub Pages khi worker mới vừa triển khai.
+- Phản hồi shell phải thành công mới được ghi vào cache và cho phép worker kích hoạt; phản hồi lỗi không thể thay bản đang dùng.
+- Các ảnh truyện, font và mã có URL phiên bản vẫn tái sử dụng cache cũ, nên việc làm mới shell không khiến tải lại 24 trang.
+- Cache ngoại tuyến nâng lên v51.
+- Đã mô phỏng HTTP cache còn hạn, shell mới, phản hồi 404/503, nâng cấp từ cache cũ và cài lần đầu; kiểm tra tùy chọn `reload`, đủ khóa cache, cú pháp, 24 URL trang, liên kết sâu và HTTP.
