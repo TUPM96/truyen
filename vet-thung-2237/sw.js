@@ -1,5 +1,5 @@
 const CACHE_PREFIX = 'vt2237-reader-';
-const CACHE_NAME = 'vt2237-reader-20260814-48';
+const CACHE_NAME = 'vt2237-reader-20260814-49';
 const CORE_URLS = [
   './index.html',
   './styles.css?v=reader-share-capability-20260812',
@@ -91,9 +91,15 @@ async function matchRuntimeResponse(key) {
 }
 
 async function storeRuntimeResponse(key, response) {
+  let copy = null;
+  try {
+    copy = response.clone();
+  } catch (_) {
+    return;
+  }
   try {
     const cache = await caches.open(CACHE_NAME);
-    await cache.put(key, response.clone());
+    await cache.put(key, copy);
   } catch (_) {}
 }
 

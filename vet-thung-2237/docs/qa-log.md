@@ -624,3 +624,12 @@
 - Nhánh cache-hit, phản hồi lỗi mạng và dự phòng điều hướng giữ nguyên hành vi; chỉ tách đường trả nội dung khỏi lời hứa ghi cache.
 - Cache ngoại tuyến nâng lên v48.
 - Đã mô phỏng ghi cache hoàn tất, bị từ chối và treo vô hạn cho cả ảnh lẫn điều hướng; kiểm tra cú pháp, 24 URL trang, liên kết sâu và HTTP.
+
+## Giữ bản sao trước khi ghi cache nền — 14/08/2026
+
+- Không thêm trang hoặc chương mới; Tập 1 giữ nguyên 2 chương, 24 trang hoàn chỉnh.
+- Service worker nay tạo bản sao phản hồi ngay trước mọi điểm chờ của Cache Storage, nên reader có thể tiêu thụ nội dung gốc tức thời mà không làm mất bản dành cho ngoại tuyến.
+- Nếu `caches.open()` phản hồi chậm, bản sao vẫn còn nguyên để ghi khi cache sẵn sàng; lỗi tạo bản sao chỉ bỏ qua lưu nền và không ảnh hưởng nội dung đang hiển thị.
+- Áp dụng đồng nhất cho ảnh, mã giao diện và HTML điều hướng; khóa chuẩn của ảnh thử lại và `index.html` vẫn được giữ.
+- Cache ngoại tuyến nâng lên v49.
+- Đã mô phỏng phản hồi bị đọc hết trước khi cache mở, cache mở chậm, ghi bị từ chối và cache-hit; kiểm tra cú pháp, 24 URL trang, liên kết sâu và HTTP.
