@@ -54,6 +54,7 @@ let lastFocused = null;
 let readerSession = 0;
 let workerRefreshPending = false;
 let fullscreenExitPending = null;
+let fullscreenExitSignal = null;
 
 const pageByNumber = new Map(STORY.pages.map(page => [page.number, page]));
 const chapterForPage = number => STORY.chapters.find(chapter => number >= chapter.startPage && number <= chapter.endPage);
@@ -264,26 +265,31 @@ function cancelPendingPrint() {
 
 function beginFullscreenExit() {
   if (fullscreenExitPending) return fullscreenExitPending;
-  if (!document.fullscreenElement && !document.webkitFullscreenElement) return null;
+  const fullscreenElement = document.fullscreenElement || document.webkitFullscreenElement;
+  if (fullscreenElement !== reader) return null;
+  const exit = document.exitFullscreen || document.webkitExitFullscreen;
+  if (!exit) return null;
   try {
-    const result = document.exitFullscreen?.() || document.webkitExitFullscreen?.();
-    if (!result) {
-      handleFullscreenExit(document.fullscreenElement || document.webkitFullscreenElement);
-      return null;
-    }
+    const result = exit.call(document);
     let timeout = 0;
-    const fullscreenExit = Promise.race([
-      Promise.resolve(result).catch(() => {}),
+    let signalExit = null;
+    const candidates = [
+      new Promise(resolve => { signalExit = resolve; }),
       new Promise(resolve => { timeout = setTimeout(resolve, FULLSCREEN_EXIT_TIMEOUT_MS); })
-    ]);
+    ];
+    if (result && typeof result.then === 'function') candidates.push(Promise.resolve(result).catch(() => {}));
+    const fullscreenExit = Promise.race(candidates);
     fullscreenExitPending = fullscreenExit;
+    fullscreenExitSignal = signalExit;
     const clearPendingExit = () => {
       clearTimeout(timeout);
       if (fullscreenExitPending !== fullscreenExit) return;
       fullscreenExitPending = null;
+      if (fullscreenExitSignal === signalExit) fullscreenExitSignal = null;
       handleFullscreenExit(document.fullscreenElement || document.webkitFullscreenElement);
     };
     fullscreenExit.then(clearPendingExit);
+    if ((document.fullscreenElement || document.webkitFullscreenElement) !== reader) signalExit();
     return fullscreenExit;
   } catch (_) {
     handleFullscreenExit(document.fullscreenElement || document.webkitFullscreenElement);
@@ -512,9 +518,14 @@ function queueViewportRefresh() {
 }
 
 function handleFullscreenExit(fullscreenElement) {
-  if (!fullscreenRequested || fullscreenElement) return;
+  if (!fullscreenRequested || fullscreenElement === reader) return;
   fullscreenRequested = false;
   refreshReaderViewport();
+}
+
+function handleFullscreenChange(fullscreenElement) {
+  if (fullscreenElement !== reader) fullscreenExitSignal?.();
+  handleFullscreenExit(fullscreenElement);
 }
 
 function cleanupReader() {
@@ -706,8 +717,8 @@ document.addEventListener('keydown', event => {
     showControls();
   }
 });
-document.addEventListener('fullscreenchange', () => handleFullscreenExit(document.fullscreenElement));
-document.addEventListener('webkitfullscreenchange', () => handleFullscreenExit(document.webkitFullscreenElement));
+document.addEventListener('fullscreenchange', () => handleFullscreenChange(document.fullscreenElement));
+document.addEventListener('webkitfullscreenchange', () => handleFullscreenChange(document.webkitFullscreenElement));
 document.addEventListener('visibilitychange', () => {
   if (document.hidden) return cancelPendingShare();
   if (refreshForWorkerWhenSafe()) return;

@@ -678,3 +678,13 @@
 - Sự kiện không có controller và các `controllerchange` lặp trong lúc đã chuẩn bị làm mới tiếp tục bị bỏ qua an toàn.
 - Đồng bộ phiên bản `app.js` trong HTML và gói shell; cache ngoại tuyến nâng lên v54.
 - Đã mô phỏng cài lần đầu, cập nhật lần hai trong cùng tab, trang đã có controller từ đầu, tab ẩn, reader đang mở, sự kiện controller rỗng, cú pháp, 24 URL trang và HTTP.
+
+## Đồng bộ thoát Fullscreen trên Safari/WebKit — 14/08/2026
+
+- Không thêm trang hoặc chương mới; Tập 1 giữ nguyên 2 chương, 24 trang hoàn chỉnh.
+- Reader nay chọn đúng một API thoát Fullscreen khả dụng, không dùng phép dự phòng có thể gọi tiếp API WebKit khi API chuẩn trả về giá trị rỗng.
+- API WebKit trả về `undefined` vẫn được theo dõi bằng sự kiện `webkitfullscreenchange`; nếu trình duyệt không phát sự kiện, ngưỡng 1,5 giây tiếp tục giải phóng trạng thái chờ.
+- Chỉ Fullscreen của chính reader mới bị thoát; một phần tử khác đang Fullscreen không còn bị ứng dụng can thiệp.
+- Sự kiện thoát sang trạng thái không Fullscreen hoặc sang phần tử khác đều kết thúc đúng yêu cầu của reader, hiện lại điều khiển và làm mới viewport.
+- Đồng bộ phiên bản `app.js` trong HTML và gói shell; cache ngoại tuyến nâng lên v55.
+- Đã mô phỏng Promise chuẩn thành công/từ chối/treo, WebKit trả về rỗng có và không có sự kiện, phần tử Fullscreen không thuộc reader, callback muộn, cú pháp, 24 URL trang và HTTP.
