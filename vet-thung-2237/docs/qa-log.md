@@ -615,3 +615,12 @@
 - Mỗi lần thử lại dùng bộ hẹn giờ riêng của phần tử ảnh mới; ảnh đến muộn vẫn có thể khôi phục trạng thái thành công và callback cũ không thể đổi trạng thái trang hiện tại.
 - Đồng bộ phiên bản `app.js` trong HTML và gói shell; cache ngoại tuyến nâng lên v47.
 - Đã kiểm tra tải treo, tải thành công/thất bại, lật trang trước ngưỡng chờ, đóng–mở reader, thử lại và callback cũ đến muộn, cú pháp, 24 URL trang và HTTP.
+
+## Không chờ ghi cache mới hiển thị nội dung — 14/08/2026
+
+- Không thêm trang hoặc chương mới; Tập 1 giữ nguyên 2 chương, 24 trang hoàn chỉnh.
+- Ảnh, mã giao diện và HTML tải thành công nay được trả ngay cho trình duyệt; thao tác ghi Cache Storage chạy nền, không còn giữ nội dung hợp lệ nếu bộ nhớ trình duyệt phản hồi chậm hoặc treo.
+- Service worker vẫn gắn việc ghi nền vào vòng đời sự kiện bằng `waitUntil`, nên cache có đủ thời gian hoàn tất khi trình duyệt hoạt động bình thường.
+- Nhánh cache-hit, phản hồi lỗi mạng và dự phòng điều hướng giữ nguyên hành vi; chỉ tách đường trả nội dung khỏi lời hứa ghi cache.
+- Cache ngoại tuyến nâng lên v48.
+- Đã mô phỏng ghi cache hoàn tất, bị từ chối và treo vô hạn cho cả ảnh lẫn điều hướng; kiểm tra cú pháp, 24 URL trang, liên kết sâu và HTTP.

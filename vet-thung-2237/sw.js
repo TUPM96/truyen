@@ -1,5 +1,5 @@
 const CACHE_PREFIX = 'vt2237-reader-';
-const CACHE_NAME = 'vt2237-reader-20260814-47';
+const CACHE_NAME = 'vt2237-reader-20260814-48';
 const CORE_URLS = [
   './index.html',
   './styles.css?v=reader-share-capability-20260812',
@@ -74,10 +74,12 @@ async function cacheFirst(request) {
   requestUrl.searchParams.delete('retry');
   const canonicalRequest = isRetry ? requestUrl.href : request;
   const cached = isRetry ? null : await matchRuntimeResponse(request);
-  if (cached) return cached;
+  if (cached) return {response: cached, background: null};
   const response = await fetch(request);
-  if (response.ok) await storeRuntimeResponse(canonicalRequest, response);
-  return response;
+  return {
+    response,
+    background: response.ok ? storeRuntimeResponse(canonicalRequest, response) : null
+  };
 }
 
 async function matchRuntimeResponse(key) {
@@ -100,11 +102,21 @@ async function networkFirst(request) {
   try {
     networkResponse = await fetch(request);
     if (networkResponse.ok) {
-      await storeRuntimeResponse('./index.html', networkResponse);
-      return networkResponse;
+      return {
+        response: networkResponse,
+        background: storeRuntimeResponse('./index.html', networkResponse)
+      };
     }
   } catch (_) {}
-  return (await matchRuntimeResponse(request)) || (await matchRuntimeResponse('./index.html')) || networkResponse || Response.error();
+  return {
+    response: (await matchRuntimeResponse(request)) || (await matchRuntimeResponse('./index.html')) || networkResponse || Response.error(),
+    background: null
+  };
+}
+
+function respondWithBackgroundCache(event, task) {
+  event.respondWith(task.then(result => result.response));
+  event.waitUntil(task.then(result => result.background).catch(() => {}));
 }
 
 self.addEventListener('fetch', event => {
@@ -112,10 +124,10 @@ self.addEventListener('fetch', event => {
   const url = new URL(request.url);
   if (request.method !== 'GET' || url.origin !== self.location.origin) return;
   if (request.mode === 'navigate') {
-    event.respondWith(networkFirst(request));
+    respondWithBackgroundCache(event, networkFirst(request));
     return;
   }
   if (['font', 'image', 'manifest', 'script', 'style'].includes(request.destination)) {
-    event.respondWith(cacheFirst(request));
+    respondWithBackgroundCache(event, cacheFirst(request));
   }
 });
