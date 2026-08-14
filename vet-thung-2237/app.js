@@ -9,6 +9,8 @@ const shareStatus = document.querySelector('#shareStatus');
 const total = STORY.pages.length;
 const baseDocumentTitle = document.title;
 const volatileProgress = new Map();
+const pageLoadTimers = new WeakMap();
+const PAGE_LOAD_TIMEOUT_MS = 15000;
 
 function readProgress(key, fallback = null) {
   try {
@@ -295,10 +297,34 @@ function bindPageImages() {
 
 function bindPageImage(image, source = null) {
   const number = Number(image.dataset.pageImage);
-  image.addEventListener('load', () => setPageLoadState(number, false, image));
-  image.addEventListener('error', () => setPageLoadState(number, true, image));
+  image.addEventListener('load', () => {
+    clearPageLoadTimer(image);
+    setPageLoadState(number, false, image);
+  });
+  image.addEventListener('error', () => {
+    clearPageLoadTimer(image);
+    setPageLoadState(number, true, image);
+  });
   if (source) image.src = source;
   else if (image.complete) setPageLoadState(number, image.naturalWidth === 0, image);
+}
+
+function clearPageLoadTimer(image) {
+  const timer = pageLoadTimers.get(image);
+  if (!timer) return;
+  clearTimeout(timer);
+  pageLoadTimers.delete(image);
+}
+
+function watchPageImage(image) {
+  clearPageLoadTimer(image);
+  if (!open || image.complete) return;
+  const number = Number(image.dataset.pageImage);
+  const timer = setTimeout(() => {
+    pageLoadTimers.delete(image);
+    setPageLoadState(number, true, image);
+  }, PAGE_LOAD_TIMEOUT_MS);
+  pageLoadTimers.set(image, timer);
 }
 
 function setPageLoadState(number, failed, sourceImage = null) {
@@ -325,6 +351,7 @@ function retryPage(number) {
   replacement.removeAttribute('src');
   image.replaceWith(replacement);
   bindPageImage(replacement, retryUrl.href);
+  if (open && number === current) watchPageImage(replacement);
 }
 
 function update(direction = 0) {
@@ -337,6 +364,8 @@ function update(direction = 0) {
     const image = page.querySelector('[data-page-image]');
     image.setAttribute('loading', active ? 'eager' : 'lazy');
     image.setAttribute('fetchpriority', active ? 'high' : 'low');
+    if (active) watchPageImage(image);
+    else clearPageLoadTimer(image);
   });
   const currentPage = pageByNumber.get(current);
   const currentChapter = chapterForPage(current);
@@ -474,6 +503,7 @@ function cleanupReader() {
   clearTurnAnimation();
   reader.classList.remove('controls-hidden');
   cancelPendingPrint();
+  comic.querySelectorAll('[data-page-image]').forEach(clearPageLoadTimer);
   comic.replaceChildren();
   document.head.querySelectorAll('[data-preload]').forEach(link => link.remove());
 }

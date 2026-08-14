@@ -606,3 +606,12 @@
 - Lần mở tiếp theo sau khi thao tác cũ kết thúc vẫn yêu cầu Fullscreen bình thường.
 - Đồng bộ phiên bản `app.js` trong HTML và gói shell; cache ngoại tuyến nâng lên v46.
 - Đã kiểm tra thoát thành công, bị từ chối, lời hứa treo, mở lại khi đang chờ, đóng lại tạo thao tác mới, kết quả cũ đến muộn, mở lần kế tiếp, cú pháp, 24 URL trang và HTTP.
+
+## Thoát trạng thái tải ảnh vô hạn — 14/08/2026
+
+- Không thêm trang hoặc chương mới; Tập 1 giữ nguyên 2 chương, 24 trang hoàn chỉnh.
+- Ảnh của trang đang đọc nay có ngưỡng chờ 15 giây; nếu trình duyệt không phát cả sự kiện tải thành công lẫn thất bại, reader hiện đúng thông báo và nút **Tải lại trang** thay vì quay tải vô hạn.
+- Chỉ trang đang đọc được theo dõi; khi lật trang hoặc đóng reader, bộ hẹn giờ cũ bị hủy nên trang tải lười và phiên đã đóng không thể báo lỗi giả.
+- Mỗi lần thử lại dùng bộ hẹn giờ riêng của phần tử ảnh mới; ảnh đến muộn vẫn có thể khôi phục trạng thái thành công và callback cũ không thể đổi trạng thái trang hiện tại.
+- Đồng bộ phiên bản `app.js` trong HTML và gói shell; cache ngoại tuyến nâng lên v47.
+- Đã kiểm tra tải treo, tải thành công/thất bại, lật trang trước ngưỡng chờ, đóng–mở reader, thử lại và callback cũ đến muộn, cú pháp, 24 URL trang và HTTP.
