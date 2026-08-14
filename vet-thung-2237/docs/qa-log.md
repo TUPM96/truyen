@@ -688,3 +688,12 @@
 - Sự kiện thoát sang trạng thái không Fullscreen hoặc sang phần tử khác đều kết thúc đúng yêu cầu của reader, hiện lại điều khiển và làm mới viewport.
 - Đồng bộ phiên bản `app.js` trong HTML và gói shell; cache ngoại tuyến nâng lên v55.
 - Đã mô phỏng Promise chuẩn thành công/từ chối/treo, WebKit trả về rỗng có và không có sự kiện, phần tử Fullscreen không thuộc reader, callback muộn, cú pháp, 24 URL trang và HTTP.
+
+## Tạm dừng bộ đếm tải ảnh khi ứng dụng ở nền — 14/08/2026
+
+- Không thêm trang hoặc chương mới; Tập 1 giữ nguyên 2 chương, 24 trang hoàn chỉnh.
+- Khi tab hoặc ứng dụng chuyển sang nền, reader nay hủy các bộ đếm tải ảnh đang chạy, tránh báo nhầm lỗi sau 15 giây trong lúc trình duyệt tạm ngưng tải mạng.
+- Khi người đọc quay lại, trang hiện tại được kiểm tra ngay: ảnh đã tải thì cập nhật đúng trạng thái; ảnh còn chờ thì khởi động lại một khoảng chờ đầy đủ.
+- Bộ đếm mới không được tạo khi tài liệu vẫn đang ẩn; trạng thái ngoại tuyến và nút thử lại giữ nguyên hành vi cũ.
+- Đồng bộ phiên bản `app.js` trong HTML và gói shell; cache ngoại tuyến nâng lên v56.
+- Đã mô phỏng chu kỳ đang tải → chuyển nền → quay lại, ảnh hoàn tất trong nền, hết hạn sau khi trở lại; đồng thời kiểm tra cú pháp, 24 URL trang, ảnh nguồn và HTTP.

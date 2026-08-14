@@ -352,13 +352,24 @@ function clearPageLoadTimer(image) {
 
 function watchPageImage(image) {
   clearPageLoadTimer(image);
-  if (!open || image.complete) return;
+  if (!open || document.hidden || image.complete) return;
   const number = Number(image.dataset.pageImage);
   const timer = setTimeout(() => {
     pageLoadTimers.delete(image);
     setPageLoadState(number, true, image);
   }, PAGE_LOAD_TIMEOUT_MS);
   pageLoadTimers.set(image, timer);
+}
+
+function refreshActivePageImage() {
+  const image = comic.querySelector(`.comic-page[data-page="${current}"] [data-page-image]`);
+  if (!image) return;
+  if (image.complete) {
+    clearPageLoadTimer(image);
+    setPageLoadState(current, image.naturalWidth === 0, image);
+    return;
+  }
+  watchPageImage(image);
 }
 
 function setPageLoadState(number, failed, sourceImage = null) {
@@ -506,6 +517,7 @@ function setBackgroundInert(value) {
 function refreshReaderViewport() {
   if (!open) return;
   clearTurnAnimation();
+  refreshActivePageImage();
   preload(current - 1);
   preload(current + 1);
   showControls();
@@ -720,7 +732,11 @@ document.addEventListener('keydown', event => {
 document.addEventListener('fullscreenchange', () => handleFullscreenChange(document.fullscreenElement));
 document.addEventListener('webkitfullscreenchange', () => handleFullscreenChange(document.webkitFullscreenElement));
 document.addEventListener('visibilitychange', () => {
-  if (document.hidden) return cancelPendingShare();
+  if (document.hidden) {
+    cancelPendingShare();
+    comic.querySelectorAll('[data-page-image]').forEach(clearPageLoadTimer);
+    return;
+  }
   if (refreshForWorkerWhenSafe()) return;
   refreshReaderViewport();
 });
