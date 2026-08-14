@@ -527,13 +527,13 @@ async function closeReader({historyMode = 'auto'} = {}) {
       clearReaderHistory();
     }
   }
-  const session = ++readerSession;
+  ++readerSession;
   open = false;
   fullscreenRequested = false;
+  let fullscreenExit = null;
   if (document.fullscreenElement || document.webkitFullscreenElement) {
-    try { await (document.exitFullscreen?.() || document.webkitExitFullscreen?.()); } catch (_) {}
+    try { fullscreenExit = document.exitFullscreen?.() || document.webkitExitFullscreen?.(); } catch (_) {}
   }
-  if (session !== readerSession) return;
   reader.hidden = true;
   setBackgroundInert(false);
   document.body.classList.remove('reader-open');
@@ -541,6 +541,9 @@ async function closeReader({historyMode = 'auto'} = {}) {
   cleanupReader();
   if (lastFocused?.isConnected) lastFocused.focus({preventScroll: true});
   refreshForWorkerWhenSafe();
+  if (fullscreenExit) {
+    try { await fullscreenExit; } catch (_) {}
+  }
 }
 
 function refreshForWorkerWhenSafe() {

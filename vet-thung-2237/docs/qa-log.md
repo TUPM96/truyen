@@ -587,3 +587,12 @@
 - Phiên mới chủ động yêu cầu Fullscreen vẫn được giữ nguyên khi callback cũ hoàn tất; sự kiện thoát toàn màn hình tiếp tục làm mới viewport và hiện lại điều khiển đúng lúc.
 - Đồng bộ phiên bản `app.js` trong HTML và gói shell; cache ngoại tuyến nâng lên v44.
 - Đã kiểm tra yêu cầu cũ bị từ chối muộn, yêu cầu mới thành công, đóng–mở nhanh, mở lại không Fullscreen, callback cũ thành công muộn, thoát tự động, cú pháp, 24 URL trang và HTTP.
+
+## Dọn giao diện trước khi chờ thoát toàn màn hình — 14/08/2026
+
+- Không thêm trang hoặc chương mới; Tập 1 giữ nguyên 2 chương, 24 trang hoàn chỉnh.
+- Khi đóng reader, ứng dụng nay ẩn giao diện, mở khóa nội dung nền, dọn ảnh và khôi phục tiêu đề ngay sau khi phát lệnh thoát Fullscreen, không chờ lời hứa của trình duyệt hoàn tất.
+- Nếu `exitFullscreen` bị treo hoặc từ chối, người đọc không còn mắc kẹt trong reader; nút đọc và mục lục có thể sử dụng lại ngay.
+- Kết quả thoát Fullscreen đến muộn không thể dọn nhầm DOM của phiên reader mới đã được mở trong lúc chờ.
+- Đồng bộ phiên bản `app.js` trong HTML và gói shell; cache ngoại tuyến nâng lên v45.
+- Đã kiểm tra thoát Fullscreen thành công, bị từ chối, lời hứa treo, đóng–mở lại trong lúc chờ, callback cũ hoàn tất muộn, cú pháp, 24 URL trang và HTTP.
