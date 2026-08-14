@@ -560,3 +560,12 @@
 - Giữ nguyên mô tả ảnh, chế độ tải ưu tiên, giải mã và URL chống cache cho mỗi lần thử lại.
 - Đồng bộ phiên bản `app.js` trong HTML và gói shell; cache ngoại tuyến nâng lên v41.
 - Đã kiểm tra lỗi ban đầu, hai lần thử lại liên tiếp, callback cũ đến muộn theo cả hai hướng, khôi phục thành công, trạng thái ngoại tuyến, cú pháp, 24 URL trang và HTTP.
+
+## Buộc thử tải ảnh từ mạng — 14/08/2026
+
+- Không thêm trang hoặc chương mới; Tập 1 giữ nguyên 2 chương, 24 trang hoàn chỉnh.
+- Yêu cầu ảnh có tham số `retry` nay bỏ qua Cache Storage và đi thẳng ra mạng, nên nút **Tải lại trang** không còn nhận lại đúng bản cache vừa gây lỗi.
+- Ảnh tải lại thành công vẫn được lưu dưới URL chuẩn không có tham số `retry`, để thay bản cũ và tiếp tục dùng ngoại tuyến ở lần đọc sau.
+- Tải ảnh bình thường vẫn ưu tiên cache; khi thử lại lúc mất mạng, reader giữ đúng thông báo lỗi ngoại tuyến thay vì báo thành công giả từ cache cũ.
+- Cache ngoại tuyến nâng lên v42.
+- Đã mô phỏng cache-hit bình thường, retry khi cache có sẵn, retry thành công và cập nhật URL chuẩn, retry mất mạng, cú pháp, gói ngoại tuyến 24 trang và HTTP.
