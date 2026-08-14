@@ -669,3 +669,12 @@
 - Sau khi yêu cầu cũ hết hạn, lần đóng kế tiếp có thể phát yêu cầu thoát mới; kết quả cũ đến muộn không thể xóa nhầm trạng thái của yêu cầu mới.
 - Đồng bộ phiên bản `app.js` trong HTML và gói shell; cache ngoại tuyến nâng lên v53.
 - Đã kiểm tra thoát thành công, bị từ chối, bị treo, tự hết hạn, thử lại sau hết hạn, đóng–mở nhanh, callback cũ đến muộn, cú pháp, 24 URL trang và HTTP.
+
+## Theo dõi cập nhật worker sau lần cài đầu — 14/08/2026
+
+- Không thêm trang hoặc chương mới; Tập 1 giữ nguyên 2 chương, 24 trang hoàn chỉnh.
+- Tab mở lần đầu khi chưa có service worker nay ghi nhận worker sau sự kiện nhận quyền điều khiển đầu tiên, thay vì giữ trạng thái “chưa có controller” suốt phiên.
+- Lần nhận quyền đầu tiên vẫn không ép tải lại trang; từ lần cập nhật worker kế tiếp, shell mới được đánh dấu chờ và tự làm mới khi reader đã đóng, tab đang hiển thị.
+- Sự kiện không có controller và các `controllerchange` lặp trong lúc đã chuẩn bị làm mới tiếp tục bị bỏ qua an toàn.
+- Đồng bộ phiên bản `app.js` trong HTML và gói shell; cache ngoại tuyến nâng lên v54.
+- Đã mô phỏng cài lần đầu, cập nhật lần hai trong cùng tab, trang đã có controller từ đầu, tab ẩn, reader đang mở, sự kiện controller rỗng, cú pháp, 24 URL trang và HTTP.

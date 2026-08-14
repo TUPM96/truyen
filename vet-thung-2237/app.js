@@ -762,10 +762,14 @@ window.addEventListener('popstate', () => {
 });
 
 if ('serviceWorker' in navigator && window.isSecureContext) {
-  const hadController = Boolean(navigator.serviceWorker.controller);
+  let hadController = Boolean(navigator.serviceWorker.controller);
   let refreshingForWorker = false;
   navigator.serviceWorker.addEventListener?.('controllerchange', () => {
-    if (!hadController || refreshingForWorker) return;
+    if (!navigator.serviceWorker.controller || refreshingForWorker) return;
+    if (!hadController) {
+      hadController = true;
+      return;
+    }
     refreshingForWorker = true;
     workerRefreshPending = true;
     refreshForWorkerWhenSafe();
