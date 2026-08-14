@@ -660,3 +660,12 @@
 - Các nhánh thoát Fullscreen khi đóng reader hoặc khi một yêu cầu vào Fullscreen cũ hoàn tất muộn cũng dùng chung trạng thái, giữ nguyên cơ chế cô lập theo phiên.
 - Đồng bộ phiên bản `app.js` trong HTML và gói shell; cache ngoại tuyến nâng lên v52.
 - Đã kiểm tra thoát Fullscreen thành công, bị từ chối, lời hứa treo, lệnh thoát đã chờ từ phiên trước, đóng–mở reader, cú pháp, 24 URL trang và HTTP.
+
+## Tự giải phóng yêu cầu thoát Fullscreen bị treo — 14/08/2026
+
+- Không thêm trang hoặc chương mới; Tập 1 giữ nguyên 2 chương, 24 trang hoàn chỉnh.
+- Mọi yêu cầu thoát Fullscreen nay tự giải phóng dấu chờ sau tối đa 1,5 giây, không chỉ riêng thao tác in; một lời hứa trình duyệt bị treo không thể khóa các lần thoát tiếp theo vĩnh viễn.
+- Đóng reader tiếp tục dọn giao diện ngay và không còn giữ lời hứa trả về của hàm đóng ở trạng thái chờ vô hạn.
+- Sau khi yêu cầu cũ hết hạn, lần đóng kế tiếp có thể phát yêu cầu thoát mới; kết quả cũ đến muộn không thể xóa nhầm trạng thái của yêu cầu mới.
+- Đồng bộ phiên bản `app.js` trong HTML và gói shell; cache ngoại tuyến nâng lên v53.
+- Đã kiểm tra thoát thành công, bị từ chối, bị treo, tự hết hạn, thử lại sau hết hạn, đóng–mở nhanh, callback cũ đến muộn, cú pháp, 24 URL trang và HTTP.

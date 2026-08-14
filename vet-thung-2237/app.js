@@ -11,7 +11,7 @@ const baseDocumentTitle = document.title;
 const volatileProgress = new Map();
 const pageLoadTimers = new WeakMap();
 const PAGE_LOAD_TIMEOUT_MS = 15000;
-const PRINT_FULLSCREEN_EXIT_TIMEOUT_MS = 1500;
+const FULLSCREEN_EXIT_TIMEOUT_MS = 1500;
 
 function readProgress(key, fallback = null) {
   try {
@@ -271,29 +271,24 @@ function beginFullscreenExit() {
       handleFullscreenExit(document.fullscreenElement || document.webkitFullscreenElement);
       return null;
     }
-    const fullscreenExit = Promise.resolve(result);
+    let timeout = 0;
+    const fullscreenExit = Promise.race([
+      Promise.resolve(result).catch(() => {}),
+      new Promise(resolve => { timeout = setTimeout(resolve, FULLSCREEN_EXIT_TIMEOUT_MS); })
+    ]);
     fullscreenExitPending = fullscreenExit;
     const clearPendingExit = () => {
+      clearTimeout(timeout);
       if (fullscreenExitPending !== fullscreenExit) return;
       fullscreenExitPending = null;
       handleFullscreenExit(document.fullscreenElement || document.webkitFullscreenElement);
     };
-    fullscreenExit.then(clearPendingExit, clearPendingExit);
+    fullscreenExit.then(clearPendingExit);
     return fullscreenExit;
   } catch (_) {
     handleFullscreenExit(document.fullscreenElement || document.webkitFullscreenElement);
     return null;
   }
-}
-
-async function waitForFullscreenExitBeforePrint(fullscreenExit) {
-  if (!fullscreenExit) return;
-  let timeout = 0;
-  await Promise.race([
-    fullscreenExit.catch(() => {}),
-    new Promise(resolve => { timeout = setTimeout(resolve, PRINT_FULLSCREEN_EXIT_TIMEOUT_MS); })
-  ]);
-  clearTimeout(timeout);
 }
 
 async function printCurrentPage() {
@@ -305,7 +300,7 @@ async function printCurrentPage() {
   setPrintPending(true);
   document.body.classList.add('print-page');
   fullscreenRequested = false;
-  await waitForFullscreenExitBeforePrint(beginFullscreenExit());
+  try { await beginFullscreenExit(); } catch (_) {}
   try {
     if (contextIsCurrent()) window.print();
   } catch (_) {
@@ -598,7 +593,7 @@ async function closeReader({historyMode = 'auto'} = {}) {
   ++readerSession;
   open = false;
   fullscreenRequested = false;
-  const fullscreenExit = beginFullscreenExit();
+  beginFullscreenExit();
   reader.hidden = true;
   setBackgroundInert(false);
   document.body.classList.remove('reader-open');
@@ -606,9 +601,6 @@ async function closeReader({historyMode = 'auto'} = {}) {
   cleanupReader();
   if (lastFocused?.isConnected) lastFocused.focus({preventScroll: true});
   refreshForWorkerWhenSafe();
-  if (fullscreenExit) {
-    try { await fullscreenExit; } catch (_) {}
-  }
 }
 
 function refreshForWorkerWhenSafe() {
