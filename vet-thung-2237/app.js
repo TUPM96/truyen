@@ -288,18 +288,18 @@ function render() {
 function bindPageImages() {
   comic.querySelectorAll('[data-page-image]').forEach(image => {
     const number = Number(image.dataset.pageImage);
-    image.addEventListener('load', () => setPageLoadState(number, false));
-    image.addEventListener('error', () => setPageLoadState(number, true));
-    if (image.complete) setPageLoadState(number, image.naturalWidth === 0);
+    image.addEventListener('load', () => setPageLoadState(number, false, image));
+    image.addEventListener('error', () => setPageLoadState(number, true, image));
+    if (image.complete) setPageLoadState(number, image.naturalWidth === 0, image);
   });
   comic.querySelectorAll('[data-retry-page]').forEach(button => {
     button.addEventListener('click', () => retryPage(Number(button.dataset.retryPage)));
   });
 }
 
-function setPageLoadState(number, failed) {
+function setPageLoadState(number, failed, sourceImage = null) {
   const page = comic.querySelector(`.comic-page[data-page="${number}"]`);
-  if (!page) return;
+  if (!page || (sourceImage && page.querySelector('[data-page-image]') !== sourceImage)) return;
   const error = page.querySelector('[data-page-error]');
   page.classList.toggle('load-failed', failed);
   page.setAttribute('aria-busy', 'false');

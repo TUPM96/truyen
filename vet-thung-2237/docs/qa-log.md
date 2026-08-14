@@ -542,3 +542,12 @@
 - Bộ hẹn giờ phản hồi cũ bị hủy cùng lúc, nên không thể đặt lại biểu tượng hoặc nhãn trợ năng sau khi người đọc đã chuyển trang.
 - Đồng bộ phiên bản `app.js` trong HTML và gói shell; cache ngoại tuyến nâng lên v39.
 - Đã kiểm tra phản hồi chia sẻ thành công/thất bại rồi lật trang, bộ hẹn giờ cũ, chia sẻ đang chờ, chia sẻ mới trên trang mới, cú pháp, 24 URL trang và HTTP.
+
+## Cô lập sự kiện ảnh theo phiên reader — 14/08/2026
+
+- Không thêm trang hoặc chương mới; Tập 1 giữ nguyên 2 chương, 24 trang hoàn chỉnh.
+- Sự kiện tải thành công hoặc thất bại của ảnh nay chỉ được cập nhật trạng thái khi chính ảnh phát sự kiện vẫn thuộc trang hiện tại trong DOM.
+- Nếu reader đóng rồi mở lại nhanh, callback đến muộn từ ảnh của phiên cũ không thể đánh dấu nhầm ảnh mới là tải lỗi hoặc đã tải xong.
+- Các nhánh thử lại khi có mạng và cập nhật thông báo ngoại tuyến vẫn hoạt động trên đúng ảnh của phiên hiện tại.
+- Đồng bộ phiên bản `app.js` trong HTML và gói shell; cache ngoại tuyến nâng lên v40.
+- Đã kiểm tra callback `load`/`error` cũ sau khi đóng–mở reader, sự kiện của ảnh mới, thử tải lại, trạng thái ngoại tuyến, cú pháp, 24 URL trang và HTTP.
