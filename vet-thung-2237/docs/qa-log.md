@@ -569,3 +569,12 @@
 - Tải ảnh bình thường vẫn ưu tiên cache; khi thử lại lúc mất mạng, reader giữ đúng thông báo lỗi ngoại tuyến thay vì báo thành công giả từ cache cũ.
 - Cache ngoại tuyến nâng lên v42.
 - Đã mô phỏng cache-hit bình thường, retry khi cache có sẵn, retry thành công và cập nhật URL chuẩn, retry mất mạng, cú pháp, gói ngoại tuyến 24 trang và HTTP.
+
+## Đóng reader ngay khi lùi lịch sử — 14/08/2026
+
+- Không thêm trang hoặc chương mới; Tập 1 giữ nguyên 2 chương, 24 trang hoàn chỉnh.
+- Reader được mở từ nút đọc nay đóng và khóa tương tác ngay sau khi yêu cầu lùi lịch sử, không chờ sự kiện `popstate` mới dọn giao diện.
+- Nhấn đóng, Escape hoặc hoàn tất tập liên tiếp không thể gửi nhiều lệnh `history.back()`, lật sang trang khác trong khoảng chờ hoặc ghi đè tiến độ hoàn tất trang 1.
+- Liên kết sâu vẫn xóa tham số trang bằng `replaceState`; nút Back của trình duyệt vẫn đóng reader và khôi phục đúng URL trước khi mở.
+- Đồng bộ phiên bản `app.js` trong HTML và gói shell; cache ngoại tuyến nâng lên v43.
+- Đã kiểm tra đóng đơn/lặp, Escape lặp, hoàn tất trang 24 bằng thao tác kép, tiến độ hoàn tất, liên kết sâu, Back trình duyệt, cú pháp, 24 URL trang và HTTP.

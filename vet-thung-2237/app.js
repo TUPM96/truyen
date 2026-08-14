@@ -516,9 +516,9 @@ async function closeReader({historyMode = 'auto'} = {}) {
   if (historyMode === 'auto' && history.state?.vt2237Reader) {
     if (history.state.vt2237Origin === 'pushed') {
       history.back();
-      return;
+    } else {
+      clearReaderHistory();
     }
-    clearReaderHistory();
   }
   const session = ++readerSession;
   open = false;
