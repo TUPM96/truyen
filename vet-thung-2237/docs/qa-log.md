@@ -651,3 +651,12 @@
 - Các ảnh truyện, font và mã có URL phiên bản vẫn tái sử dụng cache cũ, nên việc làm mới shell không khiến tải lại 24 trang.
 - Cache ngoại tuyến nâng lên v51.
 - Đã mô phỏng HTTP cache còn hạn, shell mới, phản hồi 404/503, nâng cấp từ cache cũ và cài lần đầu; kiểm tra tùy chọn `reload`, đủ khóa cache, cú pháp, 24 URL trang, liên kết sâu và HTTP.
+
+## Không để thao tác in mắc kẹt trong Fullscreen — 14/08/2026
+
+- Không thêm trang hoặc chương mới; Tập 1 giữ nguyên 2 chương, 24 trang hoàn chỉnh.
+- Nút **In hoặc lưu trang hiện tại** nay dùng chung một yêu cầu thoát Fullscreen đang chờ, không gửi chồng lệnh thoát khi người đọc vừa đóng rồi mở lại hoặc thao tác cũ chưa kết thúc.
+- Nếu trình duyệt giữ lời hứa thoát Fullscreen vô hạn, trình đọc chỉ chờ tối đa 1,5 giây rồi vẫn mở hộp thoại in; nút in và lớp bố cục in không còn bị khóa vĩnh viễn.
+- Các nhánh thoát Fullscreen khi đóng reader hoặc khi một yêu cầu vào Fullscreen cũ hoàn tất muộn cũng dùng chung trạng thái, giữ nguyên cơ chế cô lập theo phiên.
+- Đồng bộ phiên bản `app.js` trong HTML và gói shell; cache ngoại tuyến nâng lên v52.
+- Đã kiểm tra thoát Fullscreen thành công, bị từ chối, lời hứa treo, lệnh thoát đã chờ từ phiên trước, đóng–mở reader, cú pháp, 24 URL trang và HTTP.
