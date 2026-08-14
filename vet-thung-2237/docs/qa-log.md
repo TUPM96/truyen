@@ -551,3 +551,12 @@
 - Các nhánh thử lại khi có mạng và cập nhật thông báo ngoại tuyến vẫn hoạt động trên đúng ảnh của phiên hiện tại.
 - Đồng bộ phiên bản `app.js` trong HTML và gói shell; cache ngoại tuyến nâng lên v40.
 - Đã kiểm tra callback `load`/`error` cũ sau khi đóng–mở reader, sự kiện của ảnh mới, thử tải lại, trạng thái ngoại tuyến, cú pháp, 24 URL trang và HTTP.
+
+## Cô lập từng lần thử tải ảnh — 14/08/2026
+
+- Không thêm trang hoặc chương mới; Tập 1 giữ nguyên 2 chương, 24 trang hoàn chỉnh.
+- Nút **Tải lại trang** nay thay phần tử ảnh lỗi bằng một phần tử mới trước khi gửi yêu cầu mới, đồng thời gắn bộ xử lý tải trước khi đặt URL thử lại.
+- Callback `load` hoặc `error` đến muộn từ yêu cầu ảnh cũ không thể xóa hay bật nhầm thông báo của lần thử mới; chỉ phần tử ảnh hiện tại được quyền đổi trạng thái trang.
+- Giữ nguyên mô tả ảnh, chế độ tải ưu tiên, giải mã và URL chống cache cho mỗi lần thử lại.
+- Đồng bộ phiên bản `app.js` trong HTML và gói shell; cache ngoại tuyến nâng lên v41.
+- Đã kiểm tra lỗi ban đầu, hai lần thử lại liên tiếp, callback cũ đến muộn theo cả hai hướng, khôi phục thành công, trạng thái ngoại tuyến, cú pháp, 24 URL trang và HTTP.

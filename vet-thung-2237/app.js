@@ -286,15 +286,18 @@ function render() {
 }
 
 function bindPageImages() {
-  comic.querySelectorAll('[data-page-image]').forEach(image => {
-    const number = Number(image.dataset.pageImage);
-    image.addEventListener('load', () => setPageLoadState(number, false, image));
-    image.addEventListener('error', () => setPageLoadState(number, true, image));
-    if (image.complete) setPageLoadState(number, image.naturalWidth === 0, image);
-  });
+  comic.querySelectorAll('[data-page-image]').forEach(image => bindPageImage(image));
   comic.querySelectorAll('[data-retry-page]').forEach(button => {
     button.addEventListener('click', () => retryPage(Number(button.dataset.retryPage)));
   });
+}
+
+function bindPageImage(image, source = null) {
+  const number = Number(image.dataset.pageImage);
+  image.addEventListener('load', () => setPageLoadState(number, false, image));
+  image.addEventListener('error', () => setPageLoadState(number, true, image));
+  if (source) image.src = source;
+  else if (image.complete) setPageLoadState(number, image.naturalWidth === 0, image);
 }
 
 function setPageLoadState(number, failed, sourceImage = null) {
@@ -317,7 +320,10 @@ function retryPage(number) {
   page.setAttribute('aria-busy', 'true');
   const retryUrl = new URL(pageData.image, document.baseURI);
   retryUrl.searchParams.set('retry', Date.now());
-  image.src = retryUrl.href;
+  const replacement = image.cloneNode(false);
+  replacement.removeAttribute('src');
+  image.replaceWith(replacement);
+  bindPageImage(replacement, retryUrl.href);
 }
 
 function update(direction = 0) {
