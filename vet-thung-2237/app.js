@@ -50,6 +50,7 @@ let finishReadyAt = 0;
 let lastFocused = null;
 let readerSession = 0;
 let workerRefreshPending = false;
+let fullscreenExitPending = null;
 
 const pageByNumber = new Map(STORY.pages.map(page => [page.number, page]));
 const chapterForPage = number => STORY.chapters.find(chapter => number >= chapter.startPage && number <= chapter.endPage);
@@ -486,6 +487,10 @@ function resetTouchGesture() {
 async function enterFullscreen(session) {
   const request = reader.requestFullscreen || reader.webkitRequestFullscreen;
   if (!request || !open || session !== readerSession) return;
+  if (fullscreenExitPending) {
+    fullscreenRequested = document.fullscreenElement === reader || document.webkitFullscreenElement === reader;
+    return;
+  }
   fullscreenRequested = true;
   try {
     await request.call(reader, {navigationUI: 'hide'});
@@ -532,7 +537,19 @@ async function closeReader({historyMode = 'auto'} = {}) {
   fullscreenRequested = false;
   let fullscreenExit = null;
   if (document.fullscreenElement || document.webkitFullscreenElement) {
-    try { fullscreenExit = document.exitFullscreen?.() || document.webkitExitFullscreen?.(); } catch (_) {}
+    try {
+      const result = document.exitFullscreen?.() || document.webkitExitFullscreen?.();
+      if (result) {
+        fullscreenExit = Promise.resolve(result);
+        fullscreenExitPending = fullscreenExit;
+        const clearPendingExit = () => {
+          if (fullscreenExitPending !== fullscreenExit) return;
+          fullscreenExitPending = null;
+          handleFullscreenExit(document.fullscreenElement || document.webkitFullscreenElement);
+        };
+        fullscreenExit.then(clearPendingExit, clearPendingExit);
+      }
+    } catch (_) {}
   }
   reader.hidden = true;
   setBackgroundInert(false);

@@ -596,3 +596,13 @@
 - Kết quả thoát Fullscreen đến muộn không thể dọn nhầm DOM của phiên reader mới đã được mở trong lúc chờ.
 - Đồng bộ phiên bản `app.js` trong HTML và gói shell; cache ngoại tuyến nâng lên v45.
 - Đã kiểm tra thoát Fullscreen thành công, bị từ chối, lời hứa treo, đóng–mở lại trong lúc chờ, callback cũ hoàn tất muộn, cú pháp, 24 URL trang và HTTP.
+
+## Không chồng yêu cầu vào–thoát toàn màn hình — 14/08/2026
+
+- Không thêm trang hoặc chương mới; Tập 1 giữ nguyên 2 chương, 24 trang hoàn chỉnh.
+- Ứng dụng nay theo dõi lời hứa thoát Fullscreen đang chờ; reader mở lại ngay vẫn dùng được nhưng không gửi thêm yêu cầu vào Fullscreen chồng lên thao tác thoát cũ.
+- Nếu phần tử reader còn đang ở Fullscreen trong lúc thoát, phiên mới nhận đúng trạng thái tạm thời để sự kiện hoặc kết quả thoát vẫn làm mới viewport và hiện điều khiển.
+- Lời hứa thoát thành công hoặc thất bại chỉ dọn chính dấu chờ của nó; kết quả cũ không thể xóa nhầm một thao tác thoát mới hơn.
+- Lần mở tiếp theo sau khi thao tác cũ kết thúc vẫn yêu cầu Fullscreen bình thường.
+- Đồng bộ phiên bản `app.js` trong HTML và gói shell; cache ngoại tuyến nâng lên v46.
+- Đã kiểm tra thoát thành công, bị từ chối, lời hứa treo, mở lại khi đang chờ, đóng lại tạo thao tác mới, kết quả cũ đến muộn, mở lần kế tiếp, cú pháp, 24 URL trang và HTTP.
