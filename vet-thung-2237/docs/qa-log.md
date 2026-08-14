@@ -633,3 +633,12 @@
 - Áp dụng đồng nhất cho ảnh, mã giao diện và HTML điều hướng; khóa chuẩn của ảnh thử lại và `index.html` vẫn được giữ.
 - Cache ngoại tuyến nâng lên v49.
 - Đã mô phỏng phản hồi bị đọc hết trước khi cache mở, cache mở chậm, ghi bị từ chối và cache-hit; kiểm tra cú pháp, 24 URL trang, liên kết sâu và HTTP.
+
+## Tái sử dụng 24 trang khi nâng cache — 14/08/2026
+
+- Không thêm trang hoặc chương mới; Tập 1 giữ nguyên 2 chương, 24 trang hoàn chỉnh.
+- Khi service worker nâng phiên bản, các trang truyện và tài nguyên có URL phiên bản không đổi nay được sao chép trực tiếp từ cache cũ sang cache mới thay vì tải lại qua mạng.
+- `index.html` vẫn luôn được lấy mới để shell không bị giữ ở bản cũ; tài nguyên mới hoặc thiếu trong cache mới đi qua mạng.
+- Gói cài đặt vẫn giữ tính toàn vẹn: chỉ kích hoạt worker mới sau khi shell và toàn bộ 24 trang bắt buộc đã có; lỗi tài nguyên phụ không chặn cập nhật.
+- Cache ngoại tuyến nâng lên v50.
+- Đã mô phỏng nâng cấp từ cache cũ, cài lần đầu, tài nguyên bắt buộc bị thiếu/lỗi và tài nguyên phụ lỗi; kiểm tra đủ khóa cache, cú pháp, 24 URL trang, liên kết sâu và HTTP.

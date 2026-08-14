@@ -1,5 +1,5 @@
 const CACHE_PREFIX = 'vt2237-reader-';
-const CACHE_NAME = 'vt2237-reader-20260814-49';
+const CACHE_NAME = 'vt2237-reader-20260814-50';
 const CORE_URLS = [
   './index.html',
   './styles.css?v=reader-share-capability-20260812',
@@ -51,12 +51,22 @@ const VOLUME_PAGE_URLS = [
 self.addEventListener('install', event => {
   event.waitUntil(
     caches.open(CACHE_NAME)
-      .then(cache => cache.addAll(CORE_URLS)
-        .then(() => cache.addAll(VOLUME_PAGE_URLS))
-        .then(() => Promise.allSettled(OPTIONAL_URLS.map(url => cache.add(url)))))
+      .then(cache => cache.add(CORE_URLS[0])
+        .then(() => Promise.all([...CORE_URLS.slice(1), ...VOLUME_PAGE_URLS]
+          .map(url => copyCachedOrFetch(cache, url))))
+        .then(() => Promise.allSettled(OPTIONAL_URLS.map(url => copyCachedOrFetch(cache, url)))))
       .then(() => self.skipWaiting())
   );
 });
+
+async function copyCachedOrFetch(cache, url) {
+  const cached = await matchRuntimeResponse(url);
+  if (cached) {
+    await cache.put(url, cached);
+    return;
+  }
+  await cache.add(url);
+}
 
 self.addEventListener('activate', event => {
   event.waitUntil(
