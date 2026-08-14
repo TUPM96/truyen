@@ -578,3 +578,12 @@
 - Liên kết sâu vẫn xóa tham số trang bằng `replaceState`; nút Back của trình duyệt vẫn đóng reader và khôi phục đúng URL trước khi mở.
 - Đồng bộ phiên bản `app.js` trong HTML và gói shell; cache ngoại tuyến nâng lên v43.
 - Đã kiểm tra đóng đơn/lặp, Escape lặp, hoàn tất trang 24 bằng thao tác kép, tiến độ hoàn tất, liên kết sâu, Back trình duyệt, cú pháp, 24 URL trang và HTTP.
+
+## Cô lập yêu cầu toàn màn hình theo phiên — 14/08/2026
+
+- Không thêm trang hoặc chương mới; Tập 1 giữ nguyên 2 chương, 24 trang hoàn chỉnh.
+- Mỗi yêu cầu Fullscreen nay gắn với đúng phiên reader đã tạo ra nó; callback thất bại đến muộn của phiên cũ không thể xóa trạng thái toàn màn hình của phiên mới.
+- Nếu yêu cầu cũ vào toàn màn hình sau khi reader đã đóng hoặc được mở lại bởi liên kết sâu không yêu cầu Fullscreen, ứng dụng tự thoát chế độ phát sinh ngoài ý muốn.
+- Phiên mới chủ động yêu cầu Fullscreen vẫn được giữ nguyên khi callback cũ hoàn tất; sự kiện thoát toàn màn hình tiếp tục làm mới viewport và hiện lại điều khiển đúng lúc.
+- Đồng bộ phiên bản `app.js` trong HTML và gói shell; cache ngoại tuyến nâng lên v44.
+- Đã kiểm tra yêu cầu cũ bị từ chối muộn, yêu cầu mới thành công, đóng–mở nhanh, mở lại không Fullscreen, callback cũ thành công muộn, thoát tự động, cú pháp, 24 URL trang và HTTP.

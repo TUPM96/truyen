@@ -483,11 +483,18 @@ function resetTouchGesture() {
   touchY = 0;
 }
 
-async function enterFullscreen() {
+async function enterFullscreen(session) {
   const request = reader.requestFullscreen || reader.webkitRequestFullscreen;
-  if (!request) return;
-  try { fullscreenRequested = true; await request.call(reader, {navigationUI: 'hide'}); }
-  catch (_) { fullscreenRequested = false; }
+  if (!request || !open || session !== readerSession) return;
+  fullscreenRequested = true;
+  try {
+    await request.call(reader, {navigationUI: 'hide'});
+    if ((!open || session !== readerSession) && !fullscreenRequested && (document.fullscreenElement === reader || document.webkitFullscreenElement === reader)) {
+      try { await (document.exitFullscreen?.() || document.webkitExitFullscreen?.()); } catch (_) {}
+    }
+  } catch (_) {
+    if (session === readerSession) fullscreenRequested = document.fullscreenElement === reader || document.webkitFullscreenElement === reader;
+  }
 }
 
 async function openReader({requestNativeFullscreen = true, historyMode = 'push'} = {}) {
@@ -499,7 +506,7 @@ async function openReader({requestNativeFullscreen = true, historyMode = 'push'}
   setBackgroundInert(true);
   document.body.classList.add('reader-open');
   render();
-  if (requestNativeFullscreen) await enterFullscreen();
+  if (requestNativeFullscreen) await enterFullscreen(session);
   if (!open || session !== readerSession) {
     if (!open && (document.fullscreenElement === reader || document.webkitFullscreenElement === reader)) {
       try { await (document.exitFullscreen?.() || document.webkitExitFullscreen?.()); } catch (_) {}
